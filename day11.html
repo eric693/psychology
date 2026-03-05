@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 11 — 社會心理學</title>
+  <title>Week 11 — 他人如何影響我們</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
+    /* NAV */
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +33,21 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
+    /* HERO */
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +56,29 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: clamp(1.9rem, 4vw, 3rem);
       font-weight: 700;
       line-height: 1.2;
-      max-width: 720px;
     }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,256 +86,277 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    /* LAYOUT */
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 0.22em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
       margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
       display: block;
     }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
-    }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .case-study p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
-    }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* INFLUENCE GRID */
-    .influence-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .influence-item {
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--rule);
-    }
-    .influence-name {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.25rem;
-    }
-    .influence-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 0.55rem;
-    }
-    .influence-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-      margin-bottom: 0.4rem;
-    }
-    .influence-ex {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--ink-light);
-      font-style: italic;
-    }
-    /* ATTRIBUTION TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* GROUP PHENOMENA */
-    .phenomena-list { margin: 1.5rem 0; }
-    .phenomena-item {
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .phenomena-item:first-child { border-top: 1px solid var(--rule); }
-    .phenomena-header {
+
+    /* CHAPTER */
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
     }
-    .phenomena-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .phenomena-en {
+    .ch-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
       color: var(--red);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
     }
-    .phenomena-desc {
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
       font-size: 0.88rem;
       font-weight: 300;
-      line-height: 1.8;
-      color: var(--ink-mid);
-    }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
-    }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
       border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
-      align-items: baseline;
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* ATTRIBUTION TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .simple-table th {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* 2-COL COMPARE */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .cg-cell { background: var(--card); padding: 1.1rem 1.3rem; }
+    .cg-head {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .cg-head.bad  { color: #a83828; }
+    .cg-head.good { color: #2a6040; }
+    .cg-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .cg-list li {
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+      padding-left: 0.9rem;
+      position: relative;
+    }
+    .cg-list li::before { position: absolute; left: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; }
+    .cg-cell.bad  .cg-list li::before { content: '✕'; color: #a83828; }
+    .cg-cell.good .cg-list li::before { content: '✓'; color: #2a6040; }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -344,8 +366,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -354,307 +377,375 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .influence-grid { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .simple-table th:nth-child(3),
+      .simple-table td:nth-child(3) { display: none; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 11 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 11 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 04 &nbsp;—&nbsp; 社會心理學</p>
-    <h1>社會心理學：<br><em>他人的力量</em></h1>
-    <p class="hero-sub">你以為自己的行為源自內在的性格與價值觀，但社會心理學的研究一再揭示：情境的力量遠超過我們的想像。他人的存在、群體的壓力、權威的聲音——這些社會力量以我們幾乎察覺不到的方式，深刻塑造著我們的思想、感受與行動。</p>
+    <p class="eyebrow">Unit 04 &nbsp;—&nbsp; 社會心理學</p>
+    <h1>他人如何<br><em>影響我們？</em></h1>
+    <p class="hero-sub">你以為自己的行為和判斷是自己決定的，但人群、權威、情境的力量遠比你想像的更強大。本週從你日常可能遇到的情境出發，帶你看清這些力量如何運作，以及你可以怎麼應對。</p>
   </div>
-  <div class="hero-number">11</div>
+  <div class="hero-num">11</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解社會認知的核心概念：社會比較、印象形成、歸因理論與基本歸因謬誤</span></li>
-      <li><span class="num">02</span><span>認識從眾（conformity）的心理機制，理解 Asch 的線段實驗及其影響因素</span></li>
-      <li><span class="num">03</span><span>深入理解 Milgram 服從權威實驗的結果、機制與倫理爭議</span></li>
-      <li><span class="num">04</span><span>了解群體對個人的影響：社會助長、社會懈怠、去個人化與群體極化</span></li>
-      <li><span class="num">05</span><span>認識偏見的心理根源：刻板印象、內外群體偏誤、隱性偏見</span></li>
-      <li><span class="num">06</span><span>理解人際吸引力的心理學：接近性、相似性、互惠好感與外貌的影響</span></li>
-    </ul>
-  </section>
+  <!-- 01 你對別人的判斷，往往不公平 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你對別人的判斷，往往不公平</span>
+    </div>
+    <p class="ch-intro">我們每天都在對別人的行為做出解讀，但這個解讀系統有幾個固定的偏差——讓我們習慣性地誤解別人，也習慣性地對自己寬容。知道這些偏差存在，不能讓你完全避免，但至少能讓你在下判斷前多停一秒。</p>
 
-  <section class="prose">
-
-    <h2>一、社會認知：我們如何理解他人</h2>
-    <p>社會心理學研究的是<strong>個人的思想、感受與行為如何被他人的真實、想像或暗示存在所影響</strong>。這個由 Gordon Allport 提出的定義，揭示了社會心理學的核心關注：即使只是想像中他人的存在，也足以改變我們的行為。</p>
-    <p>我們與他人互動的第一步，是形成對他人的印象。<strong>印象形成（impression formation）</strong>研究顯示，我們對一個人的整體評價往往受到少數關鍵特質的主導。Solomon Asch 發現，「溫暖」與「冷漠」是影響整體印象最強的核心特質——同樣一個人，被描述為「聰明、勤奮、溫暖、堅定」與「聰明、勤奮、冷漠、堅定」，會得到截然不同的整體評價，而其他形容詞幾乎被核心特質的光環所籠罩，這就是<strong>光環效應（halo effect）</strong>。</p>
-    <p>我們也不斷地在為他人的行為尋找原因，這個過程稱為<strong>歸因（attribution）</strong>。我們可以將行為歸因為<strong>內部因素</strong>（性格、能力、動機）或<strong>外部因素</strong>（情境、運氣、他人壓力）。歸因的方式深刻影響我們對他人的評價與對自己行為的解釋。</p>
-
-    <table class="compare-table">
+    <table class="simple-table">
       <thead>
         <tr>
-          <th>歸因偏誤</th>
-          <th>說明</th>
-          <th>日常例子</th>
+          <th>你的想法</th>
+          <th>背後的偏差</th>
+          <th>更準確的想法</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>基本歸因謬誤</td>
-          <td>解釋他人行為時，過度強調內部性格因素，低估情境力量</td>
-          <td>同事做錯事 → 「他太粗心了」；忽略他可能面對巨大的時間壓力</td>
+          <td>「他遲到，一定是不守時的人」</td>
+          <td>基本歸因謬誤：把行為都歸到性格，忽略情境因素</td>
+          <td>他可能碰到突發狀況。我不知道他今天遇到了什麼。</td>
         </tr>
         <tr>
-          <td>自利歸因偏誤</td>
-          <td>成功歸因於內部因素；失敗歸因於外部因素，以保護自尊</td>
-          <td>考試考好 → 「我很聰明」；考差 → 「題目太難 / 老師沒教好」</td>
+          <td>「我考砸了是因為題目太難」</td>
+          <td>自利歸因：成功歸自己，失敗推外部</td>
+          <td>部分可能是題目，部分可能是我的準備程度——兩個都值得誠實看待。</td>
         </tr>
         <tr>
-          <td>行動者—觀察者效應</td>
-          <td>解釋自己的行為時傾向強調情境；解釋他人行為時傾向強調性格</td>
-          <td>我遲到是因為堵車；你遲到是因為你不守時</td>
+          <td>「我遲到是因為堵車，你遲到是因為你懶」</td>
+          <td>行動者-觀察者效應：解釋自己看情境，解釋別人看性格</td>
+          <td>同樣的行為，我對自己和別人用了不同的標準。</td>
         </tr>
         <tr>
-          <td>公正世界假設</td>
-          <td>相信世界是公平的，因此受害者一定做了什麼才導致遭遇</td>
-          <td>「她被騷擾一定是因為穿著暴露」；「他失業一定是不夠努力」</td>
+          <td>「他那麼倒霉，一定是做了什麼」</td>
+          <td>公正世界假設：相信壞事不會無緣無故發生在人身上</td>
+          <td>壞事有時候就是隨機的。這個假設讓我們對受害者更殘忍。</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="pull-quote">
-      <p>「情境的力量是社會心理學最持久、最令人不安的發現。普通人，在特定的情境條件下，可以做出我們稱之為邪惡的事情。」</p>
-      <cite>— Philip Zimbardo，《路西法效應》，2007</cite>
-    </div>
-
-    <h2>二、從眾：群體壓力的力量</h2>
-    <p>從眾（conformity）是指改變自己的行為或信念，以符合群體的規範或期待。這種傾向在社會中無所不在，但其力量往往超出我們的預期——甚至強大到讓人相信自己眼睛看到的東西是錯的。</p>
-
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>Asch 的線段從眾實驗（1951）</h3>
-      <p>Solomon Asch 設計了一個看似簡單的知覺判斷實驗。受試者被要求在一組線段中，判斷哪一條與標準線段等長——答案非常明顯，正確率幾乎是 100%。然而，受試者並不知道，同組其他六名「受試者」實際上是實驗助理，會在特定回合中一致給出明顯錯誤的答案。</p>
-      <p>實驗結果令人震驚：在所有關鍵回合中，約 <strong>75% 的真實受試者至少從眾了一次</strong>，給出了與自己感知明顯不符的錯誤答案。平均從眾率約為 32%——在客觀上可以輕易判斷正確答案的情況下，三分之一的時間仍選擇跟隨群體。</p>
-      <p>Asch 的後續研究揭示了從眾的影響因素：當至少有一個人持不同意見時（即使那個人也是錯的），從眾率顯著下降；群體規模在 3–5 人時從眾效應最強，更大的群體並不會增加壓力。Asch 的實驗揭示了兩種從眾動機：<strong>規範性影響（normative influence）</strong>——害怕被群體排斥；以及<strong>資訊性影響（informational influence）</strong>——在不確定的情況下，相信多數人可能知道更多。</p>
-    </div>
-
-    <h2>三、服從：當權威下令時</h2>
-    <p>從眾是對同儕壓力的讓步，<strong>服從（obedience）</strong>則是對權威指令的遵從。Stanley Milgram 在 1960 年代進行的電擊服從實驗，是心理學史上最震撼、最具爭議、也最深刻影響我們對人性理解的系列研究之一。</p>
-
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>Milgram 服從實驗（1961–1963）</h3>
-      <p>受試者被告知參與一項「學習與記憶」的研究，擔任「老師」的角色，在另一間房間的「學生」答錯時，需按下開關對其施予電擊，電壓從 15 伏特（輕微）逐步增加至 450 伏特（危險：XXX）。「學生」實際上是演員，聽到的叫聲是錄音。當受試者猶豫時，實驗者（穿著灰色實驗袍的權威形象）會用固定語句催促：「請繼續」、「實驗要求你繼續」、「你別無選擇，必須繼續」。</p>
-      <p>Milgram 原先預測，只有約 1–2% 的極端施虐性格者才會執行到最高電壓。實際結果是：<strong>65% 的受試者執行到了 450 伏特的最高電壓</strong>——儘管他們聽到了「學生」的求饒、哭叫，乃至最後的沉默。這個結果在十幾個不同的變體實驗與多個國家的重複研究中都大致吻合。</p>
-      <p>Milgram 提出幾個解釋服從的機制：<strong>代理人狀態（agentic state）</strong>——人在服從權威時，將自己視為執行他人意志的工具，而非有道德責任的自主個體；逐步升級的要求讓人難以找到拒絕的明確節點；物理距離（看不見受害者）顯著增加了服從率。這個實驗的倫理爭議延續至今——許多受試者在事後出現嚴重的心理困擾，但它也為理解歷史上的集體暴行提供了深刻的心理學框架。</p>
-    </div>
-
-    <p>Milgram 實驗與 Week 01 介紹的 Phineas Gage 個案構成了一組互補的洞見：Gage 的案例說明生理因素可以改變人格與道德判斷；Milgram 的實驗則說明情境的社會力量可以讓「正常」的人做出「不道德」的行為——<strong>邪惡不一定需要邪惡的人，它需要的是特定的情境結構</strong>。Hannah Arendt 在報導艾希曼審判時提出的「邪惡的平庸性（banality of evil）」，在 Milgram 的實驗室中得到了令人不安的心理學佐證。</p>
-
-    <h2>四、群體對個人的影響</h2>
-    <p>他人的存在不只影響我們的判斷，也影響我們的表現。這些影響有時讓我們表現更好，有時卻讓我們退步，甚至讓我們失去個人的道德感。</p>
-
-    <div class="phenomena-list">
-      <div class="phenomena-item">
-        <div class="phenomena-header">
-          <span class="phenomena-name">社會助長</span>
-          <span class="phenomena-en">Social Facilitation</span>
-        </div>
-        <div class="phenomena-desc">他人在場時，個體在<strong>熟練或簡單任務</strong>上的表現會提升，但在<strong>困難或陌生任務</strong>上表現會下降。Robert Zajonc 解釋，他人在場提高了生理喚起，喚起狀態強化了「優勢反應」——熟練的人優勢反應是正確行為，初學者的優勢反應是錯誤行為。這解釋了為什麼職業運動員在主場（觀眾更多）往往表現更好，而新手在眾目睽睽下容易出錯。</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你和某個同事或朋友起了摩擦。你覺得對方就是個自私、不負責任的人，而你自己的反應完全是情有可原的。</p>
       </div>
-      <div class="phenomena-item">
-        <div class="phenomena-header">
-          <span class="phenomena-name">社會懈怠</span>
-          <span class="phenomena-en">Social Loafing</span>
-        </div>
-        <div class="phenomena-desc">在群體共同完成任務時，個人的努力程度往往低於單獨工作時。Ringelmann 的拔河實驗首先記錄了這個現象：三人拔河的力道小於三個人單獨拔河力道的總和。社會懈怠的原因包括：個人貢獻難以被識別（責任分散）、搭便車動機（別人會做），以及認為自己的貢獻微不足道。跨文化研究顯示，集體主義文化中的社會懈怠程度低於個人主義文化。</div>
-      </div>
-      <div class="phenomena-item">
-        <div class="phenomena-header">
-          <span class="phenomena-name">去個人化</span>
-          <span class="phenomena-en">Deindividuation</span>
-        </div>
-        <div class="phenomena-desc">在群體中失去個人身份感與自我意識，導致行為抑制減弱，更容易做出平時不會做的衝動或反規範行為。網路匿名留言的惡意攻擊、暴徒在群體中的暴力行為、制服（尤其是遮臉的）對攻擊性的增強——都是去個人化在起作用。Philip Zimbardo 的史丹佛監獄實驗是去個人化最著名（也最具爭議）的示範。</div>
-      </div>
-      <div class="phenomena-item">
-        <div class="phenomena-header">
-          <span class="phenomena-name">群體極化</span>
-          <span class="phenomena-en">Group Polarization</span>
-        </div>
-        <div class="phenomena-desc">群體討論往往使成員的觀點比討論前更加極端，而非趨向中間立場。若群體成員討論前普遍偏向某一立場，討論後這個立場會變得更強烈。社群媒體的演算法推薦機制，透過讓人接觸與自己觀點相似的資訊，加速了群體極化的趨勢，被認為是當代政治極化的重要驅動力。</div>
-      </div>
-      <div class="phenomena-item">
-        <div class="phenomena-header">
-          <span class="phenomena-name">集體思維</span>
-          <span class="phenomena-en">Groupthink</span>
-        </div>
-        <div class="phenomena-desc">高度凝聚的群體在追求一致性與和諧時，會壓制異議聲音，導致決策品質嚴重下降。症狀包括：過度樂觀、集體合理化、對外群體的刻板印象、對異議者的自我審查。Irving Janis 分析了美國幾個重大政策失誤（豬灣事件、挑戰者號太空梭災難），認為集體思維是關鍵因素。</div>
+      <div class="scard-body">
+        <p class="why">你的大腦預設會把對方的行為歸因到他的性格，把你自己的行為歸因到情境。這不是你特別壞，而是幾乎所有人都這樣。但它會讓衝突更難解決，因為你在跟「他這個人」對抗，而不是在解決「這件事」。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>問自己：如果是我做同樣的事，我會怎麼解釋？</b>如果你做了同樣的事，你會說什麼原因？把同樣的理由也給對方試試看。</li>
+          <li><b>把「他這個人」換成「這件事」。</b>「他就是這樣的人」→「這件事讓我很不舒服，我希望⋯⋯」縮小問題的範圍，讓解決成為可能。</li>
+          <li><b>在下結論之前，多問一個問題。</b>「他最近是不是有什麼狀況？」不需要每次都找到答案，但這個問題本身會讓你的判斷更準確。</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <h2>五、偏見：他者化的心理學</h2>
-    <p>偏見（prejudice）是對某個群體成員的負向評價與態度，通常基於刻板印象而非實際了解。它由三個相互交織的成分構成：<strong>刻板印象（stereotypes）</strong>是對群體的概括性認知；<strong>偏見（prejudice）</strong>是對群體的情感態度（通常是負向的）；<strong>歧視（discrimination）</strong>是對群體成員的差別對待行為。</p>
-    <p>偏見的形成有幾個心理根源。<strong>社會分類（social categorization）</strong>是人腦自動將人分群的傾向——「我們」（內群體）與「他們」（外群體）的區分幾乎是即時且不可避免的。一旦分類發生，內群體偏誤（in-group bias）便隨之而來：對「我們」有更高的評價與信任，對「他們」有更多的懷疑與負面歸因。更令人憂慮的是，即使是完全人為、毫無意義的分類（如隨機分成「紅隊」和「藍隊」），也足以迅速產生內群體偏誤。</p>
-    <p><strong>隱性偏見（implicit bias）</strong>是更難察覺也更難消除的偏見形式：它存在於意識之外，透過自動化的聯想影響判斷與行為，即使當事人主觀上認為自己沒有偏見。內隱聯結測試（Implicit Association Test, IAT）是測量隱性偏見最廣泛使用的工具，研究顯示大多數人對不同種族、性別或年齡的刻板聯結都存在某種程度的自動化偏誤，無論當事人的顯性態度為何。</p>
+  <!-- 02 從眾：你比你以為的更容易跟風 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">從眾：你比你以為的更容易跟風</span>
+    </div>
+    <p class="ch-intro">從眾不是軟弱，而是人腦的預設模式——當大家都做同一件事，你的大腦會把它解讀成「這可能是正確的」或「不跟的話會被排除」。問題是，這個機制很容易在你沒有意識到的情況下影響你的判斷和決定。</p>
 
-    <h2>六、人際吸引力：我們為何喜歡某些人？</h2>
-    <p>社會心理學對「我們為何對某些人產生好感」的研究，揭示了幾個強大而普遍的影響因素，它們的力量往往遠超過我們意識到的。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">會議上有人提出一個你覺得有問題的方向，但其他人都點頭，你最後也沒有說什麼。或者朋友圈裡大家都在做某件事（投資、買房、換工作），你開始覺得自己是不是也應該跟著做。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">從眾有兩個驅動力：一個是「大家都這樣，可能大家知道的比我多」（資訊性），另一個是「不跟的話會被排除或被當成奇怪的人」（規範性）。兩個都是真實的力量，但它們都跟「這個選擇對我是否正確」沒有直接關係。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把「大家都這樣」和「這對我是否適合」分開。</b>大家都在做的事，不代表它適合你的情況。在被群體拉著走之前，問一次：「如果沒有人這樣做，我自己會怎麼判斷？」</li>
+          <li><b>在會議裡，先把自己的想法寫下來再聽別人說。</b>一旦聽到別人的意見，要保持原本的判斷會難很多。先記錄自己的想法，再聽別人的，你的意見會更獨立。</li>
+          <li><b>找到一個不同意的人。</b>群體裡只要有一個人說出不同的意見，從眾的壓力就會大幅下降。如果你不確定某個決定，主動找一個會挑戰它的人談談。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <div class="influence-grid">
-      <div class="influence-item">
-        <div class="influence-name">接近性</div>
-        <div class="influence-en">Proximity / Mere Exposure Effect</div>
-        <div class="influence-desc">單純接觸效應（Zajonc）：反覆接觸一個刺激會增加對它的好感，無需任何互動。物理距離的接近性是友誼與愛情形成最強的預測因子之一——你最可能愛上住在同棟樓或坐在你附近的人。</div>
-        <div class="influence-ex">宿舍研究顯示，住在同一層樓相距最近的人，最可能成為好友，無論性格是否相似。</div>
+  <!-- 03 服從：為什麼「不」這麼難說 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">服從：為什麼「不」這麼難說？</span>
+    </div>
+    <p class="ch-intro">面對權威——上司、老師、制度、社會規範——我們很難拒絕，就算心裡覺得不對。這不是因為你膽小，而是因為服從的傾向深深地刻在人類的社會演化裡。</p>
+
+    <div class="pquote">
+      <p>一個人不需要是壞人才能做出有害的事。他只需要在一個讓他覺得「自己只是在執行指示」的情境裡。</p>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">主管要求你做一件你覺得不太對的事——不一定是違法，但讓你不舒服。你沒有明確拒絕，告訴自己「這是工作」，照做了，然後事後一直有點過不去。</p>
       </div>
-      <div class="influence-item">
-        <div class="influence-name">相似性</div>
-        <div class="influence-en">Similarity Attraction</div>
-        <div class="influence-desc">我們傾向於喜歡與自己在態度、價值觀、背景與人格上相似的人。「物以類聚」在心理學研究中得到強力支持。相似性降低了互動的不確定性，也強化了自我肯定感——對方的存在確認了我們的世界觀。</div>
-        <div class="influence-ex">長期伴侶在意識型態、宗教信仰與社經背景上的相似性，遠高於隨機配對的預期。</div>
+      <div class="scard-body">
+        <p class="why">當你處在一個有清楚權威結構的情境裡，大腦會自動切換到「執行模式」——你把自己的角色定位為「執行指示的人」，而不是「有道德判斷的個體」。這讓做出不符合自己價值觀的事變得更容易，因為責任感被分散了。事後不舒服，正是因為你的價值觀和你的行為出現了落差。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>在執行之前，給自己一個「暫停點」。</b>問：「如果沒有人要求我做這件事，我自己會這樣做嗎？」這個問題把責任感拉回到你身上，讓你更清楚地看到自己的立場。</li>
+          <li><b>用「我」的立場提出問題，而不是直接拒絕。</b>「我想確認一下這樣做的原因，因為我有一些顧慮⋯⋯」比「我不做」更容易被接受，也更能打開對話空間。</li>
+          <li><b>提前想好你的底線是什麼。</b>「什麼樣的要求是我一定不會配合的？」在平靜的時候想清楚，在壓力下才知道要怎麼回應。不提前想，在當下幾乎無法做出清醒的判斷。</li>
+        </ul>
       </div>
-      <div class="influence-item">
-        <div class="influence-name">互惠好感</div>
-        <div class="influence-en">Reciprocal Liking</div>
-        <div class="influence-desc">得知某人喜歡我們，本身就會讓我們對那個人產生好感——即使原本對對方並無特別感覺。這是人際吸引力中效果最強的因素之一：知道被喜歡，會激發溫暖感與趨近動機。</div>
-        <div class="influence-ex">社會心理學實驗顯示，被告知某陌生人對自己評價很高，會使受試者對那個人的好感顯著提升。</div>
+    </div>
+  </div>
+
+  <!-- 04 群體讓你更好，還是更差？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">群體讓你更好，還是更差？</span>
+    </div>
+    <p class="ch-intro">和別人一起做事，有時會讓你表現更好，有時會讓你表現更差，有時甚至讓你做出一個人時不會做的決定。這不是隨機的——取決於你在什麼樣的群體裡，以及你和那個群體的關係。</p>
+
+    <div class="compare-grid">
+      <div class="cg-cell bad">
+        <div class="cg-head bad">群體讓人變糟的情況</div>
+        <ul class="cg-list">
+          <li>大家都不出力，你也開始少出力（社會懈怠）</li>
+          <li>在群體裡失去個人身份感，做出平時不會做的事（去個人化）</li>
+          <li>大家討論後，每個人的立場都變得更極端（群體極化）</li>
+          <li>為了維持和諧，沒有人說出真實的疑慮（集體思維）</li>
+          <li>網路匿名狀態下，對別人更惡意、更無情</li>
+        </ul>
       </div>
-      <div class="influence-item">
-        <div class="influence-name">外貌吸引力</div>
-        <div class="influence-en">Physical Attractiveness</div>
-        <div class="influence-desc">外貌吸引力對第一印象的影響巨大，且延伸至對智力、能力、品格的評估（光環效應）。「美麗即善良」的刻板印象在跨文化中普遍存在。然而，長期關係的滿意度與外貌吸引力的相關性顯著低於初始階段。</div>
-        <div class="influence-ex">研究顯示，外貌更具吸引力的被告，在法庭上獲得更輕的判決；求職者的外貌影響錄取機率，即使在非外貌相關的職位上。</div>
+      <div class="cg-cell good">
+        <div class="cg-head good">群體讓人變好的情況</div>
+        <ul class="cg-list">
+          <li>做熟練的事情時，有人觀看反而表現更好（社會助長）</li>
+          <li>群體提供的問責感，讓你更能堅持習慣和目標</li>
+          <li>多元觀點的群體，能做出比個人更好的決策</li>
+          <li>社會支持緩衝了壓力對身心的傷害</li>
+          <li>共同目標讓人更有歸屬感和動力</li>
+        </ul>
       </div>
     </div>
 
-    <p>羅伯特·西奧迪尼在《影響力》中歸納了六個社會影響力原則，它們與上述的吸引力因素密切相關：<strong>互惠（reciprocity）</strong>——人傾向於回報他人的好意；<strong>承諾與一致性（commitment and consistency）</strong>——一旦公開承諾，就傾向於維持一致的行為；<strong>社會認同（social proof）</strong>——在不確定時，參考他人的行為；<strong>喜好（liking）</strong>——更容易被自己喜歡的人說服；<strong>權威（authority）</strong>——傾向於服從具有專業或地位的人；<strong>稀缺性（scarcity）</strong>——感覺稀缺的東西更有價值。這六個原則是行銷、談判與說服策略的心理學基礎，理解它們既能幫助你更有效地影響他人，也能幫助你辨識和抵禦對這些原則的操縱性使用。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在一個群組或團隊裡，討論的結果往往比你一開始的想法更極端，或者大家最後都同意了一個你私下覺得有問題的決定，但現場沒有人說出來。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">群體討論有一個傾向：它不會讓意見「平均化」，反而會讓多數人原本的傾向變得更強。而且當群體凝聚力越強，大家越不想破壞和諧氣氛，真正的疑慮就越難被說出來。結果是：表面上大家都同意，私下每個人都有保留。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>在討論開始前，讓每個人先個別寫下自己的想法。</b>一旦有人說出意見，其他人就會開始往那個方向靠。先各自記錄，再討論，能保留更多真實的多元觀點。</li>
+          <li><b>主動指定一個人負責提出反對意見。</b>「魔鬼代言人」的角色讓說出不同意見變得有合理性，不再像是在搗亂，而是在盡職。</li>
+          <li><b>說出你私下的顧慮。</b>你不知道有多少人和你一樣有疑慮但沒說出來。通常你說了，會有人說「我也這樣覺得」——沉默的多數往往比你以為的更多。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  </section>
+  <!-- 05 偏見：你沒有意識到的自動判斷 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">偏見：你沒有意識到的自動判斷</span>
+    </div>
+    <p class="ch-intro">偏見不只存在於明顯的歧視行為裡。更多時候，它是一種自動的、你自己也不一定察覺到的傾向——對某些人更快產生好感或信任，對另一些人更快產生懷疑或負面評價。沒有人是完全中立的，但你可以練習更慢下來。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你面試了幾個人，對其中一個有一種說不清楚的「感覺不太對」，但具體說不出哪裡不對。或者你注意到自己對某個群體的人，反應就是比較快，比較容易信任。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">大腦對人的第一印象判斷非常快速，而且這個判斷會影響後續所有的資訊處理——你更容易注意到符合第一印象的資訊，忽略不符合的。光環效應讓你對「第一眼喜歡的人」在各方面都打更高的分；而內外群體偏誤讓你對「和自己相似的人」自動更信任，對不同的人更懷疑。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>用結構取代直覺。</b>在評估人或做決定時，先列出你要看的具體標準，再根據標準評分，而不是先有「感覺」再找理由支持它。</li>
+          <li><b>問自己：「如果是另一種人做同樣的事，我的反應會一樣嗎？」</b>這個問題不舒服，但它能讓你注意到自己的雙重標準。</li>
+          <li><b>多接觸和你不同的人的真實故事。</b>刻板印象靠的是「類別」，打破它靠的是「個體」。不是理論上的接受多元，而是真實接觸到那個「類別」裡的具體的人。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 說服與影響：六個你每天遇到的機制 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">06</span>
+      <span class="ch-title">說服與影響：六個你每天都在遇到的機制</span>
+    </div>
+    <p class="ch-intro">廣告、銷售、社群媒體、甚至你身邊的人——都在用心理學的影響力機制影響你的決定。知道這些機制不是要讓你更冷酷，而是讓你在被影響的時候，多一點選擇的空間。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>機制</th>
+          <th>它如何影響你</th>
+          <th>你怎麼辨識它</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>互惠</td>
+          <td>別人給了你什麼，你會感到有義務回報——即使你不想要那個「禮物」</td>
+          <td>「他給了我試用品 / 幫了我一個忙，我好像不得不答應他」</td>
+        </tr>
+        <tr>
+          <td>稀缺性</td>
+          <td>「限時」「只剩幾個」讓你感到緊迫，加速決定——通常讓決定品質變差</td>
+          <td>「倒數計時讓我不想錯過，但如果沒有這個計時器，我會買嗎？」</td>
+        </tr>
+        <tr>
+          <td>社會認同</td>
+          <td>「大家都這樣做」讓你覺得這一定是對的或安全的</td>
+          <td>「我在買這個是因為我想要，還是因為大家都有？」</td>
+        </tr>
+        <tr>
+          <td>喜好</td>
+          <td>你更容易被你喜歡的人說服，長相好、親切、和你相似的人——無論他說的對不對</td>
+          <td>「我同意他是因為他說的有道理，還是因為我喜歡他這個人？」</td>
+        </tr>
+        <tr>
+          <td>權威</td>
+          <td>頭銜、制服、專業語言讓你覺得對方說的是對的，減少你自己的判斷</td>
+          <td>「我相信這件事是因為有證據，還是因為說話的人看起來很專業？」</td>
+        </tr>
+        <tr>
+          <td>承諾一致性</td>
+          <td>一旦你答應了一件小事，很難拒絕接下來更大的要求——因為拒絕會讓你顯得不一致</td>
+          <td>「我答應後續的要求，是因為我真的想，還是因為我之前答應過第一步？」</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 11 週，共 16 週</td></tr>
       <tr><td>單元</td><td>Unit 04 — 社會心理學</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Social Psychology <span>社會心理學</span></li>
-      <li>Attribution <span>歸因</span></li>
-      <li>Halo Effect <span>光環效應</span></li>
-      <li>FAE <span>基本歸因謬誤</span></li>
-      <li>Conformity <span>從眾</span></li>
-      <li>Normative Influence <span>規範性影響</span></li>
-      <li>Informational Influence <span>資訊性影響</span></li>
-      <li>Obedience <span>服從</span></li>
-      <li>Agentic State <span>代理人狀態</span></li>
-      <li>Social Facilitation <span>社會助長</span></li>
-      <li>Social Loafing <span>社會懈怠</span></li>
-      <li>Deindividuation <span>去個人化</span></li>
-      <li>Group Polarization <span>群體極化</span></li>
-      <li>Groupthink <span>集體思維</span></li>
-      <li>Stereotype <span>刻板印象</span></li>
-      <li>Implicit Bias <span>隱性偏見</span></li>
-      <li>In-group Bias <span>內群體偏誤</span></li>
-      <li>Mere Exposure Effect <span>單純接觸效應</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">快速提醒</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">判斷人</span>
+        <span class="qa-val">先問情境因素，再評論性格</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">從眾前</span>
+        <span class="qa-val">先寫下自己的想法，再聽別人的</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">說不</span>
+        <span class="qa-val">提前想好你的底線，不要等到壓力當下</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">開會</span>
+        <span class="qa-val">讓大家先各自記下想法，再討論</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">被說服</span>
+        <span class="qa-val">問：「如果不是他說的，我還會相信嗎？」</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>Solomon Asch — 從眾實驗、印象形成</td></tr>
-      <tr><td>人物</td><td>Stanley Milgram — 服從權威實驗</td></tr>
-      <tr><td>人物</td><td>Philip Zimbardo — 史丹佛監獄實驗、去個人化</td></tr>
-      <tr><td>人物</td><td>Irving Janis — 集體思維理論</td></tr>
-      <tr><td>人物</td><td>Robert Zajonc — 社會助長、單純接觸效應</td></tr>
-      <tr><td>人物</td><td>Robert Cialdini — 影響力六原則</td></tr>
-      <tr><td>人物</td><td>Henri Tajfel — 社會認同理論、內外群體</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《影響力》Robert Cialdini</td></tr>
-      <tr><td>書目</td><td>《路西法效應》Philip Zimbardo</td></tr>
-      <tr><td>書目</td><td>《服從權威》Stanley Milgram</td></tr>
-      <tr><td>書目</td><td>《偏見的本質》Gordon Allport</td></tr>
-      <tr><td>論文</td><td>Milgram, S. (1963). Behavioral study of obedience.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《影響力》Robert Cialdini</td></tr>
+      <tr><td>書</td><td>《路西法效應》Philip Zimbardo</td></tr>
+      <tr><td>書</td><td>《快思慢想》Daniel Kahneman</td></tr>
+      <tr><td>書</td><td>《偏見》Jennifer Eberhardt</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>Milgram 的實驗顯示，65% 的普通人在權威指令下會對無辜者施加極端痛苦。這個結果如何改變你對「我在那種情況下一定不會那樣做」這種直覺的信任？你認為什麼因素讓某些人能夠抵抗服從的壓力？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>這週試著觀察一次：你對某個人的行為做出了負面判斷。你有沒有想到任何情境因素，可能解釋他的行為？如果是你做同樣的事，你會怎麼解釋？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>群體極化被認為是社群媒體時代政治極化加劇的重要機制。你有沒有注意到自己在某個社群媒體平台上，信念或偏好變得比原本更極端的經歷？你採取了什麼（或可以採取什麼）來對抗這個趨勢？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你最近有沒有做過一個「大家都這樣」但你其實不確定是不是適合自己的決定？如果只有你一個人，你會怎麼選？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>「接近性」是友誼與愛情形成最強的預測因子之一——我們往往愛上了剛好在我們身邊的人。這個發現如何影響你對「緣分」、「命中注定」等浪漫信念的看法？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你的底線是什麼？在工作或生活裡，有沒有哪些要求是你一定不會配合的？有沒有曾經越過了自己的底線，然後後悔的經驗？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>回想一個你曾被 Cialdini 六原則之一影響而做出決定的情境（例如被互惠原則、稀缺性或社會認同驅動的購買行為）。在理解了背後的心理機制後，你認為你當初的決定是否仍然理性？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>六個影響力機制裡，哪一個你覺得對你最有效？你有沒有辦法想到一個最近它影響過你決定的例子？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day10.html" class="page-link">&#8592; Week 10</a>
-  <span class="page-dot">11 / 16</span>
-  <a href="day12.html" class="page-link">Week 12 &#8594;</a>
+<div class="pager">
+  <a href="day10.html">← Week 10</a>
+  <span class="pager-mid">11 / 16</span>
+  <a href="day12.html">Week 12 →</a>
 </div>
 
 <script>
-  const key = 'week-11';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-11';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
