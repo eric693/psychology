@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 09 — 壓力、焦慮與因應</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F0E8;
+      --ink:       #1A1612;
+      --ink-mid:   #4A4440;
+      --ink-light: #8A8480;
+      --red:       #C0392B;
+      --rule:      rgba(26,22,18,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      min-height: 100vh;
+      padding-bottom: 6rem;
+    }
+    nav {
+      padding: 1.2rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+    }
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 720px;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      max-width: 600px;
+    }
+    .hero-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+    .page-wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+      gap: 5vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+      display: block;
+    }
+    .objectives { margin-bottom: 3.5rem; }
+    .obj-list { list-style: none; }
+    .obj-list li {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      gap: 0.4rem;
+    }
+    .obj-list li .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--red);
+    }
+    .prose { margin-bottom: 3.5rem; }
+    .prose h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 2.8rem 0 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .prose p {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--ink-mid);
+      margin-bottom: 1.1rem;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose p strong { font-weight: 500; color: var(--ink); }
+    .pull-quote {
+      margin: 2rem 0;
+      padding: 1.6rem 2rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pull-quote p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+      margin: 0;
+    }
+    .pull-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      font-style: normal;
+    }
+    .case-study {
+      border: 1px solid var(--rule);
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .case-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+    .case-study h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .case-study p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      margin-bottom: 0.6rem;
+    }
+    .case-study p:last-child { margin-bottom: 0; }
+    /* GAS PHASES */
+    .gas-phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      margin: 1.5rem 0;
+    }
+    .gas-box {
+      padding: 1.4rem 1.2rem;
+      border: 1px solid var(--rule);
+    }
+    .gas-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .gas-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .gas-desc {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--ink-mid);
+    }
+    /* STRESSOR TABLE */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+    .compare-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .compare-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--ink-mid);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
+    /* COPING STRATEGIES */
+    .coping-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      margin: 1.5rem 0;
+    }
+    .coping-item {
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--rule);
+    }
+    .coping-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .coping-en {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 0.55rem;
+    }
+    .coping-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      margin-bottom: 0.4rem;
+    }
+    .coping-note {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+    /* HEALTH EFFECTS */
+    .effect-list { margin: 1.5rem 0; }
+    .effect-row {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1.2rem;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    .effect-row:first-child { border-top: 1px solid var(--rule); }
+    .effect-system {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .effect-desc {
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink-mid);
+    }
+    /* SIDEBAR */
+    .sidebar-block { margin-bottom: 2.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; }
+    .meta-table tr { border-bottom: 1px solid var(--rule); }
+    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
+    .meta-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      width: 4.5rem;
+      padding-top: 0.85rem;
+    }
+    .meta-table td:last-child { color: var(--ink-mid); }
+    .terms-list { list-style: none; }
+    .terms-list li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
+    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .reflection-inner { border: 1px solid var(--rule); }
+    .reflection-q {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+    .reflection-q:last-child { border-bottom: none; }
+    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
+    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-complete {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
+    .pagination {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .page-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .page-link:hover { color: var(--red); }
+    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
+    @media (max-width: 760px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-number { display: none; }
+      .gas-phases { grid-template-columns: 1fr; }
+      .coping-grid { grid-template-columns: 1fr; }
+      .effect-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
+  <span class="nav-week">Week 09 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Unit 03 &nbsp;—&nbsp; 情緒與人格</p>
+    <h1>壓力、焦慮<br>與<em>因應的心理學</em></h1>
+    <p class="hero-sub">壓力是現代生活的底色。從短暫的考前緊張到長年累積的慢性耗竭，壓力以千百種形式滲入我們的身心。本週探索壓力的生理機制、慢性壓力的健康代價、焦慮與壓力的差異，以及心理學研究揭示的有效因應策略。</p>
+  </div>
+  <div class="hero-number">09</div>
+</div>
+
+<div class="page-wrap">
+<main>
+
+  <section class="objectives">
+    <span class="section-label">Learning Objectives</span>
+    <ul class="obj-list">
+      <li><span class="num">01</span><span>理解壓力的定義與來源分類，區分急性壓力與慢性壓力的不同影響</span></li>
+      <li><span class="num">02</span><span>認識 Selye 的一般適應症候群（GAS）三階段：警覺、抵抗、耗竭</span></li>
+      <li><span class="num">03</span><span>了解壓力的生理機制：HPA 軸、皮質醇、戰鬥或逃跑反應，以及慢性壓力對免疫、心血管與大腦的影響</span></li>
+      <li><span class="num">04</span><span>理解壓力的認知評估模型（Lazarus），區分初級評估與次級評估</span></li>
+      <li><span class="num">05</span><span>認識焦慮症的主要類型，理解焦慮與正常壓力反應的區別</span></li>
+      <li><span class="num">06</span><span>掌握有效的壓力因應策略，包括問題焦點、情緒焦點與意義焦點的因應方式</span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+
+    <h2>一、壓力是什麼？</h2>
+    <p>「壓力」這個詞在日常語言中被廣泛使用，但在心理學中它有更精確的定義。壓力（stress）是指個體感知到<strong>外在要求超過自身應對資源</strong>時所產生的生理與心理反應過程。這個定義有幾個重要含意：首先，壓力不只是「外在事件」本身，而是個體對事件的主觀評估；其次，壓力涉及「要求」與「資源」的比例——同樣的工作截止日期，對資源充足的人是挑戰，對資源匱乏的人是威脅。</p>
+    <p>引發壓力反應的外在事件或情境稱為<strong>壓力源（stressor）</strong>。壓力源的類型多樣，從生死攸關的重大創傷，到每日瑣碎的微小煩惱，都可能啟動壓力反應系統。值得注意的是，並非所有壓力都有害。心理學家區分了<strong>好壓力（eustress）</strong>——適度的挑戰性壓力，能激發動力、促進成長、提升表現；以及<strong>壞壓力（distress）</strong>——超出承受能力的壓力，損害身心功能。問題不在於有沒有壓力，而在於壓力的強度、持續時間，以及個體對它的評估與因應方式。</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>壓力源類型</th>
+          <th>說明</th>
+          <th>例子</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>重大生活事件</td>
+          <td>需要重大調適的人生轉折，即使是正面事件也具有壓力值</td>
+          <td>喪偶、離婚、失業、結婚、搬家、生育</td>
+        </tr>
+        <tr>
+          <td>日常瑣事</td>
+          <td>累積性的日常小煩惱，研究顯示其健康影響不亞於重大事件</td>
+          <td>塞車、與人衝突、工作截止日、家務爭執</td>
+        </tr>
+        <tr>
+          <td>慢性壓力源</td>
+          <td>長期持續存在、難以改變的情境壓力</td>
+          <td>慢性病照護、長期財務困難、職場霸凌、歧視</td>
+        </tr>
+        <tr>
+          <td>創傷事件</td>
+          <td>威脅生命或身體完整性的極端事件，可引發創傷後壓力症候群</td>
+          <td>自然災害、暴力犯罪、戰爭、重大意外</td>
+        </tr>
+        <tr>
+          <td>環境壓力源</td>
+          <td>物理環境中的持續性不愉快刺激</td>
+          <td>噪音污染、擁擠、空氣品質惡劣、長期失眠</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>二、壓力的生理機制</h2>
+    <p>當大腦感知到威脅時，它會啟動兩條相互配合的生理路徑，在幾秒到幾分鐘內動員全身資源應對危機。</p>
+    <p><strong>第一條路徑：交感神經系統——腎上腺髓質軸（SAM 軸）</strong>是快速反應系統。下視丘激活交感神經系統，腎上腺髓質迅速分泌<strong>腎上腺素（adrenaline）</strong>與<strong>正腎上腺素（noradrenaline）</strong>，在數秒內引發心跳加速、呼吸急促、肌肉緊張、血糖升高、瞳孔擴大——這就是著名的<strong>「戰鬥或逃跑反應（fight-or-flight response）」</strong>，由 Walter Cannon 在 1915 年首次描述。這套系統在面對獅子的祖先身上是完美的求生機制；在現代辦公室的截止日期壓力下，同樣的系統則往往無法被適當地「釋放」。</p>
+    <p><strong>第二條路徑：下視丘—腦垂體—腎上腺軸（HPA 軸）</strong>是較慢但更持久的系統。下視丘分泌促腎上腺皮質素釋放激素（CRH），刺激腦垂體分泌促腎上腺皮質素（ACTH），後者再刺激腎上腺皮質分泌<strong>皮質醇（cortisol）</strong>。皮質醇在數分鐘至數十分鐘內發揮作用，動員能量儲備、增強免疫應激反應、提升警覺性。在急性壓力下，皮質醇的分泌是適應性的；但若 HPA 軸長期處於過度激活狀態，皮質醇的持續高濃度則會對全身多個系統造成損害。</p>
+
+    <div class="pull-quote">
+      <p>「壓力不是來自事件本身，而是來自你對事件的解讀。改變解讀，你就改變了壓力。」</p>
+      <cite>— Richard Lazarus，認知評估模型奠基者，加州大學柏克萊分校</cite>
+    </div>
+
+    <h2>三、一般適應症候群</h2>
+    <p>匈牙利裔加拿大醫學家 Hans Selye 在 1930–40 年代透過動物實驗，發現無論壓力源的性質如何（電擊、寒冷、感染、手術），身體的反應模式都呈現驚人的相似性。他將這個共通的生理反應歷程稱為<strong>一般適應症候群（General Adaptation Syndrome, GAS）</strong>，分為三個依序發生的階段。</p>
+
+    <div class="gas-phases">
+      <div class="gas-box">
+        <div class="gas-num">Phase 01</div>
+        <div class="gas-title">警覺反應</div>
+        <div class="gas-desc">壓力源出現，身體立即動員。SAM 軸與 HPA 軸同步激活，腎上腺素與皮質醇大量分泌，全身進入高度喚起狀態。短暫的抵抗力下降（因為資源被重新分配），隨即迅速回升。這是「戰鬥或逃跑」的生理準備狀態。</div>
+      </div>
+      <div class="gas-box">
+        <div class="gas-num">Phase 02</div>
+        <div class="gas-title">抵抗階段</div>
+        <div class="gas-desc">若壓力源持續存在，身體嘗試適應並維持高度警覺。表面上看起來功能正常，但實際上正在消耗大量生理儲備。皮質醇持續高濃度分泌，免疫功能開始受到抑制，非緊急的生理功能（消化、生殖）被壓縮。個體感覺勉強撐著。</div>
+      </div>
+      <div class="gas-box">
+        <div class="gas-num">Phase 03</div>
+        <div class="gas-title">耗竭階段</div>
+        <div class="gas-desc">若壓力持續而無緩解，生理儲備耗盡，身體進入耗竭狀態。免疫功能嚴重受損，各系統開始崩潰，出現身心症狀（潰瘍、心臟病、憂鬱），極端情況下可導致死亡。現代人的「燃盡（burnout）」正是耗竭階段的典型表現。</div>
+      </div>
+    </div>
+
+    <p>Selye 的 GAS 模型是壓力研究的奠基貢獻，首次以系統性的方式連結了心理壓力與生理疾病。然而，後來的研究者批評它過於生物化，忽略了認知評估與個別差異在壓力反應中的關鍵角色——同樣的壓力源對不同人的衝擊可以天差地別，這無法只靠生理機制解釋。</p>
+
+    <h2>四、慢性壓力的健康代價</h2>
+    <p>短暫的急性壓力往往不會造成長期損害，甚至有助於免疫系統的短期強化。真正對健康構成威脅的是<strong>慢性壓力（chronic stress）</strong>——持續數週、數月乃至數年的壓力狀態。長期高濃度的皮質醇對多個生理系統造成系統性損害。</p>
+
+    <div class="effect-list">
+      <div class="effect-row">
+        <div class="effect-system">免疫系統</div>
+        <div class="effect-desc">慢性皮質醇抑制淋巴細胞功能，削弱免疫監控能力。慢性壓力者更容易感冒、感染，傷口癒合更慢，且癌細胞的免疫監控效率下降。Sheldon Cohen 的研究顯示，壓力程度高的受試者，接種感冒病毒後的發病率顯著更高。</div>
+      </div>
+      <div class="effect-row">
+        <div class="effect-system">心血管系統</div>
+        <div class="effect-desc">持續的交感神經激活使血壓長期偏高，加速動脈粥樣硬化。長期壓力是心臟病、中風的獨立風險因子。A 型人格（競爭、急躁、敵意）的心臟病風險顯著高於 B 型人格，其中「敵意」成分被認為是最關鍵的致病因素。</div>
+      </div>
+      <div class="effect-row">
+        <div class="effect-system">大腦結構</div>
+        <div class="effect-desc">長期高濃度皮質醇會損傷海馬迴神經元，削弱記憶形成能力與空間導航。研究顯示，長期壓力者的海馬迴體積顯著縮小，這與創傷後壓力症候群、憂鬱症的認知損害密切相關。</div>
+      </div>
+      <div class="effect-row">
+        <div class="effect-system">代謝與消化</div>
+        <div class="effect-desc">皮質醇促進脂肪在腹部堆積（內臟脂肪），增加代謝症候群與糖尿病風險。消化系統在壓力下被抑制，導致腸躁症、消化性潰瘍（雖幽門螺旋桿菌是主因，壓力顯著惡化病情）、食慾失調。</div>
+      </div>
+      <div class="effect-row">
+        <div class="effect-system">生殖與荷爾蒙</div>
+        <div class="effect-desc">慢性壓力抑制生殖軸，導致月經週期紊亂、性功能障礙、不孕風險提升。皮質醇與性荷爾蒙存在競爭關係，長期壓力下睪固酮與雌激素水平均可能下降。</div>
+      </div>
+      <div class="effect-row">
+        <div class="effect-system">心理健康</div>
+        <div class="effect-desc">慢性壓力是憂鬱症與焦慮症最重要的環境誘因之一。HPA 軸的持續激活與血清素、多巴胺系統的失調密切相關。壓力誘發的神經炎症也被認為是憂鬱症的潛在病理機制。</div>
+      </div>
+    </div>
+
+    <h2>五、認知評估模型：你如何詮釋壓力？</h2>
+    <p>Richard Lazarus 與 Susan Folkman 在 1984 年提出的<strong>認知評估模型（cognitive appraisal model）</strong>是現代壓力研究的核心理論框架。它的核心主張是：壓力不是刺激本身，也不是反應本身，而是個體與環境之間的<strong>交易（transaction）</strong>——事件的壓力程度取決於個體如何評估它。</p>
+    <p>這個評估過程分為兩個階段。<strong>初級評估（primary appraisal）</strong>是對事件本身的評估：「這件事對我重要嗎？它是威脅、傷害、還是挑戰？」同樣的截止日期，對在意這份工作的人是高威脅，對準備離職的人幾乎無壓力。<strong>次級評估（secondary appraisal）</strong>是對自身因應資源的評估：「我有辦法處理這件事嗎？我有什麼資源、選項與能力？」當個體評估威脅遠超過自身資源時，壓力感最為強烈。</p>
+    <p>認知評估模型解釋了一個重要現象：<strong>心理韌性（resilience）高的人面對相同的客觀壓力源，往往產生截然不同的壓力反應</strong>。他們傾向於將挑戰性事件評估為「挑戰」（growth opportunity）而非「威脅」（potential harm），且對自身的因應能力抱有更高的信心。這不是否認困難的存在，而是對事件意義的積極重構——而這種重構能力是可以被訓練的。</p>
+
+    <div class="case-study">
+      <span class="case-label">Research Finding</span>
+      <h3>壓力觀念的重要性：McGonigal 的壓力再框架研究</h3>
+      <p>心理學家 Kelly McGonigal 在回顧一項追蹤 30,000 名美國成人八年的研究時，發現了一個驚人的結果。研究詢問受試者：「你在過去一年中承受了多少壓力？」以及「你相信壓力有害健康嗎？」</p>
+      <p>結果顯示，<strong>高壓力本身並不直接預測死亡風險的升高；但「高壓力 + 相信壓力有害」的組合，卻與 43% 的過早死亡風險上升相關</strong>。相比之下，高壓力但不相信壓力有害的人，死亡率甚至低於低壓力組。</p>
+      <p>這個研究顯示，你對壓力本身的信念，可能比壓力量本身更能預測健康後果。當人們將生理喚起（心跳加速）詮釋為「身體在幫我準備迎接挑戰」而非「我快要崩潰了」時，心血管的反應模式確實有所不同——血管更放鬆，與壓力相關的心臟損傷風險更低。<strong>改變你對壓力的詮釋，可能真的改變壓力對身體的影響。</strong></p>
+    </div>
+
+    <h2>六、焦慮：當壓力反應失去控制</h2>
+    <p>壓力與焦慮密切相關，但並不相同。<strong>焦慮（anxiety）</strong>是對感知到的威脅（通常是未來的、不確定的、或想像中的）所產生的持續性警覺狀態。適度的焦慮是正常且有功能的——它讓你在重要考試前準備更充分，在危險環境中保持警惕。問題在於當焦慮反應的強度、頻率或持續時間超出了情境的實際需求，開始干擾日常功能時，就可能進入焦慮症的範疇。</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>焦慮症類型</th>
+          <th>核心特徵</th>
+          <th>終生盛行率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>廣泛性焦慮症</td>
+          <td>對多個生活領域的持續過度擔憂，難以控制，伴隨肌肉緊張、疲勞、睡眠問題</td>
+          <td>約 5–9%</td>
+        </tr>
+        <tr>
+          <td>恐慌症</td>
+          <td>反覆發生的恐慌發作（心悸、呼吸困難、胸痛、感覺即將死去），及對再次發作的持續恐懼</td>
+          <td>約 3–5%</td>
+        </tr>
+        <tr>
+          <td>社交焦慮症</td>
+          <td>對社交或表演情境的強烈恐懼，害怕被負面評價，傾向逃避社交場合</td>
+          <td>約 7–13%</td>
+        </tr>
+        <tr>
+          <td>特定恐懼症</td>
+          <td>對特定物體或情境（蜘蛛、高處、血液、搭機）的強烈非理性恐懼</td>
+          <td>約 7–9%</td>
+        </tr>
+        <tr>
+          <td>創傷後壓力症候群</td>
+          <td>創傷事件後出現的閃回、噩夢、迴避、過度警覺，持續超過一個月</td>
+          <td>約 6–8%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>七、有效的壓力因應策略</h2>
+    <p>Lazarus 與 Folkman 的因應理論將因應策略分為兩大類。<strong>問題焦點因應（problem-focused coping）</strong>直接針對壓力源採取行動——蒐集資訊、制定計畫、尋求協助、改變情況。這在壓力源是可控的情況下最為有效。<strong>情緒焦點因應（emotion-focused coping）</strong>則著重管理壓力引發的情緒反應——重新詮釋情境、尋求社會支持、冥想放鬆——在壓力源無法改變時（如失去親人、慢性病）更為適合。</p>
+    <p>近年研究還強調了第三類：<strong>意義焦點因應（meaning-focused coping）</strong>——在困境中尋找意義、重新評估價值觀與優先順序。Viktor Frankl 在《活出意義來》中描述了納粹集中營倖存者的心理歷程，揭示了即使在最極端的苦難中，找到意義的能力也能維持心理存活的核心力量。</p>
+
+    <div class="coping-grid">
+      <div class="coping-item">
+        <div class="coping-name">社會支持</div>
+        <div class="coping-en">Social Support</div>
+        <div class="coping-desc">社會連結是最有力的壓力緩衝因子之一。情感支持（被傾聽、被理解）、資訊支持（獲得建議與資源）、工具性支持（實際協助）都有保護效果。孤立感本身是強力的壓力源與健康危險因子。</div>
+        <div class="coping-note">Sheldon Cohen 的研究：社交網絡廣的人，感冒發病率顯著較低。</div>
+      </div>
+      <div class="coping-item">
+        <div class="coping-name">認知重構</div>
+        <div class="coping-en">Cognitive Reappraisal</div>
+        <div class="coping-desc">主動改變對壓力事件的詮釋框架，從威脅重構為挑戰，從失敗重構為學習機會。這是認知行為治療的核心技術，也是情緒調節策略中效果最持久的一種。</div>
+        <div class="coping-note">不同於壓抑（表面壓制情緒），重構從根源改變情緒評估。</div>
+      </div>
+      <div class="coping-item">
+        <div class="coping-name">正念冥想</div>
+        <div class="coping-en">Mindfulness</div>
+        <div class="coping-desc">有意識地將注意力帶到當下時刻，以不評判的方式觀察自身的思想、感受與身體感覺。Jon Kabat-Zinn 的正念減壓（MBSR）課程在慢性疼痛、焦慮症與壓力管理方面有大量實證支持。</div>
+        <div class="coping-note">8 週 MBSR 訓練可使杏仁核灰質密度降低，前額葉調節能力提升。</div>
+      </div>
+      <div class="coping-item">
+        <div class="coping-name">規律運動</div>
+        <div class="coping-en">Physical Exercise</div>
+        <div class="coping-desc">有氧運動能直接降低皮質醇水平、促進腦內啡與 BDNF（腦源性神經營養因子）分泌。規律運動對輕至中度憂鬱和焦慮的效果，在某些研究中與藥物治療相當，且無副作用。</div>
+        <div class="coping-note">每週 150 分鐘中等強度有氧運動是世界衛生組織建議的心理健康維護基準。</div>
+      </div>
+      <div class="coping-item">
+        <div class="coping-name">書寫表達</div>
+        <div class="coping-en">Expressive Writing</div>
+        <div class="coping-desc">James Pennebaker 的研究顯示，連續數天將創傷或壓力經歷書寫出來（包括事件與情緒感受），能顯著降低壓力荷爾蒙、改善免疫功能、減少就醫次數。書寫幫助大腦將混亂的情緒記憶組織成有脈絡的敘事。</div>
+        <div class="coping-note">每次書寫 15–20 分鐘，連續 3–4 天，效果可持續數月。</div>
+      </div>
+      <div class="coping-item">
+        <div class="coping-name">主動放鬆</div>
+        <div class="coping-en">Relaxation Response</div>
+        <div class="coping-desc">Herbert Benson 提出的放鬆反應（relaxation response）是戰鬥或逃跑反應的生理對立面：副交感神經主導、心率下降、皮質醇降低。深呼吸、漸進式肌肉放鬆、瑜伽等方法都能主動激活此系統。</div>
+        <div class="coping-note">「生理嘆息」（雙吸氣後緩慢呼出）是目前已知最快速降低焦慮的呼吸技術之一。</div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<aside>
+  <div class="sidebar-block">
+    <span class="section-label">Course Info</span>
+    <table class="meta-table">
+      <tr><td>週次</td><td>第 9 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 03 — 情緒與人格</td></tr>
+      <tr><td>程度</td><td>無需先備知識</td></tr>
+      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Terms</span>
+    <ul class="terms-list">
+      <li>Stress <span>壓力</span></li>
+      <li>Stressor <span>壓力源</span></li>
+      <li>Eustress <span>好壓力</span></li>
+      <li>Distress <span>壞壓力</span></li>
+      <li>Fight-or-Flight <span>戰鬥或逃跑</span></li>
+      <li>HPA Axis <span>下視丘腦垂體腎上腺軸</span></li>
+      <li>Cortisol <span>皮質醇</span></li>
+      <li>GAS <span>一般適應症候群</span></li>
+      <li>Cognitive Appraisal <span>認知評估</span></li>
+      <li>Primary Appraisal <span>初級評估</span></li>
+      <li>Secondary Appraisal <span>次級評估</span></li>
+      <li>Resilience <span>心理韌性</span></li>
+      <li>Anxiety <span>焦慮</span></li>
+      <li>PTSD <span>創傷後壓力症候群</span></li>
+      <li>Problem-focused Coping <span>問題焦點因應</span></li>
+      <li>Mindfulness <span>正念</span></li>
+      <li>Social Support <span>社會支持</span></li>
+      <li>Cognitive Reappraisal <span>認知重構</span></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Figures</span>
+    <table class="meta-table">
+      <tr><td>人物</td><td>Walter Cannon — 戰鬥或逃跑反應，1915</td></tr>
+      <tr><td>人物</td><td>Hans Selye — 一般適應症候群，壓力研究之父</td></tr>
+      <tr><td>人物</td><td>Richard Lazarus — 認知評估模型，壓力與因應</td></tr>
+      <tr><td>人物</td><td>Jon Kabat-Zinn — 正念減壓（MBSR）創始人</td></tr>
+      <tr><td>人物</td><td>James Pennebaker — 書寫表達療法研究</td></tr>
+      <tr><td>人物</td><td>Kelly McGonigal — 壓力信念與健康研究</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Further Reading</span>
+    <table class="meta-table">
+      <tr><td>書目</td><td>《壓力的好處》Kelly McGonigal</td></tr>
+      <tr><td>書目</td><td>《活出意義來》Viktor Frankl</td></tr>
+      <tr><td>書目</td><td>《正念減壓》Jon Kabat-Zinn</td></tr>
+      <tr><td>書目</td><td>《為什麼斑馬不會得胃潰瘍？》Robert Sapolsky</td></tr>
+      <tr><td>論文</td><td>Pennebaker, J.W. (1997). Writing about emotional experiences as a therapeutic process.</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<div class="reflection">
+  <span class="section-label">Reflection Questions</span>
+  <div class="reflection-inner">
+    <div class="reflection-q">
+      <span class="q-num">Q1</span>
+      <span>回想你近期最強烈的一次壓力體驗。用 Lazarus 的認知評估模型分析它：你的初級評估是「威脅」還是「挑戰」？你的次級評估（對自身因應資源的判斷）是什麼？如果你重新評估，結果會有什麼不同？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q2</span>
+      <span>研究顯示，「相信壓力有害」本身就會惡化壓力的健康影響。你一向如何看待自己的壓力反應？讀完本週後，你對壓力的觀念有什麼轉變？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q3</span>
+      <span>在六種因應策略中，你目前最常使用哪一種？有沒有哪種策略你很少使用，但根據你對自身壓力模式的理解，可能會對你特別有幫助？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q4</span>
+      <span>慢性壓力對海馬迴的損傷顯示，長期壓力不只影響情緒，也影響記憶與認知能力。你有沒有注意到，在高壓力時期你的記憶力或學習能力有所下降？你認為你目前的壓力水平對你的認知功能有什麼影響？</span>
+    </div>
+  </div>
+</div>
+
+<div class="complete-row">
+  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pagination">
+  <a href="day8.html" class="page-link">&#8592; Week 08</a>
+  <span class="page-dot">9 / 16</span>
+  <a href="day10.html" class="page-link">Week 10 &#8594;</a>
+</div>
+
+<script>
+  const key = 'week-9';
+  const btn = document.getElementById('completeBtn');
+  if (localStorage.getItem(key) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(key, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>

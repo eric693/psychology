@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 02 — 大腦與行為</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F0E8;
+      --ink:       #1A1612;
+      --ink-mid:   #4A4440;
+      --ink-light: #8A8480;
+      --red:       #C0392B;
+      --rule:      rgba(26,22,18,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      min-height: 100vh;
+      padding-bottom: 6rem;
+    }
+    nav {
+      padding: 1.2rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+    }
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 720px;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      max-width: 600px;
+    }
+    .hero-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+    .page-wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+      gap: 5vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+      display: block;
+    }
+    .objectives { margin-bottom: 3.5rem; }
+    .obj-list { list-style: none; }
+    .obj-list li {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      gap: 0.4rem;
+    }
+    .obj-list li .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--red);
+    }
+    .prose { margin-bottom: 3.5rem; }
+    .prose h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 2.8rem 0 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .prose p {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--ink-mid);
+      margin-bottom: 1.1rem;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose p strong { font-weight: 500; color: var(--ink); }
+    .pull-quote {
+      margin: 2rem 0;
+      padding: 1.6rem 2rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pull-quote p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+      margin: 0;
+    }
+    .pull-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      font-style: normal;
+    }
+    .case-study {
+      border: 1px solid var(--rule);
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .case-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+    .case-study h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .case-study p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      margin-bottom: 0.6rem;
+    }
+    .case-study p:last-child { margin-bottom: 0; }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+    .compare-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .compare-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--ink-mid);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+    /* BRAIN REGIONS GRID */
+    .region-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      margin: 1.5rem 0;
+    }
+    .region-item {
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--rule);
+    }
+    .region-name { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
+    .region-latin {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+    .region-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.75; color: var(--ink-mid); }
+    /* NEUROTRANSMITTER TABLE */
+    .nt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.87rem;
+    }
+    .nt-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-align: left;
+      padding: 0.65rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .nt-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.6;
+      color: var(--ink-mid);
+      vertical-align: top;
+    }
+    .nt-table tr:last-child td { border-bottom: none; }
+    .nt-table td:first-child { font-weight: 500; color: var(--ink); font-style: italic; }
+    /* SIDEBAR */
+    .sidebar-block { margin-bottom: 2.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; }
+    .meta-table tr { border-bottom: 1px solid var(--rule); }
+    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
+    .meta-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      width: 4.5rem;
+      padding-top: 0.85rem;
+    }
+    .meta-table td:last-child { color: var(--ink-mid); }
+    .terms-list { list-style: none; }
+    .terms-list li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
+    /* REFLECTION */
+    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .reflection-inner { border: 1px solid var(--rule); }
+    .reflection-q {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+    .reflection-q:last-child { border-bottom: none; }
+    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
+    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-complete {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
+    .pagination {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .page-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .page-link:hover { color: var(--red); }
+    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
+    @media (max-width: 760px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-number { display: none; }
+      .region-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
+  <span class="nav-week">Week 02 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Unit 01 &nbsp;—&nbsp; 認識心理學基礎</p>
+    <h1>大腦與行為：<br><em>神經科學入門</em></h1>
+    <p class="hero-sub">你的每一個念頭、每一種情緒、每一次決定，都有其神經生物學基礎。本週帶你走進大腦的世界，認識神經元如何溝通、腦區如何分工，以及生理與心理之間那條看不見卻至關重要的紐帶。</p>
+  </div>
+  <div class="hero-number">02</div>
+</div>
+
+<div class="page-wrap">
+<main>
+
+  <section class="objectives">
+    <span class="section-label">Learning Objectives</span>
+    <ul class="obj-list">
+      <li><span class="num">01</span><span>理解神經元的基本結構與電化學訊號傳遞機制（動作電位、突觸傳遞）</span></li>
+      <li><span class="num">02</span><span>認識主要神經傳導物質及其對行為與情緒的影響</span></li>
+      <li><span class="num">03</span><span>了解大腦的主要結構分區（腦幹、邊緣系統、大腦皮質）及各自功能</span></li>
+      <li><span class="num">04</span><span>理解神經可塑性（neuroplasticity）的概念及其對學習與復原的意義</span></li>
+      <li><span class="num">05</span><span>認識研究腦與行為關係的主要方法：腦損傷個案、腦影像技術等</span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+
+    <h2>一、為什麼心理學需要了解大腦？</h2>
+    <p>十九世紀的心理學家幾乎無法直接觀察大腦運作，只能靠行為觀察與口頭報告推測心智。二十世紀後半葉，腦電圖（EEG）、電腦斷層掃描（CT）、正子放射斷層掃描（PET）乃至功能性磁振造影（fMRI）的相繼問世，讓科學家第一次得以「看見」思考中的大腦。這場技術革命徹底改變了心理學的面貌。</p>
+    <p>現代心理學有一個基本預設：<strong>所有的心理現象都有其生物學基礎</strong>。你感到恐懼，是杏仁核被激活；你墜入愛河，是多巴胺與催產素在血液中激增；你陷入憂鬱，往往與血清素系統的失調有關。這並不是說心理現象「只不過是」化學反應——但理解這些生理機制，能讓我們更深刻地理解人類的行為與主觀體驗。</p>
+
+    <div class="pull-quote">
+      <p>「大腦是迄今為止宇宙中已知最複雜的物體。它由約 860 億個神經元組成，而每個神經元平均與其他神經元建立了 7,000 個突觸連結。」</p>
+      <cite>— Suzana Herculano-Houzel，神經科學家，2009</cite>
+    </div>
+
+    <h2>二、神經元：大腦的基本單位</h2>
+    <p>大腦的基本工作單位是<strong>神經元（neuron）</strong>，一種特化的神經細胞。人類大腦約有 860 億個神經元，每個神經元平均與數千個其他神經元相連，形成極其複雜的神經網絡。</p>
+    <p>神經元的結構由幾個部分組成：<strong>細胞體（soma）</strong>是代謝中心，包含細胞核；<strong>樹突（dendrites）</strong>是從細胞體延伸出的短分支，負責接收來自其他神經元的訊號；<strong>軸突（axon）</strong>是細長的纖維，負責將電訊號從細胞體傳送出去，最長可達一公尺以上（例如從脊髓到腳趾的運動神經元）；<strong>髓鞘（myelin sheath）</strong>是包裹軸突的脂肪絕緣層，能大幅加速訊號傳遞速度，多發性硬化症便是髓鞘遭到破壞所引起的疾病。</p>
+    <p>神經元傳遞訊號的方式分為兩個階段。在神經元<strong>內部</strong>，訊號以電訊號的形式傳遞，稱為<strong>動作電位（action potential）</strong>：當神經元受到足夠強度的刺激，細胞膜的離子通道開啟，鈉離子大量湧入，造成膜電位急遽升高，形成一個短暫的電脈衝，以「全有全無」（all-or-none）的方式沿軸突傳導。</p>
+    <p>在神經元<strong>之間</strong>，訊號的傳遞則依賴化學物質。軸突末端與下一個神經元樹突之間有一個微小的間隙，稱為<strong>突觸（synapse）</strong>。當動作電位抵達軸突末梢，儲存在囊泡中的<strong>神經傳導物質（neurotransmitters）</strong>被釋放到突觸間隙，與接收端神經元上的受體結合，產生興奮性或抑制性效果，決定下一個神經元是否被激發。</p>
+
+    <h2>三、神經傳導物質與行為</h2>
+    <p>不同的神經傳導物質各司其職，對情緒、認知、動機與行為有深遠影響。許多精神科藥物正是透過調節這些化學物質的濃度來產生療效。</p>
+
+    <table class="nt-table">
+      <thead>
+        <tr>
+          <th>神經傳導物質</th>
+          <th>主要功能</th>
+          <th>失調時的影響</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>多巴胺<br>Dopamine</td>
+          <td>動機、獎賞、運動控制、愉悅感；驅動「想要」的渴望感</td>
+          <td>過多：與思覺失調症的陽性症狀有關；過少：帕金森氏症、憂鬱症的動力缺乏</td>
+        </tr>
+        <tr>
+          <td>血清素<br>Serotonin</td>
+          <td>情緒調節、睡眠、食慾、衝動控制；帶來平靜與滿足感</td>
+          <td>過少：與憂鬱症、焦慮症、強迫症高度相關；SSRI 類抗憂鬱藥即作用於此系統</td>
+        </tr>
+        <tr>
+          <td>正腎上腺素<br>Norepinephrine</td>
+          <td>警覺、注意力、壓力反應（戰鬥或逃跑）；調節心跳與血壓</td>
+          <td>過少：憂鬱、注意力不集中；過多：焦慮、恐慌發作</td>
+        </tr>
+        <tr>
+          <td>乙醯膽鹼<br>Acetylcholine</td>
+          <td>肌肉收縮、學習與記憶（尤其是海馬迴功能）、自律神經系統</td>
+          <td>過少：阿茲海默症患者大腦中乙醯膽鹼大幅減少，記憶與認知功能衰退</td>
+        </tr>
+        <tr>
+          <td>GABA</td>
+          <td>主要抑制性神經傳導物質；降低神經興奮性，帶來鎮靜效果</td>
+          <td>過少：焦慮症、癲癇；苯二氮平類藥物（如 Valium）即增強 GABA 作用</td>
+        </tr>
+        <tr>
+          <td>腦內啡<br>Endorphins</td>
+          <td>天然止痛劑；運動後、大笑後分泌，帶來愉悅與幸福感</td>
+          <td>慢性疼痛患者腦內啡系統可能功能失調；嗎啡等藥物模仿其作用</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>四、大腦的結構與功能分區</h2>
+    <p>人類的大腦可以從演化的角度分為三個層次，由內而外分別對應越來越晚近的演化發展，各自負責不同層次的功能。</p>
+    <p><strong>腦幹（brainstem）</strong>是最古老的腦區，負責維持生命的基本功能：呼吸、心跳、睡眠—清醒週期、嘔吐反射等。即使大腦皮質完全損傷，只要腦幹完好，生命仍可維持（植物人狀態）。<strong>小腦（cerebellum）</strong>位於腦幹後方，主要負責協調運動、平衡與精細動作的學習，騎腳踏車或彈琴的肌肉記憶就儲存於此。</p>
+    <p>接下來是<strong>邊緣系統（limbic system）</strong>，這是情緒與記憶的核心區域，由幾個互相緊密連結的結構組成。</p>
+
+    <div class="region-grid">
+      <div class="region-item">
+        <div class="region-name">杏仁核</div>
+        <div class="region-latin">Amygdala</div>
+        <div class="region-desc">情緒處理中樞，尤其是恐懼與攻擊反應。在威脅出現時迅速激活，觸發「戰鬥或逃跑」反應，早於理性皮質的判斷。杏仁核受損者往往喪失對危險的恐懼感。</div>
+      </div>
+      <div class="region-item">
+        <div class="region-name">海馬迴</div>
+        <div class="region-latin">Hippocampus</div>
+        <div class="region-desc">長期記憶的形成與鞏固關鍵區域。新的陳述性記憶（事實與事件）必須經由海馬迴處理才能轉為長期記憶。著名患者 H.M. 因手術切除雙側海馬迴，此後無法形成任何新記憶。</div>
+      </div>
+      <div class="region-item">
+        <div class="region-name">下視丘</div>
+        <div class="region-latin">Hypothalamus</div>
+        <div class="region-desc">調節生理恆定狀態（體溫、飢餓、口渴、性行為、晝夜節律）及控制腦垂體荷爾蒙分泌。是大腦與內分泌系統之間的橋樑，面積雖小，功能卻極為關鍵。</div>
+      </div>
+      <div class="region-item">
+        <div class="region-name">扣帶皮層</div>
+        <div class="region-latin">Cingulate Cortex</div>
+        <div class="region-desc">負責衝突監控、錯誤偵測、疼痛感知與情緒調節。前扣帶皮層在決策與衝動控制中扮演重要角色，也是憂鬱症研究中高度關注的腦區。</div>
+      </div>
+    </div>
+
+    <p>最外層的<strong>大腦皮質（cerebral cortex）</strong>是人類最獨特、最發達的腦區，負責高階認知功能。它分為四個腦葉：<strong>額葉（frontal lobe）</strong>負責規劃、決策、衝動控制與人格；<strong>頂葉（parietal lobe）</strong>整合感覺訊息，處理空間感與數學；<strong>顳葉（temporal lobe）</strong>處理聽覺與語言，包含記憶提取；<strong>枕葉（occipital lobe）</strong>專司視覺處理。</p>
+    <p>值得特別注意的是<strong>前額葉皮質（prefrontal cortex, PFC）</strong>，它在人類身上比其他靈長類動物更為發達，被稱為「大腦的執行長」，負責理性思考、延遲滿足、同理心與道德判斷。青少年衝動行為的部分原因，正是因為前額葉皮質要到 25 歲左右才完全發育成熟。</p>
+
+    <div class="case-study">
+      <span class="case-label">Case Study</span>
+      <h3>Phineas Gage——一根鐵棒改變的人格（1848）</h3>
+      <p>1848 年，25 歲的美國鐵路工人 Phineas Gage 在一次爆破意外中，一根長約 109 公分、直徑 3.2 公分的鐵夯棒從他的左臉頰穿入，穿透前額葉後從頭頂飛出。令人難以置信的是，Gage 在事故中存活下來，語言與運動能力幾乎未受影響。</p>
+      <p>然而，他的家人與朋友都說：「他不再是 Gage 了。」原本負責任、受同事尊敬的他，事故後變得粗鄙無禮、反覆無常、無法維持長期計畫，對社會規範漠然置之。他的智識能力保持完好，但人格與社會判斷能力卻徹底改變。</p>
+      <p>Gage 的案例成為神經科學史上最著名的個案之一，首次提供了強力證據：<strong>前額葉皮質是人格、道德判斷與社會行為的關鍵神經基礎</strong>。它告訴我們，「性格」並非飄渺的靈魂特質，而有具體的腦部對應。</p>
+    </div>
+
+    <h2>五、神經可塑性：大腦會改變</h2>
+    <p>過去科學界長期認為，大腦在成年後便固定不變。然而二十世紀後半葉的研究徹底推翻了這個觀念。<strong>神經可塑性（neuroplasticity）</strong>指的是大腦根據經驗、學習與環境，持續改變其結構與功能連結的能力——這種能力貫穿人的一生。</p>
+    <p>神經可塑性的機制在於突觸的強化與弱化。神經科學家 Donald Hebb 在 1949 年提出著名的「Hebb 法則」：<strong>「一起激發的神經元，會連結在一起（Neurons that fire together, wire together）」</strong>。當兩個神經元反覆同時被激發，它們之間的突觸連結會變得更強、更高效——這就是學習與記憶形成的細胞機制。</p>
+    <p>神經可塑性的現實意義極為深遠。倫敦計程車司機因長年記憶複雜地圖，海馬迴後部顯著大於一般人；盲人的視覺皮質會被重新分配來處理觸覺與聽覺；中風患者透過復健訓練，可以讓大腦其他區域「接管」受損區域的功能。對學習者而言，最重要的啟示是：<strong>大腦不是固定的硬體，而是持續被使用習慣重塑的活系統</strong>。你現在正在閱讀的行為，正在改變你的大腦。</p>
+
+    <h2>六、研究腦與行為的方法</h2>
+    <p>科學家透過多種互補的方法來探索腦與行為的關係。<strong>腦損傷個案研究</strong>是最古老的方法，如 Phineas Gage 和 H.M.，透過特定腦區損傷造成的功能缺失，推斷該腦區的正常功能。</p>
+    <p><strong>電生理紀錄（EEG）</strong>透過貼附在頭皮的電極記錄腦部電活動，時間解析度極高，可捕捉毫秒級的神經反應，常用於睡眠研究與癲癇診斷。<strong>功能性磁振造影（fMRI）</strong>則偵測大腦不同區域的血氧濃度變化，間接反映神經活動，空間解析度優越，讓研究者得以精確定位受試者在執行特定任務時哪些腦區被激活。</p>
+    <p><strong>穿顱磁刺激（TMS）</strong>是一種能夠暫時「關閉」或「干擾」特定腦區功能的技術，讓研究者在健康受試者身上模擬腦損傷效果，驗證腦區功能假說。這些方法各有優缺點，現代研究者往往結合多種方法，從不同角度拼湊出大腦運作的完整圖像。</p>
+
+  </section>
+</main>
+
+<aside>
+  <div class="sidebar-block">
+    <span class="section-label">Course Info</span>
+    <table class="meta-table">
+      <tr><td>週次</td><td>第 2 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 01 — 認識心理學基礎</td></tr>
+      <tr><td>程度</td><td>無需先備知識</td></tr>
+      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Terms</span>
+    <ul class="terms-list">
+      <li>Neuron <span>神經元</span></li>
+      <li>Dendrite <span>樹突</span></li>
+      <li>Axon <span>軸突</span></li>
+      <li>Action Potential <span>動作電位</span></li>
+      <li>Synapse <span>突觸</span></li>
+      <li>Neurotransmitter <span>神經傳導物質</span></li>
+      <li>Dopamine <span>多巴胺</span></li>
+      <li>Serotonin <span>血清素</span></li>
+      <li>Limbic System <span>邊緣系統</span></li>
+      <li>Amygdala <span>杏仁核</span></li>
+      <li>Hippocampus <span>海馬迴</span></li>
+      <li>Prefrontal Cortex <span>前額葉皮質</span></li>
+      <li>Neuroplasticity <span>神經可塑性</span></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Figures</span>
+    <table class="meta-table">
+      <tr><td>人物</td><td>Santiago Ramón y Cajal — 神經元學說奠基者（1906 諾貝爾獎）</td></tr>
+      <tr><td>人物</td><td>Donald Hebb — Hebb 法則，突觸可塑性理論</td></tr>
+      <tr><td>人物</td><td>Brenda Milner — H.M. 個案研究，海馬迴與記憶</td></tr>
+      <tr><td>人物</td><td>Paul Broca — 語言區（布洛卡區）發現者</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Brain Imaging</span>
+    <table class="meta-table">
+      <tr><td>EEG</td><td>高時間解析度，記錄腦電波，適合睡眠研究</td></tr>
+      <tr><td>fMRI</td><td>高空間解析度，偵測血氧變化，定位腦區活動</td></tr>
+      <tr><td>PET</td><td>追蹤放射性示蹤劑，研究代謝與神經傳導</td></tr>
+      <tr><td>TMS</td><td>暫時干擾特定腦區，驗證功能假說</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Further Reading</span>
+    <table class="meta-table">
+      <tr><td>書目</td><td>《大腦解密手冊》David Eagleman</td></tr>
+      <tr><td>書目</td><td>《神經科學：探索腦》Bear, Connors &amp; Paradiso</td></tr>
+      <tr><td>書目</td><td>《錯把太太當帽子的人》Oliver Sacks</td></tr>
+      <tr><td>個案</td><td>H.M.（Henry Molaison）— 記憶研究史上最重要的個案</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<div class="reflection">
+  <span class="section-label">Reflection Questions</span>
+  <div class="reflection-inner">
+    <div class="reflection-q">
+      <span class="q-num">Q1</span>
+      <span>Phineas Gage 的案例顯示，腦部損傷可以改變人格。這對你理解「自由意志」與「性格是天生還是後天」這兩個問題有什麼啟發？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q2</span>
+      <span>神經可塑性告訴我們大腦會隨使用習慣改變。你目前的哪些習慣，你認為正在強化或弱化你的哪些神經迴路？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q3</span>
+      <span>多巴胺與「想要」的渴望感密切相關。你能舉出生活中多巴胺系統被過度激活的例子嗎（例如社群媒體、賭博、購物）？這對你的行為有什麼影響？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q4</span>
+      <span>前額葉皮質在 25 歲前尚未完全成熟，負責衝動控制與長遠規劃。回顧你的青少年時期，有哪些決定現在看來可能與當時前額葉未發育完全有關？</span>
+    </div>
+  </div>
+</div>
+
+<div class="complete-row">
+  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pagination">
+  <a href="day1.html" class="page-link">&#8592; Week 01</a>
+  <span class="page-dot">2 / 16</span>
+  <a href="day3.html" class="page-link">Week 03 &#8594;</a>
+</div>
+
+<script>
+  const key = 'week-2';
+  const btn = document.getElementById('completeBtn');
+  if (localStorage.getItem(key) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(key, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>

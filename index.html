@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>心理學十六週課程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #F5F0E8;
+      --ink:     #1A1612;
+      --ink-mid: #4A4440;
+      --ink-light: #8A8480;
+      --red:     #C0392B;
+      --rule:    rgba(26,22,18,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      min-height: 100vh;
+      padding: 0 0 6rem;
+      /* subtle paper grain */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding: 3rem 5vw 2.2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .header-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    header h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .header-meta .weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--ink);
+      display: block;
+    }
+
+    .header-meta .weeks-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      padding: 2.4rem 5vw 0;
+      max-width: 660px;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-mid);
+    }
+
+    /* ── UNIT SECTIONS ── */
+    main {
+      padding: 3.5rem 5vw 0;
+    }
+
+    .unit {
+      margin-bottom: 3.2rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .unit-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .unit-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--ink-mid);
+    }
+
+    /* ── WEEK GRID ── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--rule);
+    }
+
+    .week-card {
+      background: var(--bg);
+      padding: 1.5rem 1.6rem 1.4rem;
+      border: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: background 0.18s ease;
+      position: relative;
+    }
+
+    .week-card:hover {
+      background: rgba(192, 57, 43, 0.04);
+    }
+
+    .week-card:hover .week-num {
+      color: var(--red);
+    }
+
+    .week-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      transition: color 0.18s ease;
+    }
+
+    .week-title {
+      font-size: 0.97rem;
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .week-arrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--red);
+      opacity: 0;
+      position: absolute;
+      bottom: 1.4rem;
+      right: 1.6rem;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      transform: translateX(-4px);
+    }
+
+    .week-card:hover .week-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 5rem;
+      padding: 2rem 5vw;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+    }
+
+    footer .progress-bar {
+      height: 2px;
+      width: 160px;
+      background: var(--rule);
+      position: relative;
+    }
+
+    footer .progress-fill {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--red);
+      transition: width 0.6s ease;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { grid-template-columns: 1fr; }
+      .header-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <p class="header-eyebrow">Psychology / 2025 &nbsp;&mdash;&nbsp; Online Course</p>
+    <h1>人人都能學的<br><em>心理學</em></h1>
+  </div>
+  <div class="header-meta">
+    <span class="weeks">16</span>
+    <span class="weeks-label">Weeks</span>
+  </div>
+</header>
+
+<p class="intro">
+  從神經科學到社會行為，從情緒調節到正向心理，十六週系統化帶你建立完整的心理學知識體系，無需任何基礎，以影片課程形式輕鬆學習。
+</p>
+
+<main>
+
+  <!-- UNIT 1 -->
+  <section class="unit">
+    <div class="unit-header">
+      <span class="unit-number">Unit 01</span>
+      <span class="unit-title">認識心理學基礎</span>
+    </div>
+    <div class="week-grid">
+      <a href="day1.html" class="week-card">
+        <span class="week-num">WEEK 01</span>
+        <span class="week-title">什麼是心理學？從日常生活看見心理的力量</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day2.html" class="week-card">
+        <span class="week-num">WEEK 02</span>
+        <span class="week-title">大腦與行為：神經科學入門</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day3.html" class="week-card">
+        <span class="week-num">WEEK 03</span>
+        <span class="week-title">意識、睡眠與夢境的心理學</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- UNIT 2 -->
+  <section class="unit">
+    <div class="unit-header">
+      <span class="unit-number">Unit 02</span>
+      <span class="unit-title">認知與行為心理學</span>
+    </div>
+    <div class="week-grid">
+      <a href="day4.html" class="week-card">
+        <span class="week-num">WEEK 04</span>
+        <span class="week-title">感知與注意力：我們如何解讀世界</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day5.html" class="week-card">
+        <span class="week-num">WEEK 05</span>
+        <span class="week-title">記憶的運作：為什麼我們會遺忘？</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day6.html" class="week-card">
+        <span class="week-num">WEEK 06</span>
+        <span class="week-title">思維與決策：人類的理性與偏見</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day7.html" class="week-card">
+        <span class="week-num">WEEK 07</span>
+        <span class="week-title">行為改變的科學：習慣養成與破除</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- UNIT 3 -->
+  <section class="unit">
+    <div class="unit-header">
+      <span class="unit-number">Unit 03</span>
+      <span class="unit-title">情緒與人格</span>
+    </div>
+    <div class="week-grid">
+      <a href="day8.html" class="week-card">
+        <span class="week-num">WEEK 08</span>
+        <span class="week-title">情緒的本質：喜怒哀樂從哪裡來？</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day9.html" class="week-card">
+        <span class="week-num">WEEK 09</span>
+        <span class="week-title">壓力、焦慮與身心反應</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day10.html" class="week-card">
+        <span class="week-num">WEEK 10</span>
+        <span class="week-title">人格心理學：你是哪一種人？</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- UNIT 4 -->
+  <section class="unit">
+    <div class="unit-header">
+      <span class="unit-number">Unit 04</span>
+      <span class="unit-title">社會心理學</span>
+    </div>
+    <div class="week-grid">
+      <a href="day11.html" class="week-card">
+        <span class="week-num">WEEK 11</span>
+        <span class="week-title">他人如何影響我們？從眾與服從</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day12.html" class="week-card">
+        <span class="week-num">WEEK 12</span>
+        <span class="week-title">偏見、刻板印象與人際衝突</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day13.html" class="week-card">
+        <span class="week-num">WEEK 13</span>
+        <span class="week-title">愛情、友誼與人際關係的心理學</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- UNIT 5 -->
+  <section class="unit">
+    <div class="unit-header">
+      <span class="unit-number">Unit 05</span>
+      <span class="unit-title">正向心理學與身心健康</span>
+    </div>
+    <div class="week-grid">
+      <a href="day14.html" class="week-card">
+        <span class="week-num">WEEK 14</span>
+        <span class="week-title">幸福是什麼？正向心理學的科學</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day15.html" class="week-card">
+        <span class="week-num">WEEK 15</span>
+        <span class="week-title">心理韌性與情緒調節的實踐</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+      <a href="day16.html" class="week-card">
+        <span class="week-num">WEEK 16</span>
+        <span class="week-title">活出自己：自我成長與心理健康的整合</span>
+        <span class="week-arrow">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Psychology &mdash; 16 Weeks &mdash; Online</span>
+  <div>
+    <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+  </div>
+  <span id="pct">0 / 16 completed</span>
+</footer>
+
+<script>
+  // Read completion from localStorage (if user marks days complete later)
+  const total = 16;
+  let done = 0;
+  for (let i = 1; i <= total; i++) {
+    if (localStorage.getItem('week-' + i) === 'done') done++;
+  }
+  document.getElementById('pf').style.width = (done / total * 100) + '%';
+  document.getElementById('pct').textContent = done + ' / ' + total + ' completed';
+</script>
+
+</body>
+</html>

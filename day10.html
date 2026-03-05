@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 10 — 人格心理學</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F0E8;
+      --ink:       #1A1612;
+      --ink-mid:   #4A4440;
+      --ink-light: #8A8480;
+      --red:       #C0392B;
+      --rule:      rgba(26,22,18,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      min-height: 100vh;
+      padding-bottom: 6rem;
+    }
+    nav {
+      padding: 1.2rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+    }
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 720px;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      max-width: 600px;
+    }
+    .hero-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+    .page-wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+      gap: 5vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+      display: block;
+    }
+    .objectives { margin-bottom: 3.5rem; }
+    .obj-list { list-style: none; }
+    .obj-list li {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      gap: 0.4rem;
+    }
+    .obj-list li .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--red);
+    }
+    .prose { margin-bottom: 3.5rem; }
+    .prose h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 2.8rem 0 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .prose p {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--ink-mid);
+      margin-bottom: 1.1rem;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose p strong { font-weight: 500; color: var(--ink); }
+    .pull-quote {
+      margin: 2rem 0;
+      padding: 1.6rem 2rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pull-quote p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+      margin: 0;
+    }
+    .pull-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      font-style: normal;
+    }
+    .case-study {
+      border: 1px solid var(--rule);
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .case-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+    .case-study h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .case-study p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      margin-bottom: 0.6rem;
+    }
+    .case-study p:last-child { margin-bottom: 0; }
+    /* BIG FIVE GRID */
+    .bigfive-grid { margin: 1.5rem 0; }
+    .bigfive-item {
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 13rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .bigfive-item:first-child { border-top: 1px solid var(--rule); }
+    .bigfive-left {}
+    .bigfive-trait {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .bigfive-en {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .bigfive-poles {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+    .bigfive-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.82;
+      color: var(--ink-mid);
+    }
+    .bigfive-life {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+    /* APPROACH COMPARE TABLE */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+    .compare-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .compare-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--ink-mid);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
+    /* THEORY GRID */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--rule);
+      margin: 1.5rem 0;
+    }
+    .theory-item {
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--rule);
+    }
+    .theory-school {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .theory-rep {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 0.55rem;
+    }
+    .theory-core {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink-mid);
+    }
+    /* SIDEBAR */
+    .sidebar-block { margin-bottom: 2.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; }
+    .meta-table tr { border-bottom: 1px solid var(--rule); }
+    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
+    .meta-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      width: 4.5rem;
+      padding-top: 0.85rem;
+    }
+    .meta-table td:last-child { color: var(--ink-mid); }
+    .terms-list { list-style: none; }
+    .terms-list li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
+    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .reflection-inner { border: 1px solid var(--rule); }
+    .reflection-q {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+    .reflection-q:last-child { border-bottom: none; }
+    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
+    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-complete {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
+    .pagination {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .page-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .page-link:hover { color: var(--red); }
+    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
+    @media (max-width: 760px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-number { display: none; }
+      .bigfive-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .theory-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
+  <span class="nav-week">Week 10 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Unit 03 &nbsp;—&nbsp; 情緒與人格</p>
+    <h1>人格心理學：<br><em>我們究竟是誰？</em></h1>
+    <p class="hero-sub">你是內向還是外向？謹慎還是衝動？這些關於「你是什麼樣的人」的描述，心理學稱之為人格。本週探索人格的定義、測量、主要理論，以及那個讓人又愛又恨的問題：人格可以改變嗎？</p>
+  </div>
+  <div class="hero-number">10</div>
+</div>
+
+<div class="page-wrap">
+<main>
+
+  <section class="objectives">
+    <span class="section-label">Learning Objectives</span>
+    <ul class="obj-list">
+      <li><span class="num">01</span><span>理解人格的定義，認識人格研究的核心問題：一致性、穩定性與個別差異</span></li>
+      <li><span class="num">02</span><span>掌握大五人格模型（Big Five / OCEAN）的五個向度及其對生活結果的預測力</span></li>
+      <li><span class="num">03</span><span>了解主要人格理論流派：特質論、精神分析、人本主義、社會認知論</span></li>
+      <li><span class="num">04</span><span>認識人格的遺傳與環境基礎，理解雙胞胎研究對人格遺傳力的發現</span></li>
+      <li><span class="num">05</span><span>批判性評估常見人格測驗（Myers-Briggs、大五人格）的科學效度</span></li>
+      <li><span class="num">06</span><span>了解人格在成人期的穩定性與可塑性的研究發現，思考「人格能否改變」的問題</span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+
+    <h2>一、什麼是人格？</h2>
+    <p>每個人都有一些相對穩定的、跨情境一致的行為、思維與情緒模式——這就是<strong>人格（personality）</strong>。心理學對人格的定義是：個體在思考、感受與行為上所展現的、相對持久且跨情境一致的特徵模式，使某人有別於他人。</p>
+    <p>這個定義包含幾個關鍵要素。「<strong>相對持久</strong>」意味著人格具有跨時間的穩定性，不會因為一次壞心情或一個特殊情境而根本改變。「<strong>跨情境一致</strong>」意味著一個高外向性的人，不只在派對上健談，在工作場合、面對陌生人時也傾向於主動開口。然而，這種一致性是「相對的」而非「絕對的」——情境的力量（如第 1 週 Milgram 實驗所示）也能深刻影響行為，人格與情境之間的交互作用才能完整解釋行為。</p>
+    <p>人格研究的核心問題始終圍繞著幾個爭論：人格是天生的還是後天習得的？它是由少數幾個基本向度構成，還是無數細微特質的集合？它能被準確測量嗎？成年後人格還能改變嗎？這些問題至今仍在持續演進的研究中被反覆探討。</p>
+
+    <div class="pull-quote">
+      <p>「人格是個人在對環境做出反應時，表現出的心理系統的動態組織，它決定了個人特有的思想、感受與行為模式。」</p>
+      <cite>— Gordon Allport，《人格：一種心理學詮釋》，1937</cite>
+    </div>
+
+    <h2>二、大五人格模型</h2>
+    <p>在人格心理學的歷史上，研究者提出過無數種描述人格的方式：Freud 的口腔期與肛門期性格、Jung 的內向與外向、Eysenck 的三向度模型……然而，從 1980 年代起，一個透過龐大的跨文化實證資料逐漸浮現的共識框架，幾乎統一了現代人格研究：<strong>大五人格模型（Big Five / OCEAN）</strong>。</p>
+    <p>大五人格並非由某位研究者設計，而是透過對成千上萬人的人格描述詞進行統計因素分析後，反覆出現的五個穩定向度。它們被認為涵蓋了人格描述空間的絕大部分，在超過 50 種語言與文化的研究中都呈現類似的結構，是目前最具跨文化可複製性的人格框架。</p>
+
+    <div class="bigfive-grid">
+      <div class="bigfive-item">
+        <div class="bigfive-left">
+          <div class="bigfive-trait">開放性</div>
+          <div class="bigfive-en">OPENNESS</div>
+          <div class="bigfive-poles">高：好奇、創意、開放<br>低：傳統、務實、保守</div>
+        </div>
+        <div>
+          <div class="bigfive-desc">對新經驗、新想法、藝術與抽象思考的開放程度。高開放性者享受智識探索、藝術體驗與不尋常的觀點；低開放性者傾向於熟悉、傳統與具體的思考方式。兩者各有優勢：高開放性帶來創造力，低開放性帶來執行的一致性。</div>
+          <div class="bigfive-life">預測：創意職業表現、藝術欣賞能力、政治自由主義傾向、對多元文化的接受度。</div>
+        </div>
+      </div>
+      <div class="bigfive-item">
+        <div class="bigfive-left">
+          <div class="bigfive-trait">盡責性</div>
+          <div class="bigfive-en">CONSCIENTIOUSNESS</div>
+          <div class="bigfive-poles">高：有組織、自律、目標導向<br>低：隨性、靈活、不拘小節</div>
+        </div>
+        <div>
+          <div class="bigfive-desc">自我調節、組織能力、目標導向行為與延遲滿足的傾向。高盡責性者計畫周詳、守時可靠、持之以恆；低盡責性者更加靈活隨性，但可能在需要長期堅持的任務上表現較差。盡責性是大五人格中預測學業與工作成就最強的單一向度。</div>
+          <div class="bigfive-life">預測：學業成績、工作績效、健康行為、長壽、婚姻滿意度——研究中最具預測力的人格向度。</div>
+        </div>
+      </div>
+      <div class="bigfive-item">
+        <div class="bigfive-left">
+          <div class="bigfive-trait">外向性</div>
+          <div class="bigfive-en">EXTRAVERSION</div>
+          <div class="bigfive-poles">高：外向、活躍、尋求刺激<br>低：內向、沉靜、偏好獨處</div>
+        </div>
+        <div>
+          <div class="bigfive-desc">從社交互動與外部刺激中獲得能量的傾向。外向者在人群中充電，主動尋求社交、興奮與刺激；內向者在獨處中充電，偏好深度的一對一互動而非群體社交。重要：內向不等於害羞，外向不等於善於社交——它描述的是能量來源，而非社交能力。</div>
+          <div class="bigfive-life">預測：主觀幸福感（正向情緒頻率）、社交網絡規模、領導力傾向、在刺激性環境中的表現。</div>
+        </div>
+      </div>
+      <div class="bigfive-item">
+        <div class="bigfive-left">
+          <div class="bigfive-trait">親和性</div>
+          <div class="bigfive-en">AGREEABLENESS</div>
+          <div class="bigfive-poles">高：合作、信任、利他<br>低：競爭、懷疑、對抗</div>
+        </div>
+        <div>
+          <div class="bigfive-desc">對他人的關懷、信任與合作傾向。高親和性者重視和諧關係、富有同理心、避免衝突；低親和性者更具競爭性、直接表達不同意見，在談判與維護自身利益上可能更有效。兩個極端都有其代價：過高可能導致過度服從，過低可能損害人際關係。</div>
+          <div class="bigfive-life">預測：人際關係品質、助人行為、職場衝突頻率。低親和性是反社會人格障礙的相關因素。</div>
+        </div>
+      </div>
+      <div class="bigfive-item">
+        <div class="bigfive-left">
+          <div class="bigfive-trait">神經質</div>
+          <div class="bigfive-en">NEUROTICISM</div>
+          <div class="bigfive-poles">高：情緒不穩、焦慮、易怒<br>低：情緒穩定、鎮定、有韌性</div>
+        </div>
+        <div>
+          <div class="bigfive-desc">體驗負向情緒（焦慮、悲傷、憤怒、自我懷疑）的傾向與強度。高神經質者情緒反應強烈且恢復較慢，在壓力下更容易被淹沒；低神經質者（情緒穩定者）面對同樣的壓力源，情緒波動較小、復原較快。神經質是心理健康問題的重要預測因子。</div>
+          <div class="bigfive-life">預測：焦慮症、憂鬱症風險、主觀不幸福感、婚姻不滿意度、對負向事件的反芻思考。</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>三、主要人格理論流派</h2>
+    <p>大五人格模型描述了「人格是什麼」，但不同的理論流派對「人格從何而來、如何運作」有截然不同的解釋。</p>
+
+    <div class="theory-grid">
+      <div class="theory-item">
+        <div class="theory-school">特質論</div>
+        <div class="theory-rep">Allport, Cattell, Eysenck / 20 世紀</div>
+        <div class="theory-core">人格由穩定的內在特質（traits）構成，這些特質是個體行為的基本驅動單位。特質論者試圖找出最基本的人格向度，並以此預測行為。大五人格模型是特質論的最成熟形式。</div>
+      </div>
+      <div class="theory-item">
+        <div class="theory-school">精神分析取向</div>
+        <div class="theory-rep">Freud, Jung, Adler / 1900s</div>
+        <div class="theory-core">人格根植於童年經歷與無意識歷程。Freud 強調本我、自我、超我的動態衝突；Jung 加入了集體無意識與原型；Adler 強調社會情感與自卑感的超越。這些觀點難以科學驗證，但對臨床實踐影響深遠。</div>
+      </div>
+      <div class="theory-item">
+        <div class="theory-school">人本主義取向</div>
+        <div class="theory-rep">Maslow, Rogers / 1940–60s</div>
+        <div class="theory-core">強調個人的主觀體驗、自由意志與自我實現潛能。Rogers 提出「充分運作的人（fully functioning person）」的概念，認為在無條件積極關懷的環境中，人天生趨向成長與整合。人格是動態的自我概念與理想自我之間的落差。</div>
+      </div>
+      <div class="theory-item">
+        <div class="theory-school">社會認知論</div>
+        <div class="theory-rep">Bandura, Mischel / 1960–80s</div>
+        <div class="theory-core">人格是個體、行為與環境三者持續交互影響的產物（交互決定論）。Mischel 強調情境的重要性，提出人格的「如果……那麼……」特徵：在不同情境條件下，人會表現出不同的行為模式，這些模式本身才是人格的穩定單位。</div>
+      </div>
+    </div>
+
+    <h2>四、人格的遺傳與環境基礎</h2>
+    <p>人格是天生的（基因），還是後天形塑的（環境）？答案是：兩者都有，且各自的貢獻比多數人預期的更難分割。</p>
+    <p>雙胞胎研究是探討遺傳力最有力的方法。同卵雙胞胎（共享 100% 基因）與異卵雙胞胎（共享約 50% 基因）的比較顯示，大五人格的<strong>遺傳力（heritability）約為 40–60%</strong>——也就是說，人格差異中約有一半可以歸因於遺傳因素。更令人驚訝的是，分開撫養的同卵雙胞胎在人格測驗上的相似度，幾乎與共同撫養的一樣高。</p>
+    <p>這個發現引發了一個令人不安的問題：如果分開撫養的雙胞胎人格仍然如此相似，父母的養育方式到底有多重要？行為遺傳學家 Judith Rich Harris 在其著作《教養的迷思》中提出了一個爭議性的主張：父母對孩子人格的影響遠小於我們以為的，真正塑造人格的是<strong>基因 + 同儕環境</strong>，而非家庭教養方式。這個觀點至今仍有爭議，但它讓我們重新思考親子關係在人格形成中的角色。</p>
+    <p>環境的影響主要分為兩類：<strong>共享環境（shared environment）</strong>是兄弟姐妹共同擁有的環境（同樣的家庭、父母、社區），研究顯示其對成人人格的影響出乎意料地小；<strong>非共享環境（non-shared environment）</strong>是每個孩子獨有的體驗（不同的朋友圈、老師、偶發事件），對人格的影響反而更大。這解釋了為什麼在同一家庭長大的兄弟姐妹，人格往往差異顯著。</p>
+
+    <div class="case-study">
+      <span class="case-label">Research Finding</span>
+      <h3>MBTI：最廣為人知卻最受質疑的人格測驗</h3>
+      <p>Myers-Briggs 性格類型指標（MBTI）是全球最廣泛使用的人格測驗，每年有超過兩百萬人接受測試，被無數企業用於團隊建立與人才招募。它將人格分為 16 種類型（如 INTJ、ENFP），描述生動、易於辨識，讓人有「終於被理解了」的感覺。</p>
+      <p>然而，MBTI 在心理測量學上的問題相當嚴重。首先是<strong>信度不足</strong>：研究顯示，高達 50% 的受測者在五週後重測時，會得到不同的類型——同一個人，不同時間，結果不同。其次是<strong>效度問題</strong>：MBTI 的四個向度與大五人格的向度高度重疊，但 MBTI 將連續分布的特質人為切割為二元類型（內向 vs. 外向），忽略了中間地帶的大多數人。此外，幾乎每種 MBTI 類型的描述都寫得足夠正面且模糊，以至於各種人都容易認同（此即「巴納姆效應」）。</p>
+      <p>相比之下，<strong>大五人格量表</strong>有更嚴格的心理測量依據：高信度、高跨文化一致性，且對工作績效、心理健康、學業成就等生活結果具有顯著的預測效度。這並不意味著 MBTI 毫無價值——它的描述性語言確實有助於自我反思與團隊溝通，但不應被當作準確的科學測量工具。</p>
+    </div>
+
+    <h2>五、人格的穩定性與可塑性</h2>
+    <p>「人格可以改變嗎？」是人格研究中最具實際意義的問題之一。傳統觀點認為人格在成年後（約 30 歲）趨於固定，正如 William James 所說的「30 歲後性格就像石膏一樣硬化了」。然而，現代縱貫性研究提供了更細緻的圖像。</p>
+    <p>總體而言，人格在成人期確實展現出相當的穩定性，尤其是排名穩定性（你在人群中相對位置的穩定）。但<strong>平均層次的改變（mean-level change）</strong>卻是系統性且可預期的：隨著年齡增長，多數人的盡責性與親和性會提升，神經質會下降，外向性與開放性則略微下降——這個模式被稱為「人格的成熟原則（maturity principle）」，在跨文化研究中相當一致。</p>
+    <p>更重要的是，人格並非完全不可改變。<strong>重大生活事件</strong>（成為父母、重要職位、創傷、治療）可以改變人格向度。有意圖的自我改變也有實證支持：Nathan Hudson 的研究顯示，有動機改變特定人格特質的人，在 16 週的介入後確實表現出可測量的改變——雖然幅度不大，但統計顯著。認知行為治療被顯示能降低神經質、提升情緒穩定性。</p>
+    <p>結論是：人格既不是完全固定的命運，也不是可以隨意改變的表演。它是一個在生物基礎上、透過持續的生活經驗與主動選擇而動態形成的穩定模式，具有足夠的彈性讓改變成為可能，也具有足夠的穩定性讓「你是誰」保持一定的連貫性。</p>
+
+    <h2>六、人格與生活結果</h2>
+    <p>人格研究的實用價值在於它對重要生活結果的預測力。以下是目前研究中最強健的發現：</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>生活領域</th>
+          <th>最重要的人格預測因子</th>
+          <th>研究摘要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>工作績效</td>
+          <td>盡責性（最強）</td>
+          <td>跨越職業類型，盡責性是工作績效最穩定的人格預測因子，效果量在 meta 分析中一致顯著</td>
+        </tr>
+        <tr>
+          <td>學業成就</td>
+          <td>盡責性、開放性</td>
+          <td>盡責性預測努力投入；開放性預測對學習的興趣與深度；神經質與考試焦慮相關</td>
+        </tr>
+        <tr>
+          <td>主觀幸福感</td>
+          <td>外向性（正）、神經質（負）</td>
+          <td>外向性與正向情緒頻率相關；神經質是不幸福感與心理疾病最強的人格風險因子</td>
+        </tr>
+        <tr>
+          <td>健康與長壽</td>
+          <td>盡責性（正）、神經質（負）</td>
+          <td>高盡責性者有更好的健康行為習慣，預期壽命更長；高神經質與慢性疾病風險相關</td>
+        </tr>
+        <tr>
+          <td>人際關係</td>
+          <td>親和性、神經質</td>
+          <td>高親和性預測關係滿意度；高神經質是離婚和婚姻衝突最強的人格預測因子</td>
+        </tr>
+        <tr>
+          <td>政治傾向</td>
+          <td>開放性</td>
+          <td>高開放性持續與政治自由主義相關；低開放性與保守主義傾向相關，跨文化一致</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+</main>
+
+<aside>
+  <div class="sidebar-block">
+    <span class="section-label">Course Info</span>
+    <table class="meta-table">
+      <tr><td>週次</td><td>第 10 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 03 — 情緒與人格</td></tr>
+      <tr><td>程度</td><td>無需先備知識</td></tr>
+      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Terms</span>
+    <ul class="terms-list">
+      <li>Personality <span>人格</span></li>
+      <li>Trait <span>特質</span></li>
+      <li>Big Five / OCEAN <span>大五人格</span></li>
+      <li>Openness <span>開放性</span></li>
+      <li>Conscientiousness <span>盡責性</span></li>
+      <li>Extraversion <span>外向性</span></li>
+      <li>Agreeableness <span>親和性</span></li>
+      <li>Neuroticism <span>神經質</span></li>
+      <li>Heritability <span>遺傳力</span></li>
+      <li>Shared Environment <span>共享環境</span></li>
+      <li>Non-shared Environment <span>非共享環境</span></li>
+      <li>MBTI <span>邁爾斯-布里格斯類型指標</span></li>
+      <li>Barnum Effect <span>巴納姆效應</span></li>
+      <li>Maturity Principle <span>人格成熟原則</span></li>
+      <li>Reciprocal Determinism <span>交互決定論</span></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Key Figures</span>
+    <table class="meta-table">
+      <tr><td>人物</td><td>Gordon Allport — 特質論奠基者</td></tr>
+      <tr><td>人物</td><td>Hans Eysenck — 三向度人格模型</td></tr>
+      <tr><td>人物</td><td>Paul Costa &amp; Robert McCrae — 大五人格量表（NEO-PI）</td></tr>
+      <tr><td>人物</td><td>Walter Mischel — 情境論，人格的「如果…那麼…」特徵</td></tr>
+      <tr><td>人物</td><td>Carl Rogers — 自我概念，無條件積極關懷</td></tr>
+      <tr><td>人物</td><td>Judith Rich Harris — 《教養的迷思》，同儕環境理論</td></tr>
+    </table>
+  </div>
+
+  <div class="sidebar-block">
+    <span class="section-label">Further Reading</span>
+    <table class="meta-table">
+      <tr><td>書目</td><td>《人格心理學》Lawrence Pervin</td></tr>
+      <tr><td>書目</td><td>《教養的迷思》Judith Rich Harris</td></tr>
+      <tr><td>書目</td><td>《內向性格的競爭力》Susan Cain</td></tr>
+      <tr><td>書目</td><td>《性格的力量》Martin Seligman</td></tr>
+      <tr><td>論文</td><td>Roberts, B.W. et al. (2006). The rank-order consistency of personality traits from childhood to old age.</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<div class="reflection">
+  <span class="section-label">Reflection Questions</span>
+  <div class="reflection-inner">
+    <div class="reflection-q">
+      <span class="q-num">Q1</span>
+      <span>根據大五人格模型，你認為自己在每個向度上大致處於哪個位置（高、中、低）？你的自我評估與親近的人對你的描述是否一致？如果有落差，你認為原因是什麼？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q2</span>
+      <span>MBTI 在全球被廣泛使用，但科學效度受到質疑。你或你的組織曾使用過 MBTI 嗎？知道了它的測量問題後，你對這些結果的看法有什麼改變？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q3</span>
+      <span>「人格遺傳力約 50%」意味著基因對人格有相當影響，但並非決定命運。你認為這個發現對「我想改變某個人格特質」這件事有什麼啟示？什麼是可以改變的，什麼是需要接受的？</span>
+    </div>
+    <div class="reflection-q">
+      <span class="q-num">Q4</span>
+      <span>人格研究顯示，盡責性是預測工作成就與健康最強的單一人格因子。如果盡責性是可以透過習慣訓練部分提升的，你願意為此做出什麼具體的改變？結合第 7 週所學，你會如何設計這個改變？</span>
+    </div>
+  </div>
+</div>
+
+<div class="complete-row">
+  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pagination">
+  <a href="day9.html" class="page-link">&#8592; Week 09</a>
+  <span class="page-dot">10 / 16</span>
+  <a href="day11.html" class="page-link">Week 11 &#8594;</a>
+</div>
+
+<script>
+  const key = 'week-10';
+  const btn = document.getElementById('completeBtn');
+  if (localStorage.getItem(key) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(key, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>
