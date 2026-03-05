@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 12 — 人際關係：那些日常的困境</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #F5F0E8;
+      --ink:      #1A1612;
+      --mid:      #4A4440;
+      --light:    #8A8480;
+      --red:      #C0392B;
+      --rule:     rgba(26,22,18,0.12);
+      --card:     #FDFAF3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      padding-bottom: 6rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 1.1rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--light);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+    .hero-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* ── MAIN GRID ── */
+    .wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+
+    /* ── SECTION LABEL ── */
+    .slabel {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    /* ── CHAPTER ── */
+    .chapter { margin-bottom: 3.8rem; }
+
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── SITUATION CARD ── */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* ── ATTACHMENT GRID ── */
+    .att-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+    }
+    .att-cell {
+      background: var(--card);
+      padding: 1.1rem 1.3rem;
+    }
+    .att-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .att-name { font-size: 0.93rem; font-weight: 600; color: var(--ink); }
+    .att-pct {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--light);
+    }
+    .att-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.78;
+      color: var(--mid);
+      margin-bottom: 0.65rem;
+    }
+    .att-you {
+      font-size: 0.83rem;
+      font-weight: 400;
+      line-height: 1.68;
+      color: var(--ink);
+      border-left: 2px solid var(--red);
+      padding-left: 0.75rem;
+      background: rgba(192,57,43,0.04);
+      padding-top: 0.35rem;
+      padding-bottom: 0.35rem;
+    }
+
+    /* ── CONFLICT TABLE ── */
+    .ctable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin-top: 1.3rem;
+    }
+    .ctable th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .ctable td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.62;
+      vertical-align: top;
+    }
+    .ctable tr:last-child td { border-bottom: none; }
+    .ctable td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+    .bad  { color: #a83828; }
+    .good { color: #2a6040; }
+
+    /* ── SIDEBAR ── */
+    aside { min-width: 0; }
+    .sb-block { margin-bottom: 2.4rem; }
+
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+
+    /* Quick actions sidebar box */
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* ── REFLECTION ── */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+    }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .pager a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .pager a:hover { color: var(--red); }
+    .pager-mid {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--light);
+    }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .att-grid { grid-template-columns: 1fr; }
+      .ctable th:nth-child(2), .ctable td:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 12 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Unit 04 &nbsp;—&nbsp; 社會心理學</p>
+    <h1>人際關係：<br><em>那些日常的困境</em></h1>
+    <p class="hero-sub">孤獨感、衝突、友誼悄悄消退、刷完社群媒體反而更空虛——這些都很常見。本週從真實的情境出發，看看心理學如何讓你多幾個選擇。</p>
+  </div>
+  <div class="hero-num">12</div>
+</div>
+
+<div class="wrap">
+<main>
+
+  <!-- ─── 1. 孤獨感 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">孤獨感：跟你有多少朋友沒什麼關係</span>
+    </div>
+    <p class="ch-intro">孤獨不是「沒有朋友」，而是一種「我沒有被真正理解」的感受。你可以一直在聊天、有很多聯絡人，卻仍然感到孤立。成年後建立新連結之所以難，主要是因為我們失去了「自然重複接觸」的機會——大學宿舍、共同上課這些結構消失了，剩下的要靠自己主動創造。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">換了城市或工作，或剛結束一段重要關係。週末沒有人可以約，想傳訊息給老朋友卻覺得尷尬，不知道從哪裡開始重建。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你高估了「主動聯繫的尷尬程度」，也低估了對方收到訊息的正向感受。你腦中那個「這樣傳會不會很奇怪」的擔憂，幾乎從來都不是事實。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>降低門檻，增加頻率。</b>短暫的午餐、下班順路喝個咖啡，比精心安排的晚餐更能建立連結。重複出現才是關係的基礎，不是一次完美的相聚。</li>
+          <li><b>加入有固定活動的群體。</b>運動課、讀書會、社區活動——固定見面比一次性的社交場合更容易轉化成真正的友誼，因為你不需要每次都努力找話題。</li>
+          <li><b>現在就傳那條一直沒傳的訊息。</b>「最近看到這個想到你」「不知道你最近過得怎樣」——不需要解釋為什麼久沒聯繫，直接傳就好。</li>
+          <li><b>分享一點真實的自己。</b>只聊天氣和工作不會讓人感覺被認識。說一件你最近真正在意的事，往往會帶來更真實的回應。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 2. 依附風格 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">依附風格：你在關係裡的慣性模式</span>
+    </div>
+    <p class="ch-intro">每個人都帶著一套從小習得的「關係慣性」——面對親密時的舒適度、感到不安全時的反應方式。認識自己的模式，能讓你在關係觸發你的時候多一個暫停的空間，而不是自動反應。</p>
+
+    <div class="att-grid">
+      <div class="att-cell">
+        <div class="att-head">
+          <span class="att-name">安全型</span>
+          <span class="att-pct">約 55%</span>
+        </div>
+        <p class="att-desc">對親密感到自在，不太擔心被拋棄。衝突後能夠修復，對另一半的行為傾向正向解讀。</p>
+        <div class="att-you">留意伴侶的風格——對方的焦慮或疏遠，不代表不愛你，可能只是他們的慣性反應。</div>
+      </div>
+      <div class="att-cell">
+        <div class="att-head">
+          <span class="att-name">焦慮型</span>
+          <span class="att-pct">約 20%</span>
+        </div>
+        <p class="att-desc">渴望高度親密，但持續擔心對方不夠在乎或會離開。對細微訊號非常敏感，容易反覆確認（「他沒回訊息，是不是生氣了？」）。</p>
+        <div class="att-you">被觸發時先問自己：「這是事實，還是我的恐懼？」練習用語言說出需求，而不是用行為測試對方。</div>
+      </div>
+      <div class="att-cell">
+        <div class="att-head">
+          <span class="att-name">迴避型</span>
+          <span class="att-pct">約 25%</span>
+        </div>
+        <p class="att-desc">重視獨立，對過度親密感到不舒服。對方需要情感支持時容易退縮，或把話題轉向解決問題，而不是陪伴。</p>
+        <div class="att-you">對方難受時，先在場再解決問題。說「我聽到了，這聽起來真的很難」，比立刻給建議更有幫助。</div>
+      </div>
+      <div class="att-cell">
+        <div class="att-head">
+          <span class="att-name">混亂型</span>
+          <span class="att-pct">約 5–10%</span>
+        </div>
+        <p class="att-desc">同時渴望親密又害怕親密，容易在關係裡出現矛盾行為——想靠近，又用衝突或消失來保持距離。</p>
+        <div class="att-you">這個模式最難靠自己摸索，信任的諮商關係本身就能成為修復的空間。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 3. 衝突 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">衝突：為什麼越解釋越吵？</span>
+    </div>
+    <p class="ch-intro">衝突本身不是問題，處理方式才是。很多吵架到最後，真正的議題已經消失了，剩下的只有「你不聽我說話」的感受在互相攻擊。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">同一件事反覆爭吵，每次都從小事升級成互相指責，最後冷戰或說了傷人的話。你覺得對方就是不懂你。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">情緒激動時，大腦的理性功能會被部分關閉。衝突升級通常不是因為那件事本身，而是因為雙方都感到「不被尊重」或「被誤解了」。你在情緒高峰說的話，代表的是當下的恐懼，不是你真實的立場。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>先暫停，再對話。</b>情緒很高的時候，說「我需要 20 分鐘冷靜一下，之後我們繼續談」——這不是逃避，是讓對話有辦法真的發生的前提。</li>
+          <li><b>說感受，不說罪狀。</b>「你從來不在乎我」→「當你在滑手機的時候我說話，我感到被忽視，很難受。」說你的感受，對方的防禦心會小很多。</li>
+          <li><b>先讓對方感到被聽見。</b>在說自己的立場之前，先複述對方說的：「你是說⋯⋯對嗎？」讓對方知道你有在聽，衝突的溫度通常會立刻降低。</li>
+          <li><b>有些問題不是用來「解決」的。</b>很多長期衝突的根源是價值觀差異，沒有誰對誰錯。目標不是讓對方認錯，而是找到雙方都能接受的共處方式。</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="ctable">
+      <thead>
+        <tr>
+          <th>當你⋯⋯</th>
+          <th>這樣反應會讓事情更糟</th>
+          <th>試試這樣替代</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>想批評對方</td>
+          <td class="bad">「你就是這樣，永遠這麼自私」</td>
+          <td class="good">「這件事讓我很受傷，我需要⋯⋯」</td>
+        </tr>
+        <tr>
+          <td>想防禦反擊</td>
+          <td class="bad">「你才是，你上次不也是⋯⋯」</td>
+          <td class="good">「我聽到你說的，我也想讓你知道我的感受⋯⋯」</td>
+        </tr>
+        <tr>
+          <td>感到輕蔑優越</td>
+          <td class="bad">「你這個人真的很幼稚」（翻白眼）</td>
+          <td class="good">先暫停，等自己情緒降溫再繼續</td>
+        </tr>
+        <tr>
+          <td>想切斷對話</td>
+          <td class="bad">完全不回應、走掉、已讀不回</td>
+          <td class="good">「我現在需要一點時間，但我們之後會繼續談」</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 4. 友誼消退 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">友誼消退：關係不會自動維持</span>
+    </div>
+    <p class="ch-intro">成年後的友誼通常不是因為吵架才消失的——它是在沒有任何衝突的情況下，安靜地淡掉的。我們往往等到完全疏遠才意識到，其實只需要更早一點主動一下就好。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">發現一個以前很親近的朋友，已經好幾個月沒有真正聯繫了。你想傳訊息，又擔心太突兀，結果繼續拖著，關係就這樣繼續冷卻。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你對「主動聯繫的尷尬程度」的預估幾乎總是過高的。對方收到你的訊息，大概率是高興的，不是覺得奇怪。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>直接傳，不需要解釋。</b>「最近看到這個想到你」或「不知道你最近過得怎樣」就夠了，不需要交代為什麼這麼久沒聯繫。</li>
+          <li><b>低成本訊號也算數。</b>分享一個梗圖、說一句「這讓我想到你」——頻繁的小訊號傳遞「你對我還重要」，不是每次都要有深度對話。</li>
+          <li><b>把「有空再約」換成具體的日期。</b>「有空再約」幾乎等於不約。設定一個真實的時間，比漫無目的的「找機會」更實際。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 5. 社群媒體 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">社群媒體：為什麼滑完反而更空虛？</span>
+    </div>
+    <p class="ch-intro">社群媒體給你一種「連結的幻覺」——你知道朋友吃了什麼、去了哪裡，但這種被動觀看無法真正填補社交需求，反而常常讓孤獨感加劇。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">刷了二十分鐘 Instagram，看到朋友在派對、同事升遷、別人的伴侶好體貼——說不清楚為什麼，就是比滑之前更空虛、更焦慮。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你拿自己的「幕後全貌」和別人的「舞台精選」在比較，這個比賽從一開始就不公平。被動地看別人的生活，不能填補你對真實連結的需求，它只是填充了時間，卻沒有填充那個空缺。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把被動瀏覽換成主動互動。</b>在朋友的貼文下留一個真實的留言，而不是按讚後繼續滑。這把消費行為變成了真實的社交接觸，感受完全不同。</li>
+          <li><b>注意你使用前後的情緒。</b>不需要戒斷，先建立意識：哪種使用方式讓你更好？哪種讓你更糟？帶著覺察比無意識刷更重要。</li>
+          <li><b>設定每天被動瀏覽的時間上限。</b>限制在三十分鐘以內，多數人的孤獨感和焦慮感會在幾週內明顯改善。</li>
+          <li><b>重要的關係仍然需要真實的見面。</b>社群媒體適合維持弱連結，但很難深化你真正在意的關係，那個還是要靠真實的共同時間。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── SIDEBAR ─── -->
+<aside>
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
+      <tr><td>週次</td><td>第 12 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 04 — 社會心理學</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">快速行動清單</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">孤獨</span>
+        <span class="qa-val">現在就傳那條一直沒傳的訊息，不用解釋為什麼</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">依附</span>
+        <span class="qa-val">被觸發時問：這是事實，還是我的恐懼？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">衝突</span>
+        <span class="qa-val">先暫停 20 分鐘，等心跳降下來再談</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">友誼</span>
+        <span class="qa-val">把「有空再約」換成行事曆裡的具體日期</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">社群</span>
+        <span class="qa-val">留言取代按讚，把消費變成真實互動</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《依附》Levine &amp; Heller</td></tr>
+      <tr><td>書</td><td>《愛的博弈》John Gottman</td></tr>
+      <tr><td>書</td><td>《孤獨世紀》Noreena Hertz</td></tr>
+      <tr><td>書</td><td>《脆弱的力量》Brené Brown</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<!-- ─── REFLECTION ─── -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>根據依附風格的描述，你最認得出哪一種是自己？在哪個具體情境下，這個慣性模式最容易被觸發？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>想一個你在意、但已經一段時間沒有真正聯繫的人。是什麼讓你一直沒有傳訊息？你願意今天就傳嗎？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>上次你和重要的人發生衝突，衝突表格裡的四種反應，你出現了哪一種？如果重來一次，在哪個時間點你可以選擇不同的做法？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>這一週試著記錄：使用社群媒體之後，你的心情是更好還是更差？你注意到了什麼規律，想做什麼調整？</span>
+    </div>
+  </div>
+</div>
+
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pager">
+  <a href="day11.html">← Week 11</a>
+  <span class="pager-mid">12 / 16</span>
+  <a href="day13.html">Week 13 →</a>
+</div>
+
+<script>
+  const KEY = 'week-12';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(KEY, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>

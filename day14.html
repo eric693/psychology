@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 14 — 幸福是什麼？</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      padding-bottom: 6rem;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.1rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--light);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+    .hero-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* LAYOUT */
+    .wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+
+    .slabel {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    /* CHAPTER */
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* MYTH GRID — what doesn't work vs what does */
+    .myth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .myth-col { background: var(--card); padding: 1.1rem 1.3rem; }
+    .myth-head {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .myth-head.bad  { color: #a83828; }
+    .myth-head.good { color: #2a6040; }
+    .myth-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .myth-list li {
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+      padding-left: 0.9rem;
+      position: relative;
+    }
+    .myth-list li::before {
+      position: absolute;
+      left: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .myth-col.bad  .myth-list li::before { content: '✕'; color: #a83828; }
+    .myth-col.good .myth-list li::before { content: '✓'; color: #2a6040; }
+
+    /* PERMA GRID */
+    .perma-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .perma-cell {
+      background: var(--card);
+      padding: 1rem 0.9rem;
+      text-align: center;
+    }
+    .perma-letter {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .perma-word {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .perma-en {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--light);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+    .perma-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--mid);
+    }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .pager a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .myth-grid { grid-template-columns: 1fr; }
+      .perma-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 14 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Unit 05 &nbsp;—&nbsp; 心理健康與自我成長</p>
+    <h1>幸福是什麼？<br><em>你可能找錯方向了</em></h1>
+    <p class="hero-sub">我們花了很多時間追求我們以為會帶來幸福的東西——薪水、成就、被認可——卻往往在得到之後發現空虛依舊。幸福有它自己的運作邏輯，而且大部分跟你想的不一樣。</p>
+  </div>
+  <div class="hero-num">14</div>
+</div>
+
+<div class="wrap">
+<main>
+
+  <!-- 01 你以為會帶來幸福的，通常不會 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你以為會帶來幸福的，通常不會</span>
+    </div>
+    <p class="ch-intro">人類不太擅長預測什麼事情會讓自己快樂，以及快樂能持續多久。我們有一套強大的「情感預測」系統，但這個系統有幾個固定的盲點，讓我們一再在錯誤的地方努力。</p>
+
+    <div class="myth-grid">
+      <div class="myth-col bad">
+        <div class="myth-head bad">我們以為會帶來幸福的⋯⋯</div>
+        <ul class="myth-list">
+          <li>升職、加薪或達成大目標</li>
+          <li>買到很想要的東西</li>
+          <li>搬到更好的城市或環境</li>
+          <li>找到完美的伴侶</li>
+          <li>讓自己一直很忙、很有生產力</li>
+          <li>得到別人的認可與讚美</li>
+        </ul>
+      </div>
+      <div class="myth-col good">
+        <div class="myth-head good">實際上持續影響幸福感的⋯⋯</div>
+        <ul class="myth-list">
+          <li>有幾段真實的、有品質的人際連結</li>
+          <li>覺得自己的生活有意義或方向</li>
+          <li>能夠做到有點難但不太難的事情</li>
+          <li>身體健康：睡眠、運動、少久坐</li>
+          <li>有感恩和欣賞當下的習慣</li>
+          <li>對自己的生活有一定的掌控感</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ch-intro" style="margin-top:0.2rem; margin-bottom:0;">為什麼會有這個落差？大腦有一個叫做「享樂適應（hedonic adaptation）」的機制——不管好事還是壞事，我們都會逐漸習慣，情緒回到原本的基準線。加薪的喜悅大約三到六個月後就沒了；換了新環境，你也會重新習慣。這不是你的問題，而是人腦的預設運作方式。</p>
+  </div>
+
+  <!-- 02 幸福的五個成分：PERMA -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">幸福的五個真實成分</span>
+    </div>
+    <p class="ch-intro">正向心理學把幸福拆解成五個比較具體、比較可以主動培養的成分。不是叫你每天強迫自己開心，而是問：我的生活裡，哪些部分長期缺席？</p>
+
+    <div class="perma-grid">
+      <div class="perma-cell">
+        <div class="perma-letter">P</div>
+        <div class="perma-word">正向情緒</div>
+        <div class="perma-en">Positive Emotion</div>
+        <div class="perma-desc">感受到喜悅、感恩、平靜、希望。不是假裝快樂，而是主動創造讓自己感到好的時刻。</div>
+      </div>
+      <div class="perma-cell">
+        <div class="perma-letter">E</div>
+        <div class="perma-word">投入</div>
+        <div class="perma-en">Engagement</div>
+        <div class="perma-desc">做一件事讓你完全忘記時間，那就是投入。找到那些讓你進入「流」狀態的活動。</div>
+      </div>
+      <div class="perma-cell">
+        <div class="perma-letter">R</div>
+        <div class="perma-word">關係</div>
+        <div class="perma-en">Relationships</div>
+        <div class="perma-desc">有幾個真正了解你、你也真正了解的人。質比量重要，一段深度連結勝過一百個弱連結。</div>
+      </div>
+      <div class="perma-cell">
+        <div class="perma-letter">M</div>
+        <div class="perma-word">意義</div>
+        <div class="perma-en">Meaning</div>
+        <div class="perma-desc">覺得自己做的事情對某件比自己更大的事情有貢獻——不一定要宏大，對家人、對工作、對社群都算。</div>
+      </div>
+      <div class="perma-cell">
+        <div class="perma-letter">A</div>
+        <div class="perma-word">成就</div>
+        <div class="perma-en">Achievement</div>
+        <div class="perma-desc">為了本身的滿足感而追求目標，而不只是為了證明自己。小的、持續的進步比偶爾的大成功更持久。</div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你的生活客觀上沒有什麼大問題，但就是覺得有一種說不清楚的空洞感，很難對什麼事情感到真正的興奮或滿足。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這種空洞感通常不是因為缺少某一件大事，而是因為 PERMA 的某幾個成分長期不足——最常見的是「投入」和「意義」。你可能把大部分時間花在消費（追劇、刷手機）而不是創造，或者一直在做被要求做的事，而不是真正在乎的事。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>做一個 PERMA 自我評分。</b>給五個成分各打一個 1–10 分，哪個最低？那個就是你目前最需要投資的地方。</li>
+          <li><b>找回一件讓你有「流」感的事。</b>回想你最近一次完全忘記時間是在做什麼——那就是你的投入來源。把它排回你的生活裡。</li>
+          <li><b>讓一件例行公事變得有意義。</b>同樣的工作，你可以聚焦在「我在完成任務」，也可以聚焦在「我在幫助某某人」。意義感往往不是換工作才能找到的。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 流：最容易被忽略的幸福來源 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">「流」的狀態：幸福最容易被忽略的來源</span>
+    </div>
+    <p class="ch-intro">心理學家 Csikszentmihalyi 把那種「完全投入、忘記時間、渾然忘我」的狀態稱為「心流（flow）」。它不只是讓你感覺好——它可能是人類最純粹的幸福體驗之一，卻也是現代生活最容易被切碎的那一種。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你一整天很忙，但到晚上回顧，卻感覺什麼都沒做到，整個人很累又很空。看了三小時影集，滑了一個小時手機，但不覺得有休息到。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">消費和休息不一樣。被動地接收刺激（滑手機、追劇）幾乎不會帶來心流，它只是填滿了時間。真正讓人充電的往往是主動的投入——做一件有點挑戰性但你做得到的事，大腦會在結束後給你一個真實的滿足感。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>心流需要「剛好難度」。</b>太簡單會無聊，太難會焦慮。找到那個讓你稍微需要集中注意力、但不至於挫折的甜蜜點——那就是心流最容易發生的地方。</li>
+          <li><b>保護一段不被打斷的時間。</b>心流需要連續的注意力，十分鐘就收到一個通知的狀態幾乎不可能進入。把手機靜音、關掉通知，給自己至少 45 分鐘的不打斷時間。</li>
+          <li><b>把被動消費換成主動創作。</b>不是要你天天寫作或畫畫，但哪怕是煮一頓飯、整理一個空間、寫幾行字——主動做一件事的滿足感和被動看別人做的完全不同。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 感恩：最簡單但最少人真的在做的事 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">感恩：最簡單但最少人真的在做</span>
+    </div>
+    <p class="ch-intro">「要懂得感恩」這個道理大家都聽過，但實際上它的效果遠比你想像的更直接、更快。問題不是你不感恩，而是你的大腦預設會把注意力放在問題和缺少的東西上——感恩練習是一個主動的校正。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你知道自己其實還不錯，但就是很難真正感受到。生活裡的好事好像都是理所當然的，壞事卻特別放大。你不確定「感恩練習」是不是在自我欺騙。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這不是自我欺騙。你的大腦有一個演化遺留的「負向偏誤」——注意威脅和問題的速度比注意好事快三到五倍。感恩練習不是叫你假裝問題不存在，而是強迫大腦也去注意那些它預設會忽略的正向訊息，讓你的「現實感知」更完整、更準確。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>具體比籠統有效。</b>「我感謝我有工作」是籠統的，效果有限。「今天午餐時間我一個人坐在陽光下吃飯，感覺很好」是具體的，大腦會真的記住它。</li>
+          <li><b>每天三件事，但要真的想。</b>不是例行公事地填清單，而是花三十秒真的回想那件事發生的畫面。讓身體感受到，才有用。</li>
+          <li><b>感謝一個真實的人。</b>想到某個讓你感謝的人，直接告訴他。不需要很正式，一條訊息就夠——對你和對方的幸福感都有即時的效果。</li>
+          <li><b>享受「好事」時放慢腳步。</b>好的體驗很容易被我們快速略過。當你正在經歷一件好事的時候，刻意暫停幾秒，注意它、感受它——這叫做「品味（savoring）」，是幸福感的主動儲存。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 幸福的幾個常見誤解 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">關於幸福，你可能想歪的幾件事</span>
+    </div>
+    <p class="ch-intro">有些關於幸福的直覺完全錯誤，而且這些錯誤的直覺往往讓人在追求幸福的路上走得更辛苦。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>常見想法</th>
+          <th>實際上是這樣</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>「等我達到某個目標，我就會快樂了」</td>
+          <td>達成目標帶來的幸福感通常在幾週內消退，因為你很快就習慣了新的基準線，然後把注意力轉向下一個目標。</td>
+        </tr>
+        <tr>
+          <td>「要追求最大幸福，就要追求最好的選擇」</td>
+          <td>過多選項反而讓人更不快樂。「夠好」往往比「最好」帶來更多滿足感，因為你不會一直懷疑自己是否錯過了什麼。</td>
+        </tr>
+        <tr>
+          <td>「錢讓人快樂」</td>
+          <td>錢在滿足基本需求之前非常重要；超過一定程度後，額外的收入對幸福感的邊際影響很小。你怎麼花錢比你有多少錢更重要。</td>
+        </tr>
+        <tr>
+          <td>「幸福的人不會有負面情緒」</td>
+          <td>幸福不是沒有負面情緒，而是能夠與負面情緒共處，不被它淹沒。強迫自己「要正面」反而會讓負面情緒積累得更猛烈。</td>
+        </tr>
+        <tr>
+          <td>「把錢花在自己身上最讓人快樂」</td>
+          <td>把錢花在別人身上（請朋友吃飯、捐款、送禮）對幸福感的貢獻，通常高於花在自己身上的同等金額。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pquote">
+      <p>幸福不是一個你可以直接追求的目標，它是你在做有意義的事情時產生的副產品。直接追求幸福，往往讓你離它更遠。</p>
+    </div>
+  </div>
+
+  <!-- 06 比較心：最常讓我們不快樂的習慣 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">06</span>
+      <span class="ch-title">比較心：最常讓我們不快樂的習慣</span>
+    </div>
+    <p class="ch-intro">人類幾乎無法停止與他人比較，這是我們的天性。問題不在於比較本身，而在於我們通常選了最傷自己的比較方式。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">看到同齡人升遷、買房、結婚、出國旅遊——你對自己的生活本來還好，但一看到這些就開始覺得自己落後了、不夠好、做的選擇都錯了。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你在做「向上社會比較」，而且比較的對象是別人生命裡最好的那個切面，而不是全貌。你看不到他們的不安全感、他們放棄的東西、他們生活裡同樣存在的困境。這個比較本質上是不公平的，但大腦不會自動提醒你這一點。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把「和別人比」換成「和昨天的自己比」。</b>問題不是你跟別人差多少，而是你是否在往自己想去的方向移動。這個比較基準你可以完全掌控。</li>
+          <li><b>注意你在比較什麼。</b>你只看到別人的結果，沒看到過程。當比較心升起的時候，試著想：「我不知道他為了這件事付出了什麼、放棄了什麼。」</li>
+          <li><b>定義你自己的成功是什麼。</b>如果你沒有想清楚「對我來說什麼算是好的生活」，你就只能借用別人的標準來衡量自己，那永遠比不贏。</li>
+          <li><b>減少觸發比較的情境。</b>不是要完全逃避，但你可以選擇不追蹤那些讓你一直覺得不夠的帳號，或者減少被動瀏覽的時間。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
+      <tr><td>週次</td><td>第 14 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 05 — 心理健康</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">今天就可以做</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">感恩</span>
+        <span class="qa-val">想三件今天有的、具體的好事，讓自己真的感受一下</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">感謝</span>
+        <span class="qa-val">傳一條訊息給你想感謝的人，說出你感謝他什麼</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">心流</span>
+        <span class="qa-val">今晚花 45 分鐘做一件讓你投入的事，手機靜音</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">比較</span>
+        <span class="qa-val">問自己：對我來說，什麼樣的生活算是好的？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">PERMA</span>
+        <span class="qa-val">給五個成分各打分，找出最低的那個</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《心流》Csikszentmihalyi</td></tr>
+      <tr><td>書</td><td>《真實的快樂》Martin Seligman</td></tr>
+      <tr><td>書</td><td>《快樂為什麼不幸福》Daniel Gilbert</td></tr>
+      <tr><td>書</td><td>《先問，為什麼？》Simon Sinek</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>用 PERMA 給自己打分（1–10）。哪個成分最低？在你目前的生活裡，最缺席的是哪一個？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你最近一次進入「完全投入、忘記時間」的狀態是在做什麼？這件事還在你的生活裡嗎？如果沒有，是什麼讓它消失了？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>幸福的誤解表格裡，哪一條最讓你有共鳴？你的生活裡有沒有類似的「我以為這樣就會快樂，結果⋯⋯」的經驗？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>如果用自己的話說，對你來說「過得好」是什麼樣子？不是別人期待的，是你自己真的想要的。</span>
+    </div>
+  </div>
+</div>
+
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pager">
+  <a href="day13.html">← Week 13</a>
+  <span class="pager-mid">14 / 16</span>
+  <a href="day15.html">Week 15 →</a>
+</div>
+
+<script>
+  const KEY = 'week-14';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(KEY, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>

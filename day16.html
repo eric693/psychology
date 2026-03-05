@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 16 — 活出自己</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      padding-bottom: 6rem;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.1rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--light);
+    }
+
+    /* HERO — final week gets a bigger, more editorial treatment */
+    .hero {
+      padding: 4rem 5vw 3.5rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.18;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.9;
+      max-width: 580px;
+    }
+    .hero-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+    /* final week badge */
+    .final-badge {
+      display: inline-block;
+      margin-top: 1.4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--red);
+      padding: 0.35rem 0.8rem;
+    }
+
+    /* LAYOUT */
+    .wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+
+    .slabel {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    /* CHAPTER */
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.92;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    /* VALUES EXERCISE — 2-col card grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .val-cell {
+      background: var(--card);
+      padding: 1rem 1.2rem;
+    }
+    .val-area {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+    .val-q {
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.72;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .val-hint {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--light);
+      font-style: italic;
+    }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* COURSE WRAP-UP — final summary block */
+    .wrapup {
+      border: 1px solid var(--ink);
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .wrapup-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .wrapup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem 2rem;
+    }
+    .wu-item {}
+    .wu-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      margin-bottom: 0.2rem;
+    }
+    .wu-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .wu-takeaway {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--mid);
+    }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* FINAL MESSAGE */
+    .final-msg {
+      padding: 3rem 5vw 0;
+      max-width: 1200px;
+    }
+    .final-inner {
+      border-top: 2px solid var(--ink);
+      padding-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .final-inner h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 1.1rem;
+      grid-column: 1 / -1;
+    }
+    .final-inner h2 em { font-style: normal; color: var(--red); }
+    .final-p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--mid);
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .pager a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .values-grid { grid-template-columns: 1fr; }
+      .wrapup-grid { grid-template-columns: 1fr; }
+      .final-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .final-inner h2 { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 16 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Unit 05 &nbsp;—&nbsp; 心理健康與自我成長</p>
+    <h1>活出自己：<br><em>整合、前進，繼續走</em></h1>
+    <p class="hero-sub">十六週下來，我們談了大腦、記憶、情緒、壓力、人格、關係、幸福——但這些知識只有在你把它們用在自己的生活上，才算真正學到了。最後一週，不是再加新內容，而是幫你把這些東西串起來，想清楚你接下來怎麼走。</p>
+    <span class="final-badge">最終週</span>
+  </div>
+  <div class="hero-num">16</div>
+</div>
+
+<div class="wrap">
+<main>
+
+  <!-- 01 自我認識：你現在比以前更了解自己了嗎？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你現在比以前更了解自己了嗎？</span>
+    </div>
+    <p class="ch-intro">自我認識聽起來很玄，但它其實很具體：知道自己在哪些情境下容易觸發什麼反應，知道自己的需求是什麼、價值觀是什麼，知道哪些模式在幫助你、哪些在拖累你。這不是一次性的頓悟，而是一個持續觀察自己的習慣。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你讀了很多關於自我成長的書和課程，對很多概念都有共鳴，但感覺自己實際上沒有什麼真的改變。知道歸知道，就是做不到。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「知道但做不到」是成長最常見的卡關點。原因不是你意志力不夠，而是知識和行為之間需要一個橋梁：你必須先把那個概念連結到你的具體生活情境，才能在真實的當下想起來用它。泛泛的知識很難在情緒高峰時被提取，但「當我感到被忽視的時候，我的第一反應通常是……然後我可以試著……」這樣具體的連結就可以。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把學到的東西翻譯成「我的語言」。</b>不是記住理論名詞，而是用自己的話說出：「這跟我有關的部分是……」「我在這個地方通常會……」</li>
+          <li><b>選一個，認真用兩週。</b>不要試圖一次改變很多事。從這十六週裡選一個你覺得最重要的洞見，刻意在接下來兩週把它用在真實的情況中，觀察它對你的效果。</li>
+          <li><b>寫下來，哪怕只是一兩句話。</b>把觀察自己的東西寫下來，會讓你更能注意到自己的模式，也更容易在下次被觸發時想起來。不需要很正式，手機備忘錄就夠。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 搞清楚你的價值觀 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">搞清楚你的價值觀</span>
+    </div>
+    <p class="ch-intro">很多人說不清楚自己真正在乎什麼。不是因為沒有，而是從來沒有認真想過。當你的行為和你真正在乎的事情不一致，那種空洞感、疲憊感就會長期存在——你一直在做事，但不知道為了什麼。</p>
+
+    <div class="values-grid">
+      <div class="val-cell">
+        <div class="val-area">關係</div>
+        <p class="val-q">你最想成為什麼樣的人，在對你重要的人面前？</p>
+        <p class="val-hint">不是別人期待你成為的，是你自己想要的。</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-area">工作與貢獻</div>
+        <p class="val-q">你做什麼樣的事情會讓你覺得今天過得有意義？</p>
+        <p class="val-hint">不一定要很偉大，對一個人有幫助也算。</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-area">個人成長</div>
+        <p class="val-q">什麼樣的自己，是你想要成為但還沒成為的？</p>
+        <p class="val-hint">具體一點：不是「更好的人」，而是哪一個具體的方向。</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-area">日常生活</div>
+        <p class="val-q">一個「過得好」的普通週一，你的生活是什麼樣子的？</p>
+        <p class="val-hint">從這裡往回推，你的日常缺少了什麼？</p>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你一直在追求某個目標，但快達到的時候卻發現自己並沒有想像中興奮，甚至有點空虛。你懷疑自己是不是一直在追錯東西。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">很可能是的。我們很容易繼承別人的成功標準——父母的期待、同儕的比較、社會預設的軌道——然後把它當成自己的目標。當你走在別人的路上，走到終點也不會是你想要的地方。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>問：「這是我想要的，還是我應該要想要的？」</b>這個問題值得認真回答。如果誠實的答案是後者，至少你知道了。</li>
+          <li><b>注意你的能量。</b>什麼事情做完讓你有電？什麼事情做完讓你更空？能量的流向是一個很誠實的價值觀指標，比你腦子裡說的更可靠。</li>
+          <li><b>允許自己重新校準。</b>發現走錯方向不是失敗，是你有足夠的自我認識去注意到它。越早知道，調整的成本越低。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 心理健康不是沒有問題 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">心理健康不是沒有問題</span>
+    </div>
+    <p class="ch-intro">「心理健康」常常被誤解成一種「沒有負面情緒、沒有困難、一切都好」的狀態，但這個標準根本不存在，追求它只會讓你更焦慮。真正的心理健康是一種能力，不是一個狀態。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>不是這樣</th>
+          <th>而是這樣</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>沒有焦慮和難過</td>
+          <td>焦慮和難過出現時，能夠與它們共處，不被完全淹沒</td>
+        </tr>
+        <tr>
+          <td>對所有事情都充滿正能量</td>
+          <td>能夠真實面對困難，同時不失去往前走的能力</td>
+        </tr>
+        <tr>
+          <td>不需要任何人的幫助</td>
+          <td>知道什麼時候需要支持，而且願意開口尋求</td>
+        </tr>
+        <tr>
+          <td>對自己的過去完全釋懷</td>
+          <td>過去的事不再控制你現在的選擇</td>
+        </tr>
+        <tr>
+          <td>永遠知道自己想要什麼</td>
+          <td>對不確定感到焦慮是正常的，但不讓它癱瘓你</td>
+        </tr>
+        <tr>
+          <td>永遠理性、不被情緒影響</td>
+          <td>情緒是資訊，不是敵人——學會聽它說什麼</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你隔一段時間就會有一陣很低落、或很焦慮的時期。你擔心自己是不是有什麼問題，或者是不是永遠都會這樣。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">情緒的起伏是正常的，大腦本來就不是設計來保持穩定快樂的。問題不在於你有這些感受，而在於它們持續多久、頻率如何、是否已經影響到你的基本功能。偶爾的低潮期不需要被「解決」，它需要的是被允許存在，以及你有一些基本的因應方式。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>區分「情緒的起伏」和「需要關注的訊號」。</b>如果低落感持續超過兩週、影響睡眠飲食、讓你對以前喜歡的事失去興趣，這不是「想太多」，而是值得尋求專業支持的訊號。</li>
+          <li><b>建立你的「低電量模式」清單。</b>你知道自己狀態不好的時候，哪三到五件事情最能幫你穩住？睡覺、運動、跟某個人說話、出去走走——把它寫下來，狀態差的時候不需要思考，直接執行。</li>
+          <li><b>不要等到很嚴重才尋求幫助。</b>看心理師不是因為你「壞掉了」，就像定期看牙醫不是因為你的牙快掉光了。越早談，成本越低，效果越好。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 改變的節奏 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">改變的節奏：慢慢來，但不要停</span>
+    </div>
+    <p class="ch-intro">自我成長最大的陷阱不是懶惰，而是「全有全無」的心態——要麼徹底改變，要麼放棄。真實的改變通常是很慢的、非線性的，充滿了退步和反覆，但只要方向對了，就會往前走。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你有過很多次「這次我真的要改變了」的時刻，但熱情通常撐不過兩週就消退了。你開始懷疑自己是不是根本沒辦法改變，或者只是一個意志力很差的人。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">動機是會消退的，這不是你的問題，而是動機的本質。依賴動機和熱情來維持改變，就像靠天氣好才出門運動——不穩定。真正讓行為持續的是環境設計和微小到不可能失敗的起點，而不是強大的意志力。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把目標縮小到荒謬的程度。</b>「每天運動三十分鐘」太容易被放棄。「每天做兩個深蹲」荒謬地簡單，但它能讓你建立「我是一個會運動的人」的身份認同，而且你幾乎不可能失敗。</li>
+          <li><b>退步不是失敗，是正常過程的一部分。</b>「我今天又沒做到，算了」是最昂貴的反應。「我今天沒做到，但明天繼續」才是真正的韌性。評估的週期是幾個月，不是幾天。</li>
+          <li><b>改變你的環境，而不是改變你的意志力。</b>想少滑手機，就把手機放到另一個房間。想多讀書，就把書放在床頭最顯眼的地方。讓好的行為更容易發生，讓壞的行為多一點摩擦。</li>
+          <li><b>找到一個可以陪你一起的人。</b>公開承諾、互相問責，讓改變從私人事務變成社交事務——人對社群的承諾，往往比對自己的承諾更難放棄。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 課程總回顧 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">十六週，你帶走什麼？</span>
+    </div>
+    <p class="ch-intro">不是要你記住所有東西，而是希望你對幾個核心洞見有一點「喔，原來是這樣」的感覺。下面是這門課最重要的幾個帶走點：</p>
+
+    <div class="wrapup">
+      <div class="wrapup-title">課程核心洞見回顧</div>
+      <div class="wrapup-grid">
+        <div class="wu-item">
+          <div class="wu-week">Week 01–02</div>
+          <div class="wu-title">大腦是可塑的</div>
+          <div class="wu-takeaway">你不是被固定設定好的。經驗、習慣、學習都能改變大腦的結構和功能——但這需要時間，不是一夜之間。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 05–06</div>
+          <div class="wu-title">記憶和思考都會出錯</div>
+          <div class="wu-takeaway">你的記憶不是錄影機，你的判斷不是純理性的。知道自己容易在哪裡出錯，是做出更好決定的第一步。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 07</div>
+          <div class="wu-title">習慣是可以設計的</div>
+          <div class="wu-takeaway">改變習慣不靠意志力，靠的是提示、慣例和獎勵的結構設計。改變環境，比改變自己更有效。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 08–09</div>
+          <div class="wu-title">情緒是資訊，不是障礙</div>
+          <div class="wu-takeaway">壓力、焦慮、悲傷都在告訴你一些事情。問題不是有這些情緒，而是你怎麼與它們的關係。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 10</div>
+          <div class="wu-title">人格不是命運</div>
+          <div class="wu-takeaway">你有穩定的傾向，但你不是被它們決定的。了解自己的模式，才能選擇什麼時候跟著它，什麼時候不跟著它。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 11–12</div>
+          <div class="wu-title">情境的力量超乎想像</div>
+          <div class="wu-takeaway">你的行為很大程度上被你所在的環境和周圍的人塑造。這是警惕，也是機會——設計你的環境，選擇你的社群。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 14</div>
+          <div class="wu-title">幸福不在你以為的地方</div>
+          <div class="wu-takeaway">真實的幸福來自連結、投入、意義和感恩，而不是達成目標或得到認可。方向對了，才不會一直在跑空心的跑步機。</div>
+        </div>
+        <div class="wu-item">
+          <div class="wu-week">Week 16</div>
+          <div class="wu-title">了解自己是一輩子的事</div>
+          <div class="wu-takeaway">這不是一門課讀完就結束的事。持續觀察自己、對自己好奇，比任何理論都更有價值。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
+      <tr><td>週次</td><td>第 16 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 05 — 心理健康</td></tr>
+      <tr><td>重點</td><td>整合與應用</td></tr>
+      <tr><td>時間</td><td>40 — 60 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">讀完這週做一件事</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">現在</span>
+        <span class="qa-val">回答價值觀四個問題，寫下來</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">本週</span>
+        <span class="qa-val">從課程裡選一個洞見，在生活中刻意用一次</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">本月</span>
+        <span class="qa-val">建立一個微小到不可能失敗的新習慣</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">長期</span>
+        <span class="qa-val">養成定期觀察自己的習慣，每週花五分鐘</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">繼續閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《被討厭的勇氣》岸見一郎</td></tr>
+      <tr><td>書</td><td>《原子習慣》James Clear</td></tr>
+      <tr><td>書</td><td>《情緒跟你以為的不一樣》Barrett</td></tr>
+      <tr><td>書</td><td>《心流》Csikszentmihalyi</td></tr>
+      <tr><td>書</td><td>《也許你該找人談談》Lori Gottlieb</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<!-- FINAL MESSAGE -->
+<div class="final-msg">
+  <div class="final-inner">
+    <h2>你已經走完了十六週。<br><em>接下來才是真正的開始。</em></h2>
+    <div class="final-p">
+      心理學不是一套讓你「修好自己」的技術手冊。它是一種看待自己和他人的方式——更有好奇心，更少評判，更願意在被觸發的當下多停一秒，問問自己這個反應從哪裡來。<br><br>
+      這十六週裡，你讀到的那些理論和概念，只有在你把它們帶進真實生活的瞬間才有意義。不是全部，挑一個最讓你有共鳴的，先從那裡開始。
+    </div>
+    <div class="final-p">
+      成長不是一條直線，也不是一個終點。你會有退步的時候，有完全忘記這些東西的時候，有再次被同樣的模式困住的時候——那都沒關係。每次你注意到，你就已經在進步了。<br><br>
+      謝謝你把這十六週給了自己。這本身就是一件值得的事。
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">最後四個問題</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>這十六週裡，哪一個概念或洞見對你影響最大？它改變了你看待什麼事情的方式？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你認識自己了多少？跟十六週前相比，你對自己的哪個面向有了更清楚的認識？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>用你自己的話說：對你來說，「活得好」是什麼樣子的？不是理想版本，而是你真正想要的日常。</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>接下來三個月，你想在哪一個方向上刻意投入？一件具體的事，不是一個模糊的目標。</span>
+    </div>
+  </div>
+</div>
+
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">完成整個課程</button>
+</div>
+
+<div class="pager">
+  <a href="day15.html">← Week 15</a>
+  <span class="pager-mid">16 / 16</span>
+  <a href="index.html">回到總覽 →</a>
+</div>
+
+<script>
+  const KEY = 'week-16';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '課程已完成 ✓';
+  }
+  function markDone() {
+    localStorage.setItem(KEY, 'done');
+    btn.classList.add('done');
+    btn.textContent = '課程已完成 ✓';
+  }
+</script>
+</body>
+</html>

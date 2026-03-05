@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 15 — 心理韌性與情緒調節</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      padding-bottom: 6rem;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.1rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--light);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+    .hero-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* LAYOUT */
+    .wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+
+    .slabel {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    /* CHAPTER */
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* EMOTION THERMOMETER — levels of distress */
+    .thermo {
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      margin: 1.2rem 0;
+    }
+    .thermo-row {
+      display: grid;
+      grid-template-columns: 7rem 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .thermo-row:last-child { border-bottom: none; }
+    .thermo-row.head .thermo-cell {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      padding: 0.6rem 1rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .thermo-cell {
+      padding: 0.85rem 1rem;
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--mid);
+      border-right: 1px solid var(--rule);
+    }
+    .thermo-cell:last-child { border-right: none; }
+    .thermo-cell.level {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.88rem;
+    }
+    .thermo-row.hi   .thermo-cell.level { color: #a83828; }
+    .thermo-row.mid2 .thermo-cell.level { color: #b05c20; }
+    .thermo-row.lo   .thermo-cell.level { color: #2a6040; }
+
+    /* TWO-COL COMPARE */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .two-cell {
+      background: var(--card);
+      padding: 1.1rem 1.3rem;
+    }
+    .two-head {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .two-head.red { color: var(--red); }
+    .two-head.green { color: #2a6040; }
+    .two-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .two-list li {
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+    }
+    .two-list li::before {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      padding-top: 0.1rem;
+    }
+    .two-cell.bad  .two-list li::before { content: '✕'; color: #a83828; }
+    .two-cell.good .two-list li::before { content: '✓'; color: #2a6040; }
+
+    /* STEPS — numbered sequence */
+    .steps { margin: 1.2rem 0; display: flex; flex-direction: column; gap: 1px; }
+    .step {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .step-num {
+      background: rgba(192,57,43,0.07);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--red);
+    }
+    .step-body { padding: 0.9rem 1.1rem; }
+    .step-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .step-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--mid);
+    }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: flex;
+      gap: 0.9rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .pager a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .two-col { grid-template-columns: 1fr; }
+      .thermo-row { grid-template-columns: 5rem 1fr; }
+      .thermo-row .thermo-cell:nth-child(3) { display: none; }
+      .thermo-row.head .thermo-cell:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 15 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Unit 05 &nbsp;—&nbsp; 心理健康與自我成長</p>
+    <h1>心理韌性：<br><em>不是不倒，是倒了能起來</em></h1>
+    <p class="hero-sub">心理韌性不是指你不會被打倒，也不是叫你咬牙撐著。它是一種在困境中找到出路的能力——可以培養，可以練習，而且你現在就可以開始。</p>
+  </div>
+  <div class="hero-num">15</div>
+</div>
+
+<div class="wrap">
+<main>
+
+  <!-- 01 情緒來了，先別急著趕走它 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">情緒來了，先別急著趕走它</span>
+    </div>
+    <p class="ch-intro">情緒調節不是「控制情緒」，也不是讓自己快點冷靜下來。很多人對情緒的第一個反應是壓下去、轉移注意力、或是批評自己「怎麼這麼脆弱」——這些都會讓情緒在之後反彈得更猛烈。第一步其實是讓情緒在你這裡停一下。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你受到批評、被否定、或發生了讓你很難受的事。情緒一來，你要麼馬上爆發，要麼強壓下去假裝沒事，但之後又一直反覆想這件事，久久無法放下。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">強壓情緒就像按住彈簧——你放開的時候它彈得更高。反覆回想（反芻）則是讓大腦在情緒迴路裡一直打轉，沒有出口。兩種都不是真正的調節，只是把情緒移到其他地方或其他時間。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>給情緒一個名字。</b>「我現在很焦慮」「我感到被忽視」「我其實很受傷」——光是把情緒說出來或寫下來，情緒的強度就會降低。這不是在放大它，而是讓大腦的理性區域重新介入。</li>
+          <li><b>允許它在，但不讓它主導。</b>你可以感到難受，同時還是做需要做的事。情緒不需要消失才能繼續生活——它只需要被承認。</li>
+          <li><b>身體先行。</b>情緒是身體反應，不只是念頭。深呼吸（吸四秒、吐六秒）、讓肩膀放鬆、喝一杯水——這些小動作會直接降低生理喚起，讓你能夠思考，而不是只能反應。</li>
+          <li><b>把「我很憤怒」換成「我注意到有憤怒的感覺」。</b>這個微小的語言轉換，讓你從「被情緒吞噬」變成「觀察情緒的人」，是情緒調節最核心的技術。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 情緒溫度計：你在哪個程度？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">讀懂自己的情緒溫度</span>
+    </div>
+    <p class="ch-intro">很多人的情緒只有兩個刻度：「還好」和「爆炸」。學習辨識自己在中間的各個狀態，是情緒調節的基本功——你越早知道自己在升溫，就越容易介入。</p>
+
+    <div class="thermo">
+      <div class="thermo-row head">
+        <div class="thermo-cell">程度</div>
+        <div class="thermo-cell">你的內在感受</div>
+        <div class="thermo-cell">有效的介入方式</div>
+      </div>
+      <div class="thermo-row hi">
+        <div class="thermo-cell level">高度激動<br><small style="font-weight:300; font-size:0.75rem; color:var(--light)">8–10 分</small></div>
+        <div class="thermo-cell">快要爆發或完全關閉。思考幾乎不可能，只有反應。身體感覺很緊、很熱，或完全麻木。</div>
+        <div class="thermo-cell">先做身體的事：離開現場、深呼吸、喝水、走動。這個狀態下對話沒有用，先讓生理降溫。</div>
+      </div>
+      <div class="thermo-row mid2">
+        <div class="thermo-cell level">中度激動<br><small style="font-weight:300; font-size:0.75rem; color:var(--light)">5–7 分</small></div>
+        <div class="thermo-cell">有情緒，但還能思考。注意力有點渙散，容易過度詮釋對方的話，想法偏負向。</div>
+        <div class="thermo-cell">命名情緒、寫下來、和信任的人說說話。可以開始問自己：「這件事我能控制的部分是什麼？」</div>
+      </div>
+      <div class="thermo-row lo">
+        <div class="thermo-cell level">平靜窗口<br><small style="font-weight:300; font-size:0.75rem; color:var(--light)">1–4 分</small></div>
+        <div class="thermo-cell">清醒、有彈性、能夠思考多種可能性。這是解決問題和困難對話的最佳狀態。</div>
+        <div class="thermo-cell">在這個狀態下做重要決定、進行需要理性的對話、以及為下次情緒高峰預先計畫。</div>
+      </div>
+    </div>
+
+    <p class="ch-intro" style="margin-bottom: 0;">重要事項和困難對話，盡量在你的「平靜窗口」裡進行。情緒高峰時做的決定、說的話，往往是你事後最後悔的。</p>
+  </div>
+
+  <!-- 03 反芻思考：怎麼從腦袋裡的迴圈跳出來 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">反芻思考：怎麼跳出腦袋裡的迴圈</span>
+    </div>
+    <p class="ch-intro">反芻（rumination）是指你一直重複回想同一件讓你痛苦的事，腦袋像卡帶一樣播放——「如果我當初這樣做就好了」「他為什麼要那樣說」「我是不是真的很差勁」。這不是在解決問題，而是在消耗你。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">睡前腦袋開始播放白天發生的不愉快，或是一件已經過了很久的事，一直想一直想，停不下來，越想越難受，越難受越想。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">反芻看起來像是在「想清楚」，但實際上它只是讓情緒迴路一直被激活，沒有帶來新的洞見，只是讓你更痛苦。大腦誤以為「想更多就能解決問題」，但反芻是原地打轉，不是向前移動。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>區分「反省」和「反芻」。</b>反省是：「這件事我學到什麼？我下次可以怎麼做？」——有終點，有行動方向。反芻是：「為什麼會這樣、怎麼可以這樣、早知道⋯⋯」——沒有終點，只有情緒循環。注意你的思考有沒有在移動。</li>
+          <li><b>設定一個「擔憂時間」。</b>當反芻出現時，告訴自己：「我等一下 8 點再來想這件事。」刻意把它延後，讓大腦知道這件事不會被遺忘，但不是現在。很多人發現到了那個時間，那件事沒有原本看起來那麼嚴重了。</li>
+          <li><b>讓身體做點事。</b>散步、洗碗、打掃——重複性的身體活動能夠打斷反芻迴路，效果比「努力不去想」好得多。</li>
+          <li><b>寫下來，然後放下。</b>把讓你反覆想的事情寫出來，包括情緒和你最擔心的結果。寫完之後，問自己：「我現在可以做的最小一步是什麼？」有行動就有出口，反芻就會減弱。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 面對困境：有用的 vs 沒用的因應方式 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">面對困境：哪些方式真的有用？</span>
+    </div>
+    <p class="ch-intro">困境發生的時候，人們有各種方式應對。有些看起來有效，但長期下來反而讓問題更大；有些感覺很難，但才是真正讓你走出來的路。</p>
+
+    <div class="two-col">
+      <div class="two-cell bad">
+        <div class="two-head red">短期有效，長期讓你更困</div>
+        <ul class="two-list">
+          <li>一直逃避讓你焦慮的事情和場合</li>
+          <li>靠酒精、過度飲食、滑手機麻痺感受</li>
+          <li>把情緒全部壓下去，對外假裝沒事</li>
+          <li>一直訴苦但不採取任何行動</li>
+          <li>把所有精力放在無法控制的事情上</li>
+          <li>告訴自己「等這件事過了再說」</li>
+        </ul>
+      </div>
+      <div class="two-cell good">
+        <div class="two-head green">感覺難，但真的有效</div>
+        <ul class="two-list">
+          <li>面對讓你焦慮的事，哪怕先踏出一小步</li>
+          <li>讓自己感受情緒，然後繼續行動</li>
+          <li>對信任的人說出你真正的感受</li>
+          <li>區分你能控制的和不能控制的，專注前者</li>
+          <li>在困境裡找到一件你仍然可以做的小事</li>
+          <li>把「這很糟」換成「這很難，但我在應對」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 自我批評 vs 自我慈悲 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">自我批評 vs 自我慈悲</span>
+    </div>
+    <p class="ch-intro">很多人相信嚴厲地批評自己能讓自己進步，但實際上過度的自我批評是焦慮和憂鬱最常見的燃料之一，而且它幾乎不會帶來真正的改變，只是讓你更不敢嘗試。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你犯了一個錯誤，或是某件事沒有做到你預期的標準。你對自己說的話，是你絕對不會對朋友說的那種：「你真的很廢」「你怎麼每次都這樣」「你根本不行」。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">自我批評的聲音讓你感覺「至少有在檢討自己」，但它帶來的是羞恥感，不是動力。羞恥感讓人想躲、想逃、想放棄——不是想改進。你對自己最嚴厲的那些話，如果是別人對你說的，你只會更想逃離，不會更想努力。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>用對待朋友的方式對待自己。</b>想像你最在意的朋友正在經歷你現在的處境，你會對他說什麼？把那些話說給自己聽。這不是自我放縱，這是讓你能夠繼續前進的方式。</li>
+          <li><b>承認「這很難」，不假裝沒事。</b>自我慈悲不是否認困難，而是承認：「這件事確實很難，我現在很掙扎，這是真實的。」承認了，才能真的面對。</li>
+          <li><b>把批評轉成具體的方向。</b>「我很廢」沒有行動方向。「這次我在哪個地方可以做得不一樣？」有。情緒的能量用對地方才有用。</li>
+          <li><b>注意批評的語氣，不只是內容。</b>有時候你說的話不算太嚴厲，但語氣是嘲諷的、輕蔑的。那個語氣傳遞的訊息比內容更傷人。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 建立你的復原系統 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">06</span>
+      <span class="ch-title">建立你自己的復原系統</span>
+    </div>
+    <p class="ch-intro">心理韌性不是你在崩潰的當下才開始培養的，它是平時累積起來的。有幾個基礎，做好了，你在遇到困境時的「彈回能力」就會明顯不同。</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-title">知道什麼讓你充電</div>
+          <div class="step-desc">每個人充電的方式不一樣——有人需要獨處，有人需要人群；有人需要運動，有人需要安靜。先搞清楚你的充電方式是什麼，然後在狀態還好的時候規律地做，不要等到快空了才去補。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-title">有一兩個可以真正說話的人</div>
+          <div class="step-desc">不需要很多，但需要至少一個你在很糟糕的時候可以打電話的人——不是來幫你解決問題，而是讓你說說話、讓你感到不孤單的人。這個關係要在平時維繫，不是只在需要的時候才出現。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-title">睡眠是一切的基礎</div>
+          <div class="step-desc">睡眠不足會讓情緒調節能力下降 40% 以上。你在睡眠不足的狀態下感受到的壓力、焦慮、難受，有很大一部分是生理的，不是心理的。先睡好，很多事情第二天看起來都不一樣了。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-title">有一件讓你感到掌控感的事</div>
+          <div class="step-desc">當生活的某個部分失控，在另一個部分維持規律和掌控感會非常有幫助——每天固定做一件小事（運動、做飯、整理空間）。不是因為那件事本身有多重要，而是它告訴你的大腦：「有些事情仍然在我手上。」</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-title">知道你在困難時需要什麼</div>
+          <div class="step-desc">現在就想好：當你下次進入高度激動或很低落的狀態，你要做的第一件事是什麼？你需要獨處還是陪伴？你需要動起來還是安靜下來？預先知道，比在當下才摸索快得多。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pquote">
+      <p>你不需要等到「更強大的時候」才能面對困難。韌性不是你擁有的特質，它是你在困難中一次又一次選擇繼續的過程。</p>
+    </div>
+  </div>
+
+  <!-- 07 什麼時候需要尋求專業協助？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">07</span>
+      <span class="ch-title">什麼時候應該尋求專業協助？</span>
+    </div>
+    <p class="ch-intro">自我調節有它的極限。有些時候，你需要的不是更多的方法，而是一個受過訓練的人在你身邊。尋求幫助不是失敗，是你為自己做的最好的一件事之一。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>如果你有這些狀況</th>
+          <th>這代表什麼，你可以怎麼做</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>持續兩週以上情緒低落、對什麼都提不起興趣</td>
+          <td>這可能不只是「心情不好」，值得跟心理師或身心科醫師談談，排除憂鬱症的可能。</td>
+        </tr>
+        <tr>
+          <td>焦慮已經影響到你的日常功能（睡眠、工作、人際）</td>
+          <td>焦慮症是可以治療的，你不需要一直這樣生活。認知行為治療（CBT）對焦慮症有很好的效果。</td>
+        </tr>
+        <tr>
+          <td>用喝酒、藥物、自傷來應對情緒</td>
+          <td>這是情緒痛苦已經超出你目前能承受範圍的訊號，請立刻尋求幫助。這不是軟弱，這是你需要支持。</td>
+        </tr>
+        <tr>
+          <td>你試了很多方法，但還是一直卡在同一個地方</td>
+          <td>心理師不是在你「很嚴重」才去找的，卡住了就可以去。他們能看到你自己看不到的模式。</td>
+        </tr>
+        <tr>
+          <td>你覺得自己是別人的負擔，或不想繼續了</td>
+          <td>請現在就聯繫你信任的人，或撥打安心專線 1925。這個感受是可以改變的，但你需要幫助。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
+      <tr><td>週次</td><td>第 15 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 05 — 心理健康</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">情緒急救包</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">激動時</span>
+        <span class="qa-val">先離開現場，吸4秒吐6秒，讓身體降溫</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">反芻時</span>
+        <span class="qa-val">寫下來，問自己「現在最小的一步是什麼？」</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">自我批評</span>
+        <span class="qa-val">用對待好朋友的方式對待自己，說同樣的話</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">情緒命名</span>
+        <span class="qa-val">說出「我注意到有⋯⋯的感覺」，不是「我很⋯⋯」</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">需要幫助</span>
+        <span class="qa-val">安心專線 1925，全天候免費</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《自我慈悲》Kristin Neff</td></tr>
+      <tr><td>書</td><td>《接受與承諾治療》Steven Hayes</td></tr>
+      <tr><td>書</td><td>《情緒靈敏力》Susan David</td></tr>
+      <tr><td>書</td><td>《當下的力量》Eckhart Tolle</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>用情緒溫度計想想你上週情緒最高的一個時刻。那時候你在幾分？你當時做了什麼？如果重來，你會想在哪個時間點介入？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你最常用的因應方式是「短期有效、長期讓你更困」的那類，還是「感覺難但真的有效」的那類？是什麼讓你傾向於前者？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你對自己說話的方式，跟你對好朋友說話的方式有多大的差距？試著想一件你最近批評自己的事，用對朋友說話的方式重新說一遍——感覺有什麼不同？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你的「復原系統」現在有哪些元素？充電方式、可以說話的人、規律做的事——哪個是你目前最缺的？</span>
+    </div>
+  </div>
+</div>
+
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pager">
+  <a href="day14.html">← Week 14</a>
+  <span class="pager-mid">15 / 16</span>
+  <a href="day16.html">Week 16 →</a>
+</div>
+
+<script>
+  const KEY = 'week-15';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(KEY, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 13 — 日常心理健康</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Serif TC', serif;
+      padding-bottom: 6rem;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.1rem 5vw;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: var(--red); }
+    .nav-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--light);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 5vw 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.85;
+      max-width: 560px;
+    }
+    .hero-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 10vw, 8rem);
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* LAYOUT */
+    .wrap {
+      padding: 3.5rem 5vw 0;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
+      max-width: 1200px;
+    }
+    main { min-width: 0; }
+    aside { min-width: 0; }
+
+    .slabel {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    /* CHAPTER */
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard {
+      border: 1px solid var(--rule);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene {
+      font-size: 0.91rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* SPECTRUM BAR — for distinguishing normal vs clinical */
+    .spectrum {
+      margin: 1.4rem 0;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .spectrum-row {
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .spectrum-row:last-child { border-bottom: none; }
+    .sp-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.9rem 0.9rem;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      background: var(--card);
+    }
+    .sp-label.normal { color: #2a6040; }
+    .sp-label.worth  { color: #8a5a10; }
+    .sp-label.seek   { color: var(--red); }
+    .sp-text {
+      padding: 0.9rem 1.1rem;
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+
+    /* REFRAME PAIRS */
+    .reframe-list { margin: 1.3rem 0; display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--rule); }
+    .reframe-item {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--rule);
+    }
+    .reframe-item:last-child { border-bottom: none; }
+    .rf-before {
+      padding: 0.85rem 1.1rem;
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #a04030;
+      border-right: 1px solid var(--rule);
+    }
+    .rf-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.7rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--light);
+      background: var(--bg);
+      border-right: 1px solid var(--rule);
+    }
+    .rf-after {
+      padding: 0.85rem 1.1rem;
+      font-size: 0.87rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: #2a5a38;
+    }
+
+    /* CHECK-IN GRID */
+    .checkin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.3rem 0;
+    }
+    .ci-cell {
+      background: var(--card);
+      padding: 1.1rem 1.3rem;
+    }
+    .ci-q {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .ci-hint {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.7rem 1.6rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
+      padding: 2.5rem 5vw 0;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .pager a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .checkin-grid { grid-template-columns: 1fr; }
+      .reframe-item { grid-template-columns: 1fr; }
+      .rf-arrow { display: none; }
+      .rf-before { border-right: none; border-bottom: 1px solid var(--rule); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 13 / 16</span>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Unit 05 &nbsp;—&nbsp; 心理健康與正向心理學</p>
+    <h1>日常心理健康：<br><em>那些沒有名字的不對勁</em></h1>
+    <p class="hero-sub">你不需要「生病」才值得照顧自己的心理狀態。情緒低落、持續焦慮、感覺空空的、動力消失——這些都算。本週從你可能正在經歷的感受出發，幫你分辨什麼是正常的起伏，什麼值得認真對待，以及你可以從哪裡開始。</p>
+  </div>
+  <div class="hero-num">13</div>
+</div>
+
+<div class="wrap">
+<main>
+
+  <!-- ─── 1. 情緒低落 vs 憂鬱 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">情緒低落、提不起勁——這是正常的嗎？</span>
+    </div>
+    <p class="ch-intro">心情不好、一段時間對什麼都沒興趣、早上很難起床——這些感受非常普遍，不代表你「有問題」。但有些時候，這些感受超出了正常的波動範圍，值得更認真地對待。這兩者的差別，不是嚴不嚴重，而是持續多久、有多影響你的生活。</p>
+
+    <div class="spectrum">
+      <div class="spectrum-row">
+        <span class="sp-label normal">正常起伏</span>
+        <p class="sp-text">因為具體的事情（失去、失敗、疲勞）而情緒低落，持續幾天到一兩週，日常功能大致維持，可以感受到某些時刻仍然開心或放鬆。</p>
+      </div>
+      <div class="spectrum-row">
+        <span class="sp-label worth">值得關注</span>
+        <p class="sp-text">情緒低落持續超過兩週，不是因為特定事件，對以前喜歡的事情提不起興趣，開始影響工作、睡眠或人際關係，感覺做什麼都很費力。</p>
+      </div>
+      <div class="spectrum-row">
+        <span class="sp-label seek">需要尋求協助</span>
+        <p class="sp-text">出現對自己的價值感極度低落、有傷害自己的念頭、完全無法正常生活、感覺未來沒有任何希望——這些是需要讓身邊的人或專業者知道的訊號。</p>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">已經好幾週了，早上起床需要很大的力氣，對平常喜歡的事情沒什麼感覺，下班之後只想躺著，也不太想跟人說話。你說不清楚為什麼，就是感覺空空的。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這種「空空的」感受，常常是身體在說：我的某個需求長期被忽略了——可能是休息、可能是意義感、可能是真實的連結，也可能是長期壓力的累積終於顯現。它不是你的性格問題，也不是你「想太多」。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>先做一件最小的事。</b>不是「振作起來」，是今天做一件五分鐘以內、讓你稍微移動的事：出去走走、喝一杯熱飲、傳一個訊息給朋友。動力不是出現了才能行動，是行動了才會出現。</li>
+          <li><b>把「我應該開心」換成「我現在感覺怎樣」。</b>對自己的狀態誠實，比強迫自己樂觀更有幫助。你可以說「我最近很累，我需要慢下來」，不需要假裝沒事。</li>
+          <li><b>讓一個人知道你現在的狀態。</b>不需要解釋很多，也不需要找答案，只是讓一個你信任的人知道你不太好。被聽見本身就有幫助。</li>
+          <li><b>如果已經持續超過兩週，認真考慮尋求諮商。</b>去看諮商師不代表你「病了」，就像身體不舒服去看醫生一樣正常。很多人在第一次諮商後就覺得有所不同。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 2. 焦慮 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">焦慮：腦子停不下來，擔心停不下來</span>
+    </div>
+    <p class="ch-intro">焦慮是大腦偵測到潛在威脅時的警報系統，它的初衷是保護你。問題是，這個警報系統有時會過度敏感——在沒有真實危險的情況下持續鳴響，把你的注意力和能量都消耗在「萬一」上面。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">睡前腦子特別活躍，開始想明天的事、下週的事、各種可能出錯的情況。明知道現在擔心沒有用，但就是停不下來，然後因為睡不著又開始擔心睡不好會影響明天。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你的大腦在試圖「提前解決問題」，但焦慮思維的本質是開放式迴圈——每個「萬一」都會生出下一個「萬一」，越想越多，越想越焦慮。你不是在解決問題，你是在反覆播放問題。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把擔憂的事情寫下來。</b>腦子裡轉的東西一旦寫出來，就從「無形的威脅」變成了「有限的清單」，焦慮感通常會立刻降低一些。寫完之後可以告訴自己：這些我已經記錄了，現在可以放下了。</li>
+          <li><b>用呼吸打斷焦慮迴圈。</b>吸氣 4 秒 → 屏住 2 秒 → 緩慢吐氣 6 秒。把吐氣拉得比吸氣長，能直接激活副交感神經，讓身體從警報狀態切換出來。這不是「放鬆一下」，而是有生理機制的。</li>
+          <li><b>設定一個「擔憂時間」。</b>每天固定一個 15 分鐘的時段讓自己擔憂，其他時間如果焦慮念頭出現，告訴自己「這個我等到擔憂時間再想」。這個方法聽起來奇怪，但很多人用了之後發現，那個時段到了其實也沒那麼想擔憂了。</li>
+          <li><b>問自己：這件事我現在可以做什麼？</b>如果有具體可以做的事，去做它。如果沒有，它就是超出你控制範圍的事，繼續想下去不會有幫助。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 3. 內在批評 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">內在批評：你對自己說話的方式</span>
+    </div>
+    <p class="ch-intro">你腦子裡有一個聲音，在你犯錯的時候說「你怎麼這麼蠢」，在你沒達到目標的時候說「你就是不夠努力」，在你需要休息的時候說「你沒資格偷懶」。這個聲音太熟悉了，熟悉到你以為那就是「事實」。但它不是。</p>
+
+    <div class="reframe-list">
+      <div class="reframe-item">
+        <div class="rf-before">「我什麼都做不好，我就是廢物。」</div>
+        <div class="rf-arrow">→</div>
+        <div class="rf-after">「我這次沒做好這件事。這件事我可以怎麼做不同？」</div>
+      </div>
+      <div class="reframe-item">
+        <div class="rf-before">「所有人都比我厲害，我跟不上。」</div>
+        <div class="rf-arrow">→</div>
+        <div class="rf-after">「我在跟別人的外在表現比較我的內在感受，這個比較本來就不公平。」</div>
+      </div>
+      <div class="reframe-item">
+        <div class="rf-before">「我不應該有這種感覺，我太脆弱了。」</div>
+        <div class="rf-arrow">→</div>
+        <div class="rf-after">「我現在有這個感受，這是真實的。感受本身沒有對錯。」</div>
+      </div>
+      <div class="reframe-item">
+        <div class="rf-before">「我休息就是在浪費時間。」</div>
+        <div class="rf-arrow">→</div>
+        <div class="rf-after">「休息是維持功能的必要條件，不是獎勵，也不需要被賺取。」</div>
+      </div>
+      <div class="reframe-item">
+        <div class="rf-before">「我讓大家失望了，我真的很差勁。」</div>
+        <div class="rf-arrow">→</div>
+        <div class="rf-after">「我做了一件沒做好的事。這不等於我這個人的全部價值。」</div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">犯了一個錯誤或沒達到某個目標，然後腦子開始循環：「我真的很差」「我是不是根本不適合做這個」「其他人一定覺得我很沒用」。理智上知道不應該這樣想，但停不下來。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">內在批評的聲音通常是從某個地方習得的——可能是曾經的評語、某種環境的標準、或是對失去接納的深層恐懼。它的邏輯是「如果我先批評自己，就不會被別人批評得那麼痛」。問題是，它根本沒有在保護你，它只是讓你更痛。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把那個聲音說的話說給朋友聽，聽聽自己的感受。</b>如果你的好朋友跟你說「我什麼都做不好，我就是廢物」，你會怎麼回應他？你對自己說的話，也值得同樣的溫柔對待。</li>
+          <li><b>分開「我做的事」和「我這個人」。</b>沒做好一件事，不等於你是沒用的人。這一刀切清楚，很多內在批評就失去了力量。</li>
+          <li><b>注意內在批評何時出現。</b>通常是壓力大、睡眠不足、或感到不安全的時候。這時候它出現，不是因為它說的是真的，而是因為你的防禦系統被激活了。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 4. 倦怠 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">倦怠感：不是你不夠努力，是你沒有休息</span>
+    </div>
+    <p class="ch-intro">倦怠（burnout）不是「懶」，也不是「抗壓性差」。它是長期高度投入、卻沒有足夠恢復的結果，通常發生在那些最認真、最在乎自己工作的人身上。如果你感覺做什麼都很費力、對工作越來越冷漠、很容易被激怒——這些可能不是態度問題。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你上班不再有任何熱情，但也沒有力氣離職。每天只是把事情做完，下班之後什麼都不想做，週末也恢復不了。你知道這樣不行，但想到要「努力改變」就覺得更累。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">倦怠的核心問題是「付出」和「恢復」嚴重不平衡。你的油箱快空了，但一直沒有真正加油。「努力改變」聽起來又是一件要付出的事，所以當然更累。倦怠的出口不是更努力，是先讓自己休息到真的有點恢復為止。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>先辨識你的「假休息」。</b>躺著滑手機、看一整天劇——這些不是真正讓神經系統恢復的休息。真正有恢復效果的休息包括：睡眠、在自然環境中移動、完全不需要表現或做決定的時間、以及感受到真實連結的社交。</li>
+          <li><b>找到一件「只是因為喜歡」的事。</b>不是有生產力的、不是對工作有幫助的、不是別人覺得你應該做的。只是你喜歡的。倦怠通常伴隨著「意義感消失」，重新接觸讓你有輕微愉悅感的事是恢復的起點。</li>
+          <li><b>暫時減少決策數量。</b>倦怠狀態下的前額葉皮質非常疲憊。減少不必要的選擇（固定吃什麼、穿什麼）能把有限的認知資源留給真正重要的事。</li>
+          <li><b>如果可以，和主管或你信任的人談。</b>倦怠有時是可以在工作環境裡調整的，但只有讓別人知道你的狀態，才有改變的可能。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 5. 日常心理健康檢查 ─── -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">給自己一個每週的心理健康檢查</span>
+    </div>
+    <p class="ch-intro">你不需要等到很不好了才開始照顧自己的心理狀態。下面這幾個問題，每週問自己一次——不是要你評判自己的答案，是讓你對自己當下的狀態保持意識。</p>
+
+    <div class="checkin-grid">
+      <div class="ci-cell">
+        <p class="ci-q">我的睡眠和飲食正常嗎？</p>
+        <p class="ci-hint">這兩件事是心理狀態最直接的基礎。如果這兩個都不穩定，其他的調整效果都會打折。</p>
+      </div>
+      <div class="ci-cell">
+        <p class="ci-q">這週有沒有時刻感覺還不錯？</p>
+        <p class="ci-hint">不是要你假裝開心，是確認你仍然有能力感受到某些好的時刻，哪怕很短暫。</p>
+      </div>
+      <div class="ci-cell">
+        <p class="ci-q">我有沒有跟任何人有真實的接觸？</p>
+        <p class="ci-hint">不是訊息往返，是真正讓你感覺被看見的互動。哪怕只有一次、只有幾分鐘。</p>
+      </div>
+      <div class="ci-cell">
+        <p class="ci-q">我的身體有沒有移動過？</p>
+        <p class="ci-hint">不是要你健身，是問你有沒有讓身體動起來——走路、伸展、任何讓你離開椅子的行為。</p>
+      </div>
+      <div class="ci-cell">
+        <p class="ci-q">有什麼事情我一直在逃避？</p>
+        <p class="ci-hint">逃避通常是焦慮的訊號。你不需要今天就解決它，但讓自己知道它在那裡。</p>
+      </div>
+      <div class="ci-cell">
+        <p class="ci-q">如果以 1–10 分描述這週，我會給幾分？</p>
+        <p class="ci-hint">不是要求高分，是建立一個持續追蹤的基線。持續的低分比偶發的低分更值得認真看待。</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
+      <tr><td>週次</td><td>第 13 週，共 16 週</td></tr>
+      <tr><td>單元</td><td>Unit 05 — 心理健康</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">快速行動清單</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">低落</span>
+        <span class="qa-val">先做一件五分鐘以內的小事，動力在行動後才會來</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">焦慮</span>
+        <span class="qa-val">把擔憂的事情寫下來，讓它從「無形威脅」變成清單</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">自責</span>
+        <span class="qa-val">分開「我做的事」和「我這個人」——做錯≠我很差</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">倦怠</span>
+        <span class="qa-val">找一件只是因為喜歡而做的事，不需要有生產力</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">每週</span>
+        <span class="qa-val">每週問自己六個心理健康檢查問題，保持意識</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">何時尋求協助</span>
+    <table class="mini-table">
+      <tr><td>徵兆</td><td>情緒低落、焦慮、或倦怠持續超過兩週且影響日常功能</td></tr>
+      <tr><td>徵兆</td><td>對任何事情都提不起興趣，包括以前喜歡的</td></tr>
+      <tr><td>徵兆</td><td>出現傷害自己的念頭，無論多輕微</td></tr>
+      <tr><td>資源</td><td>台灣自殺防治專線 1925（安心專線，24小時）</td></tr>
+      <tr><td>資源</td><td>衛福部心理健康司心理諮詢專線 1925</td></tr>
+    </table>
+  </div>
+
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《也許你該找人聊聊》Lori Gottlieb</td></tr>
+      <tr><td>書</td><td>《情緒勒索》Susan Forward</td></tr>
+      <tr><td>書</td><td>《你可以生氣，但不要越想越氣》Albert Ellis</td></tr>
+      <tr><td>書</td><td>《正念減壓，全面自癒》Jon Kabat-Zinn</td></tr>
+    </table>
+  </div>
+</aside>
+</div>
+
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>用頻譜的三個區間（正常起伏、值得關注、需要協助）描述你目前的狀態。你會放在哪個區間？你這樣判斷的依據是什麼？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你腦子裡最常出現的內在批評是什麼句子？試著把那個句子寫下來，然後用「如果朋友說這句話，你會怎麼回應他」的角度，重新寫一個版本。</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你現在的「休息」是真正有恢復效果的，還是「假休息」？這一週，你願意加入一件真正讓你恢復的活動嗎？具體是什麼？</span>
+    </div>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>做完今天的心理健康檢查六個問題，你注意到了什麼？有沒有哪個問題的答案讓你有點意外，或是讓你想多想一下？</span>
+    </div>
+  </div>
+</div>
+
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
+</div>
+
+<div class="pager">
+  <a href="day12.html">← Week 12</a>
+  <span class="pager-mid">13 / 16</span>
+  <a href="day14.html">Week 14 →</a>
+</div>
+
+<script>
+  const KEY = 'week-13';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+  function markDone() {
+    localStorage.setItem(KEY, 'done');
+    btn.classList.add('done');
+    btn.textContent = '已完成本週';
+  }
+</script>
+</body>
+</html>
