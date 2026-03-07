@@ -7,24 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,267 +80,232 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .case-study p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
-    }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* MEMORY MODEL FLOW */
-    .memory-flow {
-      margin: 1.8rem 0;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 0;
-      align-items: center;
-    }
-    .memory-box {
-      border: 1px solid var(--rule);
-      padding: 1.2rem 1rem;
-      text-align: center;
-    }
-    .memory-box .box-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
-    }
-    .memory-box .box-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--red);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.55rem;
-    }
-    .memory-box .box-spec {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--ink-light);
-      line-height: 1.5;
-    }
-    .memory-arrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.2rem;
-      color: var(--red);
-      text-align: center;
-      padding: 0 0.5rem;
-      user-select: none;
-    }
-    /* MEMORY TYPE GRID */
-    .type-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .type-item {
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--rule);
-    }
-    .type-name { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
-    .type-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 0.55rem;
-    }
-    .type-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.75; color: var(--ink-mid); }
-    /* FORGETTING TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
       font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
     }
-    .compare-table th {
+    .act-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* ENCODING TIPS */
-    .tips-list { margin: 1.5rem 0; }
-    .tip-row {
-      display: grid;
-      grid-template-columns: 3rem 1fr;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .tip-row:first-child { border-top: 1px solid var(--rule); }
-    .tip-num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
       color: var(--red);
+      margin-bottom: 0.75rem;
     }
-    .tip-body {}
-    .tip-title { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
-    .tip-desc { font-size: 0.87rem; font-weight: 300; line-height: 1.75; color: var(--ink-mid); }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
     }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--rule);
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* MEMORY TYPES GRID */
+    .mem-grid {
       display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .mem-cell { background: var(--card); padding: 1rem 1.1rem; }
+    .mem-name { font-size: 0.92rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+    .mem-en { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.06em; color: var(--red); margin-bottom: 0.55rem; }
+    .mem-desc { font-size: 0.83rem; font-weight: 300; line-height: 1.68; color: var(--mid); }
+
+    /* LEARNING METHODS TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
       align-items: baseline;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -355,8 +315,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -365,335 +326,347 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .type-grid { grid-template-columns: 1fr; }
-      .memory-flow { grid-template-columns: 1fr; }
-      .memory-arrow { transform: rotate(90deg); margin: 0.3rem auto; }
+      .hero-num { display: none; }
+      .mem-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 05 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 05 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
-    <h1>記憶的運作：<br><em>為什麼我們會遺忘？</em></h1>
-    <p class="hero-sub">記憶不是攝影機，而是一位說故事的人——每次回憶都是一次重新建構，而非播放錄像。本週探索記憶如何形成、如何儲存、為何遺忘，以及為何我們對自己的記憶如此有信心，卻又如此容易出錯。</p>
+    <p class="eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
+    <h1>記憶的運作：<br><em>你記得的不一定是真的</em></h1>
+    <p class="hero-sub">記憶不是錄影機，它是一個說故事的人——每次你回想一件事，大腦都在重新建構它，而不是播放原始檔案。這讓我們對自己的記憶過度自信，也讓我們在學習和關係中犯下很多可以避免的錯誤。</p>
   </div>
-  <div class="hero-number">05</div>
+  <div class="hero-num">05</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解 Atkinson-Shiffrin 三階段記憶模型：感覺記憶、短期記憶與長期記憶的容量與特性</span></li>
-      <li><span class="num">02</span><span>認識長期記憶的主要類型：陳述性記憶（語意與情節）與非陳述性記憶（程序、制約等）</span></li>
-      <li><span class="num">03</span><span>了解工作記憶模型（Baddeley）及其在日常認知中的核心角色</span></li>
-      <li><span class="num">04</span><span>理解記憶編碼的層次處理理論，掌握提升記憶效果的有效策略</span></li>
-      <li><span class="num">05</span><span>認識遺忘的主要原因：消退、干擾、提取失敗、動機性遺忘</span></li>
-      <li><span class="num">06</span><span>了解記憶的重建性本質，理解錯誤記憶與虛假記憶的成因與影響</span></li>
-    </ul>
-  </section>
+  <!-- 01 你的記憶比你以為的更不可靠 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你的記憶比你以為的更不可靠</span>
+    </div>
+    <p class="ch-intro">你有沒有和家人或朋友聊起同一件事，卻發現彼此記得的版本完全不一樣——而雙方都對自己的版本非常確定？這不是誰在說謊，而是記憶本來就是這樣運作的。</p>
+    <p class="ch-intro" style="margin-bottom:0.5rem;">每次回憶，你的大腦不是在播放一段錄影，而是根據片段的記憶、當下的情緒、還有後來知道的事，重新拼湊一個版本。這個過程每次都會悄悄修改一些細節——而你完全感覺不到這個修改在發生。</p>
 
-  <section class="prose">
-
-    <h2>一、記憶不是錄像，而是重建</h2>
-    <p>多數人對記憶有一個直覺性的誤解：以為記憶像一台攝影機，忠實地錄下曾經發生的事，需要時按下播放鍵就能重現。但認知心理學的研究一再證明，這個比喻根本錯誤。</p>
-    <p>記憶是一個<strong>主動建構的過程（reconstructive process）</strong>。每次你回憶一件事，大腦並非讀取一份儲存的檔案，而是根據片段的記憶痕跡、當下的情緒狀態、既有的知識框架與後來獲得的資訊，重新拼湊出一個版本的故事。這個版本每次都可能稍有不同，且會被悄悄「填補」細節。這就是為什麼兩個人對同一件事的記憶可以相差懸殊，為什麼童年記憶往往帶有後來才有的認知，以及為什麼目擊者證詞如此不可靠。</p>
-    <p>記憶的重建性並非缺陷，而是大腦在有限儲存空間下的高效策略：不記錄所有細節，而是記錄最重要的模式與意義，並在需要時依靠推斷補全其餘。這個策略在大多數情況下運作良好，卻在需要精確記憶時暴露出驚人的脆弱。</p>
-
-    <div class="pull-quote">
-      <p>「記憶並不像一個儲藏室，你把東西放進去，需要時再拿出來。它更像是一個維基百科頁面——你可以讀它，但你也可以隨時修改它。」</p>
-      <cite>— Elizabeth Loftus，記憶研究權威，加州大學爾灣分校</cite>
+    <div class="pquote">
+      <p>對自己記憶的確信感，不等於那個記憶的準確性。你越確定，不代表越正確。</p>
     </div>
 
-    <h2>二、三階段記憶模型</h2>
-    <p>1968 年，Richard Atkinson 與 Richard Shiffrin 提出了影響深遠的<strong>三階段記憶模型（three-stage memory model）</strong>，將記憶過程分為感覺記憶、短期記憶與長期記憶三個相互連結的儲存系統，至今仍是記憶研究的基本框架。</p>
-
-    <div class="memory-flow">
-      <div class="memory-box">
-        <div class="box-title">感覺記憶</div>
-        <div class="box-en">Sensory Memory</div>
-        <div class="box-spec">容量：無限大<br>時間：0.5 — 3 秒<br>視覺影像記憶 / 聲音回響記憶</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你和伴侶吵架，雙方都記得當時說過什麼，但記得的版本不一樣。你很確定對方說了某句話，對方很確定他沒說。你開始懷疑對方是不是在刻意否認。</p>
       </div>
-      <div class="memory-arrow">&#8594;</div>
-      <div class="memory-box">
-        <div class="box-title">短期記憶</div>
-        <div class="box-en">Short-term Memory</div>
-        <div class="box-spec">容量：7 ± 2 個組塊<br>時間：約 20 — 30 秒<br>需要複誦才能維持</div>
-      </div>
-      <div class="memory-arrow">&#8594;</div>
-      <div class="memory-box">
-        <div class="box-title">長期記憶</div>
-        <div class="box-en">Long-term Memory</div>
-        <div class="box-spec">容量：近乎無限<br>時間：數分鐘至終身<br>需要編碼才能進入</div>
+      <div class="scard-body">
+        <p class="why">很可能你們兩個都不是在說謊。情緒激動的狀態下，記憶特別容易被扭曲——你會記得符合你感受的版本，對方也是。而且你越確信，越代表你的大腦已經把那個「版本」鞏固成了「事實」。這不是誰的問題，這是記憶運作的方式。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>爭論「誰說了什麼」通常沒有意義。</b>記憶不可靠，你們兩個人都不是錄影機。與其爭究竟誰說了什麼，不如把對話轉到「那件事讓我感覺怎樣」——感受是真實的，即使記憶不準確。</li>
+          <li><b>允許「我們記得的版本不一樣」是一個正常的結果。</b>不需要有人承認說謊，也不需要分出誰對誰錯。接受兩個人對同一件事可以有不同的記憶，對關係更有幫助。</li>
+          <li><b>重要的對話如果可以，事後簡短確認一次。</b>「剛才我們說好的是……對嗎？」——不是不信任對方，而是讓雙方對重要的事達成一致理解，減少後來的「我以為我們說的是」。</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <p><strong>感覺記憶（sensory memory）</strong>是感覺訊號消逝前的極短暫保留，分為視覺影像記憶（iconic memory，約 0.5 秒）與聲音回響記憶（echoic memory，約 3–4 秒）。它的容量極大，但幾乎所有訊息都在不到一秒內消退，只有被注意到的訊號才能進入下一階段。</p>
-    <p><strong>短期記憶（short-term memory）</strong>是暫時性的工作空間，容量極為有限。George Miller 在 1956 年的著名論文《神奇的數字：七加減二》中指出，短期記憶一次約能保持 7 ± 2 個「組塊（chunk）」的資訊——組塊是有意義的資訊單位，可以是單一數字，也可以是一個詞語或概念。電話號碼分組的習慣（如 0912-345-678 而非 0912345678），正是利用了組塊化策略來擴展有效記憶容量。未經複誦的短期記憶在 20–30 秒後就會自然消退。</p>
-    <p><strong>長期記憶（long-term memory）</strong>是相對永久的儲存系統，容量近乎無限，可以保存數分鐘到終身。但進入長期記憶並不自動——它需要經歷<strong>編碼（encoding）</strong>的過程，將短期記憶中的訊息轉化並儲存。睡眠在這個鞏固過程中扮演關鍵角色（詳見第 3 週）。</p>
+  <!-- 02 你的記憶是怎麼被改寫的 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">你的記憶是怎麼被改寫的？</span>
+    </div>
+    <p class="ch-intro">記憶不只會遺忘，還會被修改——而且不需要有人刻意騙你。事後聽到的資訊、問題的問法、甚至你當下的情緒，都能悄悄改變你對過去的記憶。</p>
 
-    <h2>三、工作記憶：大腦的便條紙</h2>
-    <p>Atkinson-Shiffrin 模型的「短期記憶」概念後來被認為過於簡化。1974 年，Alan Baddeley 與 Graham Hitch 提出更精緻的<strong>工作記憶模型（working memory model）</strong>，將短期記憶重新概念化為一個主動的多成分系統，而非單純的被動儲存槽。</p>
-    <p>工作記憶由四個成分構成：<strong>中央執行系統（central executive）</strong>是核心控制者，協調資源分配、監控任務進行、抑制無關訊息；<strong>語音迴路（phonological loop）</strong>暫時保留語音與語言訊息，是你在心中「默念」電話號碼的機制；<strong>視覺空間畫板（visuospatial sketchpad）</strong>處理視覺與空間訊息，讓你能在心中旋轉圖形或回想地圖路線；<strong>情節緩衝器（episodic buffer）</strong>則整合來自不同子系統的訊息，並與長期記憶相連。</p>
-    <p>工作記憶的容量非常有限，是認知能力的重要瓶頸。工作記憶容量高的人，在需要同時保持多個訊息並進行操作的任務（如複雜的數學推理、理解長句）上表現顯著更好。這也是為什麼「邊做事邊分心」如此損害表現——分心佔用了工作記憶資源，原本的任務就少了處理資源。</p>
-
-    <h2>四、長期記憶的類型</h2>
-    <p>長期記憶並非一個單一的儲存倉庫，而是由多個功能不同、神經基礎各異的系統組成。理解這些分類，能幫助我們更清楚地認識記憶的多樣性，也能解釋為什麼失憶症患者往往失去某些記憶，卻保留另一些。</p>
-
-    <div class="type-grid">
-      <div class="type-item">
-        <div class="type-name">語意記憶</div>
-        <div class="type-en">Semantic Memory</div>
-        <div class="type-desc">對世界的一般性事實與知識，與個人經歷無關。「法國首都是巴黎」、「水的化學式是 H₂O」——這些知識你知道，但你已記不得是什麼時候學到的。</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">朋友告訴你某個人說了你壞話。之後你回想起和那個人相處的畫面，突然覺得他當時的某個表情、某句話，感覺確實有點不對勁——雖然當時你根本沒有察覺。</p>
       </div>
-      <div class="type-item">
-        <div class="type-name">情節記憶</div>
-        <div class="type-en">Episodic Memory</div>
-        <div class="type-desc">個人親身經歷的事件記憶，帶有時間、地點與情境脈絡。「我七歲生日那天，媽媽做了草莓蛋糕」——這是有「我」在場的記憶，Endel Tulving 稱之為心理時間旅行的能力。</div>
-      </div>
-      <div class="type-item">
-        <div class="type-name">程序記憶</div>
-        <div class="type-en">Procedural Memory</div>
-        <div class="type-desc">技能與習慣的記憶，通常是非意識的、自動化的。騎腳踏車、打字、演奏樂器——這些技能一旦習得，便儲存於小腦與基底核，難以用語言描述，卻難以遺忘。</div>
-      </div>
-      <div class="type-item">
-        <div class="type-name">內隱記憶</div>
-        <div class="type-en">Implicit Memory</div>
-        <div class="type-desc">無需有意識提取的記憶，包括制約反應與啟動效應（priming）。曾見過某個字詞，之後處理它的速度會更快，即使你已完全不記得見過它。這種「記憶」存在於行為中，而非意識中。</div>
-      </div>
-      <div class="type-item">
-        <div class="type-name">外顯記憶</div>
-        <div class="type-en">Explicit Memory</div>
-        <div class="type-desc">需要有意識提取的記憶，涵蓋語意記憶與情節記憶。「努力回想」這個行為本身，就是在使用外顯記憶系統。海馬迴是外顯記憶形成的關鍵結構。</div>
-      </div>
-      <div class="type-item">
-        <div class="type-name">閃光燈記憶</div>
-        <div class="type-en">Flashbulb Memory</div>
-        <div class="type-desc">對高度情緒化、震驚性事件的鮮明生動記憶，如重大災難、失去親人的瞬間。感覺如同照片般清晰，但研究顯示它同樣會隨時間扭曲——只是當事人對其準確性的信心特別高。</div>
+      <div class="scard-body">
+        <p class="why">這是「後來獲得的資訊改寫了原始記憶」的典型例子。你的大腦在獲得新訊息後，重新解讀了舊的記憶片段，把原本中性的細節重新框架成「有問題的訊號」。那個感覺真實、細節清晰——但它其實是現在建構的，不是當時記錄的。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>對「後來才想起來的細節」保持謹慎。</b>如果一個記憶是在聽到某個新資訊之後才「浮現」的，它很可能已經被那個新資訊污染了。不是要你否定感受，而是不要把它當成確鑿的「當時的事實」。</li>
+          <li><b>在做重要判斷之前，問自己：「我當時真的注意到這件事，還是現在才這樣解讀？」</b>這個區分很重要，尤其在人際關係中——「他一直都是這樣的人」有時候是真正的模式，有時候是後見之明。</li>
+        </ul>
       </div>
     </div>
 
-    <h2>五、記憶的編碼：如何記得更牢？</h2>
-    <p>並非所有的學習方式都同樣有效。Fergus Craik 與 Robert Lockhart 在 1972 年提出<strong>層次處理理論（levels of processing theory）</strong>：訊息的編碼深度決定了記憶的持久性。淺層處理（如只注意字的外形或聲音）產生脆弱的記憶痕跡；深層處理（如理解意義、聯繫個人經驗）則產生更強固的記憶。</p>
-    <p>研究支持的高效記憶策略有以下幾種，它們全都涉及更深層的編碼或更有效的提取練習：</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你很清楚地記得某件事是這樣發生的，但後來看到照片或影片，才發現你記得的細節是錯的——比如你記得穿了某件衣服，或者某個人在場，但實際上不是。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">記憶不儲存細節，它儲存的是「大意」和「感受」，細節是後來填補上去的。大腦填補細節的方式是根據「什麼最合理」、「我通常在那種場合穿什麼」、「那種時候誰通常在場」——所以感覺完全真實，但可能是合理的推測，不是真正的記憶。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>重要的事情，即時記錄比回憶更可靠。</b>日記、照片、簡短的文字記錄，不是因為你不相信自己的記憶，而是因為記憶會漸漸演化，而記錄不會。</li>
+          <li><b>用這個理解對自己更寬容。</b>你不是因為「記性差」才記錯細節，這是所有人記憶的正常運作方式。也對別人更寬容——他記得的版本和你不一樣，不代表他在說謊。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <div class="tips-list">
-      <div class="tip-row">
-        <div class="tip-num">01</div>
-        <div class="tip-body">
-          <div class="tip-title">間隔重複（Spaced Repetition）</div>
-          <div class="tip-desc">將學習分散於多個時間點，而非集中於一次「填鴨式」複習。遺忘曲線研究（Ebbinghaus, 1885）顯示，在即將遺忘之前複習的效果最好。Anki 等間隔重複軟體正是基於此原理設計。</div>
-        </div>
+  <!-- 03 你的記憶為什麼會遺忘 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">你的記憶為什麼會遺忘？</span>
+    </div>
+    <p class="ch-intro">遺忘不是大腦壞掉，而是正常的清理機制。問題是它有時候清掉你不想清掉的東西，或者在你最需要的時候找不到你要的。了解遺忘怎麼運作，能幫你減少它造成的困擾。</p>
+
+    <div class="mem-grid">
+      <div class="mem-cell">
+        <div class="mem-name">沒有認真編碼</div>
+        <div class="mem-en">Encoding Failure</div>
+        <div class="mem-desc">資訊從來沒有被真正記進去。你「看過」但沒有「處理過」，就不會進入長期記憶。</div>
       </div>
-      <div class="tip-row">
-        <div class="tip-num">02</div>
-        <div class="tip-body">
-          <div class="tip-title">主動提取練習（Retrieval Practice / Testing Effect）</div>
-          <div class="tip-desc">主動嘗試回想所學，比反覆閱讀更有效。「考試」不只是評量工具，本身就是強力的記憶鞏固行為。閉上書本，嘗試默寫剛才學到的內容，其效果遠優於再看一遍。</div>
-        </div>
+      <div class="mem-cell">
+        <div class="mem-name">時間消退</div>
+        <div class="mem-en">Decay</div>
+        <div class="mem-desc">沒有被反覆使用的記憶會逐漸淡化。不是消失，而是線索變弱，越來越難提取。</div>
       </div>
-      <div class="tip-row">
-        <div class="tip-num">03</div>
-        <div class="tip-body">
-          <div class="tip-title">精緻化編碼（Elaborative Encoding）</div>
-          <div class="tip-desc">將新資訊與已有知識連結，或用自己的話解釋，或創造具體的例子。「費曼技巧」——嘗試把一個概念解釋給外行人聽——正是深度精緻化編碼的實踐。</div>
-        </div>
+      <div class="mem-cell">
+        <div class="mem-name">干擾</div>
+        <div class="mem-en">Interference</div>
+        <div class="mem-desc">相似的記憶互相干擾。新的蓋掉舊的，或舊的干擾新的——多個密碼、多個相似名字最容易發生。</div>
       </div>
-      <div class="tip-row">
-        <div class="tip-num">04</div>
-        <div class="tip-body">
-          <div class="tip-title">脈絡與狀態依賴記憶（Context-dependent Memory）</div>
-          <div class="tip-desc">在與學習時相似的環境中提取記憶，效果更好。在考場的緊張狀態下，比在家放鬆時更容易提取在課堂中學到的內容，這也是「模擬考試環境」練習的心理學根據。</div>
-        </div>
+      <div class="mem-cell">
+        <div class="mem-name">找不到線索</div>
+        <div class="mem-en">Retrieval Failure</div>
+        <div class="mem-desc">記憶在，但缺少觸發提取的線索。聞到氣味才突然想起的事，就是因為氣味提供了線索。</div>
       </div>
-      <div class="tip-row">
-        <div class="tip-num">05</div>
-        <div class="tip-body">
-          <div class="tip-title">記憶術（Mnemonics）</div>
-          <div class="tip-desc">利用視覺聯想、故事、韻律或空間記憶宮殿（method of loci）來組織並強化難以直接記憶的材料。記憶冠軍賽選手大多使用記憶宮殿法，將抽象資訊轉化為生動的空間旅程。</div>
-        </div>
+      <div class="mem-cell">
+        <div class="mem-name">情緒壓抑</div>
+        <div class="mem-en">Motivated Forgetting</div>
+        <div class="mem-desc">大腦會主動或非主動地讓痛苦的記憶變得不容易提取。這是一種保護，但有時候也會讓人困惑。</div>
+      </div>
+      <div class="mem-cell">
+        <div class="mem-name">從未真正注意</div>
+        <div class="mem-en">Inattention</div>
+        <div class="mem-desc">注意力分散時，訊息幾乎不進入記憶。你「在場」但大腦不在場。</div>
       </div>
     </div>
 
-    <h2>六、遺忘的原因</h2>
-    <p>遺忘是記憶系統的常態，而非異常。Hermann Ebbinghaus 在 1885 年對自己進行了一系列嚴謹的記憶實驗，繪製出著名的<strong>遺忘曲線（forgetting curve）</strong>：學習後若不複習，記憶量在最初 20 分鐘內急遽下降，一小時後遺忘約 50%，一天後遺忘約 70%，之後則趨於平緩。遺忘並非線性，而是指數級的早期衰退。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你剛認識一個人，他自我介紹了名字，但五分鐘後你完全想不起來。你對自己的記性感到挫折。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">大多數時候，「記不住名字」不是記性差的問題，而是根本沒有認真編碼的問題。在聽到名字的那一秒，你的注意力很可能在想接下來要說什麼，或者在觀察對方的整體印象，名字只是飄過去了。沒有進入記憶的東西，就不會在記憶裡。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>聽到名字的當下，立刻在腦子裡重複一次。</b>「他叫王明——王明。」這個動作讓名字從「聽到的聲音」變成「你主動處理的訊息」，進入記憶的機會大很多。</li>
+          <li><b>把名字連結到一個具體的東西。</b>「明——明亮——他眼睛很亮」，或者「王——王牌——他說話很有自信」。越奇怪的連結越容易記，因為它製造了更深的加工。</li>
+          <li><b>在對話裡用一兩次他的名字。</b>「你好，明，你是做什麼工作的？」——用出來就記住了，這是最有效的記憶方式。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <table class="compare-table">
+  <!-- 04 真正有效的學習方式 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">真正有效的學習方式（和你以為的不一樣）</span>
+    </div>
+    <p class="ch-intro">大多數人學習的方式——反覆閱讀、劃重點、看完一遍再看一遍——在感覺上很像在學習，但記憶研究顯示它們的效果很差。真正有效的方式感覺比較困難，但記得更久。</p>
+
+    <table class="simple-table">
       <thead>
         <tr>
-          <th>遺忘原因</th>
-          <th>機制說明</th>
-          <th>日常範例</th>
+          <th>方法</th>
+          <th>怎麼做</th>
+          <th>為什麼有效</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>消退（Decay）</td>
-          <td>記憶痕跡因時間流逝而自然減弱，尤其在未被提取時</td>
-          <td>幾年未聯繫的熟人名字、久未使用的外語詞彙</td>
+          <td>主動提取練習</td>
+          <td>閉上書本，試著把剛才學的東西默寫或說出來。不看答案，先努力回想</td>
+          <td>「嘗試提取」這個動作本身就是最強的記憶鞏固方式，比再看一遍有效得多——即使你答錯了也一樣</td>
         </tr>
         <tr>
-          <td>干擾（Interference）</td>
-          <td>相似的舊記憶干擾新記憶（順向干擾），或新記憶干擾舊記憶（逆向干擾）</td>
-          <td>記混了兩個電話號碼；學了新語言後舊語言變生疏</td>
+          <td>間隔重複</td>
+          <td>今天學，明天複習一次，三天後再一次，一週後再一次——不是一次全部複習完</td>
+          <td>在「快要忘掉之前」複習的效果最好。集中複習感覺記住了，但很快消退；分散複習記得更久</td>
         </tr>
         <tr>
-          <td>提取失敗（Retrieval Failure）</td>
-          <td>記憶存在但缺乏足夠的提取線索，形成「舌尖現象」</td>
-          <td>名字就在嘴邊卻說不出來；聞到氣味忽然想起往事</td>
+          <td>用自己的話解釋</td>
+          <td>學完一個概念，試著解釋給一個不懂的人聽，或者寫下來用自己的話說</td>
+          <td>你只有真正理解了才能解釋。解釋的過程會暴露你哪裡其實還不懂，並且讓理解變得更深</td>
         </tr>
         <tr>
-          <td>編碼失敗（Encoding Failure）</td>
-          <td>資訊根本未被充分編碼，從未真正進入長期記憶</td>
-          <td>看了很多遍卻記不住；分心時聽過的話完全想不起</td>
-        </tr>
-        <tr>
-          <td>動機性遺忘（Motivated Forgetting）</td>
-          <td>對痛苦、羞恥或威脅性記憶的主動或非主動壓抑</td>
-          <td>創傷記憶的壓抑；記不住自己失禮行為的細節</td>
+          <td>交錯練習</td>
+          <td>不要連續只練習一種題型，把不同類型的內容混在一起練習</td>
+          <td>混合練習感覺比較難、比較慢，但它迫使大腦每次都重新判斷「這是哪一種問題」，記憶和理解都更深</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>七、錯誤記憶與虛假記憶</h2>
-    <p>記憶不只會消逝，還會被扭曲，甚至被憑空植入。Elizabeth Loftus 是這個領域最重要的研究者，她的工作徹底改變了司法系統對目擊者證詞的認識。</p>
-
-    <div class="case-study">
-      <span class="case-label">Classic Research</span>
-      <h3>Elizabeth Loftus 的虛假記憶研究（1974–1990s）</h3>
-      <p>Loftus 在 1974 年進行了一個經典實驗：受試者觀看一段車禍影片後，被問到「兩輛車<em>碰撞（hit）</em>時速度有多快？」或「兩輛車<em>猛烈撞擊（smashed into）</em>時速度有多快？」。結果顯示，使用「smashed」的組別，估計的車速顯著更高，且一週後更可能「記得」影片中有破碎的玻璃——但影片中根本沒有玻璃破碎。</p>
-      <p>這個實驗開創了「<strong>錯誤訊息效應（misinformation effect）</strong>」的研究：事後獲得的錯誤訊息，會悄悄融入原始記憶，改變人們對事件的回憶。後來，Loftus 更進一步展示了「虛假記憶植入（false memory implantation）」：透過暗示，她成功讓約 25% 的受試者對從未發生過的兒時事件（如在購物中心迷路）產生完整、生動的「記憶」，甚至能描述細節。</p>
-      <p>Loftus 的研究對法律實踐有深遠影響。在美國，有超過 300 名死刑犯透過 DNA 檢測被證明無辜獲釋，其中約 75% 的案件涉及錯誤的目擊者證詞。<strong>記憶的可塑性不只是學術議題，它攸關真實的人命與正義</strong>。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在準備考試，把教科書從頭看到尾，覺得都看懂了，很有信心。但考試的時候腦子一片空白，明明看過的東西就是想不起來。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「看懂了」和「記住了」是兩件不同的事。閱讀的時候，訊息流過你的意識，感覺熟悉；但熟悉感不等於可以提取。記憶需要你主動把資訊拉出來——而不只是被動地讓它流過去。考試的時候你失敗的，是提取練習，不是理解。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>每看完一段，蓋上去，試著回想剛才讀了什麼。</b>不需要完整，也不需要完全正確——嘗試的過程就在建立記憶。這比再看一遍有效三到四倍。</li>
+          <li><b>做題比看書重要。</b>如果有練習題，優先做題，而不是優先看書。做錯了再回去查，這個「出錯—查詢」的循環，是最快的記憶建立方式。</li>
+          <li><b>把複習分散到幾天，不要集中在考前一晚。</b>前一晚複習只能維持短暫的記憶，撐過考試可以，但很快就全忘了。</li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <p>虛假記憶的研究也對「壓抑記憶（repressed memory）」的臨床實踐提出了嚴肅的質疑。1990 年代，美國出現大量在心理治療中「恢復」兒時受虐記憶的案例，導致許多家庭破裂，部分案件進入司法程序。後來的研究顯示，許多這類「恢復的記憶」可能是在治療師的引導與暗示下被無意間植入的虛假記憶。這場「記憶戰爭」至今仍是心理學界最具爭議的議題之一，提醒我們：對自己記憶的確信感，並不等同於記憶的準確性。</p>
+  <!-- 05 你的記憶和你的身份有關 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">你的記憶和你對自己的故事有關</span>
+    </div>
+    <p class="ch-intro">記憶不只是存放過去事件的倉庫，它還構成了你的「自我敘事」——你是誰、你的人生是什麼樣的故事。問題是，這個敘事會影響你怎麼記住新的事件，而記住的方式又會強化那個敘事。</p>
 
-  </section>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你相信自己是一個「運氣不好的人」或者「在感情上總是失敗的人」。你發現自己非常清楚地記得所有運氣差的事和失敗的感情，卻很難想起成功的例子——即使別人說你其實有很多做得很好的地方。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這就是確認偏誤在記憶層面的運作：你更容易記住和你對自己的信念一致的事，也更容易從模糊的事件中挑出支持那個信念的部分。你不是在「客觀地」回顧過去，而是在「選擇性地」建構一個符合你自我形象的故事。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>主動收集反例。</b>如果你覺得自己「總是失敗」，列出三個你曾經做成功的事——即使是小的。記憶需要這些反例，才能平衡那個過度強化的故事。</li>
+          <li><b>注意你在選擇記住什麼。</b>下次你說「我就是這樣的人」或「我總是這樣」，停一下問：這是真的一直這樣，還是我只記得符合這個說法的例子？</li>
+          <li><b>把重要的好事也記錄下來。</b>不只記困難和失敗，也記成功和讓你感到驕傲的事。你的記憶會朝你記錄的方向偏移。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 5 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 02 — 認知與行為心理學</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 02 — 認知與行為</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Encoding <span>編碼</span></li>
-      <li>Storage <span>儲存</span></li>
-      <li>Retrieval <span>提取</span></li>
-      <li>Sensory Memory <span>感覺記憶</span></li>
-      <li>Working Memory <span>工作記憶</span></li>
-      <li>Long-term Memory <span>長期記憶</span></li>
-      <li>Semantic Memory <span>語意記憶</span></li>
-      <li>Episodic Memory <span>情節記憶</span></li>
-      <li>Procedural Memory <span>程序記憶</span></li>
-      <li>Implicit Memory <span>內隱記憶</span></li>
-      <li>Flashbulb Memory <span>閃光燈記憶</span></li>
-      <li>Levels of Processing <span>層次處理理論</span></li>
-      <li>Spaced Repetition <span>間隔重複</span></li>
-      <li>Retrieval Practice <span>提取練習</span></li>
-      <li>Forgetting Curve <span>遺忘曲線</span></li>
-      <li>Misinformation Effect <span>錯誤訊息效應</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">有效學習速查</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">最重要</span>
+        <span class="qa-val">蓋上去，試著回想——不是再看一遍</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">複習</span>
+        <span class="qa-val">分散到幾天，不要集中在最後一晚</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">記名字</span>
+        <span class="qa-val">聽到立刻默念，再做一個奇怪的聯想</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">理解</span>
+        <span class="qa-val">試著解釋給外行人聽——暴露真正不懂的地方</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">記憶衝突</span>
+        <span class="qa-val">不爭誰對誰錯，談感受比談細節更有用</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>Hermann Ebbinghaus — 遺忘曲線，首位以科學方法研究記憶者</td></tr>
-      <tr><td>人物</td><td>George Miller — 神奇數字 7，短期記憶容量</td></tr>
-      <tr><td>人物</td><td>Alan Baddeley — 工作記憶模型</td></tr>
-      <tr><td>人物</td><td>Endel Tulving — 情節記憶與語意記憶的區分</td></tr>
-      <tr><td>人物</td><td>Elizabeth Loftus — 錯誤訊息效應，虛假記憶植入</td></tr>
-      <tr><td>人物</td><td>Fergus Craik — 層次處理理論</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《記憶的七種罪》Daniel Schacter</td></tr>
-      <tr><td>書目</td><td>《目擊者的證詞》Elizabeth Loftus</td></tr>
-      <tr><td>書目</td><td>《超強記憶術》Joshua Foer</td></tr>
-      <tr><td>論文</td><td>Ebbinghaus, H. (1885). Memory: A contribution to experimental psychology.</td></tr>
-      <tr><td>論文</td><td>Loftus, E.F. &amp; Palmer, J.C. (1974). Reconstruction of automobile destruction.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《記憶的七種罪》Daniel Schacter</td></tr>
+      <tr><td>書</td><td>《超強記憶術》Joshua Foer</td></tr>
+      <tr><td>書</td><td>《大腦喜歡這樣學》Barbara Oakley</td></tr>
+      <tr><td>書</td><td>《為什麼我們記憶中的過去從未真正過去》Donna Orange</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>回想一段你非常確信準確的童年記憶。現在思考：哪些部分可能是你後來「填補」進去的？有沒有可能你當時根本不在場，或細節與你記得的不同？這讓你有什麼感受？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>你有沒有和別人對同一件事記得不同版本的經驗？當時你是怎麼處理的？現在知道記憶的重建性，你覺得那次可以怎麼不同地應對？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>「主動提取練習」的效果遠優於反覆閱讀。回顧你過去的學習習慣，你是以哪種方式學習為主？你打算如何調整你的讀書或學習方法？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>回顧你平常學習或記東西的方式。你最常用的是哪種方法？根據今天讀到的，你覺得哪個地方可以調整？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>Loftus 的研究顯示目擊者記憶高度不可靠，但許多司法系統仍大量依賴目擊者證詞。你認為應該如何在司法實踐中應對記憶的不可靠性？有哪些具體改革可能有幫助？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你對自己有沒有一個「我就是這樣的人」的敘事？你覺得你的記憶是否有在選擇性地支持這個敘事？你能想出三個反例嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>「舌尖現象」是提取失敗的典型例子——你知道你知道，但就是想不起來。你通常用什麼方式幫助自己提取這類卡住的記憶？這些方法背後有什麼心理學邏輯？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你有沒有一段你非常確定的記憶，但後來有證據（照片、別人的說法）顯示細節可能不對？那個發現讓你有什麼感受？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day4.html" class="page-link">&#8592; Week 04</a>
-  <span class="page-dot">5 / 16</span>
-  <a href="day6.html" class="page-link">Week 06 &#8594;</a>
+<div class="pager">
+  <a href="day4.html">← Week 04</a>
+  <span class="pager-mid">05 / 16</span>
+  <a href="day6.html">Week 06 →</a>
 </div>
 
 <script>
-  const key = 'week-5';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-05';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

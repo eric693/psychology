@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 06 — 思維與決策</title>
+  <title>Week 06 — 思維偏誤與決策</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,272 +80,299 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 0.22em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
       margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
       display: block;
     }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
-    }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .case-study p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
-    }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* DUAL SYSTEM */
-    .dual-system {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .system-box {
-      padding: 1.6rem 1.5rem;
-      border: 1px solid var(--rule);
-    }
-    .system-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 0.6rem;
-    }
-    .system-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .system-list { list-style: none; }
-    .system-list li {
-      font-size: 0.87rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      padding: 0.35rem 0;
-      border-bottom: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: 0.8rem 1fr;
-      gap: 0.6rem;
-    }
-    .system-list li:last-child { border-bottom: none; }
-    .system-list li::before {
-      content: '—';
-      color: var(--red);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-    }
-    /* BIAS GRID */
-    .bias-list { margin: 1.5rem 0; }
-    .bias-item {
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .bias-item:first-child { border-top: 1px solid var(--rule); }
-    .bias-header {
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      margin-bottom: 0.5rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
     }
-    .bias-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .bias-en {
+    .ch-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
       color: var(--red);
-      letter-spacing: 0.08em;
-    }
-    .bias-desc {
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      margin-bottom: 0.4rem;
-    }
-    .bias-example {
-      font-size: 0.83rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--ink-light);
-      font-style: italic;
-      padding-left: 1rem;
-      border-left: 2px solid var(--rule);
-    }
-    /* PROBLEM SOLVING TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
       letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
+      flex-shrink: 0;
     }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
       border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
+    }
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* BIAS GRID */
+    .bias-grid {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
+    .bias-row {
+      background: var(--card);
       display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
+      grid-template-columns: 8rem 1fr 1fr;
+    }
+    .bias-name-cell {
+      padding: 1rem 1.1rem;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.2rem;
+    }
+    .bias-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+    .bias-en { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.06em; color: var(--red); }
+    .bias-what {
+      padding: 1rem 1.1rem;
+      border-right: 1px solid var(--rule);
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--mid);
+    }
+    .bias-life {
+      padding: 1rem 1.1rem;
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--mid);
+    }
+    .bias-life em { font-style: italic; color: var(--ink); }
+
+    /* DUAL SYSTEM */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .dual-cell { background: var(--card); padding: 1.2rem 1.3rem; }
+    .dual-head {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .dual-head.s1 { color: var(--red); }
+    .dual-head.s2 { color: #2a5040; }
+    .dual-title { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; }
+    .dual-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .dual-list li {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--mid);
+      padding-left: 0.9rem;
+      position: relative;
+    }
+    .dual-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 1.1rem;
+      line-height: 1.3;
+    }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
       align-items: baseline;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -360,8 +382,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -370,342 +393,366 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .dual-system { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .bias-row { grid-template-columns: 1fr; }
+      .bias-what { border-right: none; border-bottom: 1px solid var(--rule); }
+      .dual-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 06 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 06 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
-    <h1>思維與決策：<br><em>人類的理性與偏見</em></h1>
-    <p class="hero-sub">我們以為自己是理性的決策者，實際上卻被一套快速、自動、充滿捷徑的直覺系統悄悄主導。本週探索人類思維的雙重歷程、問題解決的障礙，以及那些讓我們系統性地犯錯的認知偏誤——了解它們，是對抗它們的第一步。</p>
+    <p class="eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
+    <h1>思維偏誤與決策：<br><em>你的大腦在騙你</em></h1>
+    <p class="hero-sub">你以為自己在理性思考，但大腦其實大多數時候在走捷徑。這些捷徑通常夠用，但在重要的時刻——買東西、做投資、判斷一個人、選擇繼不繼續——它們會讓你系統性地做出糟糕的決定。認識這些機制，是讓它們不再完全控制你的第一步。</p>
   </div>
-  <div class="hero-number">06</div>
+  <div class="hero-num">06</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解 Kahneman 的雙歷程理論：系統一（快思）與系統二（慢想）的特性、優勢與限制</span></li>
-      <li><span class="num">02</span><span>認識人類解決問題的常見策略（演算法、捷思法）及其適用場合</span></li>
-      <li><span class="num">03</span><span>了解阻礙問題解決的心理障礙：心理定勢、功能固著與確認偏誤</span></li>
-      <li><span class="num">04</span><span>掌握至少八種重要的認知偏誤及其在日常決策中的具體表現</span></li>
-      <li><span class="num">05</span><span>理解框架效應與前景理論：損失厭惡如何扭曲我們的選擇</span></li>
-      <li><span class="num">06</span><span>認識「去偏誤」的可能性與限制，了解提升決策品質的實用策略</span></li>
-    </ul>
-  </section>
-
-  <section class="prose">
-
-    <h2>一、我們真的理性嗎？</h2>
-    <p>幾個世紀以來，經濟學與哲學都預設人類是理性的決策者——能夠衡量所有資訊、計算最大效益，做出符合自身利益的選擇。這個「理性人（homo economicus）」的假設構建了整個古典經濟學的大廈。然而，心理學家在過去半個世紀的研究系統性地推翻了這個假設。</p>
-    <p>人類的思維充滿了<strong>系統性偏誤（systematic biases）</strong>——這些偏誤不是隨機的失誤，而是可以預測的、反覆出現的思維錯誤模式，源自大腦用來節省認知資源的心理捷徑。理解這些偏誤，並不意味著人類愚蠢或軟弱；恰恰相反，它們在演化上曾經（往往現在仍然）是高效而有用的。問題在於，當這些快速的直覺系統被應用到不適合的場合時，就會產生代價高昂的錯誤。</p>
-
-    <div class="pull-quote">
-      <p>「我們對自己的思考方式的認識，比我們認為的要少得多。我們的理性能力被我們高估了，而我們的非理性被我們大大低估了。」</p>
-      <cite>— Daniel Kahneman，《快思慢想》，2011 年諾貝爾經濟學獎得主</cite>
+  <!-- 01 快思與慢想：你用哪個在做決定？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">快思與慢想：你用哪個在做決定？</span>
     </div>
+    <p class="ch-intro">你的大腦有兩個模式。一個是快速、自動、幾乎不費力的；另一個是緩慢、費力、需要你主動投入的。問題是：第一個是預設值，而且它在你不知情的情況下做了大多數決定。</p>
 
-    <h2>二、雙歷程理論：快思與慢想</h2>
-    <p>Daniel Kahneman 在其著作《快思慢想》中，將人類的思維整理為兩個截然不同的系統，這個框架現在被稱為<strong>雙歷程理論（dual process theory）</strong>，是當代認知心理學與行為經濟學最有影響力的概念之一。</p>
-
-    <div class="dual-system">
-      <div class="system-box">
-        <div class="system-label">System 1</div>
-        <div class="system-name">快思——直覺系統</div>
-        <ul class="system-list">
-          <li>自動、快速、幾乎不費力</li>
-          <li>非意識運作，難以主動控制</li>
-          <li>依賴模式辨識與過去經驗</li>
-          <li>情緒驅動，對熟悉事物有偏好</li>
-          <li>一次處理大量平行訊息</li>
-          <li>容易產生捷思偏誤</li>
-          <li>範例：看見「2+2」立知答案 4；辨認朋友的臉；感受到危險</li>
+    <div class="dual-grid">
+      <div class="dual-cell">
+        <div class="dual-head s1">系統一 — 快思</div>
+        <div class="dual-title">自動、直覺、省力</div>
+        <ul class="dual-list">
+          <li>幾乎不需要意識參與，自動運作</li>
+          <li>依賴模式辨識和過去的經驗</li>
+          <li>受情緒和當下情境影響很大</li>
+          <li>非常快，但容易走捷徑犯錯</li>
+          <li>例：看見熟人的臉、感覺危險、瞬間的第一印象</li>
         </ul>
       </div>
-      <div class="system-box">
-        <div class="system-label">System 2</div>
-        <div class="system-name">慢想——分析系統</div>
-        <ul class="system-list">
-          <li>緩慢、費力、需要有意識投入</li>
-          <li>可控制、可監督、邏輯性強</li>
-          <li>依賴規則、統計與因果推理</li>
-          <li>能抑制系統一的衝動反應</li>
-          <li>一次只能處理一件事（序列處理）</li>
-          <li>容易因疲勞而被系統一接管</li>
-          <li>範例：計算 17×24；填寫稅單；評估投資風險</li>
+      <div class="dual-cell">
+        <div class="dual-head s2">系統二 — 慢想</div>
+        <div class="dual-title">刻意、分析、費力</div>
+        <ul class="dual-list">
+          <li>需要有意識地投入注意力</li>
+          <li>可以做邏輯推理和複雜計算</li>
+          <li>能夠抑制系統一的衝動反應</li>
+          <li>容量有限，疲憊時會退位給系統一</li>
+          <li>例：做數學題、評估一份合約、做重大決定</li>
         </ul>
       </div>
     </div>
 
-    <p>關鍵洞見在於：系統一是預設模式，系統二是例外。我們絕大多數的日常決策都由系統一主導，系統二只在意識到問題複雜、需要仔細推理時才被「召喚」。但系統二不只慢，還非常懶——它傾向於接受系統一已提供的答案，只做最低限度的驗證。正因為如此，認知偏誤才如此普遍且難以消除：它們是系統一在我們不知情的情況下悄悄做出的判斷。</p>
-    <p>另一個重要觀察是<strong>決策疲勞（decision fatigue）</strong>：系統二的認知資源是有限且可耗盡的。一天中做了越多需要深思熟慮的決定，系統二就越疲憊，越容易退回到系統一的衝動反應。研究以色列假釋委員會的一項著名研究發現，假釋通過率在用餐後的休息之後顯著上升，而在一段連續審判後顯著下降——饑餓與疲勞讓法官更傾向於做出預設的保守（拒絕假釋）決定。</p>
+    <p class="ch-intro" style="margin-bottom:0.5rem;">關鍵在於：系統二很懶。它不喜歡工作，而且在你累了、餓了、情緒高漲的時候，它更容易退位。這時候系統一接管，而系統一充滿了各種偏誤。</p>
 
-    <h2>三、問題解決的策略與障礙</h2>
-    <p>問題解決（problem solving）是認知心理學的核心研究主題之一。面對問題時，人們通常採用兩類策略。<strong>演算法（algorithms）</strong>是系統性地嘗試所有可能解法的步驟，保證能找到答案，但往往耗時耗力——例如用暴力窮舉法解密碼。<strong>捷思法（heuristics）</strong>則是依賴經驗法則的心理捷徑，快速產生「夠好」的解答，但不保證最優或正確——例如「哪個選項看起來最熟悉，就選哪個」。</p>
-    <p>多數日常問題解決依賴捷思法，這通常沒什麼問題；但在重要決策中，對捷思法的過度依賴會帶來系統性錯誤。問題解決還面臨幾個常見的心理障礙：</p>
-    <p><strong>心理定勢（mental set）</strong>是指傾向於用過去有效的方法解決新問題，即使新問題有更簡單的解法。一旦某個解法「曾經有效」，大腦就傾向於先套用它，而不是重新評估。<strong>功能固著（functional fixedness）</strong>是指無法跳出物品「常規用途」的框架來思考解法。如果你需要一把錘子，卻只看得見工具箱裡的扳手，而沒想到用書本的角落敲釘子——這就是功能固著在作怪。</p>
-    <p><strong>確認偏誤（confirmation bias）</strong>是最普遍、影響最深遠的思維障礙之一：人們傾向於主動尋找支持自己既有信念的證據，忽略或貶低與之矛盾的資訊。在問題解決中，確認偏誤讓人過早鎖定一個假設，只去驗證它，而不是嘗試推翻它——而科學方法的核心恰恰是相反：<strong>嘗試「否證（falsify）」你的假設</strong>，而非確認它。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你下班回家，很累，對方問你「要不要一起點外送？」你說好了，然後對自己點了一個貴很多、其實不怎麼想吃的東西。隔天清醒的狀態你不會這樣選。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">疲憊狀態下，系統二的能量不夠，系統一接管了決策。系統一偏好熟悉的、容易的、當下感覺不錯的選項，不太在乎明天的自己是否後悔。這不是意志力問題，而是大腦的節能機制在錯誤的時機上線。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>在狀態好的時候做重要決定，不在疲憊、饑餓、情緒激動時做。</b>「睡一覺再說」不是在拖延，是在讓系統二重新有能量參與。</li>
+          <li><b>對重要決定設一個「等待期」。</b>衝動性購物、重要的回覆、關係上的決定——讓自己先等二十四小時。冷靜下來，系統二才有機會檢查系統一是否做了正確的判斷。</li>
+          <li><b>減少需要系統二的小決定。</b>把不重要的日常選擇變成預設或習慣，把系統二的能量留給真正重要的事。（例：每週的菜單固定輪流，不每天重新決定。）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <h2>四、認知偏誤大全</h2>
-    <p>認知偏誤是系統性、可預測的思維錯誤，研究者已記錄了超過一百種。以下列出對日常決策影響最大的幾種，理解它們是提升思維品質的起點。</p>
+  <!-- 02 八個讓你做出糟糕決定的思維偏誤 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">八個讓你做出糟糕決定的思維偏誤</span>
+    </div>
+    <p class="ch-intro">這些偏誤不是你的個人問題，而是人類大腦的共同特性。了解它們在你生活裡長什麼樣子，比記住它們的名字更有用。</p>
 
-    <div class="bias-list">
-      <div class="bias-item">
-        <div class="bias-header">
-          <span class="bias-name">可得性捷思</span>
-          <span class="bias-en">Availability Heuristic</span>
-        </div>
-        <div class="bias-desc">以「某件事多容易浮現腦海」來判斷其發生機率。越生動、越近期、越情緒化的事件，在記憶中越「可得」，因此被高估機率。</div>
-        <div class="bias-example">飛機失事新聞鋪天蓋地後，人們高估空難風險，卻低估遠更致命的車禍風險。看完犯罪新聞後，民眾普遍高估社會的整體犯罪率。</div>
-      </div>
-      <div class="bias-item">
-        <div class="bias-header">
-          <span class="bias-name">代表性捷思</span>
-          <span class="bias-en">Representativeness Heuristic</span>
-        </div>
-        <div class="bias-desc">以「某人/事物多像某類型的典型代表」來判斷其所屬類別，忽略基率（base rate）資訊。</div>
-        <div class="bias-example">描述一位「文靜、有條理、關注細節」的人，多數人猜他是圖書館員而非農夫——但農夫的人數遠多於圖書館員，基率被忽略了。</div>
-      </div>
-      <div class="bias-item">
-        <div class="bias-header">
-          <span class="bias-name">錨定效應</span>
-          <span class="bias-en">Anchoring Effect</span>
-        </div>
-        <div class="bias-desc">決策時過度依賴第一個接收到的資訊（錨點），後續判斷都在錨點附近調整，調整幅度往往不足。</div>
-        <div class="bias-example">詢問「甘地去世時幾歲？是高於還是低於 140 歲？」後再問實際年齡，與先問「是高於還是低於 9 歲？」相比，前者估計的年齡顯著偏高。</div>
-      </div>
-      <div class="bias-item">
-        <div class="bias-header">
+    <div class="bias-grid">
+      <div class="bias-row">
+        <div class="bias-name-cell">
           <span class="bias-name">確認偏誤</span>
           <span class="bias-en">Confirmation Bias</span>
         </div>
-        <div class="bias-desc">優先搜尋、解讀、記憶與自己既有信念一致的資訊，同時迴避或貶低矛盾的證據。</div>
-        <div class="bias-example">相信某種保健食品有效的人，會記住朋友吃了好轉的例子，忽略沒有效果的案例；政治立場偏向某黨的人，傾向於只瀏覽與自己觀點一致的媒體。</div>
+        <div class="bias-what">你傾向於尋找和相信支持你已有想法的資訊，忽略或貶低反對的證據。</div>
+        <div class="bias-life"><em>生活裡：</em>你覺得某個人不好相處，之後他做的每件事你都往負面解讀；你相信某個飲食方法有效，就只記得成功的案例。</div>
       </div>
-      <div class="bias-item">
-        <div class="bias-header">
-          <span class="bias-name">後見之明偏誤</span>
-          <span class="bias-en">Hindsight Bias</span>
-        </div>
-        <div class="bias-desc">事件發生後，認為自己「早就知道會這樣」，高估了事前的可預測性。常稱為「我早就說過了（I knew it all along）」效應。</div>
-        <div class="bias-example">金融危機爆發後，許多分析師宣稱「早就看出泡沫的跡象」；某隊輸掉比賽後，球迷紛紛表示早就預料到。但事前的分析往往充滿不確定性。</div>
-      </div>
-      <div class="bias-item">
-        <div class="bias-header">
+      <div class="bias-row">
+        <div class="bias-name-cell">
           <span class="bias-name">沉沒成本謬誤</span>
           <span class="bias-en">Sunk Cost Fallacy</span>
         </div>
-        <div class="bias-desc">因為過去已投入的成本（金錢、時間、心力）而繼續一個不再值得的行動，而非基於未來的預期效益做決定。</div>
-        <div class="bias-example">已花了 300 元買電影票，儘管開場 20 分鐘後覺得非常無聊，仍堅持看完「因為票錢不能浪費」——但票錢已無法追回，繼續看只是在浪費時間。</div>
+        <div class="bias-what">因為已經投入了時間、金錢或心力，就繼續做一件不再值得的事。</div>
+        <div class="bias-life"><em>生活裡：</em>電影看了一半覺得很無聊，還是撐完「因為票錢花了」；在一段不好的關係裡待著，因為「在一起這麼久了」；繼續讀不喜歡的科系，因為「都讀到大三了」。</div>
       </div>
-      <div class="bias-item">
-        <div class="bias-header">
-          <span class="bias-name">過度自信效應</span>
-          <span class="bias-en">Overconfidence Effect</span>
+      <div class="bias-row">
+        <div class="bias-name-cell">
+          <span class="bias-name">錨定效應</span>
+          <span class="bias-en">Anchoring Effect</span>
         </div>
-        <div class="bias-desc">系統性地高估自己的知識準確度、能力水平或對未來的預測能力。研究顯示，90% 的駕駛認為自己高於平均水平。</div>
-        <div class="bias-example">創業者往往過度高估新企業的成功機率（統計顯示五年內失敗率超過 50%）；學生往往低估完成作業所需的時間（規劃謬誤）。</div>
+        <div class="bias-what">你的判斷會被第一個接收到的數字或資訊錨住，即使那個數字是隨機的或不相關的。</div>
+        <div class="bias-life"><em>生活裡：</em>原價八千現在四千的包包讓你覺得賺到，忘了問「四千貴不貴」；談薪水時先開口的人設定了整個協商的範圍。</div>
       </div>
-      <div class="bias-item">
-        <div class="bias-header">
+      <div class="bias-row">
+        <div class="bias-name-cell">
+          <span class="bias-name">可得性捷思</span>
+          <span class="bias-en">Availability Heuristic</span>
+        </div>
+        <div class="bias-what">你用「這件事多容易想到」來判斷它發生的機率——越容易想到，越覺得常發生。</div>
+        <div class="bias-life"><em>生活裡：</em>看完空難新聞，覺得飛機很危險；身邊有朋友中樂透，覺得自己也有機會；看太多創業成功故事，低估了失敗率。</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-name-cell">
+          <span class="bias-name">後見之明偏誤</span>
+          <span class="bias-en">Hindsight Bias</span>
+        </div>
+        <div class="bias-what">事情發生後，你覺得自己「早就知道會這樣」，高估了事前的可預測性。</div>
+        <div class="bias-life"><em>生活裡：</em>股市崩盤後說「我就知道泡沫了」；某個人對你做了什麼事後說「我一開始就覺得他不對」；事後對自己或別人做出不公平的苛責。</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-name-cell">
+          <span class="bias-name">過度自信</span>
+          <span class="bias-en">Overconfidence</span>
+        </div>
+        <div class="bias-what">你系統性地高估自己的能力、判斷的準確度，以及對未來的預測。</div>
+        <div class="bias-life"><em>生活裡：</em>低估完成一件事需要的時間；認為自己的駕駛技術高於平均；對自己不熟悉的領域有強烈的意見。</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-name-cell">
+          <span class="bias-name">損失厭惡</span>
+          <span class="bias-en">Loss Aversion</span>
+        </div>
+        <div class="bias-what">失去的痛苦，大約是獲得同等東西的快樂的兩倍。所以你對損失的反應往往比對獲得的反應更強烈。</div>
+        <div class="bias-life"><em>生活裡：</em>不願意停損一個虧損的投資「萬一回來了呢」；不敢換工作因為害怕失去穩定；在談判裡框架成「你會損失什麼」比「你會獲得什麼」更有效。</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-name-cell">
           <span class="bias-name">基本歸因謬誤</span>
-          <span class="bias-en">Fundamental Attribution Error</span>
+          <span class="bias-en">Attribution Error</span>
         </div>
-        <div class="bias-desc">解釋他人行為時，過度強調個人性格因素，低估情境因素；但解釋自己的行為時，則傾向於強調情境因素。</div>
-        <div class="bias-example">同事遲到，你認為他「不負責任」；自己遲到，你解釋為「路上塞車」。看見街友，認為他「懶惰」，忽略了結構性的社會因素。</div>
+        <div class="bias-what">評斷別人的行為時，你傾向於歸因於他的性格；評斷自己的行為時，你傾向於歸因於情境。</div>
+        <div class="bias-life"><em>生活裡：</em>同事遲到，你覺得他不負責任；自己遲到，你解釋為塞車。對別人的標準比對自己嚴格，或者反過來——對自己比對別人寬鬆。</div>
       </div>
     </div>
+  </div>
 
-    <h2>五、框架效應與損失厭惡</h2>
-    <p>Kahneman 與 Tversky 在 1979 年提出<strong>前景理論（prospect theory）</strong>，從根本上挑戰了傳統經濟學的理性人假設。其中最核心的發現之一是<strong>損失厭惡（loss aversion）</strong>：人對於損失的痛苦感，大約是獲得同等收益喜悅感的兩倍。這意味著「失去 100 元」的心理衝擊，大約等同於「獲得 200 元」的心理效益——選擇並非純粹基於客觀結果，而是基於相對於參照點的「感知得失」。</p>
-    <p><strong>框架效應（framing effect）</strong>揭示，即使客觀資訊完全相同，用不同方式呈現（框架）會導致截然不同的選擇。</p>
+  <!-- 03 你被框住了嗎？框架效應 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">你被框住了嗎？同樣的事，不同的說法</span>
+    </div>
+    <p class="ch-intro">同樣的資訊，用不同方式表達，你的選擇可能完全相反。這不是邏輯問題，而是大腦對「損失」和「獲得」有非常不同的敏感度。</p>
 
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>亞洲疾病問題（Tversky &amp; Kahneman, 1981）</h3>
-      <p>受試者被告知一種疾病預計將奪走 600 人性命，必須在兩個方案中選擇。</p>
-      <p><strong>正向框架（強調獲得）：</strong>方案 A：確定拯救 200 人。方案 B：三分之一機率拯救全部 600 人，三分之二機率無人獲救。結果：72% 選擇確定性的方案 A（風險趨避）。</p>
-      <p><strong>負向框架（強調損失）：</strong>方案 C：確定死亡 400 人。方案 D：三分之一機率無人死亡，三分之二機率 600 人全部死亡。結果：78% 選擇賭一把的方案 D（風險尋求）。</p>
-      <p>關鍵在於：方案 A 與方案 C 在數學上完全等價（都是確定拯救 200 人，確定死亡 400 人），方案 B 與方案 D 亦然。但光是改變敘述框架——從「獲救」到「死亡」——就讓多數人的選擇完全逆轉。這是框架效應最有力的示範，也是損失厭惡的直接表現：<strong>死亡的框架讓損失感更強烈，因此人們願意賭一把來「避免確定的損失」。</strong></p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">「這個手術有九十%的存活率」和「這個手術有十%的死亡率」——客觀上完全一樣的資訊，但聽起來的感受差很多。前者讓你比較願意接受手術，後者讓你比較猶豫。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">大腦對「損失」的敏感度大約是「獲得」的兩倍。當資訊被包裝成損失框架（死亡率、你會失去什麼），你的反應會比獲得框架（存活率、你會得到什麼）更強烈，即使數字完全相同。廣告、談判、政治宣傳都在利用這個機制。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>當你在做重要決定，主動問自己：「這個資訊被怎麼包裝的？」</b>把它轉成另一個框架：損失說法換成獲得說法，或者反過來，看看你的感受有沒有改變。如果改變了，那個改變來自框架，不是來自事實。</li>
+          <li><b>注意「省了多少」和「花了多少」的差別。</b>「打折省了三百」和「花了七百」是同一件事。問自己：「如果這件東西原來就賣七百，我還會買嗎？」</li>
+          <li><b>在談判或說服的場合，主動選擇框架。</b>「我們保留了二十%的預算」比「我們削減了八十%」更容易被接受。知道這個機制，你在溝通時可以更有意識地選擇對方聽到的方式。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 沉沒成本——讓你繼續做錯誤選擇的最常見陷阱 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">沉沒成本：讓你繼續做錯誤選擇的最常見陷阱</span>
+    </div>
+    <p class="ch-intro">沉沒成本是最常見、影響最廣的認知偏誤之一，因為它偽裝成「負責任」和「不浪費」的樣子。但已經花出去的成本，不管你怎麼做都不會回來了。</p>
+
+    <div class="pquote">
+      <p>已經投入的成本不是繼續下去的理由，它只是解釋了你為什麼在這裡。真正的問題是：「從現在開始，繼續值不值得？」</p>
     </div>
 
-    <h2>六、創意思維與洞見問題</h2>
-    <p>並非所有問題都能用分析性的系統二解決。有些問題需要<strong>洞見（insight）</strong>——那種忽然「靈光一閃」、問題迎刃而解的體驗，心理學家稱之為「啊哈時刻（aha moment）」。洞見往往在你停止刻意思考問題之後出現：在洗澡、散步、從夢中醒來的瞬間。</p>
-    <p>神經科學研究顯示，洞見伴隨著右腦前顳葉的高頻伽瑪波（gamma wave）突然爆發，發生在問題解法「突破」進入意識的瞬間。這暗示在洞見發生之前，大腦已在非意識層面持續處理問題，只是答案尚未「浮出水面」。這就是為什麼「暫時放下問題」有時反而是解題的最佳策略——讓非意識的系統一在後台繼續運算。</p>
-    <p>提升創意思維的實用策略包括：刻意拓展視角（從不同立場思考問題）、類比思維（這個問題是否像另一個已解決的問題？）、逆向思維（如果要讓問題更糟，該怎麼做？——常常反向操作即是解法）、以及允許大腦孵化（incubation）——讓問題在非意識中靜置一段時間後再回頭。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在一段讓你不快樂的關係裡，但你告訴自己「都在一起五年了，不能就這樣放棄」。或者你做了一個投資虧了很多，繼續放著「等它漲回來，不然之前的錢就虧掉了」。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「已經投入五年」和「已經虧了多少」是沉沒成本——它們已經發生，無法改變。用它們來決定未來的行動，等於是在用過去的錯誤替未來的決定買單。這個偏誤讓人在糟糕的情況裡待得比應該的更久。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>問自己一個假設性問題：「如果我今天才剛進入這個狀況，我會選擇繼續嗎？」</b>把過去的投入暫時從考慮裡拿掉，只看從現在開始的成本和收益。如果答案是「不會」，那繼續的理由只剩沉沒成本。</li>
+          <li><b>把「不浪費」和「做正確的決定」分開。</b>繼續一段不好的關係或一個虧損的投資，不會讓你「浪費更少」——你只是在繼續增加成本。承認損失，才能讓自己不再繼續追加損失。</li>
+          <li><b>在做重要決定前，先確認：「我是因為未來值得，還是因為已經投入太多？」</b>這兩個理由得到的答案應該相同——如果它們指向不同方向，先認真對待那個不舒服的差距。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <h2>七、如何做出更好的決策？</h2>
-    <p>了解認知偏誤之後，一個自然而然的問題是：知道了這些，能幫助我們避免偏誤嗎？答案是：部分能，但程度有限。單純「知道」某個偏誤的存在，並不足以消除它——因為偏誤根植於系統一的自動運作，而系統二的監督能力有限且易疲勞。</p>
-    <p>更有效的策略是改變<strong>決策環境（decision architecture）</strong>，而非試圖強迫自己更理性。行為經濟學家 Thaler 與 Sunstein 提出「<strong>nudge（推力）</strong>」的概念：透過改變選項的呈現方式與預設值，在不限制選擇自由的前提下，引導人們做出更符合自身長期利益的決定。例如，將退休儲蓄計畫設為「預設加入、需主動退出」而非「預設不加入、需主動加入」，參與率可從 40% 提升至 90%。</p>
+  <!-- 05 如何做出更好的決定 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">如何做出更好的決定？</span>
+    </div>
+    <p class="ch-intro">知道偏誤存在，不會讓它消失——偏誤是系統一自動運作的結果，不是你努力就能完全關掉的。但你可以改變決策的條件，讓系統二更容易參與。</p>
 
-    <table class="compare-table">
+    <table class="simple-table">
       <thead>
         <tr>
           <th>策略</th>
-          <th>做法</th>
-          <th>對應偏誤</th>
+          <th>具體怎麼做</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>考慮對立假設</td>
-          <td>主動尋找反駁自己想法的證據，詢問「如果我是錯的，證據會是什麼？」</td>
-          <td>確認偏誤、過度自信</td>
+          <td>等待</td>
+          <td>重要決定睡一覺再說。衝動感最強的時候，不是做決定的好時機——那是系統一在說話</td>
         </tr>
         <tr>
-          <td>延遲重大決策</td>
-          <td>在情緒高昂或疲憊時避免重大決定，睡一覺後再定奪</td>
-          <td>情緒性決策、決策疲勞</td>
+          <td>主動找反證</td>
+          <td>確認偏誤的對抗方式：主動問「我的想法如果是錯的，證據會長什麼樣子？」然後真的去找那些證據</td>
         </tr>
         <tr>
-          <td>預先承諾裝置</td>
-          <td>在理性清醒時預先設定規則，防止未來的自己被衝動覆蓋（如自動扣款儲蓄）</td>
-          <td>短視偏誤、自我控制失敗</td>
+          <td>重新框架</td>
+          <td>把問題改用不同的方式說，看感受是否改變。改變了就說明你被框架影響，不是被事實影響</td>
         </tr>
         <tr>
-          <td>重新框架問題</td>
-          <td>用不同方式重新陳述問題（損失 vs. 獲得；絕對數字 vs. 比例）以獲得不同視角</td>
-          <td>框架效應、損失厭惡</td>
+          <td>事前驗屍</td>
+          <td>在做決定之前，假設它已經失敗了，問：「最可能的失敗原因是什麼？」往往能找到你在樂觀狀態下忽略的風險</td>
         </tr>
         <tr>
-          <td>外部視角參照</td>
-          <td>查閱統計基率（「類似案例通常結果如何？」），而非只依賴個案判斷</td>
-          <td>代表性捷思、過度樂觀</td>
+          <td>看基率</td>
+          <td>不只問「這次會怎樣」，也問「類似的情況通常怎樣」——統計上的基準率比你的直覺更可靠</td>
         </tr>
         <tr>
-          <td>事前驗屍（Pre-mortem）</td>
-          <td>在執行計畫前，假設計畫已失敗，往回推理失敗的可能原因</td>
-          <td>過度自信、規劃謬誤</td>
+          <td>問別人</td>
+          <td>找一個你信任且不會只說你想聽的人說說你的想法。外部視角更容易看到你的盲點</td>
         </tr>
       </tbody>
     </table>
+  </div>
 
-  </section>
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 6 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 02 — 認知與行為心理學</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 02 — 認知與行為</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Dual Process Theory <span>雙歷程理論</span></li>
-      <li>System 1 / System 2 <span>系統一 / 系統二</span></li>
-      <li>Heuristic <span>捷思法</span></li>
-      <li>Algorithm <span>演算法</span></li>
-      <li>Mental Set <span>心理定勢</span></li>
-      <li>Functional Fixedness <span>功能固著</span></li>
-      <li>Confirmation Bias <span>確認偏誤</span></li>
-      <li>Availability Heuristic <span>可得性捷思</span></li>
-      <li>Anchoring Effect <span>錨定效應</span></li>
-      <li>Hindsight Bias <span>後見之明偏誤</span></li>
-      <li>Sunk Cost Fallacy <span>沉沒成本謬誤</span></li>
-      <li>Loss Aversion <span>損失厭惡</span></li>
-      <li>Framing Effect <span>框架效應</span></li>
-      <li>Prospect Theory <span>前景理論</span></li>
-      <li>Nudge <span>推力</span></li>
-      <li>Decision Fatigue <span>決策疲勞</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">做決定前先問</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">狀態</span>
+        <span class="qa-val">我現在累了、餓了、還是情緒很高嗎？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">框架</span>
+        <span class="qa-val">這個資訊是怎麼被包裝的？換個說法我還是這樣想嗎？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">沉沒</span>
+        <span class="qa-val">我是因為未來值得，還是因為已經投入太多？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">反證</span>
+        <span class="qa-val">如果我的想法是錯的，證據會是什麼？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">基率</span>
+        <span class="qa-val">類似的情況，統計上通常怎麼樣？</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>Daniel Kahneman — 雙歷程理論、前景理論（諾貝爾獎）</td></tr>
-      <tr><td>人物</td><td>Amos Tversky — 與 Kahneman 共同研究認知偏誤</td></tr>
-      <tr><td>人物</td><td>Richard Thaler — 行為經濟學、推力理論（諾貝爾獎）</td></tr>
-      <tr><td>人物</td><td>Gerd Gigerenzer — 捷思法的生態理性觀點</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《快思慢想》Daniel Kahneman</td></tr>
-      <tr><td>書目</td><td>《推力》Thaler &amp; Sunstein</td></tr>
-      <tr><td>書目</td><td>《思考的藝術》Rolf Dobelli</td></tr>
-      <tr><td>書目</td><td>《超級預測》Philip Tetlock</td></tr>
-      <tr><td>論文</td><td>Tversky, A. &amp; Kahneman, D. (1981). The framing of decisions.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《快思慢想》Daniel Kahneman</td></tr>
+      <tr><td>書</td><td>《思考的藝術》Rolf Dobelli</td></tr>
+      <tr><td>書</td><td>《推力》Thaler &amp; Sunstein</td></tr>
+      <tr><td>書</td><td>《超級預測》Philip Tetlock</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>回想一個你最近做的重要決定。事後看來，其中有哪些認知偏誤可能影響了你的判斷？如果用系統二重新分析，你會做出同樣的決定嗎？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>八個偏誤裡，哪一個你覺得在你生活裡最常出現？你能想到一個具體的例子嗎——它上次是在什麼情況下影響了你的判斷或決定？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>損失厭惡解釋了為什麼「避免損失」的動機往往強過「追求獲益」。你能找到一個生活中損失厭惡讓你做出非理性決定的例子嗎？（例如繼續一段不好的關係、不停損一個虧損的投資）</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你現在生活裡有沒有一個「沉沒成本陷阱」——一件你繼續做的事，主要理由是「已經投入了這麼多」，而不是「繼續值得」？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>確認偏誤讓我們傾向於只看支持自己觀點的資訊。在你最堅定持有的某個信念上，你上一次認真尋找「反駁它的證據」是什麼時候？你願意現在嘗試嗎？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你最近有沒有做過一個決定，事後覺得是在系統一主導的狀態下做的（疲憊、情緒高漲、衝動）？如果當時讓系統二參與，你可能做出不同的選擇嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>「推力（nudge）」透過改變預設值來引導行為，而不限制選擇自由。你認為政府或企業利用行為心理學設計推力是否合乎倫理？在什麼情況下推力是有益的，什麼情況下是操縱？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>選一個你即將要做的重要決定，試用「事前驗屍」：假設這個決定一年後被證明是錯的，最可能的原因是什麼？這個練習改變了你對這個決定的想法嗎？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day5.html" class="page-link">&#8592; Week 05</a>
-  <span class="page-dot">6 / 16</span>
-  <a href="day7.html" class="page-link">Week 07 &#8594;</a>
+<div class="pager">
+  <a href="day5.html">← Week 05</a>
+  <span class="pager-mid">06 / 16</span>
+  <a href="day7.html">Week 07 →</a>
 </div>
 
 <script>
-  const key = 'week-6';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-06';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

@@ -3,28 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 01 — 什麼是心理學？</title>
+  <title>Week 01 — 心理學是什麼</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,19 +31,18 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
     .hero {
       padding: 3.5rem 5vw 3rem;
@@ -54,30 +52,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,219 +78,222 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
     }
-    .case-study p {
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
+      line-height: 1.76;
+      color: var(--mid);
     }
-    .case-study p:last-child { margin-bottom: 0; }
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    .school-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .school-item {
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--rule);
-    }
-    .school-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
-    .school-founder {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 0.6rem;
-    }
-    .school-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.75; color: var(--ink-mid); }
-    .timeline { margin: 1.5rem 0; }
-    .tl-item {
-      display: grid;
-      grid-template-columns: 4.5rem 1fr;
-      gap: 1rem;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .tl-year { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--red); }
-    .tl-text { font-size: 0.88rem; font-weight: 300; line-height: 1.7; color: var(--ink-mid); }
-    .tl-text strong { font-weight: 500; color: var(--ink); }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
-    }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--rule);
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    /* REFLECTION */
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
-      align-items: baseline;
+    .acts li b { font-weight: 600; color: var(--ink); }
+    /* MYTH TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .simple-table th {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); }
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+    /* LENS GRID */
+    .lens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .lens-cell { background: var(--card); padding: 1rem 1.1rem; }
+    .lens-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+    .lens-q { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; color: var(--red); margin-bottom: 0.5rem; }
+    .lens-desc { font-size: 0.83rem; font-weight: 300; line-height: 1.68; color: var(--mid); }
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -307,8 +303,8 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -317,299 +313,338 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .school-grid { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .lens-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 01 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 01 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 01 &nbsp;—&nbsp; 認識心理學基礎</p>
-    <h1>什麼是心理學？<br>從日常生活<em>看見心理的力量</em></h1>
-    <p class="hero-sub">心理學是研究人類行為與心智歷程的科學。本週將帶你從生活中熟悉的現象出發，理解心理學的本質、歷史脈絡，以及它如何深刻影響你每一天的決定與感受。</p>
+    <p class="eyebrow">Unit 01 &nbsp;—&nbsp; 認識心理學基礎</p>
+    <h1>心理學是什麼：<br><em>你以為你懂人，但你不懂</em></h1>
+    <p class="hero-sub">你每天在解讀人——為什麼他這樣說話、為什麼自己做了那個決定、為什麼某些事怎麼樣都改不了。你有一套對人的直覺理解，但這套直覺裡有很多錯的東西。心理學要做的，就是把它們找出來。</p>
   </div>
-  <div class="hero-number">01</div>
+  <div class="hero-num">01</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解心理學的定義與研究範疇，區分「常識心理學」與科學心理學的差異</span></li>
-      <li><span class="num">02</span><span>認識心理學主要學派的歷史脈絡，包括行為主義、精神分析、人本主義、認知心理學等</span></li>
-      <li><span class="num">03</span><span>了解心理學的科學研究方法概覽：觀察法、實驗法、調查法、個案研究</span></li>
-      <li><span class="num">04</span><span>能舉出心理學在日常生活、教育、職場、醫療等領域的實際應用</span></li>
-      <li><span class="num">05</span><span>認識心理學發展的重要里程碑與代表人物</span></li>
-    </ul>
-  </section>
-
-  <section class="prose">
-
-    <h2>一、心理學是什麼？</h2>
-    <p>心理學（Psychology）這個詞來自希臘文，由 <strong>psyche</strong>（靈魂、心智）與 <strong>logos</strong>（學問、研究）組合而成。從字義上看，它是「研究心靈的學問」。然而現代心理學的定義更為精確：<strong>心理學是對人類（及其他動物）的行為（behavior）與心智歷程（mental processes）進行科學性研究的學科。</strong></p>
-    <p>這個定義中有兩個關鍵詞值得深究。<strong>行為</strong>指的是可以被直接觀察的一切舉動，例如說話、走路、皺眉、逃跑；<strong>心智歷程</strong>則涵蓋內在、看不見的活動，包括思考、記憶、感知、情緒、動機、夢境、決策等。心理學同時關注這兩個層面，這讓它有別於純粹研究行為的行為科學，或純粹研究大腦生理的神經科學。</p>
-    <p>更重要的是「科學性」這三個字。心理學不是玄學，也不是單純依靠個人直覺或文化傳說來解釋人的行為。它依賴<strong>系統化的觀察、可重複的實驗、數據分析與邏輯推理</strong>，以嚴謹的方式建立關於人類心智的知識體系。正是這種科學精神，讓心理學能持續修正自身，而不是一成不變地墨守舊說。</p>
-
-    <div class="pull-quote">
-      <p>「心理學的任務，不是告訴人們他們已經知道的事，而是挑戰那些他們以為自己知道的事。」</p>
-      <cite>— William James，《心理學原理》，1890</cite>
+  <!-- 01 你對人的直覺，有多少是錯的？ -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你對人的直覺，有多少是錯的？</span>
     </div>
+    <p class="ch-intro">每個人都是業餘的心理學家——我們從小就開始解讀別人的動機、預測別人的行為、判斷誰可信誰不可信。問題是：這套由個人經驗和文化傳承建立起來的直覺，裡面有很多系統性的錯誤，而且很難靠自己發現。</p>
 
-    <h2>二、常識心理學 vs. 科學心理學</h2>
-    <p>許多人在接觸心理學之前，早已對人類行為有一套直覺性的解釋，這種日常生活中形成的理解，稱為<strong>常識心理學（Folk Psychology）</strong>。我們從小就聽說「一分耕耘，一分收穫」、「發洩情緒有益健康」、「人在壓力下表現更好」——這些說法聽起來理所當然，卻往往在科學研究中遭到挑戰甚至推翻。</p>
-    <p>常識心理學的問題在於：它建立在個人經驗與文化傳承之上，缺乏系統性的驗證。我們傾向於<strong>確認偏誤（confirmation bias）</strong>——只記住那些符合自己想法的案例，忽略不符合的反例。這讓我們的直覺看起來總是「對的」，但其實只是選擇性記憶的產物。</p>
-
-    <table class="compare-table">
+    <table class="simple-table">
       <thead>
         <tr>
-          <th>常識說法</th>
-          <th>科學研究的發現</th>
+          <th>你可能相信</th>
+          <th>研究發現的實際狀況</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>「發洩怒氣可以消火」</td>
-          <td>研究顯示，情緒宣洩（catharsis）往往強化而非減少憤怒，反覆練習攻擊行為會鞏固神經迴路</td>
+          <td>「把情緒發洩出來，比較容易消氣」</td>
+          <td>宣洩憤怒往往強化而非減少怒火。反覆練習攻擊行為，只是在鞏固那個神經迴路</td>
         </tr>
         <tr>
-          <td>「人只用了大腦的 10%」</td>
-          <td>神經影像學顯示，人類幾乎使用所有腦區，不同任務激活不同區域，並無大片「閒置」的大腦</td>
+          <td>「人類只用了大腦的 10%」</td>
+          <td>這是迷思。神經影像顯示幾乎所有腦區都會被用到，只是不同任務用不同的區域</td>
         </tr>
         <tr>
-          <td>「壓力下人的表現更好」</td>
-          <td>耶基斯—多德森定律指出，適中的喚起水平才有助表現，過高或過低的壓力都會降低效能</td>
+          <td>「一點壓力讓人表現更好」</td>
+          <td>適中的壓力確實有幫助，但這個「適中」因人因任務而異，而且很多人長期過了那個點</td>
         </tr>
         <tr>
-          <td>「記憶像攝影機一樣準確」</td>
-          <td>Elizabeth Loftus 的研究證明，記憶是主動重建的過程，容易受到事後資訊的植入與扭曲</td>
+          <td>「記憶是可靠的，特別是重要的事」</td>
+          <td>記憶是主動重建的，不是錄影。越重要越情緒化的記憶，被扭曲的程度往往越大</td>
         </tr>
         <tr>
-          <td>「性格決定命運」</td>
-          <td>社會心理學研究顯示，情境因素對行為的影響力往往超過個人性格（見 Milgram 實驗）</td>
+          <td>「是壞人才會做壞事」</td>
+          <td>普通人在特定情境下可以做出令人難以置信的行為。情境的力量往往遠超過個人性格</td>
         </tr>
       </tbody>
     </table>
 
-    <p>這張表格揭示了心理學最重要的價值之一：它讓我們不再滿足於「聽起來對」，而是去問「這有沒有證據？」。這種對自身認知保持謙遜與誠實的態度，本身就是心理學帶給你最珍貴的禮物。</p>
+    <p class="ch-intro" style="margin-bottom:0;">這不是要你不相信自己的直覺，而是讓你對它保持謹慎——尤其在做重要的判斷時。心理學帶給你的最大價值，不是一堆理論，而是學會問：「這個我以為的事情，有沒有可能是錯的？」</p>
+  </div>
 
-    <h2>三、心理學的歷史脈絡</h2>
-    <p>人類對心智的好奇由來已久。古希臘哲學家柏拉圖與亞里斯多德就已辯論靈魂的本質；中世紀神學家探討意志與理性；啟蒙時代的哲學家則開始以自然科學的眼光思考心智。然而，心理學成為一門<strong>獨立的科學學科</strong>，有一個明確的歷史時間點。</p>
-    <p><strong>1879 年，德國生理學家 Wilhelm Wundt 在萊比錫大學建立了世界上第一間心理學實驗室</strong>，標誌著心理學正式從哲學中獨立出來。他採用「內省法」（introspection），訓練受試者在受控條件下系統地報告自身的心智體驗，首次將心智研究帶入實驗室。</p>
+  <!-- 02 情境比性格更有力量 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">情境比性格更有力量——你可能不了解自己</span>
+    </div>
+    <p class="ch-intro">1961 年，一個實驗讓 65% 的普通人在實驗者的指示下，對另一個人按下了最高電壓的電擊按鈕——即使那個人在不斷哀嚎、求饒。他們不是特別殘忍的人，只是在一個特定的情境裡。</p>
 
-    <div class="timeline">
-      <div class="tl-item">
-        <span class="tl-year">1879</span>
-        <span class="tl-text"><strong>Wundt</strong> 在萊比錫建立第一間心理學實驗室，心理學正式脫離哲學成為獨立科學</span>
+    <div class="pquote">
+      <p>你在什麼樣的情境裡，往往比你是什麼樣的人，更能預測你會做什麼。這不是說你沒有性格，而是說情境的力量被你嚴重低估了。</p>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在工作上做了一個你後來覺得不對的決定——也許是沒有說出反對意見，也許是配合了一個你不認同的要求。你問自己「我為什麼會那樣做？」，然後覺得自己「沒有原則」。</p>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1890</span>
-        <span class="tl-text"><strong>William James</strong> 出版《心理學原理》，奠定美國功能主義心理學基礎，強調意識的適應功能</span>
+      <div class="scard-body">
+        <p class="why">在許多情況下，「沒有說出反對意見」不是因為你沒原則，而是因為情境的壓力——階層、群體的期待、當下的氣氛——讓那個選擇變得非常難。研究一再顯示，大多數人在服從情境壓力時，都認為自己是個例外，相信「別人才會，我不會」。但數據說的是另一回事。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>不要用「我是什麼樣的人」來解釋你在某個情境下的行為，先分析那個情境本身。</b>什麼讓那個選擇變得容易？什麼讓不同的選擇變得困難？理解情境，才能在下次遇到時有所準備。</li>
+          <li><b>對他人的行為，練習先問情境再問性格。</b>同事沒有完成工作，第一個問題不是「他是不是不負責任」，而是「他面對了什麼狀況？」——這個習慣會讓你的判斷更準確，也讓你對人更公平。</li>
+          <li><b>如果你想改變自己的某個行為，先改變情境，不要只靠意志力。</b>把你想要做的事變得更容易，把你想要避免的事設置更多阻力——情境設計比自我要求更有效。</li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1900</span>
-        <span class="tl-text"><strong>Sigmund Freud</strong> 出版《夢的解析》，精神分析學派崛起，潛意識概念震驚西方世界</span>
+    </div>
+  </div>
+
+  <!-- 03 看待同一件事的六個角度 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">看待同一件事的六個角度</span>
+    </div>
+    <p class="ch-intro">心理學裡有幾個不同的思考框架，每一個都能讓你看見同一件事的不同面向。它們不是競爭關係，而是不同的放大鏡——問題是什麼，決定用哪個鏡頭更有用。</p>
+
+    <div class="lens-grid">
+      <div class="lens-cell">
+        <div class="lens-name">生物的角度</div>
+        <div class="lens-q">大腦和身體在做什麼？</div>
+        <div class="lens-desc">焦慮時，杏仁核激活、皮質醇上升——這是生理事實，不是軟弱。了解生理機制，有時候能讓你對自己的狀態更客觀。</div>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1913</span>
-        <span class="tl-text"><strong>John B. Watson</strong> 發表行為主義宣言，主張心理學應只研究可觀察的行為，拒絕討論意識</span>
+      <div class="lens-cell">
+        <div class="lens-name">行為的角度</div>
+        <div class="lens-q">什麼在強化這個行為？</div>
+        <div class="lens-desc">你的習慣是被什麼獎勵和懲罰塑造的？改變行為的最有效方式，往往是改變它的結果，而不是改變動機。</div>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1943</span>
-        <span class="tl-text"><strong>Abraham Maslow</strong> 提出需求層次理論，人本主義心理學興起，重視自由意志與自我實現</span>
+      <div class="lens-cell">
+        <div class="lens-name">認知的角度</div>
+        <div class="lens-q">你怎麼解讀這件事？</div>
+        <div class="lens-desc">同樣的事，不同的解讀帶來不同的感受和反應。你的想法不是事實，但它決定了你怎麼感覺。</div>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1960s</span>
-        <span class="tl-text"><strong>認知革命</strong>興起，心理學重新關注思維、語言與訊息處理，電腦隱喻成為理解心智的新框架</span>
+      <div class="lens-cell">
+        <div class="lens-name">潛意識的角度</div>
+        <div class="lens-q">有什麼是你沒意識到的？</div>
+        <div class="lens-desc">很多行為的動機你說不清楚——不是因為你不誠實，而是因為那些驅動力真的不在意識層面。</div>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1990s</span>
-        <span class="tl-text">神經影像技術（fMRI、PET）的普及，讓科學家得以「看見」思考中的大腦，神經科學與心理學深度融合</span>
+      <div class="lens-cell">
+        <div class="lens-name">社會的角度</div>
+        <div class="lens-q">情境和他人如何影響你？</div>
+        <div class="lens-desc">你是誰，部分取決於你在什麼樣的環境裡、被什麼樣的人圍繞。沒有人是真空中的個體。</div>
       </div>
-      <div class="tl-item">
-        <span class="tl-year">1998</span>
-        <span class="tl-text"><strong>Martin Seligman</strong> 擔任美國心理學會主席，提倡正向心理學，研究幸福、優勢與美好生活</span>
+      <div class="lens-cell">
+        <div class="lens-name">發展的角度</div>
+        <div class="lens-q">你怎麼變成現在這樣的？</div>
+        <div class="lens-desc">你的依附風格、你對關係的預設、你的情緒反應模式——很多都可以追溯到更早的經歷，而且可以被重新理解。</div>
       </div>
     </div>
 
-    <h2>四、主要心理學派</h2>
-    <p>心理學並非鐵板一塊的單一體系。歷史上形成了多個彼此競爭又互補的學派，各自從不同角度詮釋人類的行為與心智。現代心理學家通常不會只信奉單一學派，而是根據研究問題靈活採用最適合的理論框架——這種態度稱為<strong>折衷主義（eclecticism）</strong>。</p>
-
-    <div class="school-grid">
-      <div class="school-item">
-        <div class="school-name">精神分析學派</div>
-        <div class="school-founder">Freud, Jung / 1900s</div>
-        <div class="school-desc">強調潛意識、童年經歷對成年行為的決定性影響。主張人的許多行為動機隱藏在意識覺察之外，透過夢境、口誤、自由聯想等方式才能探及深層心理。</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在一段關係裡，每次對方稍微冷淡一點，你就開始很焦慮，不斷想知道對方怎麼了，會不會是因為你做了什麼。對方說你想太多，你也覺得自己反應過度，但就是控制不了。</p>
       </div>
-      <div class="school-item">
-        <div class="school-name">行為主義學派</div>
-        <div class="school-founder">Watson, Skinner / 1910s</div>
-        <div class="school-desc">認為心理學應只研究可觀察、可測量的行為，排除意識討論。透過古典制約（Pavlov）、操作制約（Skinner）解釋行為的習得、維持與消退。</div>
-      </div>
-      <div class="school-item">
-        <div class="school-name">人本主義學派</div>
-        <div class="school-founder">Maslow, Rogers / 1940s</div>
-        <div class="school-desc">強調人具有追求成長、自我實現的天生傾向。反對精神分析與行為主義對人的負面或機械式觀點，重視主觀體驗、自由意志與內在潛能。</div>
-      </div>
-      <div class="school-item">
-        <div class="school-name">認知心理學</div>
-        <div class="school-founder">Neisser, Miller / 1960s</div>
-        <div class="school-desc">把人比作資訊處理系統，研究思維、記憶、語言、問題解決、決策等心智過程。認知革命打破行為主義壟斷，讓心理學重新研究「心智」本身。</div>
-      </div>
-      <div class="school-item">
-        <div class="school-name">生物心理學</div>
-        <div class="school-founder">跨學科 / 20 世紀末</div>
-        <div class="school-desc">從神經科學、遺傳學、內分泌學切入，研究大腦結構、神經傳導物質、基因等生理因素如何影響行為與心智。腦影像技術的發展大幅推進此領域。</div>
-      </div>
-      <div class="school-item">
-        <div class="school-name">社會文化取向</div>
-        <div class="school-founder">Vygotsky, Bandura / 20 世紀</div>
-        <div class="school-desc">強調人的行為無法脫離社會環境與文化脈絡。社會學習理論、跨文化心理學研究都屬此範疇，關注他人與文化如何塑造個人心理發展。</div>
+      <div class="scard-body">
+        <p class="why">用不同的角度看這件事：從生理角度，焦慮是真實的神經反應，不是「想太多」。從認知角度，你對「冷淡」的解讀可能觸發了某個根深蒂固的意義——「這代表對方不在乎」。從發展角度，這個反應模式可能和你更早期的關係經驗有關。每個角度都能給你不同的出口，而不只是告訴你「別想了」。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>當你注意到自己的反應「超過了你覺得應該有的程度」，這通常是一個值得好奇的訊號，而不是需要壓制的問題。</b>問：這個反應在提醒我什麼？它在保護我不受什麼傷害？</li>
+          <li><b>試著用不同的鏡頭描述同一件事。</b>「我的身體在焦慮」（生理）、「我在解讀這件事代表……」（認知）、「我在一個讓我感到不安全的情境裡」（社會）——同一件事，不同的說法帶出不同的應對方向。</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <h2>五、心理學的研究方法</h2>
-    <p>心理學之所以是科學，關鍵在於它使用嚴謹的研究方法來收集與分析資料。以下是幾種常見的研究設計，各有適用的問題類型與限制：</p>
-    <p><strong>描述性研究</strong>的目的是如實記錄現象。自然觀察法在真實環境中觀察行為，盡量不干預；個案研究法對單一個案（個人、組織、事件）進行深入探討；問卷調查法則大量收集自我陳述資料。這類方法能描繪現象全貌，但無法確立因果關係。</p>
-    <p><strong>相關研究</strong>探討兩個或多個變項之間是否存在關聯，例如「睡眠時間與學業成績是否有相關？」相關係數從 −1 到 +1，數值越接近兩端，關聯越強。然而，即使高度相關，也不代表其中一個變項「造成」另一個——這就是著名的「<strong>相關不等於因果</strong>」原則。冰淇淋銷量與溺水人數高度相關，但吃冰淇淋並不會導致溺水，真正的原因是夏天氣溫高。</p>
-    <p><strong>實驗法</strong>是唯一能建立因果關係的研究方法。研究者操弄<strong>自變項</strong>（independent variable），觀察對<strong>依變項</strong>（dependent variable）的影響，同時嚴格控制其他可能的干擾因素（confounding variables）。將受試者隨機分派至實驗組與控制組，確保兩組在實驗前盡量相等，是實驗設計的核心邏輯。</p>
-    <p>研究倫理是心理學不可迴避的議題。涉及欺騙、壓力或隱私的研究必須通過倫理審查，確保受試者的知情同意、不受傷害，以及事後的充分說明（debriefing）。Milgram 實驗正是在這方面引發最大爭議的經典案例之一。</p>
-
-    <div class="case-study">
-      <span class="case-label">Case Study</span>
-      <h3>Milgram 服從實驗（1961）——情境的力量</h3>
-      <p>Stanley Milgram 在耶魯大學進行了一項震驚世界的實驗。受試者被要求擔任「老師」，對假扮「學生」的演員施以電擊懲罰——電壓從 15V 逐步升至標示「危險：嚴重電擊」的 450V。「學生」（實為演員）不斷發出哀嚎、求饒，甚至表示有心臟病——但只要穿著白袍的實驗者平靜指示「請繼續」，受試者往往就會照做。</p>
-      <p>結果令人震驚：<strong>高達 65% 的受試者</strong>在權威人士的指示下，一路按下了最高電壓。他們並非特別殘忍或道德低落的人，只是普通的紐哈芬市民。</p>
-      <p>這個實驗告訴我們：普通人在特定社會情境下，可以做出令人難以置信的服從行為。它顛覆了「只有壞人才會做壞事」的常識，揭示了<strong>情境的力量遠超過個人性格</strong>的心理學核心洞見——這正是後來社會心理學最重要的貢獻之一。</p>
+  <!-- 04 為什麼「聽起來有道理」不夠 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">為什麼「聽起來有道理」不夠</span>
     </div>
+    <p class="ch-intro">心理學被誤用的方式很多，最常見的一種是：把「聽起來有道理的說法」當成「被證實的事實」。MBTI、原生家庭決定論、某某書上說的「七個習慣」——這些不一定是錯的，但「感覺對」和「有研究支持」是兩件不同的事。</p>
 
-    <h2>六、心理學的應用領域</h2>
-    <p>心理學的知識並不只停留在學術象牙塔，它深入滲透到現代社會的各個角落：</p>
-    <p><strong>臨床心理學</strong>是最為人熟知的領域，臨床心理師透過評估與心理治療，協助人們處理憂鬱症、焦慮症、創傷後壓力症候群等心理問題。<strong>教育心理學</strong>研究學習、動機、記憶等機制，協助設計更有效的教學方法與學習環境。<strong>工業與組織心理學（I/O Psychology）</strong>應用於員工選拔、領導力培訓、職場壓力管理與團隊合作效能。</p>
-    <p><strong>健康心理學</strong>探討心理因素如何影響身體健康，例如長期壓力對免疫系統的削弱、慢性病患者的心理調適等。<strong>消費者心理學</strong>被廣泛應用於廣告設計、定價策略與使用者體驗；<strong>運動心理學</strong>幫助運動員建立心理韌性、維持專注狀態；<strong>法庭心理學</strong>協助評估犯罪動機、目擊者證詞可信度，以及受刑人的再犯風險。</p>
-    <p>無論你的職業是什麼，理解心理學都意味著更深刻地理解人——包括你周圍的人，以及你自己。這是這門學科最根本的價值所在。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你做了一個 MBTI 或某個性格測驗，得到一個描述，覺得「超準」，開始用那個標籤解釋自己的一切——「我就是 INFJ 所以才會這樣」「我就是這個類型的人」。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「超準」的感覺有一部分來自「巴納姆效應」——描述夠廣泛模糊，大多數人都能在其中找到自己。性格測驗可以是有用的自我觀察工具，但當它變成解釋自己為什麼做某件事的理由，或者劃定你「天生就是這樣」的界線，它開始限制你而不是幫助你。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>用性格工具作為觀察的起點，不是結論。</b>「這個描述說我傾向迴避衝突——我在哪些情況下確實這樣？在哪些情況下不是？」比「我就是這種人」更有用。</li>
+          <li><b>對任何心理學說法，養成問「這有證據嗎？怎麼測試它？」的習慣。</b>不是要你否定一切，而是讓你成為更好的判斷者——包括判斷心理學本身。</li>
+          <li><b>「確認偏誤」讓你只記得支持你想法的例子。</b>當你覺得某個說法「超準」，主動找一找：有沒有不符合的時候？那些例子說明了什麼？</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  </section>
+  <!-- 05 這十六週你會得到什麼 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">這十六週你會得到什麼</span>
+    </div>
+    <p class="ch-intro">這門課不是要讓你記住很多名詞和理論，而是讓這些知識改變你看待自己和他人的方式。每一週都圍繞一個核心問題——不是「這是什麼」，而是「這和我的生活有什麼關係」。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>單元</th>
+          <th>你會開始問的問題</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>大腦與神經科學</td>
+          <td>我的情緒反應背後有什麼生理機制？我的大腦可以改變嗎？</td>
+        </tr>
+        <tr>
+          <td>睡眠與意識</td>
+          <td>我的睡眠習慣如何影響我的判斷力和情緒？</td>
+        </tr>
+        <tr>
+          <td>感知與注意力</td>
+          <td>我每天「看不見」什麼？我的期待如何過濾了我的感知？</td>
+        </tr>
+        <tr>
+          <td>記憶</td>
+          <td>我的記憶有多可靠？它如何在塑造我的故事？</td>
+        </tr>
+        <tr>
+          <td>思維與決策</td>
+          <td>我的哪些決定其實是偏誤在做決定？</td>
+        </tr>
+        <tr>
+          <td>情緒</td>
+          <td>我的情緒在告訴我什麼？我如何更有效地調節它？</td>
+        </tr>
+        <tr>
+          <td>人際關係</td>
+          <td>依附風格如何影響我的關係模式？我如何建立更健康的連結？</td>
+        </tr>
+        <tr>
+          <td>心理健康</td>
+          <td>壓力、焦慮和低落是怎麼運作的？什麼真的有幫助？</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 1 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 01 — 認識心理學基礎</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 01 — 心理學基礎</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Psychology <span>心理學</span></li>
-      <li>Behavior <span>行為</span></li>
-      <li>Mental Process <span>心智歷程</span></li>
-      <li>Introspection <span>內省法</span></li>
-      <li>Behaviorism <span>行為主義</span></li>
-      <li>Psychoanalysis <span>精神分析</span></li>
-      <li>Humanism <span>人本主義</span></li>
-      <li>Cognitive Revolution <span>認知革命</span></li>
-      <li>Confirmation Bias <span>確認偏誤</span></li>
-      <li>Independent Variable <span>自變項</span></li>
-      <li>Dependent Variable <span>依變項</span></li>
-      <li>Eclecticism <span>折衷主義</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">本週核心問題</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">直覺</span>
+        <span class="qa-val">我對人的直覺判斷，有哪些可能是系統性的錯誤？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">情境</span>
+        <span class="qa-val">這個行為是性格造成的，還是情境造成的？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">證據</span>
+        <span class="qa-val">這個說法「聽起來對」，還是「有研究支持」？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">角度</span>
+        <span class="qa-val">我用什麼鏡頭在看這件事？換一個鏡頭會看到什麼？</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>1832</td><td>Wilhelm Wundt — 實驗心理學之父</td></tr>
-      <tr><td>1842</td><td>William James — 美國心理學之父</td></tr>
-      <tr><td>1856</td><td>Sigmund Freud — 精神分析創始人</td></tr>
-      <tr><td>1878</td><td>John B. Watson — 行為主義宣言</td></tr>
-      <tr><td>1904</td><td>B.F. Skinner — 操作制約理論</td></tr>
-      <tr><td>1908</td><td>Abraham Maslow — 需求層次理論</td></tr>
-      <tr><td>1928</td><td>Stanley Milgram — 服從實驗</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《改變心理學的40項研究》Roger Hock</td></tr>
-      <tr><td>書目</td><td>《心理學概論》David G. Myers</td></tr>
-      <tr><td>書目</td><td>《快思慢想》Daniel Kahneman</td></tr>
-      <tr><td>書目</td><td>《路西法效應》Philip Zimbardo</td></tr>
-      <tr><td>論文</td><td>Milgram, S. (1963). Behavioral study of obedience. <em>Journal of Abnormal and Social Psychology.</em></td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《改變心理學的40項研究》Roger Hock</td></tr>
+      <tr><td>書</td><td>《路西法效應》Philip Zimbardo</td></tr>
+      <tr><td>書</td><td>《快思慢想》Daniel Kahneman</td></tr>
+      <tr><td>書</td><td>《錯把太太當帽子的人》Oliver Sacks</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>在你的生活中，有哪些你一直以為「理所當然」的心理常識，讀完本週後開始懷疑它的正確性？你打算怎麼驗證它？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>表格裡五個「常識心理學」，有沒有哪一個是你以前相信的？你是怎麼形成那個信念的？知道研究發現的實際狀況之後，你的感受是什麼？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>Milgram 實驗顯示情境對行為影響極大。回想你的生活，有沒有哪個情境讓你做了「正常情況下不會做」的事？當時是什麼力量在驅使你？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>回想一次你做了一個「不像你」的決定，或者說了一句話後悔的話。當時的情境是什麼？有沒有可能情境因素的影響比你以為的更大？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>六大心理學派中，哪一個觀點最符合你目前對人類行為的直覺理解？你認為這個學派最大的局限是什麼？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>六個鏡頭裡，你平常最常用哪一個來理解自己？哪一個是你最少用、但可能對你最有幫助的？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>如果讓你設計一個實驗，研究你生活中感興趣的某個心理現象，你會選擇什麼主題？你的自變項與依變項各是什麼？要如何控制干擾變項？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你現在生活裡有什麼困惑或困擾，是你希望這門課能幫助你更好理解的？把它寫下來，學完十六週後再回來看，那時候你會怎麼看這個問題？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="index.html" class="page-link">&#8592; 課程總覽</a>
-  <span class="page-dot">1 / 16</span>
-  <a href="day2.html" class="page-link">Week 02 &#8594;</a>
+<div class="pager">
+  <a href="index.html">← 課程總覽</a>
+  <span class="pager-mid">01 / 16</span>
+  <a href="day2.html">Week 02 →</a>
 </div>
 
 <script>
-  const key = 'week-1';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-01';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

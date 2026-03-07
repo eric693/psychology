@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 03 — 意識、睡眠與夢境</title>
+  <title>Week 03 — 睡眠與意識</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,253 +80,246 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .case-study p {
-      font-size: 0.9rem;
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
       font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
-    }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* SLEEP STAGE TIMELINE */
-    .sleep-stages {
-      margin: 1.8rem 0;
-      border: 1px solid var(--rule);
-    }
-    .sleep-stage-row {
-      display: grid;
-      grid-template-columns: 8rem 1fr auto;
-      gap: 1.2rem;
-      padding: 1rem 1.4rem;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
       border-bottom: 1px solid var(--rule);
-      align-items: center;
     }
-    .sleep-stage-row:last-child { border-bottom: none; }
-    .stage-name {
+    .act-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--ink);
-      letter-spacing: 0.06em;
-    }
-    .stage-name .stage-type {
-      display: block;
-      font-size: 0.62rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--red);
-      letter-spacing: 0.1em;
-      margin-top: 0.2rem;
+      margin-bottom: 0.75rem;
     }
-    .stage-desc {
-      font-size: 0.87rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--ink-mid);
-    }
-    .stage-brainwave {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--ink-light);
-      text-align: right;
-      white-space: nowrap;
-    }
-    /* COMPARE TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* CONSCIOUSNESS SPECTRUM */
-    .spectrum {
-      margin: 1.8rem 0;
-    }
-    .spectrum-item {
-      display: grid;
-      grid-template-columns: 11rem 1fr;
-      gap: 1.2rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .spectrum-item:first-child { border-top: 1px solid var(--rule); }
-    .spectrum-state {
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .spectrum-desc {
-      font-size: 0.88rem;
       font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
+      line-height: 1.76;
+      color: var(--mid);
     }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
-    }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--rule);
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    /* REFLECTION */
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
-      align-items: baseline;
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* SLEEP STAGES TABLE */
+    .stage-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .stage-table th {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .stage-table td {
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .stage-table tr:last-child td { border-bottom: none; }
+    .stage-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .stage-table tr.highlight td { background: rgba(192,57,43,0.04); }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -341,8 +329,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -351,289 +340,351 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .sleep-stage-row { grid-template-columns: 1fr; gap: 0.4rem; }
-      .stage-brainwave { text-align: left; }
-      .spectrum-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .hero-num { display: none; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 03 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 03 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 01 &nbsp;—&nbsp; 認識心理學基礎</p>
-    <h1>意識、睡眠<br>與<em>夢境的心理學</em></h1>
-    <p class="hero-sub">每天你有三分之一的時間處於睡眠之中，每晚你幾乎必然做夢，卻在清醒後迅速遺忘。意識是什麼？睡眠為何不可或缺？夢又究竟從何而來、有何意義？本週帶你進入這片既熟悉又神秘的心理領域。</p>
+    <p class="eyebrow">Unit 01 &nbsp;—&nbsp; 認識心理學基礎</p>
+    <h1>睡眠與意識：<br><em>你有多需要睡覺？</em></h1>
+    <p class="hero-sub">你可能覺得少睡一點沒什麼大不了——「撐過去就好」。但睡眠研究說的是另一件事：睡眠不只是休息，它是大腦處理記憶、調節情緒、清除廢物的關鍵時間。你削減的每一小時，都有代價。</p>
   </div>
-  <div class="hero-number">03</div>
+  <div class="hero-num">03</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解意識的定義與各種意識狀態的連續光譜，包括清醒、催眠、冥想與藥物改變的意識</span></li>
-      <li><span class="num">02</span><span>認識睡眠的生理機制：晝夜節律、睡眠週期、各睡眠階段的腦波特徵與功能</span></li>
-      <li><span class="num">03</span><span>了解睡眠剝奪對認知、情緒與身體健康的多重影響</span></li>
-      <li><span class="num">04</span><span>比較並評估夢境的主要心理學理論：Freud 的願望實現論、活化合成論、威脅模擬論等</span></li>
-      <li><span class="num">05</span><span>認識常見睡眠障礙的成因與影響，包括失眠、睡眠呼吸中止症、夢遊與猝睡症</span></li>
-    </ul>
-  </section>
+  <!-- 01 你為什麼會想睡覺 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你為什麼會想睡覺？</span>
+    </div>
+    <p class="ch-intro">睡意不是「意志力不夠」，它是兩套生理系統的運作結果。了解這兩套系統，你才能理解為什麼有些睡眠習慣有效，有些只是在騙自己。</p>
 
-  <section class="prose">
-
-    <h2>一、什麼是意識？</h2>
-    <p>意識（consciousness）是心理學與哲學中最難以定義、也最難以研究的概念之一。哲學家 David Chalmers 稱它為「意識的困難問題（the hard problem of consciousness）」：我們可以解釋大腦如何處理資訊、整合感官輸入、控制行為——但我們很難解釋，為什麼這些物理過程會伴隨著主觀的<strong>「感覺」（qualia）</strong>。看見紅色的感覺、品嚐咖啡的滋味、感受到疼痛的體驗——這些主觀質感從何而來？</p>
-    <p>從心理學的角度，意識可以定義為：<strong>對自身及環境的覺察（awareness of oneself and one's environment）</strong>。這個定義看似簡單，卻涵蓋了極為廣泛的狀態。意識並非只有「清醒」和「睡著」兩種狀態，而是一個連續的光譜，從高度專注到輕度分心，從淺眠到深度睡眠，從自然清醒到藥物誘發的改變狀態，都位於這個光譜的不同位置。</p>
-
-    <div class="spectrum">
-      <div class="spectrum-item">
-        <span class="spectrum-state">高度專注意識</span>
-        <span class="spectrum-desc">心流狀態（flow）：全神貫注於某項挑戰性任務，時間感消失，自我意識降低，表現達到最佳狀態。由 Csikszentmihalyi 提出。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">一般清醒狀態</span>
-        <span class="spectrum-desc">日常生活中的清醒意識，注意力在多個目標間切換，受到念頭、情緒與外界刺激的持續干擾。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">白日夢／走神</span>
-        <span class="spectrum-desc">注意力從外部任務轉向內部思緒，研究顯示人們約有 47% 的清醒時間處於某種程度的走神狀態（Killingsworth &amp; Gilbert, 2010）。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">冥想狀態</span>
-        <span class="spectrum-desc">透過訓練主動調節注意力，EEG 顯示冥想者大腦的 alpha 波與 theta 波增強，前額葉活動改變，具有可測量的神經效應。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">催眠狀態</span>
-        <span class="spectrum-desc">透過暗示誘發的高度受暗示性狀態，受試者注意力高度集中於催眠師指引，批判性思考暫時降低。並非「失去控制」，而是一種專注的窄化。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">藥物改變意識</span>
-        <span class="spectrum-desc">酒精、大麻、迷幻藥等物質透過作用於特定神經傳導系統，改變感知、情緒與認知處理模式，提供了研究意識機制的獨特視窗。</span>
-      </div>
-      <div class="spectrum-item">
-        <span class="spectrum-state">睡眠與夢境</span>
-        <span class="spectrum-desc">意識最深度的自然改變狀態。睡眠並非均一的「關機」，而是由多個不同意識水平的階段組成的動態過程。</span>
-      </div>
+    <div class="simple-table">
+      <table class="simple-table">
+        <thead>
+          <tr>
+            <th>系統</th>
+            <th>運作方式</th>
+            <th>生活裡的意義</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>生理時鐘（晝夜節律）</td>
+            <td>大腦內建的約 24 小時時鐘，靠光線校準。天黑後分泌褪黑激素，告訴身體「該睡了」</td>
+            <td>這就是為什麼你在固定時間會自然有睡意，以及為什麼熬夜後「第二天白天反而不睏」——時鐘還在走</td>
+          </tr>
+          <tr>
+            <td>睡眠壓力（腺苷累積）</td>
+            <td>清醒的每分鐘，大腦累積越來越多腺苷，造成越來越強的睡意。睡眠清除它</td>
+            <td>咖啡因阻斷腺苷受體，讓你感覺不到睡意——但腺苷還在。咖啡因退了，睡意「借來的帳」一起回來</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="pull-quote">
-      <p>「睡眠是死亡的弟弟。但與其弟弟不同，它是可逆的——而且每一次醒來，都像是一次微型的重生。」</p>
-      <cite>— Matthew Walker，《為什麼要睡覺？》，2017</cite>
-    </div>
-
-    <h2>二、睡眠的生物學基礎</h2>
-    <p>睡眠並非被動的休息，而是一個主動、複雜的生理過程。控制睡眠的機制有兩個主要系統：<strong>晝夜節律（circadian rhythm）</strong>與<strong>睡眠驅力（sleep drive / homeostatic pressure）</strong>。</p>
-    <p>晝夜節律是人體內建的大約 24 小時生理時鐘，由大腦下視丘的<strong>視交叉上核（suprachiasmatic nucleus, SCN）</strong>控制。當眼睛偵測到光線時，SCN 接收訊號並抑制松果體分泌<strong>褪黑激素（melatonin）</strong>；天黑後，褪黑激素大量分泌，向全身發出「夜晚來臨、準備入睡」的信號。現代人大量使用藍光螢幕（手機、電腦、電視），會直接干擾褪黑激素分泌，是現代睡眠問題的重要成因之一。</p>
-    <p>睡眠驅力則是另一套機制：清醒的每一分鐘，大腦中的腺苷（adenosine）會持續累積，造成越來越強的睡意。咖啡因的作用機制正是<strong>阻斷腺苷受體</strong>，讓你感覺不到睡意——但它並未消除腺苷本身，一旦咖啡因代謝完畢，積累的腺苷就會湧現，形成「咖啡因崩潰」。</p>
-
-    <h2>三、睡眠的階段</h2>
-    <p>一個完整的睡眠週期約 90 分鐘，一夜中會重複 4–6 次。每個週期由不同的睡眠階段組成，各有其腦波特徵、生理狀態與功能。早期的睡眠週期以深度睡眠為主，後期則以 REM 睡眠為主——這解釋了為什麼在睡眠不足時剝奪的往往是記憶鞏固與情緒調節最關鍵的 REM 睡眠。</p>
-
-    <div class="sleep-stages">
-      <div class="sleep-stage-row">
-        <div class="stage-name">入睡期<span class="stage-type">NREM Stage 1</span></div>
-        <div class="stage-desc">清醒與睡眠的過渡，持續數分鐘。肌肉偶有抽動（hypnic jerk，入睡抽動），這是正常的神經現象。易被喚醒，醒後往往不覺得自己睡著過。</div>
-        <div class="stage-brainwave">Alpha → Theta 波</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你今天喝了三杯咖啡，撐過了一天。晚上十一點，你覺得還好，不算很累，決定再工作一個小時。凌晨一點還是睡不著，繼續滑手機到兩點多才睡著。</p>
       </div>
-      <div class="sleep-stage-row">
-        <div class="stage-name">淺眠期<span class="stage-type">NREM Stage 2</span></div>
-        <div class="stage-desc">佔整晚睡眠約 50%。出現「睡眠紡錘波（sleep spindles）」與「K 複合波」，這些腦波活動被認為與記憶鞏固有關。體溫下降，心率減慢。</div>
-        <div class="stage-brainwave">Theta 波 + 紡錘波</div>
-      </div>
-      <div class="sleep-stage-row">
-        <div class="stage-name">深眠期<span class="stage-type">NREM Stage 3</span></div>
-        <div class="stage-desc">也稱「慢波睡眠（slow-wave sleep）」，是睡眠中最難被喚醒的階段。生長激素在此時大量分泌，免疫系統修復、細胞再生、體力恢復均在此發生。剝奪此期會造成身體疲憊。</div>
-        <div class="stage-brainwave">Delta 波（高振幅）</div>
-      </div>
-      <div class="sleep-stage-row">
-        <div class="stage-name">快速動眼期<span class="stage-type">REM Sleep</span></div>
-        <div class="stage-desc">眼球在眼瞼下快速移動，大腦活動接近清醒狀態，但全身骨骼肌幾乎完全癱瘓（防止夢境中行動）。大多數生動夢境發生於此。對情緒記憶的鞏固、創意思考與情緒調節至關重要。</div>
-        <div class="stage-brainwave">Beta / Gamma 波</div>
+      <div class="scard-body">
+        <p class="why">下午的咖啡讓你感覺不到腺苷累積的睡意，但腺苷沒有消失。晚上手機的藍光抑制了褪黑激素，生理時鐘收不到「天黑了」的訊號。兩個系統都被干擾了，所以你既不覺得睏、又睡不好，隔天還是累——但你的感覺告訴你「我好像還好」。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>下午兩點之後盡量不喝咖啡。</b>咖啡因的半衰期約五到六小時，下午三點喝的咖啡，到晚上九點還有一半在血液裡。你感覺睡得著，但深度睡眠品質已經被影響了。</li>
+          <li><b>睡前一小時調暗環境光，手機螢幕開夜間模式或調低亮度。</b>藍光干擾褪黑激素分泌——這不是迷信，是生理機制。給大腦一個「天黑了」的訊號，才能啟動入睡流程。</li>
+          <li><b>固定起床時間比固定入睡時間更重要。</b>每天同一時間起床，讓生理時鐘保持穩定，入睡反而會跟著變規律。</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <h2>四、睡眠為何不可或缺？</h2>
-    <p>現代社會普遍存在「睡眠不足」的問題，許多人將削減睡眠視為提升生產力的手段。神經科學的研究結果對此提出了嚴厲的警告。Matthew Walker 在其著作《為什麼要睡覺？》中整理了大量研究，指出睡眠對健康的影響幾乎是全面性的。</p>
-    <p><strong>認知功能</strong>方面：睡眠剝奪會損害注意力、工作記憶、決策品質與反應速度。連續 17 小時不睡覺的認知損害，相當於血液酒精濃度 0.05%；連續 24 小時不睡相當於 0.10%——已超過多數地區的酒駕標準。更諷刺的是，嚴重睡眠不足的人往往感覺不到自己已受損。</p>
-    <p><strong>記憶鞏固</strong>方面：學習後的睡眠是將短期記憶轉化為長期記憶的關鍵窗口。REM 睡眠特別有助於程序性記憶（技能學習）與情緒性記憶的整合；慢波睡眠則鞏固陳述性記憶（事實與知識）。「熬夜讀書」的效果，往往遠不如「讀書後好好睡一覺」。</p>
-    <p><strong>身體健康</strong>方面：長期睡眠不足與肥胖、糖尿病、心血管疾病、癌症風險上升及免疫功能下降都有顯著關聯。睡眠期間大腦的<strong>膠淋巴系統（glymphatic system）</strong>會加速清除代謝廢物，包括與阿茲海默症有關的 β-澱粉樣蛋白。睡得少，等於讓大腦的「垃圾清運車」工作時間減半。</p>
-
-    <div class="case-study">
-      <span class="case-label">Case Study</span>
-      <h3>Randy Gardner 的 264 小時不眠實驗（1964）</h3>
-      <p>1964 年，17 歲的高中生 Randy Gardner 為了科展，在科學監督下挑戰連續不眠的世界紀錄，持續了整整 264 小時（11 天）。睡眠研究先驅 William Dement 全程記錄了他的生理與心理變化。</p>
-      <p>第 2 天起，Gardner 出現視覺模糊與短期記憶障礙；第 4 天出現幻覺，將路牌看成人；第 6 天以後，語言表達開始變得混亂，情緒極度不穩；第 10 天時，他幾乎無法完成簡單的減法運算，並持續出現偏執念頭。</p>
-      <p>實驗結束後，Gardner 睡了 14 小時 40 分鐘，之後的恢復睡眠中出現大量補償性 REM 睡眠（REM rebound）。他的案例首次以受控方式記錄了極端睡眠剝奪對認知與精神狀態的系統性影響，也讓科學界更嚴肅地看待睡眠的不可替代性。</p>
+  <!-- 02 睡覺的時候大腦在做什麼 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">睡覺的時候，大腦在做什麼？</span>
     </div>
+    <p class="ch-intro">睡著不是大腦關機。睡著是大腦切換到一套不同的工作模式——整理記憶、修復身體、清除白天累積的代謝廢物。你睡著的每個小時，大腦都在忙。</p>
 
-    <h2>五、夢境的理論</h2>
-    <p>人類對夢境著迷已久。古埃及人將夢視為神明的啟示；古希臘的醫神廟宇以「孵夢」作為治療儀式；直到二十世紀，科學才開始以較為嚴謹的方式研究這個古老的謎題。目前存在幾種主要的夢境理論，各有其支持者與批評者。</p>
-    <p><strong>Freud 的願望實現論（1900）</strong>是最廣為人知的夢境理論。Freud 認為夢是通往潛意識的「皇家道路」，是被壓抑的願望、恐懼與衝突在放鬆的睡眠中尋求偽裝表達的途徑。他區分夢的<strong>顯夢（manifest content）</strong>（實際夢到的內容）與<strong>隱夢（latent content）</strong>（象徵背後的潛意識意涵）。然而，這個理論難以用科學方法驗證，現代研究者多持保留態度。</p>
-    <p><strong>活化合成論（Activation-Synthesis Theory，Hobson &amp; McCarley, 1977）</strong>則提出截然不同的觀點：夢並無深刻意義，只是大腦在 REM 睡眠期間對隨機神經活動的「事後解釋」。腦幹隨機激發各種神經訊號，大腦皮質試圖將這些片段拼湊成有敘事結構的故事——這就是夢。夢境的奇異性，正是因為原始材料是隨機訊號。</p>
-    <p><strong>威脅模擬論（Threat Simulation Theory，Revonsuo, 2000）</strong>從演化角度切入，認為夢境是大腦模擬危險情境的「演習系統」，讓個體在安全環境中練習應對威脅。這可以解釋為何噩夢與危險情境的夢境在各文化中都普遍存在。</p>
-    <p><strong>記憶整合論</strong>則與神經科學研究較為一致：夢境是大腦在睡眠中整合與重新處理日間經歷的副產品，尤其是情緒性記憶的處理。REM 睡眠期間，杏仁核高度活躍，前額葉皮質相對抑制，這可能解釋了夢境情緒強烈但邏輯性低的特徵。</p>
-
-    <table class="compare-table">
+    <table class="stage-table">
       <thead>
         <tr>
-          <th>理論</th>
-          <th>核心主張</th>
-          <th>科學支持程度</th>
+          <th>階段</th>
+          <th>身體狀況</th>
+          <th>大腦在做什麼</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Freud 願望實現論</td>
-          <td>夢是偽裝的潛意識願望</td>
-          <td>低——難以證偽，缺乏神經科學依據</td>
+          <td>淺眠（NREM 1–2）</td>
+          <td>體溫下降，心跳減慢，容易被喚醒</td>
+          <td>從清醒過渡，開始記憶整合的準備工作</td>
         </tr>
-        <tr>
-          <td>活化合成論</td>
-          <td>夢是腦幹隨機訊號的皮質解釋</td>
-          <td>中——解釋夢的奇異性，但過度簡化</td>
+        <tr class="highlight">
+          <td>深眠（NREM 3）</td>
+          <td>最難被喚醒，生長激素大量分泌</td>
+          <td>身體修復、免疫系統作業、事實性記憶鞏固。剝奪這個階段你隔天身體會很疲憊</td>
         </tr>
-        <tr>
-          <td>威脅模擬論</td>
-          <td>夢是演化出的危險情境演練</td>
-          <td>中——與跨文化夢境研究一致</td>
-        </tr>
-        <tr>
-          <td>記憶整合論</td>
-          <td>夢是睡眠記憶鞏固的副產品</td>
-          <td>高——與 REM 睡眠神經科學研究一致</td>
+        <tr class="highlight">
+          <td>快速動眼（REM）</td>
+          <td>眼球快速移動，全身肌肉暫時癱瘓，大腦活動接近清醒</td>
+          <td>情緒記憶整合、創意連結、情緒調節。大多數生動的夢發生在這個階段。剝奪 REM 睡眠情緒管控最受影響</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>六、常見睡眠障礙</h2>
-    <p><strong>失眠症（insomnia）</strong>是最普遍的睡眠障礙，特徵是難以入睡、難以維持睡眠或早醒，且伴隨白天功能損害。全球約 10–15% 的成人患有慢性失眠。認知行為治療（CBT-I）被認為是比安眠藥更有效、更持久的一線治療方式，它針對失眠者常見的錯誤睡眠信念與行為模式進行干預。</p>
-    <p><strong>睡眠呼吸中止症（sleep apnea）</strong>患者在睡眠中因上呼吸道反覆阻塞而短暫停止呼吸，每小時可發生數十次，嚴重片段化睡眠品質。患者白天極度嗜睡，長期可能引發心血管問題。肥胖、男性與年齡增長是主要風險因子。</p>
-    <p><strong>猝睡症（narcolepsy）</strong>是一種慢性神經系統疾病，患者在白天會突然陷入無法控制的睡眠，並可能在情緒激動時發生全身肌肉突然癱軟（猝倒症 cataplexy）。研究顯示這與下視丘分泌素（orexin）神經元的喪失有關，可能是自體免疫反應所致。</p>
-    <p><strong>夢遊（somnambulism）</strong>發生於深度 NREM 睡眠（慢波睡眠）而非 REM 睡眠，患者在睡眠中起身行走，眼睛可能睜開但實際上未有意識，醒後對夢遊過程毫無記憶。兒童比成人更常見，與遺傳有一定關聯。流行文化中「不能叫醒夢遊者」的說法並不正確，但喚醒時需輕柔，因為突然驚醒可能使他們感到困惑與恐懼。</p>
+    <p class="ch-intro" style="margin-top:0.5rem; margin-bottom:0;">一個完整的睡眠週期約 90 分鐘。前幾個週期深眠比較多，後幾個週期 REM 比較多——這代表如果你只睡六小時（少了後面兩個週期），你損失的主要是 REM 睡眠，而 REM 正是情緒調節最關鍵的部分。</p>
+  </div>
 
-  </section>
+  <!-- 03 睡眠不足對你的影響 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">睡眠不足對你的影響，比你以為的更大</span>
+    </div>
+    <p class="ch-intro">最令人不安的睡眠研究發現，不是「睡眠不足會損害你」——而是「嚴重睡眠不足的人感覺不到自己已經損害了」。你的感覺不是可靠的指標。</p>
+
+    <div class="pquote">
+      <p>連續 17 小時不睡覺的認知損害，相當於血液酒精濃度 0.05%。連續 24 小時不睡，相當於酒駕標準。而且和喝酒不同——你感覺不到自己已經到了那個程度。</p>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你最近睡眠不規律，每晚大約只睡五到六小時。你覺得自己已經「習慣了」，不像剛開始那麼累了。你認為自己是那種睡少一點也沒關係的人。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「已經習慣了」是睡眠不足最危險的錯覺。研究顯示，長期睡眠不足的人主觀上感覺越來越沒那麼累，但客觀的認知測試分數持續下降。你的大腦失去了感知自己損害程度的能力。你不是「睡少沒事」，是你的偵測系統也壞了。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>不要用「有沒有感覺累」來評估你的睡眠是否足夠，而是用行為指標。</b>你對別人更容易失去耐心嗎？小事更容易覺得煩？需要更多咖啡才能維持功能？這些是睡眠不足的訊號，比「我感覺還好」更可靠。</li>
+          <li><b>試著在一個放假的週末，不設鬧鐘，讓自己自然醒。</b>如果你睡了超過九小時，你的身體在補欠的債。那個數字就是你的睡眠赤字的一部分。</li>
+          <li><b>週末補眠有用，但無法完全抵銷工作日的睡眠損失。</b>補眠可以恢復一部分認知功能，但對某些損害（特別是情緒調節）的恢復很有限。最好的策略是每天睡夠，不是週末大補。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">考試或重要截止日前，你習慣熬夜讀書到凌晨二、三點。你覺得這樣讀書時間更多，應該記得更多。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">睡眠是記憶從短期轉換成長期的關鍵步驟。深眠鞏固你學到的事實，REM 睡眠整合情緒性記憶和技能。熬夜讀的東西，如果沒有足夠的睡眠，很多在隔天就消失了——你讀了，但沒有存進去。「讀四小時睡七小時」通常比「讀七小時睡四小時」記得更多。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把「讀完再睡」改成「讀到某個點，留足夠的睡眠時間」。</b>七到八小時的睡眠是記憶鞏固的最低需求，不是奢侈品。</li>
+          <li><b>睡前複習你最想記住的東西。</b>入睡前的記憶在睡眠中最先被鞏固。把最重要的內容放在入睡前的最後一段複習，效果好於把它夾在中間。</li>
+          <li><b>考試前一晚的睡眠比考試前一週的任何一次讀書都重要。</b>考試前一晚硬讀新內容，而犧牲睡眠，得不償失。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 你睡不好，可能是這些原因 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">你睡不好，可能是這些原因</span>
+    </div>
+    <p class="ch-intro">「明明很累，就是睡不著」「半夜一直醒來」「睡了還是沒精神」——這些不一定是失眠症，很多時候是生活習慣干擾了睡眠系統的正常運作。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>問題</th>
+          <th>可能原因</th>
+          <th>可以怎麼調整</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>躺下睡不著</td>
+          <td>睡眠壓力不足（白天睡太多）、生理時鐘偏移、睡前螢幕刺激、焦慮情緒帶進床上</td>
+          <td>固定起床時間；睡前一小時不用螢幕；擔心的事寫下來，讓大腦放下它；白天不要補眠超過 20 分鐘</td>
+        </tr>
+        <tr>
+          <td>半夜醒來、難以再入睡</td>
+          <td>睡眠環境溫度偏高、下午咖啡因殘留、酒精（讓你快速入睡但破壞後半夜睡眠）</td>
+          <td>降低臥室溫度（約 18–20°C 最佳）；下午後不喝咖啡；睡前飲酒雖然讓你快點睡著，但品質下降</td>
+        </tr>
+        <tr>
+          <td>睡夠了還是累</td>
+          <td>睡眠呼吸中止（自己不知道）、睡眠品質差而非時間不足、長期情緒疲憊</td>
+          <td>如果持續發生，特別是伴隨打鼾，考慮睡眠檢測；區分「身體累」和「心理累」——後者靠睡覺無法完全恢復</td>
+        </tr>
+        <tr>
+          <td>很早醒來睡不著</td>
+          <td>生理時鐘前移（常見於年齡增長）、憂鬱相關的早醒</td>
+          <td>如果同時伴隨持續的低落情緒，早醒可能是需要留意的訊號，建議和醫師談</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你長期失眠，試過很多方法都沒用。你開始害怕上床睡覺，躺下去就開始焦慮「今晚又要睡不著了」。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這是失眠症常見的惡性循環：睡不好→對睡覺產生焦慮→焦慮讓大腦更難放鬆→更睡不好。床變成了觸發焦慮的提示，而不是放鬆的地方。認知行為治療失眠（CBT-I）對這個模式最有效，效果比安眠藥更持久。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>只在感覺睏的時候才上床。</b>不要「提早去床上休息」——床不是用來躺著擔心睡不著的地方。讓大腦重新學習「床 = 睡覺」的連結。</li>
+          <li><b>躺超過 20 分鐘睡不著，起來做一件低刺激的事，等真的睏了再回去。</b>繼續躺著焦慮只會讓情況更糟，起來打破這個循環。</li>
+          <li><b>如果失眠已經嚴重影響白天的功能超過幾週，考慮找睡眠專科或心理師。</b>CBT-I 是有充分研究支持的非藥物治療，值得認真考慮。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 夢是什麼 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">夢是什麼，為什麼你做那些夢？</span>
+    </div>
+    <p class="ch-intro">科學上對夢沒有唯一的答案，但目前最有神經科學支持的理解是：夢不是隨機的雜訊，也不一定是「潛意識在傳達訊息」，而更像是大腦在整理和處理白天的情緒與記憶的過程。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你最近工作壓力很大，連續好幾晚做了焦慮的夢——被追、考試沒準備好、迷路、遲到。你在想這些夢是不是在告訴你什麼。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這些焦慮主題的夢很可能和你白天的壓力狀態直接相關。REM 睡眠期間，負責情緒的杏仁核高度活躍，大腦在重新處理你白天的情緒體驗——壓力大的時候，那些材料就會以焦慮場景的形式出現。這不是預兆，而是大腦在嘗試消化你正在承受的東西。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把夢當成情緒指標，而不是預言。</b>如果你連續幾晚做焦慮的夢，值得問的是：「我白天有什麼東西還沒有處理？」夢的內容可以作為了解自己情緒狀態的線索。</li>
+          <li><b>睡前的情緒狀態會影響夢境。</b>如果你在很焦慮的時候入睡，大腦有更多需要處理的焦慮材料。睡前做一些讓神經系統安靜下來的事——寫下擔心的事、做幾分鐘的深呼吸——可以稍微改變這個狀態。</li>
+          <li><b>夢境的意義沒有統一的解碼字典。</b>「夢到牙齒掉了代表……」這類說法沒有科學根據。如果某個夢讓你感到不安，更有用的問法是：「這個夢讓我感受到什麼情緒？那個情緒和我最近生活裡的什麼有關？」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 3 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 01 — 認識心理學基礎</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 01 — 心理學基礎</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Consciousness <span>意識</span></li>
-      <li>Qualia <span>感覺質</span></li>
-      <li>Circadian Rhythm <span>晝夜節律</span></li>
-      <li>Melatonin <span>褪黑激素</span></li>
-      <li>Adenosine <span>腺苷</span></li>
-      <li>NREM Sleep <span>非快速動眼睡眠</span></li>
-      <li>REM Sleep <span>快速動眼睡眠</span></li>
-      <li>Slow-wave Sleep <span>慢波睡眠</span></li>
-      <li>Sleep Spindles <span>睡眠紡錘波</span></li>
-      <li>Glymphatic System <span>膠淋巴系統</span></li>
-      <li>Manifest Content <span>顯夢</span></li>
-      <li>Latent Content <span>隱夢</span></li>
-      <li>REM Rebound <span>REM 補償反彈</span></li>
-      <li>Insomnia <span>失眠症</span></li>
-      <li>Narcolepsy <span>猝睡症</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">睡眠數字</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">建議</span>
+        <span class="qa-val">成人每晚 7–9 小時</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">週期</span>
+        <span class="qa-val">一個睡眠週期約 90 分鐘</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">咖啡因</span>
+        <span class="qa-val">半衰期約 5–6 小時，下午 2 點後盡量不喝</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">臥室溫度</span>
+        <span class="qa-val">約 18–20°C 最有助於深眠</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">螢幕</span>
+        <span class="qa-val">睡前 1 小時調暗或開夜間模式</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Sleep by Numbers</span>
-    <table class="meta-table">
-      <tr><td>建議</td><td>成人每晚建議睡眠 7–9 小時（美國睡眠醫學會）</td></tr>
-      <tr><td>週期</td><td>一個完整睡眠週期約 90 分鐘</td></tr>
-      <tr><td>REM</td><td>REM 睡眠佔整晚約 20–25%</td></tr>
-      <tr><td>夢境</td><td>每人每晚平均做 4–6 個夢</td></tr>
-      <tr><td>遺忘</td><td>醒後 5 分鐘內遺忘 50% 夢境內容</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《為什麼要睡覺？》Matthew Walker</td></tr>
-      <tr><td>書目</td><td>《夢的解析》Sigmund Freud</td></tr>
-      <tr><td>書目</td><td>《意識探秘》Francis Crick</td></tr>
-      <tr><td>論文</td><td>Hobson, J.A. &amp; McCarley, R.W. (1977). The brain as a dream state generator.</td></tr>
-      <tr><td>論文</td><td>Revonsuo, A. (2000). The reinterpretation of dreams: An evolutionary hypothesis.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《為什麼要睡覺？》Matthew Walker</td></tr>
+      <tr><td>書</td><td>《睡眠革命》Nick Littlehales</td></tr>
+      <tr><td>書</td><td>《大腦喜歡這樣學》Barbara Oakley</td></tr>
+      <tr><td>書</td><td>《情緒大腦的秘密檔案》Joseph LeDoux</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>回顧你過去一週的睡眠狀況。你平均每晚睡幾小時？有沒有睡眠不足的跡象出現在你的日常功能上（情緒、專注力、決策）？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>你上一個完全放鬆、不設鬧鐘的假期，你自然醒來大概睡了幾小時？那個數字和你平常工作日的睡眠時間相比，差了多少？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>四個夢境理論中，你覺得哪一個最能解釋你自己做過的夢？試著回想一個印象深刻的夢，分別用 Freud 的理論和活化合成論來解釋它，你覺得哪個更有說服力？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你有沒有注意到睡眠不足對你情緒的影響——更容易煩躁、更難對別人有耐心？你覺得你身邊的人有沒有感受到這個差異？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>意識的「困難問題」是哲學上最深刻的謎題之一：為什麼物理過程會產生主觀體驗？你對這個問題有什麼直覺？你認為意識可以被完全以神經科學解釋嗎？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你現在的睡前習慣是什麼？根據今天讀到的，哪一個習慣最可能在干擾你的睡眠品質？你願意這週改變一件小事試試看嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>睡眠研究顯示，「熬夜讀書」的記憶效果不如「讀後好好睡覺」。這個發現如何改變你對學習策略的看法？你打算如何調整自己的學習與睡眠安排？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你最近的夢讓你感受到什麼情緒？如果把那個情緒當成線索，它可能和你生活裡正在承受或還沒處理的什麼有關？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day2.html" class="page-link">&#8592; Week 02</a>
-  <span class="page-dot">3 / 16</span>
-  <a href="day4.html" class="page-link">Week 04 &#8594;</a>
+<div class="pager">
+  <a href="day2.html">← Week 02</a>
+  <span class="pager-mid">03 / 16</span>
+  <a href="day4.html">Week 04 →</a>
 </div>
 
 <script>
-  const key = 'week-3';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-03';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

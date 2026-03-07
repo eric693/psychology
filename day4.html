@@ -7,24 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,249 +80,231 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
     }
-    .case-study p {
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
+      line-height: 1.76;
+      color: var(--mid);
     }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* PROCESS STEPS */
-    .process-steps { margin: 1.8rem 0; }
-    .process-step {
-      display: grid;
-      grid-template-columns: 3rem 1fr;
-      gap: 1.2rem;
-      padding: 1.1rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .process-step:first-child { border-top: 1px solid var(--rule); }
-    .step-num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--red);
-      line-height: 1;
-    }
-    .step-content {}
-    .step-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-    .step-desc {
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-    }
-    /* GESTALT GRID */
-    .principle-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .principle-item {
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--rule);
-    }
-    .principle-name {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.25rem;
-    }
-    .principle-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 0.55rem;
-    }
-    .principle-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-    }
-    /* ATTENTION TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
-    }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--rule);
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
-      align-items: baseline;
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* PERCEPTION GRID — 3 cols */
+    .perc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .perc-cell { background: var(--card); padding: 1rem 1.1rem; }
+    .perc-head { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem; }
+    .perc-body { font-size: 0.83rem; font-weight: 300; line-height: 1.68; color: var(--mid); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      align-items: baseline;
+    }
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -337,8 +314,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -347,274 +325,334 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .principle-grid { grid-template-columns: 1fr; }
+      .hero-num { display: none; }
+      .perc-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 04 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 04 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
-    <h1>感知與注意力：<br><em>我們如何解讀世界</em></h1>
-    <p class="hero-sub">你以為你看見的就是真實存在的，但事實並非如此。大腦每秒接收超過一千萬個感覺訊號，卻只有極少數能進入意識。感知是主動建構而非被動接收，注意力是稀缺資源而非理所當然。本週帶你重新審視「看見」這件事。</p>
+    <p class="eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
+    <h1>感知與注意力：<br><em>你看見的不是真實</em></h1>
+    <p class="hero-sub">你以為你看見了眼前發生的一切——但你沒有。大腦每秒接收無數訊號，卻只讓極少數進入意識，其餘的全部被過濾掉。更驚人的是：就算是「進入意識」的部分，也不是真實的複製，而是大腦根據期待和經驗重新建構出來的版本。</p>
   </div>
-  <div class="hero-number">04</div>
+  <div class="hero-num">04</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>區分感覺（sensation）與感知（perception）的差異，理解感知是主動建構的過程</span></li>
-      <li><span class="num">02</span><span>認識感覺的基本測量概念：絕對閾值、差異閾值與訊號偵測理論</span></li>
-      <li><span class="num">03</span><span>了解格式塔（Gestalt）心理學的主要感知組織原則</span></li>
-      <li><span class="num">04</span><span>理解注意力的性質、限制與選擇性機制，包括雞尾酒會效應與非意識注意</span></li>
-      <li><span class="num">05</span><span>認識非意識注意（inattentional blindness）與變化盲視（change blindness）的現象及其意義</span></li>
-      <li><span class="num">06</span><span>了解由上而下與由下而上的感知處理模式，以及期待與脈絡如何影響感知</span></li>
-    </ul>
-  </section>
+  <!-- 01 你的大腦不是攝影機 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">你的大腦不是攝影機，它是一個導演</span>
+    </div>
+    <p class="ch-intro">我們通常以為感知是被動的：眼睛收光、耳朵收聲，大腦如實記錄。但事實是反過來的——大腦是主動的，它根據你的期待、過去的經驗、還有當下的情境，不斷地「猜測」外界是什麼樣子，然後把那個猜測呈現給你。</p>
+    <p class="ch-intro" style="margin-bottom:0.5rem;">你看見的，其實是大腦的預測版本，不是現實的直播。這就是為什麼兩個人站在同一個地方，感知到的可以完全不同。</p>
 
-  <section class="prose">
-
-    <h2>一、感覺與感知：兩件不同的事</h2>
-    <p>日常語言中，「感覺」與「感知」往往被混用，但在心理學中它們有嚴格的區分。<strong>感覺（sensation）</strong>是指感覺器官偵測到外界物理刺激，並將其轉換為神經訊號的過程——這是純粹的物理層次，眼睛偵測光波，耳朵偵測聲波，皮膚偵測壓力與溫度。<strong>感知（perception）</strong>則是大腦將這些神經訊號加以組織、詮釋並賦予意義的過程——這是心理層次，是「理解」的開始。</p>
-    <p>這個區分至關重要，因為它揭示了一個反直覺的真相：<strong>我們感知到的世界，並不等於物理世界本身，而是大腦對感覺訊號的詮釋與建構</strong>。同樣的物理刺激，在不同的脈絡、期待與過去經驗下，可以產生截然不同的感知結果。視錯覺正是感知建構本質最直接的展示：圖案並未改變，但你的大腦主動「加入」了不存在的線條或錯誤的深度判斷。</p>
-    <p>感覺訊號轉化為神經訊號的過程稱為<strong>轉導（transduction）</strong>。每種感覺系統都有其專屬的感覺受器：視網膜上的視錐細胞與視桿細胞偵測光線；耳蝸內的毛細胞偵測聲音振動；皮膚中的各類機械感受器偵測觸壓、溫度與疼痛。這些受器將物理刺激轉換為電化學神經訊號，沿感覺神經傳入大腦，才開始感知的歷程。</p>
-
-    <div class="pull-quote">
-      <p>「大腦不是被動地接收世界的鏡子，而是主動地建構世界的機器。它利用過去的經驗、當下的期待與極不完整的感覺訊號，不斷地猜測現實是什麼。」</p>
-      <cite>— Karl Friston，神經科學家，預測編碼理論</cite>
+    <div class="pquote">
+      <p>大腦不等待感覺輸入再被動回應。它持續地預測接下來會發生什麼，然後只處理和預測不符的部分。你「感知到」的，其實大多是你預期感知到的。</p>
     </div>
 
-    <h2>二、感覺的測量：閾值與訊號偵測</h2>
-    <p>心理物理學（psychophysics）是研究物理刺激與心理感受之間關係的學科，由德國科學家 Gustav Fechner 於十九世紀奠基。它試圖回答一個看似簡單卻極具深度的問題：刺激要多強，你才能察覺到它？</p>
-    <p><strong>絕對閾值（absolute threshold）</strong>是指在 50% 的情況下能被偵測到的最低刺激強度。例如，在完全寂靜的環境中，人耳的絕對閾值相當於 6 公尺外手錶的滴答聲；人眼在漆黑環境中可以偵測到 48 公里外的燭火。但這個閾值並不是一個固定的「開關」，而是隨著注意力狀態、疲勞程度、期待與動機而波動。</p>
-    <p><strong>差異閾值（difference threshold）</strong>又稱「最小可察覺差異（just noticeable difference, JND）」，是指能偵測到兩個刺激之間差異所需的最小變化量。Weber 定律指出：JND 與原始刺激強度的比值是恆定的。舉例而言，如果手持 100 克重物時，需要增加 2 克才能感覺到差異；那麼手持 1000 克時，就需要增加 20 克才能感覺到差異。這就是為什麼在嘈雜環境中說話需要更大聲，卻不見得更容易被聽見。</p>
-    <p>然而，感知並不只是「刺激夠強就偵測到，不夠強就偵測不到」這麼簡單。<strong>訊號偵測理論（signal detection theory）</strong>指出，偵測一個刺激不僅取決於刺激本身的強度，還取決於觀察者的<strong>判斷標準（criterion）</strong>——即他們在多謹慎或多寬鬆的態度下做出「有」或「沒有」的判斷。醫師讀 X 光片、雷達操作員偵測訊號、法官評估證據，都是訊號偵測問題：過於保守會漏掉真實的訊號（漏報），過於寬鬆會看見不存在的訊號（虛報）。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你對某人有不好的第一印象。之後和他相處，他說的每句話你都覺得「有點怪」「有點不對勁」，雖然你說不清楚是哪裡。別人都覺得他很好相處。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">第一印象設定了你大腦的「預測框架」。大腦開始過濾輸入的訊息——更容易注意到符合你判斷的細節，忽略或重新解讀不符合的。這不是你在刻意偏見，而是感知系統的正常運作方式：預測影響了你接收到的資訊。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>承認第一印象可能是一個框架，而不是真相。</b>問自己：「如果我對這個人沒有任何先入為主的印象，我會怎麼解讀剛才那件事？」這個問題很難回答，但光是問它，就能稍微鬆開那個框架。</li>
+          <li><b>主動收集和你的印象不符的資訊。</b>如果你覺得某人「不可靠」，試著回想他做到過的事。不是要說服自己他很好，而是讓你的感知有更多資料可以用。</li>
+          <li><b>在重要的判斷上，延遲定論。</b>「我還沒有足夠的資訊」是一個完全合理的位置——比過早鎖定一個框架，對你和對方都更公平。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <h2>三、感知的組織：格式塔原則</h2>
-    <p>面對眼前紛雜的感覺輸入，大腦如何將零散的訊號組織成有意義的整體形象？二十世紀初，德國的格式塔心理學家（Gestalt psychologists）提出了一系列描述感知組織規律的原則。「Gestalt」在德文中意為「形式」或「整體」，其核心主張是：<strong>「整體大於部分之和」</strong>——我們感知到的不是孤立的點、線、面，而是有組織的整體形象。</p>
+  <!-- 02 注意力是有限的資源 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">注意力是有限的資源，你每天都在花掉它</span>
+    </div>
+    <p class="ch-intro">注意力不是「打開就有」的東西，它是一種有限的資源，用了就少。每天你花注意力在哪裡，就決定了你「看見了什麼」、「記住了什麼」，以及最終「活在哪個現實裡」。</p>
 
-    <div class="principle-grid">
-      <div class="principle-item">
-        <div class="principle-name">接近性</div>
-        <div class="principle-en">Law of Proximity</div>
-        <div class="principle-desc">空間上相互接近的元素，傾向於被感知為同一群組。這就是為什麼即使沒有邊框，靠近的點也會被看成一個整體，而非分散的個體。</div>
+    <div class="perc-grid">
+      <div class="perc-cell">
+        <div class="perc-head">你注意到的</div>
+        <div class="perc-body">進入你的意識，被處理、被記憶、影響你的判斷和感受。</div>
       </div>
-      <div class="principle-item">
-        <div class="principle-name">相似性</div>
-        <div class="principle-en">Law of Similarity</div>
-        <div class="principle-desc">外觀相似的元素（形狀、顏色、大小、方向）傾向於被歸為同類。設計師利用此原則讓相關資訊在視覺上形成自然的組群，無需明確標示。</div>
+      <div class="perc-cell">
+        <div class="perc-head">你沒注意到的</div>
+        <div class="perc-body">對你來說等於不存在——即使它就在眼前，即使它很重要。</div>
       </div>
-      <div class="principle-item">
-        <div class="principle-name">連續性</div>
-        <div class="principle-en">Law of Continuity</div>
-        <div class="principle-desc">大腦傾向於將元素感知為沿平滑連續路徑排列，而非突然轉折。這使我們能夠「補全」被遮蔽的線條，感知連續的輪廓。</div>
-      </div>
-      <div class="principle-item">
-        <div class="principle-name">閉合性</div>
-        <div class="principle-en">Law of Closure</div>
-        <div class="principle-desc">即使圖形不完整，大腦也會主動填補缺口，感知出一個完整的形狀。三個不完整的圓弧，大腦會自動「看見」一個三角形。</div>
-      </div>
-      <div class="principle-item">
-        <div class="principle-name">圖地關係</div>
-        <div class="principle-en">Figure-Ground</div>
-        <div class="principle-desc">大腦自動將視覺場景分為「圖」（前景，有形狀的對象）與「地」（背景）。魯賓的花瓶是最著名的圖地反轉圖形：你既可以看見白色花瓶，也可以看見兩張黑色臉孔側影。</div>
-      </div>
-      <div class="principle-item">
-        <div class="principle-name">共同命運</div>
-        <div class="principle-en">Law of Common Fate</div>
-        <div class="principle-desc">朝同一方向運動的元素，傾向於被感知為同一群組。這解釋了為什麼鳥群、魚群在運動時看起來像一個整體——它們的共同移動方向賦予了群體感。</div>
+      <div class="perc-cell">
+        <div class="perc-head">你以為注意到的</div>
+        <div class="perc-body">大腦填補了空白，你感覺看見了，但其實是推測出來的版本。</div>
       </div>
     </div>
 
-    <p>格式塔原則在現代設計、介面設計與廣告中被廣泛應用。當設計師說「這個版面讀起來很流暢」或「那個按鈕看起來不像是可點擊的」，背後往往都涉及格式塔原則是否被正確運用。理解這些原則，就是理解大腦的感知語法。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在滑手機，伴侶在旁邊說了一件事。你說「嗯嗯」，但五分鐘後他問你剛才說什麼，你完全不記得。他很不高興，覺得你不在乎。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">注意力被手機佔走了，伴侶的話雖然進了你的耳朵，但沒有進入真正的處理。你的「嗯嗯」是自動的，不是真正在聽。對方的感受是合理的——他感受到的就是你的注意力不在他身上，而這個感受是準確的。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>「我現在沒辦法好好聽」比「嗯嗯」更誠實，也更尊重對方。</b>說「等我看完這個，你再說一次」——這讓對方知道你有聽到他在說話，只是時機不對，而不是讓他以為你聽了卻不在乎。</li>
+          <li><b>真正的「在一起」需要注意力的分配，而不只是身體在場。</b>你可以設定一段「放下手機」的時間，不是因為手機不重要，而是因為真正的陪伴需要注意力。</li>
+          <li><b>注意你的注意力流向哪裡。</b>在一天結束的時候問：今天我最多的注意力給了什麼？那是我想要的嗎？</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <h2>四、由上而下與由下而上的感知處理</h2>
-    <p>感知的處理可以從兩個方向發生，通常是同時交互運作的。<strong>由下而上處理（bottom-up processing）</strong>是從原始感覺資料出發，由細節到整體地建構感知，完全依賴外部刺激的物理特性，不受先前知識或期待的影響。看見一個從未見過的文字系統時，你只能依靠其物理形狀來嘗試辨識，這就是純粹的由下而上處理。</p>
-    <p><strong>由上而下處理（top-down processing）</strong>則是以已有的知識、期待、脈絡與過去經驗來引導和詮釋感覺輸入。你能在嘈雜環境中辨識出朋友的聲音、能在模糊的照片中認出熟悉的臉孔、能從潦草的手寫字中讀出意思，都是由上而下處理的結果——大腦在「猜測」訊號的意義，而不只是分析它。</p>
-    <p>由上而下處理的力量在語言感知中尤為明顯。閱讀時，你並不需要逐一辨識每個字母，大腦會根據字詞的整體形狀、脈絡與期待快速判斷。研究發現，只要保留單字的首尾字母，中間字母隨意打亂，大多數熟練讀者仍能毫不費力地閱讀——這正是由上而下處理在運作。</p>
+  <!-- 03 你以為可以同時做兩件事 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">你以為可以同時做兩件事，但你不行</span>
+    </div>
+    <p class="ch-intro">「我很擅長多工」——幾乎每個人都這樣說。但心理學研究非常清楚：真正的多工處理幾乎不存在。你做的是在任務之間快速切換，而每次切換都有代價。</p>
 
-    <h2>五、注意力：稀缺的心理資源</h2>
-    <p>每一秒，你的感覺系統向大腦傳入超過一千萬個訊號，但意識一次只能處理極少數。<strong>注意力（attention）</strong>是大腦選擇性地將有限的處理資源集中於特定刺激或任務的機制，它是感知的「守門員」——決定什麼訊息能進入意識，什麼被過濾在外。</p>
-    <p><strong>選擇性注意（selective attention）</strong>的最著名例子是「<strong>雞尾酒會效應（cocktail party effect）</strong>」：在嘈雜的派對中，你能夠選擇性地聚焦於與你交談的人的聲音，過濾掉周圍所有的背景噪音——直到有人在另一頭提到你的名字，你的注意力會立即被捕獲。這說明大腦並未真的「忽略」背景資訊，而是以非意識的方式持續監控環境中是否有高度相關的刺激。</p>
-    <p><strong>分散注意（divided attention）</strong>是指同時注意兩個以上的任務。研究一致顯示，人類真正的「多工處理」能力極為有限。我們以為的「多工」，實際上是在任務間快速切換注意力的「任務切換（task switching）」，每次切換都有認知成本，造成效率下降。邊開車邊講手機的危險性，正是因為它耗盡了駕駛所需的認知資源，即使使用免持聽筒也無法消除這個問題。</p>
+    <div class="pquote">
+      <p>你以為在同時做兩件事，其實是快速地在兩件事之間輪流——每次切換都要花代價重新進入狀態，而你感覺不到那個代價正在累積。</p>
+    </div>
 
-    <table class="compare-table">
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你工作時開著通知，每隔幾分鐘就看一眼訊息或社群媒體。你覺得這樣很有效率，因為你「沒有中斷工作太久」。但一整天下來你覺得很累，完成的事情卻比想像中少。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">每次你把注意力從工作切到通知，再切回工作，大腦需要時間「重新載入」你離開時的思考狀態。研究顯示，被打斷後平均需要二十三分鐘才能完全回到原本的專注狀態。十次小的分心，等於整個下午的深度工作能力消耗殆盡。你感覺「沒有中斷太久」，但切換本身就是代價。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把需要深度思考的工作保護起來。</b>設定一段時間關掉通知，告訴自己「這一小時只做這一件事」。一小時的深度工作，抵得上三小時的分心工作。</li>
+          <li><b>用「批次處理」取代「即時回應」。</b>設定一天兩三次固定的時間查看訊息和郵件，而不是讓它們隨時打斷你。大多數事情沒有那麼緊急，而你的注意力很珍貴。</li>
+          <li><b>把「完全在做A」改成「完全在做A，然後完全去做B」。</b>兩件事依序做，比同時做快，也比同時做品質好。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你開車時接了一通電話，用免持聽筒。你覺得這樣很安全，因為「雙手都在方向盤上」。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">危險不是來自手，而是來自注意力。免持聽筒讓你的手空出來，但你的注意力仍然被對話佔走了一大部分——而駕駛需要的正是注意力，不只是手。研究顯示，邊開車邊講電話（即使免持）的反應時間，和酒後駕車相近。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>重要的電話，停車再打。</b>不是在規則上保護自己，而是在真正的安全上保護自己和別人。</li>
+          <li><b>如果必須通話，讓通話越簡短越好。</b>複雜的討論、情緒性的對話——這些需要認知資源，不應該在駕駛時進行。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 你的眼睛睜開，但你看不見 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">你的眼睛睜開，但你看不見</span>
+    </div>
+    <p class="ch-intro">有一個研究讓一半的受試者完全沒注意到一隻大猩猩走過螢幕正中央——即使他們眼睛睜著，即使大猩猩在畫面裡停留了九秒。這不是因為他們笨，而是因為他們的注意力在別的地方。注意力在哪裡，你的「眼睛」才真正在那裡。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你非常確定你記得某件事是這樣發生的——當時的細節、當時誰說了什麼。但另一個在場的人記得完全不一樣的版本，而且他也同樣確定。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你們兩個人的注意力在那個當下放在不同的地方，所以「看見」的是不同的版本。而且大腦會填補你沒注意到的部分——用你認為「應該會發生的事」來補全，所以感覺非常真實完整，但那些細節可能是建構出來的。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>放棄「我看到了所以我是對的」這個假設。</b>你看到了，但你看到的不是完整的現實，而是你的注意力選擇了、你的大腦詮釋了的版本。對方也是一樣。</li>
+          <li><b>在重要的事情上，「我們記得的版本不一樣」是可以接受的結果。</b>不需要分出誰對誰錯，兩個人對同一件事有不同的感知是正常的，不代表誰在說謊。</li>
+          <li><b>如果你需要準確地記錄某件重要的事，當場寫下來。</b>記憶會隨時間和後來的資訊改變，即時的記錄比之後的回憶可靠得多。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 期待改變了你看見的世界 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">期待改變了你看見的世界</span>
+    </div>
+    <p class="ch-intro">你的感知不只受注意力影響，還受你的期待影響。大腦在接收訊息之前就已經在預測接下來會發生什麼——而那個預測，會過濾和扭曲你接收到的訊息。</p>
+
+    <table class="simple-table">
       <thead>
         <tr>
-          <th>注意力類型</th>
-          <th>定義</th>
-          <th>日常範例</th>
+          <th>你的期待</th>
+          <th>它如何改變你的感知</th>
+          <th>生活裡的例子</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>選擇性注意</td>
-          <td>聚焦於特定刺激，過濾無關訊息</td>
-          <td>嘈雜咖啡廳中專心閱讀；雞尾酒會中聆聽特定對話</td>
+          <td>「這會很無聊」</td>
+          <td>大腦更快放棄處理新訊息，注意到無聊的部分，忽略有趣的部分</td>
+          <td>帶著「這場演講一定很悶」的心態去，然後真的覺得很悶——但旁邊的人覺得很有收穫</td>
         </tr>
         <tr>
-          <td>持續性注意</td>
-          <td>在長時間內維持對特定任務的警覺</td>
-          <td>監控工廠生產線的品管人員；長途駕駛保持警覺</td>
+          <td>「他不喜歡我」</td>
+          <td>把中性的行為解讀為負面訊號，忽略正面的互動</td>
+          <td>他沒立即回訊息，你解讀為「他在避開我」，忘了他平常本來就不太立刻回訊</td>
         </tr>
         <tr>
-          <td>分散注意</td>
-          <td>同時處理兩個以上的資訊來源</td>
-          <td>邊聽音樂邊寫作（低難度）；邊開車邊通話（高危險）</td>
+          <td>「這藥一定有效」</td>
+          <td>期待本身觸發真實的生理反應（安慰劑效應）</td>
+          <td>服用無效藥物後，因為相信它有效，真的感覺疼痛減輕了——大腦釋放了真實的鎮痛物質</td>
         </tr>
         <tr>
-          <td>執行性注意</td>
-          <td>解決衝突、抑制干擾、監控目標達成</td>
-          <td>Stroop 作業：說出字體顏色而非字義（如紅色寫的「藍」）</td>
+          <td>「我不擅長數學」</td>
+          <td>面對數學問題時注意力提早放棄，把困難解讀為「證明我不行」</td>
+          <td>同樣難度的題目，相信自己能做的人堅持更久，正確率更高</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>六、非意識注意盲與變化盲視</h2>
-    <p>注意力最令人震驚的特性，不是它能做什麼，而是它<strong>無法做什麼</strong>。兩個著名的現象揭示了注意力的驚人限制。</p>
-    <p><strong>非意識注意盲（inattentional blindness）</strong>指的是：當注意力完全集中於某項任務時，一個完全可見的刺激卻無法被察覺。最著名的示範是 Simons 與 Chabris（1999）的「看不見的大猩猩實驗」：受試者被要求觀看影片並計算穿白衣球員的傳球次數，結果大約一半的受試者完全沒有注意到一個穿著大猩猩服裝的人走過畫面中央、拍胸並停留了9秒。這個令人瞠目的結果告訴我們：</p>
-
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>看不見的大猩猩（Simons &amp; Chabris, 1999）</h3>
-      <p>哈佛大學心理學家 Daniel Simons 與 Christopher Chabris 製作了一段影片：六名學生圍成一圈傳球，其中三人穿白衣、三人穿黑衣。受試者的任務是計算穿白衣者的傳球次數。</p>
-      <p>影片進行到一半，一個穿著黑色大猩猩服裝的人慢步走入畫面中央，停下來拍了拍胸部，然後離開，整個過程歷時約九秒。實驗結果顯示：<strong>約 50% 的受試者完全沒有看見大猩猩</strong>。當被告知後，他們難以相信，甚至要求重看影片確認。</p>
-      <p>這個實驗生動地展示了非意識注意盲的威力，也徹底動搖了「只要眼睛睜著就能看見眼前所有事物」的直覺假設。它對目擊者證詞的可信度、醫學影像診斷、駕駛安全等實際領域都有深遠的啟示：<strong>我們看見的遠比我們以為看見的少得多</strong>。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在一段關係裡開始懷疑對方不夠在乎你。從那之後，你開始注意到越來越多「他不在乎」的證據，越來越少看見他在乎的部分——即使那些部分還在。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">懷疑設定了一個新的「搜尋條件」。你的大腦開始主動尋找符合這個懷疑的訊息，而且找到了很多——不是因為它們突然增加了，而是因為你現在更容易注意到它們。同時，不符合這個懷疑的事情開始變得「看不見」。感知在強化一個你還不確定是否真實的故事。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把懷疑說出來，而不是讓它在感知層面積累證據。</b>直接和對方說：「最近我有一個感覺，不確定是不是真的，我想說說看。」把內心的故事帶到對話中，比讓大腦繼續默默蒐集「證據」更有用。</li>
+          <li><b>主動問自己：「如果我沒有這個懷疑，我會怎麼解讀剛才那件事？」</b>這個問題不能消除感知的偏移，但能讓你看見自己在用什麼框架在解讀。</li>
+          <li><b>注意「消失的正面訊號」。</b>如果你開始覺得「他都沒有在乎的表現」，問自己：上週他有沒有做過任何讓你感覺被在乎的事？如果有，那個訊號去哪裡了？</li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <p><strong>變化盲視（change blindness）</strong>是另一個相關現象：當一個場景發生變化時，如果注意力未集中於變化處，或變化發生在視覺干擾（如眨眼、畫面切換）的瞬間，人們往往完全無法察覺。電影剪輯中的連戲錯誤之所以常被忽略，正是變化盲視的日常體現。更令人不安的是研究顯示，在真實環境中，即使是明顯的人物替換（如對話中說話者被換掉），約有 75% 的人也沒有察覺。</p>
-    <p>這些現象共同指向一個深刻的心理學結論：<strong>我們對自己感知能力的信心，往往遠超過實際的感知能力本身</strong>。感知不是一面忠實反映現實的鏡子，而是一個充滿選擇、推斷與盲點的主動建構過程。</p>
-
-    <h2>七、期待與脈絡如何扭曲感知</h2>
-    <p>感知不僅受限於注意力，還深受<strong>期待（expectation）</strong>與<strong>脈絡（context）</strong>的影響。大腦並不是等待感覺輸入再被動回應，而是持續地根據過去經驗產生對未來感覺輸入的預測，然後只處理「預測誤差」——這個觀點被稱為<strong>預測編碼理論（predictive coding）</strong>，是當代神經科學最具影響力的感知模型之一。</p>
-    <p>期待的力量在藥效研究中最為顯著：<strong>安慰劑效應（placebo effect）</strong>就是期待改變了感知（與實際生理反應）的典型案例。服用無效藥物卻感到疼痛減輕的患者，其大腦確實釋放了內源性鴉片類物質——期待不只改變感知，還改變了生理。同樣地，「反安慰劑效應（nocebo effect）」則是因為負面期待而產生真實的不適症狀。</p>
-    <p>脈絡效應在視覺感知中尤為明顯。同樣的灰色色塊，放在白色背景上看起來較深，放在黑色背景上看起來較淺——這是<strong>側抑制（lateral inhibition）</strong>與脈絡對比效應的結果。同一個英文字母 "B"，在數字脈絡中（1 2 3）會被讀成 "13"，在字母脈絡中（A B C）則被讀成 "B"——完全相同的物理刺激，脈絡決定了感知結果。這正是由上而下處理的力量，也是感知主動建構本質最日常的展現。</p>
-
-  </section>
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 4 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 02 — 認知與行為心理學</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 02 — 認知與行為</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Sensation <span>感覺</span></li>
-      <li>Perception <span>感知</span></li>
-      <li>Transduction <span>轉導</span></li>
-      <li>Absolute Threshold <span>絕對閾值</span></li>
-      <li>JND <span>最小可察覺差異</span></li>
-      <li>Signal Detection <span>訊號偵測理論</span></li>
-      <li>Gestalt <span>格式塔</span></li>
-      <li>Figure-Ground <span>圖地關係</span></li>
-      <li>Bottom-up Processing <span>由下而上處理</span></li>
-      <li>Top-down Processing <span>由上而下處理</span></li>
-      <li>Selective Attention <span>選擇性注意</span></li>
-      <li>Cocktail Party Effect <span>雞尾酒會效應</span></li>
-      <li>Inattentional Blindness <span>非意識注意盲</span></li>
-      <li>Change Blindness <span>變化盲視</span></li>
-      <li>Predictive Coding <span>預測編碼</span></li>
-      <li>Placebo Effect <span>安慰劑效應</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">注意力管理速查</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">深度工作</span>
+        <span class="qa-val">關掉通知，一次只做一件事，保護一段不被打斷的時間</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">陪伴</span>
+        <span class="qa-val">放下手機，注意力在哪，你才真的在哪</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">判斷人</span>
+        <span class="qa-val">先入為主會過濾感知，主動找反例</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">記憶衝突</span>
+        <span class="qa-val">兩個人記得不同很正常，不代表誰在說謊</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">懷疑時</span>
+        <span class="qa-val">說出來，不要讓感知繼續默默蒐集「證據」</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>Gustav Fechner — 心理物理學奠基者，Weber-Fechner 定律</td></tr>
-      <tr><td>人物</td><td>Max Wertheimer — 格式塔心理學創始人</td></tr>
-      <tr><td>人物</td><td>Daniel Simons — 看不見的大猩猩實驗</td></tr>
-      <tr><td>人物</td><td>Anne Treisman — 特徵整合理論，選擇性注意</td></tr>
-      <tr><td>人物</td><td>Karl Friston — 預測編碼理論，自由能原則</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《看不見的大猩猩》Daniel Simons &amp; Christopher Chabris</td></tr>
-      <tr><td>書目</td><td>《錯覺的藝術》Al Seckel</td></tr>
-      <tr><td>書目</td><td>《知覺心理學》E. Bruce Goldstein</td></tr>
-      <tr><td>論文</td><td>Simons, D.J. &amp; Chabris, C.F. (1999). Gorillas in our midst.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《看不見的大猩猩》Daniel Simons &amp; Christopher Chabris</td></tr>
+      <tr><td>書</td><td>《深度工作力》Cal Newport</td></tr>
+      <tr><td>書</td><td>《注意力商人》Tim Wu</td></tr>
+      <tr><td>書</td><td>《快思慢想》Daniel Kahneman</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>「由上而下處理」意味著你的期待與過去經驗會影響你所感知到的現實。能舉出一個你生活中曾因為「先入為主」而誤判某個情境的例子嗎？這對你有什麼啟示？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>今天你的注意力主要花在哪裡？那是你想要的嗎？如果把注意力想成一種有限的資源，你覺得自己花得值不值得？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>非意識注意盲顯示我們遠比想像中「看得少」。這對目擊者證詞的可靠性有什麼影響？你認為司法系統應該如何應對這個心理學發現？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你有沒有對某個人有先入為主的印象，然後發現自己的感知一直在「找支持那個印象的證據」？那個人真實的樣子，可能和你感知到的有多大差距？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>研究顯示「多工處理」實際上是快速的任務切換，效率遠低於專注單一任務。回顧你的工作或學習習慣，你有哪些「以為在多工，其實在分散注意力」的行為？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你平常工作或學習的時候，多工的程度有多高？試著一天選一個時段完全專注做一件事，關掉所有通知。那個小時的感受和效果，和平常相比如何？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>格式塔原則廣泛應用於設計與廣告。試著分析一個你熟悉的品牌標誌或 App 介面，找出其中運用了哪些格式塔原則，它們是如何引導你的注意力與感知的？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你現在對某件事或某個人有一個「期待」或「懷疑」——它有沒有可能在改變你感知到的訊息？你可以用什麼方式檢驗那個期待是否準確？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day3.html" class="page-link">&#8592; Week 03</a>
-  <span class="page-dot">4 / 16</span>
-  <a href="day5.html" class="page-link">Week 05 &#8594;</a>
+<div class="pager">
+  <a href="day3.html">← Week 03</a>
+  <span class="pager-mid">04 / 16</span>
+  <a href="day5.html">Week 05 →</a>
 </div>
 
 <script>
-  const key = 'week-4';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-04';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

@@ -7,24 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,288 +80,244 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
       display: block;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-    }
-    .case-study p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
-    }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* THEORY COMPARE */
-    .theory-list { margin: 1.5rem 0; }
-    .theory-item {
-      padding: 1.3rem 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .theory-item:first-child { border-top: 1px solid var(--rule); }
-    .theory-header {
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      margin-bottom: 0.55rem;
-      flex-wrap: wrap;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
     }
-    .theory-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .theory-who {
+    .ch-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
       color: var(--red);
-      letter-spacing: 0.08em;
-    }
-    .theory-claim {
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      margin-bottom: 0.4rem;
-    }
-    .theory-critique {
-      font-size: 0.83rem;
-      font-weight: 300;
-      color: var(--ink-light);
-      line-height: 1.65;
-      padding-left: 1rem;
-      border-left: 2px solid var(--rule);
-    }
-    /* BASIC EMOTIONS GRID */
-    .emotion-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .emotion-item {
-      padding: 1rem 1rem;
-      border: 1px solid var(--rule);
-      text-align: center;
-    }
-    .emotion-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
-    }
-    .emotion-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--red);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.5rem;
-    }
-    .emotion-fn {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--ink-mid);
-      line-height: 1.6;
-    }
-    /* COMPONENTS */
-    .components-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .components-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .components-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .components-table tr:last-child td { border-bottom: none; }
-    .components-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
-    /* DISPLAY RULES */
-    .display-list { margin: 1.5rem 0; }
-    .display-row {
-      display: grid;
-      grid-template-columns: 9rem 1fr;
-      gap: 1.2rem;
-      padding: 0.95rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .display-row:first-child { border-top: 1px solid var(--rule); }
-    .display-rule-name {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .display-rule-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--red);
-      display: block;
-      margin-top: 0.2rem;
-    }
-    .display-rule-desc {
-      font-size: 0.87rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-    }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
       letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
+      flex-shrink: 0;
     }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
       border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.76;
+      color: var(--mid);
+    }
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* EMOTION FUNCTION GRID */
+    .emo-grid {
       display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .emo-cell { background: var(--card); padding: 1rem 1.1rem; }
+    .emo-name { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+    .emo-fn {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--mid);
+      margin-bottom: 0.55rem;
+    }
+    .emo-tip {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--light);
+      font-style: italic;
+    }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
       align-items: baseline;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -376,8 +327,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -386,310 +338,339 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .emotion-grid { grid-template-columns: 1fr 1fr; }
-      .display-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      .hero-num { display: none; }
+      .emo-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 08 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 08 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 03 &nbsp;—&nbsp; 情緒與人格</p>
-    <h1>情緒的本質：<br><em>喜怒哀樂從哪裡來？</em></h1>
-    <p class="hero-sub">情緒是人類體驗的核心，但「情緒究竟是什麼」這個問題，心理學家爭論了超過一個世紀。它是先天的生理反應，還是後天建構的主觀標籤？情緒來自身體，還是來自大腦的詮釋？本週帶你深入這場關於情緒本質的核心論辯。</p>
+    <p class="eyebrow">Unit 03 &nbsp;—&nbsp; 情緒與人格</p>
+    <h1>情緒的本質：<br><em>它在告訴你什麼？</em></h1>
+    <p class="hero-sub">憤怒、悲傷、焦慮、嫉妒——這些情緒出現的時候，你的第一反應是什麼？忽略它？壓下去？還是被它帶著走？本週帶你重新認識情緒的功能，以及如何和它建立更好的關係。</p>
   </div>
-  <div class="hero-number">08</div>
+  <div class="hero-num">08</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解情緒的三個核心成分：主觀體驗、生理喚起與行為表達，以及它們之間的關係</span></li>
-      <li><span class="num">02</span><span>比較並評估情緒的主要理論：James-Lange、Cannon-Bard、Schachter-Singer 二因論，以及建構情緒理論</span></li>
-      <li><span class="num">03</span><span>認識 Ekman 的基本情緒理論與跨文化表情研究，以及對此觀點的當代批評</span></li>
-      <li><span class="num">04</span><span>了解情緒的演化功能：情緒如何服務於生存、社會連結與決策</span></li>
-      <li><span class="num">05</span><span>理解情緒表達的文化差異與展示規則（display rules）</span></li>
-      <li><span class="num">06</span><span>認識情緒在決策中的角色：Damasio 的軀體標記假說</span></li>
-    </ul>
-  </section>
-
-  <section class="prose">
-
-    <h2>一、情緒是什麼？三個核心成分</h2>
-    <p>「情緒」這個詞我們每天都在使用，但要精確定義它卻出乎意料地困難。心理學家普遍認同，情緒是一個多成分的現象，至少包含三個相互交織的層面：</p>
-    <p><strong>主觀體驗（subjective experience）</strong>是情緒的「感覺質」——喜悅有其獨特的感覺，悲傷有其獨特的感覺，它們是私密而第一人稱的體驗，無法被他人直接觀察。這正是情緒研究最棘手的部分：科學仰賴客觀測量，但情緒最核心的部分卻是主觀且私密的。</p>
-    <p><strong>生理喚起（physiological arousal）</strong>是情緒伴隨的身體變化：心跳加速、呼吸急促、肌肉緊張、手心出汗、腎上腺素分泌。這些反應由自律神經系統調控，部分是自動且難以抑制的，這也是測謊儀試圖測量的對象（儘管測謊儀的科學可靠性備受質疑）。</p>
-    <p><strong>行為表達（behavioral expression）</strong>是情緒透過臉部表情、聲音、姿態與動作向外界傳達的訊息。皺眉、微笑、退縮、擁抱——這些表達既有跨文化的普遍性成分，也受到文化規範的塑造。情緒的表達具有重要的社會溝通功能：它讓他人能夠理解我們的內在狀態，協調社會互動。</p>
-    <p>情緒研究中一個持久的核心問題是：這三個成分之間的<strong>因果順序</strong>是什麼？是先有感覺，才有身體反應？還是先有身體反應，才產生感覺？這個問題引發了情緒心理學中最重要的一系列理論爭辯。</p>
-
-    <div class="pull-quote">
-      <p>「我們並不是因為悲傷而哭泣，因為憤怒而打人，因為恐懼而顫抖。我們哭泣、打人、顫抖——然後才感到悲傷、憤怒與恐懼。」</p>
-      <cite>— William James，《心理學原理》，1890，情緒理論的奠基陳述</cite>
+  <!-- 01 情緒不是問題，它是資訊 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">情緒不是問題，它是資訊</span>
     </div>
+    <p class="ch-intro">很多人對情緒的預設態度是：正面情緒好，負面情緒壞，負面情緒要盡快消除。但這個觀點讓我們錯過了情緒最重要的功能——它是你的大腦在告訴你某件重要的事。</p>
+    <p class="ch-intro" style="margin-bottom:0.5rem;">每一種情緒都有它的演化功能，都在傳遞一個特定的訊息。問題不是「這個情緒好不好」，而是「這個情緒在告訴我什麼，我要怎麼回應它」。</p>
 
-    <h2>二、情緒的主要理論</h2>
-    <p>情緒的本質是「身體先還是感覺先」？這個問題催生了幾個重要的理論框架，每一個都對情緒的起源提出了不同的解釋。</p>
-
-    <div class="theory-list">
-      <div class="theory-item">
-        <div class="theory-header">
-          <span class="theory-name">James-Lange 理論</span>
-          <span class="theory-who">William James &amp; Carl Lange / 1880s</span>
-        </div>
-        <div class="theory-claim">情緒是對身體變化的感知。刺激先引發生理反應（心跳加速、肌肉緊張），大腦感知到這些生理變化後，才產生情緒體驗。先有顫抖，才感到恐懼；先有淚水，才感到悲傷。身體是情緒的來源，而非情緒的結果。</div>
-        <div class="theory-critique">批評：不同情緒的生理反應有時非常相似（恐懼與興奮的心跳加速幾乎相同），難以解釋我們如何區分不同情緒。內臟器官的反應速度也相對緩慢，難以解釋即時的情緒體驗。</div>
+    <div class="emo-grid">
+      <div class="emo-cell">
+        <div class="emo-name">憤怒</div>
+        <div class="emo-fn">某個界限被越過了，或者某件事對你來說是不公平的。</div>
+        <div class="emo-tip">不是叫你爆發，而是提醒你有什麼東西需要被保護或說出來。</div>
       </div>
-      <div class="theory-item">
-        <div class="theory-header">
-          <span class="theory-name">Cannon-Bard 理論</span>
-          <span class="theory-who">Walter Cannon &amp; Philip Bard / 1920s</span>
-        </div>
-        <div class="theory-claim">情緒體驗與生理反應是同時並行的，而非因果關係。刺激訊號抵達視丘後，同時向大腦皮質（產生主觀情緒體驗）與身體（引發生理反應）發送訊號，兩者獨立發生，互不依賴。</div>
-        <div class="theory-critique">批評：現代神經科學顯示情緒的神經路徑比此理論所描述的更為複雜，且主觀體驗與生理反應之間確實存在相互影響，並非完全獨立。</div>
+      <div class="emo-cell">
+        <div class="emo-name">悲傷</div>
+        <div class="emo-fn">你失去了某件對你有意義的事，或者你在乎某件事。</div>
+        <div class="emo-tip">悲傷需要被承認和給時間，而不是被轉移注意力。</div>
       </div>
-      <div class="theory-item">
-        <div class="theory-header">
-          <span class="theory-name">Schachter-Singer 二因論</span>
-          <span class="theory-who">Stanley Schachter &amp; Jerome Singer / 1962</span>
-        </div>
-        <div class="theory-claim">情緒由兩個因素共同決定：（1）生理喚起，以及（2）對這個喚起狀態的認知標籤。相同的生理喚起狀態，因情境脈絡的不同，可以被詮釋為不同的情緒。情緒是「喚起 + 解釋」的產物。</div>
-        <div class="theory-critique">批評：後續研究未能穩定地複製原始實驗結果。但其核心洞見——認知詮釋影響情緒體驗——已被廣泛接受，成為認知評估理論的基礎。</div>
+      <div class="emo-cell">
+        <div class="emo-name">恐懼</div>
+        <div class="emo-fn">你感知到威脅，身體在準備應對它。</div>
+        <div class="emo-tip">問題是威脅是真實的還是想像的——這決定你怎麼回應。</div>
       </div>
-      <div class="theory-item">
-        <div class="theory-header">
-          <span class="theory-name">建構情緒理論</span>
-          <span class="theory-who">Lisa Feldman Barrett / 2017</span>
-        </div>
-        <div class="theory-claim">情緒並非先天固定的生物程式，而是大腦根據過去經驗、當下脈絡與文化概念主動「建構」出來的。大腦持續預測並詮釋身體的感覺訊號，情緒概念（如「憤怒」「悲傷」）是理解這些訊號的認知框架。沒有這些概念，就不會有對應的情緒體驗。</div>
-        <div class="theory-critique">最新且最具挑戰性的理論，獲得越來越多神經科學研究的支持。但其對「基本情緒」普遍性的挑戰，仍引發激烈爭論。</div>
+      <div class="emo-cell">
+        <div class="emo-name">嫉妒</div>
+        <div class="emo-fn">你想要你還沒有的東西，通常指向你真正在乎的事。</div>
+        <div class="emo-tip">把它當線索：「我在嫉妒什麼？那是我想要的嗎？」</div>
+      </div>
+      <div class="emo-cell">
+        <div class="emo-name">罪惡感</div>
+        <div class="emo-fn">你做了一件和你的價值觀不一致的事。</div>
+        <div class="emo-tip">健康的罪惡感推動你修復；慢性的罪惡感往往是自我懲罰。</div>
+      </div>
+      <div class="emo-cell">
+        <div class="emo-name">孤獨</div>
+        <div class="emo-fn">你的連結需求沒有被滿足。</div>
+        <div class="emo-tip">不是叫你立刻找很多人，而是找一個真實的連結。</div>
       </div>
     </div>
 
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>吊橋實驗（Dutton &amp; Aron, 1974）——情緒的誤歸因</h3>
-      <p>加拿大心理學家 Donald Dutton 與 Arthur Aron 進行了一個巧妙的實驗，直接測試 Schachter-Singer 二因論。他們讓男性受試者在兩種不同的橋上與一名女性研究助理相遇：一座是搖晃不穩、令人恐懼的高空吊橋；另一座是穩固低矮的木橋。助理請受試者完成一項任務，結束後留下電話號碼，表示可以進一步說明研究細節。</p>
-      <p>結果顯示，在危險吊橋上遇見助理的男性，事後撥打助理電話的比例（50%）顯著高於在穩定木橋上相遇的男性（12.5%）。吊橋組的受試者顯然<strong>將吊橋引發的生理喚起（心跳加速、手心出汗）誤歸因（misattribution）為對助理的吸引力</strong>，而非恐懼。</p>
-      <p>這個實驗是二因論最著名的支持證據，也揭示了一個令人不安的現實：我們以為自己清楚知道自己為何感受到某種情緒，但情緒體驗的成因往往比我們意識到的更為複雜與間接。「在刺激場景中遇到的人」之所以讓人感覺更有吸引力，部分原因可能正是情境引發的生理喚起被誤貼上了「喜歡」的標籤。</p>
-    </div>
-
-    <h2>三、基本情緒：有沒有普遍的情緒語言？</h2>
-    <p>Darwin 早在 1872 年就提出，某些情緒表達是人類物種共有的、具有演化根源的。這個觀點在二十世紀由心理學家 Paul Ekman 透過跨文化研究加以系統化。Ekman 前往與現代文明幾乎隔絕的巴布亞紐幾內亞，向當地 Fore 部族的族人展示西方人的臉部表情照片，發現他們能夠準確辨識這些表情所代表的情緒，即使從未接觸西方文化。</p>
-    <p>基於這些研究，Ekman 提出了<strong>六種基本情緒（basic emotions）</strong>的理論，認為它們是跨文化普遍存在的、具有固定臉部表情特徵的基本情緒模組：</p>
-
-    <div class="emotion-grid">
-      <div class="emotion-item">
-        <div class="emotion-name">快樂</div>
-        <div class="emotion-en">Happiness</div>
-        <div class="emotion-fn">社會連結、趨近獎勵、強化正向行為</div>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你對某件事感到憤怒，但覺得自己「不應該這麼計較」，於是把它壓下去。結果那個情緒沒有消失，反而在另一個場合以更大的力道爆發出來。</p>
       </div>
-      <div class="emotion-item">
-        <div class="emotion-name">悲傷</div>
-        <div class="emotion-en">Sadness</div>
-        <div class="emotion-fn">尋求社會支持、處理失落、促進反思</div>
-      </div>
-      <div class="emotion-item">
-        <div class="emotion-name">憤怒</div>
-        <div class="emotion-en">Anger</div>
-        <div class="emotion-fn">回應不公正、保護資源、動員能量行動</div>
-      </div>
-      <div class="emotion-item">
-        <div class="emotion-name">恐懼</div>
-        <div class="emotion-en">Fear</div>
-        <div class="emotion-fn">偵測威脅、觸發戰鬥或逃跑、保護生命</div>
-      </div>
-      <div class="emotion-item">
-        <div class="emotion-name">厭惡</div>
-        <div class="emotion-en">Disgust</div>
-        <div class="emotion-fn">避開污染源、維護道德與衛生邊界</div>
-      </div>
-      <div class="emotion-item">
-        <div class="emotion-name">驚訝</div>
-        <div class="emotion-en">Surprise</div>
-        <div class="emotion-fn">快速定向注意力至意外事件，更新預期</div>
-      </div>
-      <div class="emotion-item" style="grid-column: span 2;">
-        <div class="emotion-name">輕蔑</div>
-        <div class="emotion-en">Contempt（後期加入）</div>
-        <div class="emotion-fn">表達道德優越感與社會排斥，維護群體規範</div>
+      <div class="scard-body">
+        <p class="why">壓制情緒不會讓它消失，它只是被推到意識以外的地方繼續存在，需要更多的能量去維持那道壓制。而且被壓抑的情緒往往在最不恰當的時機衝出來——通常是對一個不相關的人或事。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>先承認那個情緒存在。</b>不是要你立刻表達出來，而是在心裡說：「我現在確實很憤怒。」這個承認本身就能降低情緒的強度。</li>
+          <li><b>問那個情緒在說什麼。</b>「我憤怒的是什麼？是哪個界限被越過了？我希望什麼不一樣？」讓情緒變成資訊，而不是一個需要被擺平的問題。</li>
+          <li><b>讓情緒有出口，但選對時機和方式。</b>不是在當下爆發，而是在穩定之後找到一個可以說的方式——對相關的人說、寫下來、跟你信任的人說。情緒需要流動，不需要被鎖住。</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <p>然而，Ekman 的基本情緒理論在近年受到來自 Lisa Feldman Barrett 等研究者的嚴肅挑戰。Barrett 的跨文化研究顯示，相同的臉部表情在不同文化與情境下可以引發非常不同的情緒解讀；而且，臉部表情與內在情緒狀態之間的對應關係遠比 Ekman 所描述的更為鬆散和可變。這場爭論至今仍未定論，但它提醒我們：「情緒」的概念本身可能比我們以為的更加文化建構，更加依賴語言與脈絡。</p>
+  <!-- 02 你以為是感覺，其實是你的詮釋 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">你以為是感覺，其實是你的詮釋</span>
+    </div>
+    <p class="ch-intro">心跳加速、手心出汗、胸口緊——同樣的生理感受，你可以把它叫做「緊張」，也可以把它叫做「興奮」。情緒不只是身體的反應，更是你的大腦對那個反應貼上的標籤。標籤不同，體驗就不同。</p>
 
-    <h2>四、情緒的演化功能</h2>
-    <p>從演化的視角來看，情緒不是裝飾品，而是促進生存與繁殖的適應機制。每一種基本情緒都對應著特定的行動傾向（action tendency）：恐懼促使逃跑或僵住；憤怒動員攻擊或抗議；厭惡促使迴避；快樂促進趨近與社會連結；悲傷促使退縮反思並尋求支持。</p>
-    <p>心理學家 Barbara Fredrickson 提出了<strong>拓展與建構理論（broaden-and-build theory）</strong>，對正向情緒的功能提出了有別於傳統的解釋。她主張，負向情緒（恐懼、憤怒）縮窄注意力與行為repertoire，有助於應對即時威脅；而正向情緒（快樂、感恩、愛）則<strong>拓展</strong>個體的思維與行為視野，讓人更富創意、更開放、更願意探索——並在長期中<strong>建構</strong>持久的個人資源（社交網絡、心理韌性、技能）。正向情緒的功能不是針對立即威脅，而是投資未來。</p>
-
-    <h2>五、情緒在決策中的角色</h2>
-    <p>長期以來，理性主義傳統認為情緒是決策的敵人——理想的決策者應該排除情緒干擾，純粹依靠邏輯推理。神經科學家 Antonio Damasio 的研究從根本上顛覆了這個觀念。</p>
-    <p>Damasio 研究了一批腹內側前額葉（vmPFC）受損的患者。這些患者智力完全正常、邏輯推理能力不受影響，但由於腦部損傷，他們在決策時無法產生情緒反應。令人驚訝的是，這些「理性」的患者在日常生活中的決策能力反而嚴重受損——他們無法在職業、人際關係或財務上做出合理的長期選擇，往往在無關緊要的細節上耗費大量時間，卻無法對重要問題做出決斷。</p>
-    <p>Damasio 提出<strong>軀體標記假說（somatic marker hypothesis）</strong>：情緒在身體中留下「標記」（如某個選項讓你感到胃部緊縮，另一個讓你感到舒適放鬆），這些身體訊號在意識決策之前就已對選項進行了初步評估，縮窄了需要理性分析的選項範圍。沒有情緒的輔助，純粹的理性分析面對複雜的真實世界選擇時，反而陷入癱瘓。<strong>情緒不是理性的對立面，而是理性決策不可或缺的夥伴。</strong></p>
-
-    <h2>六、情緒的文化差異與展示規則</h2>
-    <p>雖然某些基本情緒可能具有跨文化的生物基礎，但情緒的<strong>表達方式</strong>卻受到文化規範的深刻塑造。每個文化都有一套關於「在什麼場合、對什麼人、表達多少情緒是適當的」的隱性規則，社會心理學家稱之為<strong>展示規則（display rules）</strong>。</p>
-
-    <div class="display-list">
-      <div class="display-row">
-        <div class="display-rule-name">強化
-          <span class="display-rule-en">Intensification</span>
-        </div>
-        <div class="display-rule-desc">表達比實際感受更強烈的情緒。文化規範期待在某些場合誇大情緒表達——如婚禮上的歡呼、運動賽事的激動，以符合社會期待。</div>
-      </div>
-      <div class="display-row">
-        <div class="display-rule-name">弱化
-          <span class="display-rule-en">Deintensification</span>
-        </div>
-        <div class="display-rule-desc">抑制或縮小情緒的外在表達。許多東亞文化強調克制，公開場合不宜過度表達個人情緒，以維護群體和諧與面子。</div>
-      </div>
-      <div class="display-row">
-        <div class="display-rule-name">中性化
-          <span class="display-rule-en">Neutralization</span>
-        </div>
-        <div class="display-rule-desc">無論內在感受如何，對外表現出中性無情緒的面容。「撲克臉」是典型範例，在談判、外交或某些職業場合中被視為專業表現。</div>
-      </div>
-      <div class="display-row">
-        <div class="display-rule-name">掩蓋
-          <span class="display-rule-en">Masking</span>
-        </div>
-        <div class="display-rule-desc">以一種情緒的表達遮蓋另一種情緒。感到悲傷卻微笑（「哭著說沒關係」）、感到憤怒卻保持禮貌——這是情緒勞動（emotional labor）的核心機制。</div>
-      </div>
-      <div class="display-row">
-        <div class="display-rule-name">模擬
-          <span class="display-rule-en">Simulation</span>
-        </div>
-        <div class="display-rule-desc">表達自己並未真正感受到的情緒。服務業員工需要對每位顧客展現熱情，演員需要進入角色情緒，這都是在「模擬」並非真實感受到的情緒狀態。</div>
-      </div>
+    <div class="pquote">
+      <p>恐懼和興奮的生理反應幾乎是一樣的。你感覺到哪一個，取決於你怎麼解讀它。</p>
     </div>
 
-    <p>Arlie Hochschild 在《受管理的心》（1983）中提出<strong>情緒勞動（emotional labor）</strong>的概念：某些職業（如空服員、護士、客服人員）要求員工在工作中持續管理和表演特定的情緒，即使這些情緒與內在感受不一致。長期的情緒勞動可能導致情感耗竭（emotional exhaustion）與職業倦怠（burnout），是現代職場心理健康的重要議題。</p>
-    <p>值得注意的是，情緒的表達與體驗之間存在雙向影響。<strong>臉部回饋假說（facial feedback hypothesis）</strong>提出，臉部肌肉的運動可以反過來影響情緒體驗——強迫自己微笑可能讓你感覺稍微更好；咬著一支筆讓臉部呈現微笑形狀的受試者，評估漫畫更有趣。雖然相關研究的複製性存在爭議，但身體姿態與情緒體驗之間的雙向關係，已是現代情緒研究的主流共識。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">上台前、重要會議前、約會前——你感到心跳加速、有點頭暈、思緒亂。你對自己說「我好緊張」，然後表現得果然很差。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「我好緊張」這個標籤讓你的大腦把這個生理狀態解讀為威脅，啟動防禦反應，讓你更難正常發揮。但你的身體實際上只是進入高度喚起的狀態——它也可以是準備好了、躍躍欲試的感覺。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把「我好緊張」換成「我很興奮」。</b>這不是假裝，而是給同樣的生理狀態換一個更有幫助的框架。研究顯示，這個重新標記會讓實際表現更好——因為「興奮」是行動的狀態，「緊張」是防禦的狀態。</li>
+          <li><b>注意你在給情緒貼什麼標籤。</b>你叫它「難過」和叫它「失望」，體驗是不一樣的。叫它「憤怒」和叫它「受傷」，背後的需求也不同。更精確地命名情緒，能讓你更清楚它在說什麼。</li>
+          <li><b>問：「我對這個情緒有什麼故事？」</b>有時候讓你痛苦的不是情緒本身，而是你加在情緒上的解讀——「這代表我很失敗」「這代表沒有人在乎我」。把故事和情緒分開來看。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  </section>
+  <!-- 03 情緒和決定：你的感受比你想的更理性 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">情緒和決定：你的感受比你想的更理性</span>
+    </div>
+    <p class="ch-intro">你可能被教導過：做決定要理性，不要被情緒影響。但神經科學的發現說了相反的話——沒有情緒的人，反而沒有辦法做好決定。情緒不是決策的敵人，而是它的一部分。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在考慮一個工作機會。薪水更好、職位更高，條件上看起來應該接受。但你有一種說不清楚的「不對勁」，覺得哪裡不太對——你不確定這個感覺算不算數。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">那個「說不清楚的不對勁」，很可能是你的大腦在整合了很多你意識上還沒處理到的資訊之後，給你的一個訊號。情緒是一種快速的資訊整合機制，它在你的意識推理之前就完成了評估。忽略它，不一定是更理性的選擇。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把那個「感覺」當成值得探索的資訊，而不是要忽略的雜訊。</b>問：「這個不對勁具體是什麼？是文化、是人、是工作內容、還是時機？」通常你能夠說得出來，只是還沒有去問。</li>
+          <li><b>理性和感受都要問。</b>列出條件和理由，但也問：「想像一下我接受了——身體的感覺是什麼？想像一下我拒絕了——身體的感覺是什麼？」讓你的身體也參與這個決定。</li>
+          <li><b>分辨「恐懼引發的猶豫」和「直覺的警示」。</b>不是所有的不舒服感都是有意義的警訊——有時候是你害怕改變。問：「如果我完全不害怕，我還會有這個不對勁嗎？」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 情緒調節：不是壓住它，而是和它共處 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">情緒調節：不是壓住它，而是和它共處</span>
+    </div>
+    <p class="ch-intro">情緒調節不是「讓自己不要有這個情緒」，而是讓你在有這個情緒的時候，還是能夠選擇你的行動。情緒出現是正常的，問題是你有多少空間在情緒和行動之間。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>方式</th>
+          <th>實際上在做什麼</th>
+          <th>長期效果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>壓制</td>
+          <td>把情緒推到意識以外，假裝它不存在</td>
+          <td>情緒沒有消失，只是被延後——而且往往以更大的力道回來，同時消耗大量精力維持壓制</td>
+        </tr>
+        <tr>
+          <td>發洩（直接爆發）</td>
+          <td>把情緒完全釋放出來，對人或對物</td>
+          <td>短暫感覺好一點，但不會降低情緒的強度——反而可能強化它，同時破壞關係</td>
+        </tr>
+        <tr>
+          <td>重新詮釋</td>
+          <td>改變你對事件或情緒的解讀方式</td>
+          <td>有效且持久——改變標籤和故事，情緒體驗也真的會改變</td>
+        </tr>
+        <tr>
+          <td>承認與命名</td>
+          <td>說出「我現在感到……」，給情緒一個名字</td>
+          <td>光是命名就能降低情緒的強度，讓前額葉重新參與，讓你有選擇的空間</td>
+        </tr>
+        <tr>
+          <td>接納（不評判地觀察）</td>
+          <td>讓情緒存在，不試圖推開或抓住它，觀察它來了又去</td>
+          <td>情緒的持續時間通常比你以為的短——大多數情緒如果不被餵養，幾分鐘到幾十分鐘內會自然消退</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在情緒很高漲的時候說了或做了一件事，事後很後悔。你知道自己「情緒來了就控制不住」，但不知道怎麼改變。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">情緒高峰的時候，負責理性判斷的前額葉被「劫持」了——杏仁核（情緒中樞）的反應速度遠比理性思考快，所以當情緒到了某個強度，你確實很難在當下做出最好的決定。問題不是你「理性不夠強」，而是你需要在情緒上升到那個點之前就介入。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>認識你的「情緒升溫訊號」。</b>每個人在情緒快要失控之前，身體都有先兆——心跳加速、肌肉緊繃、聲音變高、思緒變窄。練習認識你的個人訊號，那是你還有選擇空間的最後時機。</li>
+          <li><b>在那個時機點，先暫停。</b>說「我需要一點時間」然後離開，或者做幾次深呼吸。這不是迴避，而是讓你的前額葉有機會重新上線。二十分鐘通常足以讓生理喚起降到可以對話的程度。</li>
+          <li><b>事後不要只是道歉，也要理解那個情緒在說什麼。</b>「我當時為什麼反應那麼大？那個點具體是什麼？」理解自己的觸發點，下次才能在更早的時候介入。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 情緒勞動：你在工作裡消耗了多少自己 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">情緒勞動：你在工作裡消耗了多少自己？</span>
+    </div>
+    <p class="ch-intro">有一種疲憊叫做「情緒勞動的耗損」——你一整天都在管理自己的情緒表現，表現出你實際上不一定感受到的熱情、耐心或平靜。這不計入工作量，但它消耗真實的能量。</p>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你在服務性質的工作裡，一整天都需要對客戶保持友善和耐心，就算他們不合理或讓你很不舒服。下班後你覺得完全榨乾了，什麼都不想說、不想做，也不想和任何人說話。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你描述的是情緒勞動的耗竭。當你長期需要在表達的情緒和真實感受之間維持落差，這個落差本身需要能量去維持。你沒有在「不做事」——你整天都在做情緒管理的工作，只是這個工作看不見、也不被算進去。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>承認這是真實的消耗，不是你「太脆弱」。</b>情緒勞動是真實的工作，它的疲勞感也是真實的。停止告訴自己「應該沒事」。</li>
+          <li><b>在下班後給自己一段「去角色」的時間。</b>換衣服、散步、安靜地坐著——讓你的大腦有一個儀式性的切換，從「工作模式的你」轉回「真實的你」。</li>
+          <li><b>找到幾個你不需要管理情緒的關係。</b>有些人和場合讓你可以直接說「我今天很累」「這件事讓我很煩」，不需要包裝，不需要考慮對方的感受。這些關係是你的情緒充電來源。</li>
+          <li><b>長期的情緒勞動累積值得認真評估。</b>如果你長期處於嚴重的情緒耗竭狀態，這是一個需要認真審視的訊號——不只是紓壓技巧的問題，而是這份工作或環境對你來說是否可持續的問題。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 8 週，共 16 週</td></tr>
       <tr><td>單元</td><td>Unit 03 — 情緒與人格</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Emotion <span>情緒</span></li>
-      <li>Subjective Experience <span>主觀體驗</span></li>
-      <li>Physiological Arousal <span>生理喚起</span></li>
-      <li>James-Lange Theory <span>James-Lange 理論</span></li>
-      <li>Cannon-Bard Theory <span>Cannon-Bard 理論</span></li>
-      <li>Two-Factor Theory <span>二因論</span></li>
-      <li>Misattribution of Arousal <span>喚起誤歸因</span></li>
-      <li>Constructed Emotion <span>建構情緒理論</span></li>
-      <li>Basic Emotions <span>基本情緒</span></li>
-      <li>Display Rules <span>展示規則</span></li>
-      <li>Emotional Labor <span>情緒勞動</span></li>
-      <li>Somatic Marker <span>軀體標記</span></li>
-      <li>Broaden-and-Build <span>拓展與建構理論</span></li>
-      <li>Facial Feedback <span>臉部回饋假說</span></li>
-      <li>Action Tendency <span>行動傾向</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">情緒調節速查</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">當下</span>
+        <span class="qa-val">承認情緒存在，給它一個名字</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">升溫時</span>
+        <span class="qa-val">先暫停，二十分鐘後再回來</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">事後</span>
+        <span class="qa-val">問：那個情緒在說什麼？我的觸發點是什麼？</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">決定前</span>
+        <span class="qa-val">讓身體也投票，不只是腦子</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">每天</span>
+        <span class="qa-val">找到幾個可以真實表達的時刻和對象</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>William James — James-Lange 情緒理論</td></tr>
-      <tr><td>人物</td><td>Paul Ekman — 基本情緒、跨文化表情研究</td></tr>
-      <tr><td>人物</td><td>Lisa Feldman Barrett — 建構情緒理論</td></tr>
-      <tr><td>人物</td><td>Antonio Damasio — 軀體標記假說</td></tr>
-      <tr><td>人物</td><td>Barbara Fredrickson — 拓展與建構理論</td></tr>
-      <tr><td>人物</td><td>Arlie Hochschild — 情緒勞動概念</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《情緒跟你以為的不一樣》Lisa Feldman Barrett</td></tr>
-      <tr><td>書目</td><td>《笛卡兒的錯誤》Antonio Damasio</td></tr>
-      <tr><td>書目</td><td>《情緒革命》Daniel Goleman</td></tr>
-      <tr><td>書目</td><td>《受管理的心》Arlie Hochschild</td></tr>
-      <tr><td>論文</td><td>Dutton, D.G. &amp; Aron, A.P. (1974). Some evidence for heightened sexual attraction under conditions of high anxiety.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《情緒跟你以為的不一樣》Lisa Feldman Barrett</td></tr>
+      <tr><td>書</td><td>《情緒的驚人力量》Susan David</td></tr>
+      <tr><td>書</td><td>《當下的力量》Eckhart Tolle</td></tr>
+      <tr><td>書</td><td>《笛卡兒的錯誤》Antonio Damasio</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>吊橋實驗顯示，我們可能將情境引發的生理喚起誤歸因為對他人的吸引力。回想你的生活，有沒有哪段關係或哪次「感覺」，事後回想可能有誤歸因的成分在內？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>你平常對「負面情緒」的第一反應是什麼——壓制、發洩、還是其他？這個習慣對你的效果如何？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>建構情緒理論認為，情緒是大腦根據文化概念與過去經驗建構出來的，而非先天固定的程式。如果這個理論是正確的，對於「跨文化溝通」與「情緒教育」有什麼重要意涵？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>情緒六格裡，哪一個情緒你覺得最難面對或最少去理解它在說什麼？你願意這週觀察一次它出現時，它可能在告訴你什麼嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>Damasio 的研究顯示，情緒是良好決策的必要條件，而非障礙。這個觀點如何改變你對「理性」與「感性」的看法？有沒有哪個你曾做的「純理性」決定，事後發現其實忽略了重要的情緒訊號？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>你有沒有過一個「直覺說不對，但條件很好」的決定？你當時怎麼選？事後看來那個直覺準不準確？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>你在日常生活中執行哪些「情緒展示規則」？在工作場合、家庭中、與朋友相處時，你對自己情緒表達的管理有什麼不同？這些管理對你的身心有什麼代價？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你每天有多少情緒勞動？你有沒有足夠的空間和對象，讓你不需要管理情緒地表達自己？如果沒有，你可以從哪裡開始找到這個空間？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day7.html" class="page-link">&#8592; Week 07</a>
-  <span class="page-dot">8 / 16</span>
-  <a href="day9.html" class="page-link">Week 09 &#8594;</a>
+<div class="pager">
+  <a href="day7.html">← Week 07</a>
+  <span class="pager-mid">08 / 16</span>
+  <a href="day9.html">Week 09 →</a>
 </div>
 
 <script>
-  const key = 'week-8';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-08';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }

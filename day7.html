@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Week 07 — 行為改變的科學</title>
+  <title>Week 07 — 習慣養成與破除</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #F5F0E8;
-      --ink:       #1A1612;
-      --ink-mid:   #4A4440;
-      --ink-light: #8A8480;
-      --red:       #C0392B;
-      --rule:      rgba(26,22,18,0.12);
+      --bg:    #F5F0E8;
+      --ink:   #1A1612;
+      --mid:   #4A4440;
+      --light: #8A8480;
+      --red:   #C0392B;
+      --rule:  rgba(26,22,18,0.12);
+      --card:  #FDFAF3;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background: var(--bg);
       color: var(--ink);
       font-family: 'Noto Serif TC', serif;
-      min-height: 100vh;
       padding-bottom: 6rem;
     }
+
     nav {
-      padding: 1.2rem 5vw;
+      padding: 1.1rem 5vw;
       border-bottom: 1px solid var(--rule);
       display: flex;
       justify-content: space-between;
@@ -32,20 +32,20 @@
     }
     .nav-back {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
     .nav-back:hover { color: var(--red); }
-    .nav-week {
+    .nav-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
-      color: var(--ink-light);
+      color: var(--light);
     }
+
     .hero {
       padding: 3.5rem 5vw 3rem;
       border-bottom: 2px solid var(--ink);
@@ -54,30 +54,25 @@
       gap: 2rem;
       align-items: end;
     }
-    .hero-eyebrow {
+    .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
-      color: var(--red);
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 720px;
-    }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
     .hero h1 em { font-style: normal; color: var(--red); }
     .hero-sub {
-      margin-top: 1.2rem;
+      margin-top: 1.1rem;
       font-size: 1rem;
       font-weight: 300;
-      color: var(--ink-mid);
+      color: var(--mid);
       line-height: 1.85;
-      max-width: 600px;
+      max-width: 560px;
     }
-    .hero-number {
+    .hero-num {
       font-family: 'IBM Plex Mono', monospace;
       font-size: clamp(5rem, 10vw, 8rem);
       font-weight: 300;
@@ -85,287 +80,239 @@
       line-height: 1;
       user-select: none;
     }
-    .page-wrap {
+
+    .wrap {
       padding: 3.5rem 5vw 0;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-      gap: 5vw;
+      grid-template-columns: minmax(0, 2.2fr) 260px;
+      gap: 4vw;
       max-width: 1200px;
     }
     main { min-width: 0; }
     aside { min-width: 0; }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-    }
-    .objectives { margin-bottom: 3.5rem; }
-    .obj-list { list-style: none; }
-    .obj-list li {
-      display: grid;
-      grid-template-columns: 2rem 1fr;
-      align-items: baseline;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-      gap: 0.4rem;
-    }
-    .obj-list li .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--red);
-    }
-    .prose { margin-bottom: 3.5rem; }
-    .prose h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 2.8rem 0 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-    .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-    .prose p {
-      font-size: 0.97rem;
-      font-weight: 300;
-      line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 1.1rem;
-    }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose p strong { font-weight: 500; color: var(--ink); }
-    .pull-quote {
-      margin: 2rem 0;
-      padding: 1.6rem 2rem;
-      border-left: 3px solid var(--red);
-      background: rgba(192,57,43,0.04);
-    }
-    .pull-quote p {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--ink);
-      margin: 0;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      font-style: normal;
-    }
-    .case-study {
-      border: 1px solid var(--rule);
-      padding: 1.6rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .case-label {
+
+    .slabel {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .chapter { margin-bottom: 3.8rem; }
+    .ch-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.3rem;
+    }
+    .ch-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+    .ch-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .ch-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SITUATION CARD */
+    .scard { border: 1px solid var(--rule); margin-bottom: 1.2rem; overflow: hidden; }
+    .scard-top {
+      background: rgba(192,57,43,0.055);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 1.4rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .scard-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 0.7rem;
-      display: block;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
     }
-    .case-study h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
+    .scard-scene { font-size: 0.91rem; font-style: italic; line-height: 1.72; color: var(--ink); }
+    .scard-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .why {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.88;
+      color: var(--mid);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
     }
-    .case-study p {
+    .act-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .acts { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .acts li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-mid);
-      margin-bottom: 0.6rem;
+      line-height: 1.76;
+      color: var(--mid);
     }
-    .case-study p:last-child { margin-bottom: 0; }
-    /* HABIT LOOP */
-    .habit-loop {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .loop-box {
-      padding: 1.4rem 1.2rem;
-      border: 1px solid var(--rule);
-      text-align: center;
-    }
-    .loop-step {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .loop-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-    .loop-desc {
-      font-size: 0.83rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--ink-mid);
-    }
-    /* CONDITIONING COMPARE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .compare-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      line-height: 1.65;
-      color: var(--ink-mid);
-      vertical-align: top;
-    }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    /* REINFORCEMENT GRID */
-    .reinforcement-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid var(--rule);
-      margin: 1.5rem 0;
-    }
-    .rf-item {
-      padding: 1.2rem 1.4rem;
-      border: 1px solid var(--rule);
-    }
-    .rf-name {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.25rem;
-    }
-    .rf-type {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 0.55rem;
-    }
-    .rf-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-      margin-bottom: 0.4rem;
-    }
-    .rf-example {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--ink-light);
-      font-style: italic;
-    }
-    /* SCHEDULE TABLE */
-    .schedule-list { margin: 1.5rem 0; }
-    .schedule-row {
-      display: grid;
-      grid-template-columns: 10rem 1fr;
-      gap: 1.2rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-    }
-    .schedule-row:first-child { border-top: 1px solid var(--rule); }
-    .schedule-name {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--ink);
-    }
-    .schedule-en {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--red);
-      display: block;
-      margin-top: 0.2rem;
-    }
-    .schedule-desc {
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--ink-mid);
-    }
-    /* SIDEBAR */
-    .sidebar-block { margin-bottom: 2.8rem; }
-    .meta-table { width: 100%; border-collapse: collapse; }
-    .meta-table tr { border-bottom: 1px solid var(--rule); }
-    .meta-table td { padding: 0.75rem 0; font-size: 0.85rem; line-height: 1.55; vertical-align: top; }
-    .meta-table td:first-child {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.1em;
-      color: var(--ink-light);
-      text-transform: uppercase;
-      width: 4.5rem;
-      padding-top: 0.85rem;
-    }
-    .meta-table td:last-child { color: var(--ink-mid); }
-    .terms-list { list-style: none; }
-    .terms-list li {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--rule);
+    .acts li::before {
+      content: '→';
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.78rem;
-      color: var(--ink);
-      letter-spacing: 0.04em;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      color: var(--red);
+      padding-top: 0.18rem;
+      flex-shrink: 0;
     }
-    .terms-list li span { color: var(--ink-light); font-size: 0.68rem; text-align: right; }
-    .reflection { padding: 3.5rem 5vw 0; max-width: 1200px; }
-    .reflection-inner { border: 1px solid var(--rule); }
-    .reflection-q {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-mid);
+    .acts li b { font-weight: 600; color: var(--ink); }
+
+    /* HABIT LOOP — 3 boxes inline */
+    .loop-row {
       display: grid;
-      grid-template-columns: 2rem 1fr;
-      gap: 0.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.2rem 0;
+    }
+    .loop-cell { background: var(--card); padding: 1.1rem 1.2rem; }
+    .loop-n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+    }
+    .loop-title { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.45rem; }
+    .loop-desc { font-size: 0.84rem; font-weight: 300; line-height: 1.72; color: var(--mid); }
+
+    /* SIMPLE TABLE */
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin: 1.2rem 0;
+    }
+    .simple-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .simple-table td {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.65;
+      color: var(--mid);
+      vertical-align: top;
+    }
+    .simple-table tr:last-child td { border-bottom: none; }
+    .simple-table td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+    /* PULL QUOTE */
+    .pquote {
+      margin: 1.8rem 0;
+      padding: 1.4rem 1.8rem;
+      border-left: 3px solid var(--red);
+      background: rgba(192,57,43,0.04);
+    }
+    .pquote p { font-size: 1rem; font-weight: 400; line-height: 1.85; color: var(--ink); }
+
+    /* SIDEBAR */
+    .sb-block { margin-bottom: 2.4rem; }
+    .mini-table { width: 100%; border-collapse: collapse; }
+    .mini-table tr { border-bottom: 1px solid var(--rule); }
+    .mini-table tr:last-child { border-bottom: none; }
+    .mini-table td {
+      padding: 0.65rem 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      vertical-align: top;
+      color: var(--mid);
+    }
+    .mini-table td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 3.8rem;
+      padding-top: 0.82rem;
+    }
+    .qa-box { border: 1px solid var(--rule); overflow: hidden; }
+    .qa-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .qa-row:last-child { border-bottom: none; }
+    .qa-key {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.05);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.65rem;
+    }
+    .qa-val {
+      font-size: 0.83rem;
+      font-weight: 300;
+      line-height: 1.58;
+      color: var(--mid);
+      padding: 0.75rem 0.85rem;
+    }
+
+    /* REFLECTION */
+    .ref-wrap { padding: 3.5rem 5vw 0; max-width: 1200px; }
+    .ref-box { border: 1px solid var(--rule); }
+    .ref-q {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.7rem;
+      padding: 1.15rem 1.7rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
       align-items: baseline;
     }
-    .reflection-q:last-child { border-bottom: none; }
-    .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--red); padding-top: 0.18rem; }
-    .complete-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
-    .btn-complete {
+    .ref-q:last-child { border-bottom: none; }
+    .q-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--red); }
+
+    .done-row { padding: 2.5rem 5vw 0; max-width: 1200px; }
+    .btn-done {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid var(--ink);
@@ -375,8 +322,9 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .btn-complete:hover, .btn-complete.done { background: var(--ink); color: var(--bg); }
-    .pagination {
+    .btn-done:hover, .btn-done.done { background: var(--ink); color: var(--bg); }
+
+    .pager {
       padding: 2.5rem 5vw 0;
       max-width: 1200px;
       display: flex;
@@ -385,329 +333,346 @@
       border-top: 1px solid var(--rule);
       margin-top: 3rem;
     }
-    .page-link {
+    .pager a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--ink-light);
-      text-decoration: none;
       text-transform: uppercase;
-      transition: color 0.15s;
+      color: var(--light);
+      text-decoration: none;
     }
-    .page-link:hover { color: var(--red); }
-    .page-dot { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink-light); }
-    @media (max-width: 760px) {
-      .page-wrap { grid-template-columns: 1fr; }
+    .pager a:hover { color: var(--red); }
+    .pager-mid { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--light); }
+
+    @media (max-width: 780px) {
+      .wrap { grid-template-columns: 1fr; }
       .hero { grid-template-columns: 1fr; }
-      .hero-number { display: none; }
-      .habit-loop { grid-template-columns: 1fr; }
-      .reinforcement-grid { grid-template-columns: 1fr; }
-      .schedule-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      .hero-num { display: none; }
+      .loop-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-back">&#8592; 課程總覽</a>
-  <span class="nav-week">Week 07 / 16</span>
+  <a href="index.html" class="nav-back">← 課程總覽</a>
+  <span class="nav-label">Week 07 / 16</span>
 </nav>
 
 <div class="hero">
   <div>
-    <p class="hero-eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
-    <h1>行為改變的科學：<br><em>習慣養成與破除</em></h1>
-    <p class="hero-sub">你的每一個習慣，都是大腦為了節省能量而建立的自動化迴路。從 Pavlov 的狗到 Skinner 的鴿子，從古典制約到操作制約，行為心理學為我們揭示了一個令人既不安又充滿希望的真相：行為是可以被系統性地塑造、維持與改變的。</p>
+    <p class="eyebrow">Unit 02 &nbsp;—&nbsp; 認知與行為心理學</p>
+    <h1>習慣養成與破除：<br><em>不靠意志力</em></h1>
+    <p class="hero-sub">你試過很多次「從明天開始」——運動、早睡、少滑手機、多讀書。每次熱情撐不過兩週。問題不是你意志力太差，而是你用了錯的方法。行為改變有它的科學原理，本週帶你用正確的方式去理解它。</p>
   </div>
-  <div class="hero-number">07</div>
+  <div class="hero-num">07</div>
 </div>
 
-<div class="page-wrap">
+<div class="wrap">
 <main>
 
-  <section class="objectives">
-    <span class="section-label">Learning Objectives</span>
-    <ul class="obj-list">
-      <li><span class="num">01</span><span>理解古典制約的核心機制：非制約刺激、制約刺激、消退、自發恢復、類化與區辨</span></li>
-      <li><span class="num">02</span><span>認識操作制約的四種後果類型：正增強、負增強、正懲罰、負懲罰，及其對行為的不同效果</span></li>
-      <li><span class="num">03</span><span>了解增強時程表對行為抵抗消退能力的影響，特別是變動比率時程的強大效果</span></li>
-      <li><span class="num">04</span><span>理解習慣迴路（提示—慣例—獎勵）的結構，以及如何利用此模型改變既有習慣</span></li>
-      <li><span class="num">05</span><span>認識社會學習理論：觀察學習與模仿的心理機制，以及鏡像神經元的發現</span></li>
-      <li><span class="num">06</span><span>掌握有科學依據的習慣建立策略，理解動機、意志力與環境設計在行為改變中的相對作用</span></li>
-    </ul>
-  </section>
-
-  <section class="prose">
-
-    <h2>一、習慣：大腦的自動化節能機制</h2>
-    <p>你今天早上起床後有沒有思考過刷牙的每一個步驟？拿起牙刷、擠牙膏、上下刷動——這些動作你幾乎是在完全不思考的狀態下完成的。這就是<strong>習慣（habit）</strong>的本質：一套在特定觸發情境下自動啟動的行為序列，幾乎不需要意識的參與或意志力的介入。</p>
-    <p>從神經科學的角度，習慣的形成是大腦<strong>基底核（basal ganglia）</strong>的「組塊化（chunking）」過程。當一個行為序列被反覆執行時，大腦逐漸將其封裝成一個自動化的整體單元，從需要前額葉皮質主動監控的有意識行為，轉化為由基底核自動執行的程序記憶。這個過程節省了大量的認知資源——大腦不必每次都從頭推理如何完成任務。</p>
-    <p>研究顯示，人類每天約有<strong>40%–45% 的行為是以習慣形式進行</strong>的，而非有意識的決定。這個數字既令人驚訝，也使「改變習慣」變得如此重要：習慣幾乎主宰了你生命的將近一半時間。</p>
-
-    <div class="pull-quote">
-      <p>「你不會上升到目標的高度，而是下沉到系統的水平。」</p>
-      <cite>— James Clear，《原子習慣》，2018</cite>
+  <!-- 01 習慣是怎麼形成的 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">01</span>
+      <span class="ch-title">習慣是怎麼運作的？</span>
     </div>
+    <p class="ch-intro">每個習慣的背後都有一個三步驟的迴路：提示觸發行為，行為帶來獎勵，獎勵強化迴路，讓下次的提示更容易再次觸發同樣的行為。這個迴路一旦建立，就會自動運作——不需要你主動決定，也不需要意志力。</p>
 
-    <h2>二、古典制約：學習聯結</h2>
-    <p>1890 年代，俄國生理學家 Ivan Pavlov 在研究狗的消化系統時意外發現了一個改變心理學歷史的現象。他注意到，實驗室的狗不只在食物出現時分泌唾液，就連看到送食物的助手走近，甚至只是聽到相關的環境聲音，也會開始分泌——即使尚未看到食物。這個「預期性分泌」引發了 Pavlov 的好奇，並開啟了對<strong>古典制約（classical conditioning）</strong>的系統性研究。</p>
-    <p>古典制約的基本邏輯是：透過反覆將一個<strong>中性刺激（neutral stimulus）</strong>與一個能自動引發反應的<strong>非制約刺激（unconditioned stimulus, US）</strong>配對呈現，最終中性刺激單獨出現也能引發類似反應，此時它便成為<strong>制約刺激（conditioned stimulus, CS）</strong>。Pavlov 的經典實驗中，鈴聲（中性刺激）與食物（US）反覆配對後，鈴聲單獨出現即能引發唾液分泌（制約反應），這就是古典制約的完整歷程。</p>
-
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>Little Albert 實驗（Watson &amp; Rayner, 1920）</h3>
-      <p>行為主義心理學家 John B. Watson 與 Rosalie Rayner 對一名 9 個月大的嬰兒 Albert 進行了一系列有爭議的實驗。他們首先確認 Albert 對白鼠並無恐懼，之後每當 Albert 伸手觸摸白鼠時，立即在其身後敲響鐵錘發出巨大聲響（US，引發恐懼反應）。</p>
-      <p>反覆配對數次後，Albert 一見到白鼠（CS）便立即哭泣並試圖逃跑——即使沒有聲響伴隨。更引人注目的是，這種恐懼反應<strong>類化（generalization）</strong>到了相似的毛茸茸物品：棉花、兔子、甚至戴著白鬍鬚的 Santa Claus 面具，都引發了 Albert 的恐懼。</p>
-      <p>這個實驗首次在人類身上示範了恐懼反應可以透過古典制約習得，為後來恐懼症的行為治療理論奠定了基礎。然而，它在倫理上備受批評：Albert 從未接受去制約治療，而研究者也從未獲得真正的知情同意。今日任何倫理審查委員會都不可能核准這樣的實驗。</p>
-    </div>
-
-    <p>古典制約還涉及幾個重要的衍生現象。<strong>消退（extinction）</strong>是指若制約刺激反覆出現而不再伴隨非制約刺激，制約反應會逐漸減弱消失——但這並非「遺忘」，而是「抑制」；<strong>自發恢復（spontaneous recovery）</strong>指消退後的制約反應在休息一段時間後可能自行重現，這解釋了為什麼戒癮後的渴望在特定情境下會突然復發。<strong>類化（generalization）</strong>讓制約反應擴展到相似刺激；<strong>區辨（discrimination）</strong>則讓個體學會只對特定制約刺激反應，而非所有相似刺激。</p>
-
-    <h2>三、操作制約：行為的後果塑造行為</h2>
-    <p>古典制約說明了反射性反應如何被學習，但人類和動物大多數的行為並非反射，而是<strong>主動發出</strong>的操作行為（operant behavior）。B.F. Skinner 在 Thorndike 「效果律」的基礎上，發展出<strong>操作制約（operant conditioning）</strong>理論：行為的後果決定該行為未來發生的頻率——正向後果使行為增加，負向後果使行為減少。</p>
-    <p>操作制約有四種基本類型，理解它們需要區分兩個維度：後果是「加入」還是「移除」某件事，以及加入/移除後行為是「增加」還是「減少」。</p>
-
-    <div class="reinforcement-grid">
-      <div class="rf-item">
-        <div class="rf-name">正增強</div>
-        <div class="rf-type">Positive Reinforcement — 加入正向刺激，行為增加</div>
-        <div class="rf-desc">在行為之後給予令人愉快的刺激，使該行為未來更可能再次出現。</div>
-        <div class="rf-example">小孩收拾玩具後被稱讚，之後更常自動收拾；員工達成業績後獲得獎金，績效動機提升。</div>
-      </div>
-      <div class="rf-item">
-        <div class="rf-name">負增強</div>
-        <div class="rf-type">Negative Reinforcement — 移除負向刺激，行為增加</div>
-        <div class="rf-desc">在行為之後移除令人不愉快的刺激，使該行為未來更可能出現。注意：負增強仍是「增強」行為，不是懲罰。</div>
-        <div class="rf-example">繫上安全帶後，車子的警報聲停止（移除煩人聲音），使繫安全帶行為增加；吃止痛藥後頭痛消失，使服藥行為增強。</div>
-      </div>
-      <div class="rf-item">
-        <div class="rf-name">正懲罰</div>
-        <div class="rf-type">Positive Punishment — 加入負向刺激，行為減少</div>
-        <div class="rf-desc">在行為之後加入令人不愉快的刺激，使該行為未來減少。</div>
-        <div class="rf-example">孩子說謊後被罰站（加入不愉快），說謊行為減少；觸摸熱爐後被燙（加入疼痛），觸摸行為消失。</div>
-      </div>
-      <div class="rf-item">
-        <div class="rf-name">負懲罰</div>
-        <div class="rf-type">Negative Punishment — 移除正向刺激，行為減少</div>
-        <div class="rf-desc">在行為之後移除令人愉快的刺激，使該行為未來減少。</div>
-        <div class="rf-example">孩子在餐桌上鬧脾氣後，禁止看電視（移除喜歡的事物），鬧脾氣行為減少；駕駛違規後被扣點（移除駕照分數），違規行為減少。</div>
-      </div>
-    </div>
-
-    <p>研究一致顯示，<strong>增強遠比懲罰更有效</strong>地建立穩定行為，懲罰只告訴個體「不能做什麼」，卻不告訴他「應該做什麼」。此外，懲罰容易產生負面情緒反應（恐懼、憤怒、逃避）、損害關係，且其效果往往依賴懲罰者的存在——一旦懲罰者不在，被懲罰的行為可能立即恢復。</p>
-
-    <h2>四、增強時程表：為何隨機獎勵最難抵抗？</h2>
-    <p>Skinner 不只研究增強的類型，還系統性地探討了<strong>增強時程表（schedules of reinforcement）</strong>——即以何種頻率和規律提供增強，對行為的維持與抵抗消退能力的影響。這個研究領域揭示了一個與直覺相反的發現：<strong>不規則、不可預測的獎勵，比穩定可預測的獎勵更能讓行為持久</strong>。</p>
-
-    <div class="schedule-list">
-      <div class="schedule-row">
-        <div class="schedule-name">連續增強
-          <span class="schedule-en">Continuous Reinforcement</span>
-        </div>
-        <div class="schedule-desc">每次行為都給予增強。學習速度最快，但一旦停止增強，消退也最快。適合初期建立新行為，但不適合長期維持。</div>
-      </div>
-      <div class="schedule-row">
-        <div class="schedule-name">固定比率
-          <span class="schedule-en">Fixed Ratio</span>
-        </div>
-        <div class="schedule-desc">每完成固定次數的行為後增強一次（如每賣出 10 件商品得一次獎金）。產生高頻率且穩定的行為，但增強後往往出現短暫停歇。</div>
-      </div>
-      <div class="schedule-row">
-        <div class="schedule-name">變動比率
-          <span class="schedule-en">Variable Ratio</span>
-        </div>
-        <div class="schedule-desc">在不可預測的次數後隨機提供增強（如吃角子老虎機）。產生最高頻率、最持久、最難消退的行為——這正是賭博成癮最難戒除的神經機制根源。社群媒體的「下拉刷新」設計也刻意模仿此機制。</div>
-      </div>
-      <div class="schedule-row">
-        <div class="schedule-name">固定間隔
-          <span class="schedule-en">Fixed Interval</span>
-        </div>
-        <div class="schedule-desc">在固定時間間隔後的第一次行為給予增強（如月薪制度）。行為在增強時間點前急遽增加，增強後立即下降，產生「扇形」的行為模式。</div>
-      </div>
-      <div class="schedule-row">
-        <div class="schedule-name">變動間隔
-          <span class="schedule-en">Variable Interval</span>
-        </div>
-        <div class="schedule-desc">在不可預測的時間間隔後給予增強（如釣魚、等公車）。產生穩定且持續的低至中等頻率行為，消退緩慢。</div>
-      </div>
-    </div>
-
-    <h2>五、習慣迴路：提示、慣例、獎勵</h2>
-    <p>Charles Duhigg 在《習慣的力量》中，將行為心理學的研究整合為一個直觀的模型：<strong>習慣迴路（habit loop）</strong>。每一個習慣都由三個要素構成，理解這個結構是改變習慣的關鍵。</p>
-
-    <div class="habit-loop">
-      <div class="loop-box">
-        <div class="loop-step">Step 01</div>
+    <div class="loop-row">
+      <div class="loop-cell">
+        <div class="loop-n">Step 01</div>
         <div class="loop-title">提示</div>
-        <div class="loop-desc">觸發習慣啟動的情境訊號。可以是時間、地點、情緒狀態、特定人物，或前一個行為。大腦開始自動執行對應的慣例。</div>
+        <div class="loop-desc">觸發習慣的訊號。可以是時間、地點、情緒、特定的人，或前一個行為。你不一定意識得到它。</div>
       </div>
-      <div class="loop-box">
-        <div class="loop-step">Step 02</div>
+      <div class="loop-cell">
+        <div class="loop-n">Step 02</div>
         <div class="loop-title">慣例</div>
-        <div class="loop-desc">習慣本身的行為序列，可以是身體的、心理的或情緒的。一旦啟動，幾乎自動執行，幾乎不需要有意識的決定參與。</div>
+        <div class="loop-desc">習慣本身的行為。一旦提示出現，這個行為幾乎自動啟動，不需要你做決定。</div>
       </div>
-      <div class="loop-box">
-        <div class="loop-step">Step 03</div>
+      <div class="loop-cell">
+        <div class="loop-n">Step 03</div>
         <div class="loop-title">獎勵</div>
-        <div class="loop-desc">滿足大腦的渴望，強化整個迴路。獎勵教導大腦「這個迴路值得記住並自動化」。渴望本身比獎勵更驅動習慣。</div>
+        <div class="loop-desc">讓大腦記住這個迴路值得保留。獎勵滿足了一個渴望——不一定是你意識到的那個。</div>
       </div>
     </div>
 
-    <p>習慣一旦形成，就不會真的「消失」，只會被新的迴路覆蓋或抑制。這就是為什麼舊習慣在壓力大或意志力耗盡時容易「復發」——抑制它的新迴路暫時失效，舊迴路重新接管。<strong>改變習慣最有效的策略，不是消滅舊習慣，而是保留原有的提示與獎勵，只替換中間的慣例部分</strong>。例如，若你習慣在下午感到無聊（提示）時去買含糖零食（慣例）以獲得短暫愉悅（獎勵），你可以嘗試保留提示與獎勵，將慣例替換為起身散步五分鐘或與同事聊天——同樣能帶來短暫愉悅，卻是更健康的慣例。</p>
+    <p class="ch-intro" style="margin-bottom:0;">習慣不會真的消失，它只會被新的迴路壓過去。這就是為什麼在壓力大或疲憊的時候，舊習慣特別容易「復發」——抑制舊迴路的新習慣暫時沒有能量，舊的就接管了。</p>
+  </div>
 
-    <h2>六、社會學習理論：我們向他人學習</h2>
-    <p>行為主義的古典制約與操作制約都強調個體透過直接體驗學習。然而，人類大量的學習是透過<strong>觀察（observation）</strong>完成的，而非親身嘗試。Albert Bandura 在 1960 年代提出<strong>社會學習理論（social learning theory）</strong>，主張人們可以透過觀察他人的行為及其後果來學習，而不需要直接經歷增強或懲罰。</p>
+  <!-- 02 你為什麼一直戒不掉壞習慣 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">02</span>
+      <span class="ch-title">你為什麼一直戒不掉壞習慣？</span>
+    </div>
+    <p class="ch-intro">大多數人戒壞習慣的方法是「靠意志力硬撐」。這個方法有一個根本問題：意志力是有限資源，而習慣迴路是自動的。在你精力充足的時候，意志力能壓住它；但一旦你累了、壓力大了、心情差了，迴路就會自動啟動，意志力不夠用了。</p>
 
-    <div class="case-study">
-      <span class="case-label">Classic Experiment</span>
-      <h3>Bobo 娃娃實驗（Bandura, 1961）</h3>
-      <p>Bandura 讓兒童觀看一段影片：影片中一名成人對一個充氣 Bobo 娃娃進行激烈的攻擊行為（拳打、腳踢、用錘子敲打，並伴隨大叫）。之後，這些兒童被帶到一個有 Bobo 娃娃的房間。</p>
-      <p>結果令人印象深刻：觀看過攻擊影片的兒童，對 Bobo 娃娃的攻擊行為顯著多於未觀看的對照組，且他們模仿的不只是攻擊行為的類型，甚至連成人的具體動作和叫聲都幾乎一模一樣地複製。</p>
-      <p>進一步的實驗顯示，當影片中攻擊者受到懲罰時，兒童的模仿行為減少；當攻擊者受到獎勵時，模仿行為增加。這說明觀察學習不只是模仿，還涉及對<strong>替代性後果（vicarious consequences）</strong>的評估——我們透過觀察他人的遭遇來預測自己行動的結果。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你每次工作到一個段落，就自動拿起手機開始刷。你沒有決定要刷，手機就在手上了。你試過「少刷一點」，但每次撐不了幾天就回到原樣。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">你的習慣迴路大概是：工作告一段落（提示）→ 拿起手機（慣例）→ 短暫的刺激和放鬆感（獎勵）。問題不是你自制力不夠，而是你的提示還在——每次工作停頓，大腦就自動啟動這個迴路。光靠「不要刷」對抗一個自動化迴路，幾乎必敗。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>改變環境，讓提示消失或變難。</b>把手機放到另一個房間，或者把社群 App 移到資料夾深處、登出帳號。讓「拿起手機」這件事多增加幾個步驟，自動化就會被打斷。</li>
+          <li><b>替換慣例，保留獎勵。</b>工作停頓後你需要的是「短暫的放鬆和刺激」——這個需求本身沒有問題。試著換一個慣例來滿足它：起來倒杯水、做幾個伸展、看窗外三十秒。保留提示和獎勵，只換中間的行為。</li>
+          <li><b>不要靠「想刷的時候忍住」，靠「設計讓自己不容易刷」。</b>在有意志力的時候把環境設計好，不要把意志力留到需要抵抗誘惑的當下。</li>
+        </ul>
+      </div>
     </div>
 
-    <p>Bandura 後來將理論進一步發展，加入了<strong>自我效能感（self-efficacy）</strong>的概念：個人對自己能否成功執行特定行為的信念。自我效能感高的人，在面對困難時更持久、更願意嘗試新挑戰、更能從失敗中恢復——這成為後來認知行為治療的重要基礎。</p>
-    <p>1990 年代，義大利神經科學家 Giacomo Rizzolatti 的研究團隊在猴子腦中意外發現了<strong>鏡像神經元（mirror neurons）</strong>：當猴子做某個動作時，以及當它觀看另一隻猴子做同樣動作時，大腦中同一批神經元都會激發。在人類身上，鏡像神經元系統被認為是同理心、模仿學習與語言習得的神經基礎。我們之所以在觀看運動員比賽時會肌肉微微緊張，在看別人受傷時會感到不適，都可能與鏡像神經元有關。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你有一個壞習慣，每次心情不好或壓力大的時候就會觸發——可能是暴食、抽菸、喝酒、或者反覆做一件讓你事後後悔的事。你戒了又犯，覺得自己很沒用。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">這種習慣的提示通常是情緒狀態（壓力、無聊、孤獨、焦慮），而情緒提示比時間或地點提示更難避開——你沒辦法「把情緒放到另一個房間」。關鍵是找到那個情緒在滿足什麼需求，然後找到一個更不傷自己的替代方式。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>先辨識情緒提示。</b>下次這個習慣觸發的時候，在做之前先停一秒，問：「我現在的感覺是什麼？」通常是某種不舒服的情緒在推動它。</li>
+          <li><b>問這個習慣在滿足什麼。</b>是麻痺感？是暫時逃離某件事？是某種控制感？找到真正的獎勵，你才能找到有效的替代方案。</li>
+          <li><b>為情緒高峰時刻提前備好替代行動。</b>當情緒來的時候你沒有辦法做複雜的決定。提前想好：「當我下次感到很焦慮的時候，我要做的第一件事是……」——越具體越好，越簡單越好。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <h2>七、有效習慣建立的科學策略</h2>
-    <p>理解了學習的心理機制後，可以將其轉化為實用的習慣建立策略。以下是有研究基礎的方法：</p>
-    <p><strong>執行意圖（implementation intention）</strong>：研究者 Peter Gollwitzer 的研究顯示，預先制定「如果……那麼……」計畫（如「如果是週一、三、五早上七點，那麼我就去健身房」），比單純「我想要更常運動」的模糊意圖，執行率提升達兩到三倍。具體的時間、地點觸發提示，將意圖轉化為習慣迴路所需的「提示」元素。</p>
-    <p><strong>環境設計</strong>：比起依賴意志力抵抗誘惑，重新設計環境讓好習慣更容易、壞習慣更困難，效果更穩定且持久。想多讀書，就把書放在床頭最顯眼處；想少用手機，就把社群媒體 App 移到資料夾的第二頁並關閉通知。意志力是有限資源，環境是不知疲倦的守門員。</p>
-    <p><strong>習慣堆疊（habit stacking）</strong>：將新習慣附加在已有的強固習慣之後，借用既有習慣的強大提示。「每次喝完早晨咖啡之後，我立刻寫三件感恩的事」——咖啡習慣成為新習慣的提示，無需另行記憶或設定提醒。</p>
-    <p><strong>最小可行習慣（minimum viable habit）</strong>：將習慣縮小到幾乎不可能失敗的最低規模，降低啟動障礙。「每天做一個伏地挺身」聽起來荒謬，卻能建立「去運動」這個身份認同，並往往帶來更多行動。BJ Fogg 的「微習慣（tiny habits）」研究支持這個策略的有效性。</p>
+  <!-- 03 為什麼手機、賭博這麼難戒 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">03</span>
+      <span class="ch-title">為什麼手機和賭博這麼難戒？</span>
+    </div>
+    <p class="ch-intro">不是所有的獎勵機制都一樣強。心理學發現，<b>不可預測的隨機獎勵</b>，比固定的獎勵更能讓行為持久——而且更難戒掉。這正是吃角子老虎機的設計原理，也是社群媒體和短影音的設計原理。</p>
 
-    <table class="compare-table">
+    <div class="pquote">
+      <p>「再刷一次，說不定有什麼有趣的」——這個「說不定」就是讓你停不下來的關鍵。確定性讓人滿足，不確定性讓人上癮。</p>
+    </div>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你告訴自己只看五分鐘，結果一個小時過去了。你知道這浪費了時間，但就是停不下來。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">短影音和社群媒體的設計是一種「變動比率」的獎勵機制——每幾個無聊的內容之後，偶爾會有一個讓你覺得很有趣的。大腦不知道獎勵什麼時候出現，所以會一直保持期待狀態，停不下來。這不是你自制力的問題，這是一套被精心設計的心理機制。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>用「主動決定開始」取代「自動開始」。</b>不要讓手機成為無聊時的預設動作。設定一個明確的「我要滑手機了」的決定，比讓它自動發生更容易控制時間。</li>
+          <li><b>設定物理終點，不要靠意志力停止。</b>開始之前設定一個計時器，時間到了就放下——在你開始之前做這個決定，比在刷到一半的時候決定容易得多。</li>
+          <li><b>知道這個機制，讓你對它有一點距離感。</b>下次感受到「再刷一次」的衝動時，你可以在心裡說：「這是變動比率在作用。」不是要消除衝動，但命名它能讓你多一點選擇的空間。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 如何真的建立一個新習慣 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">04</span>
+      <span class="ch-title">如何真的建立一個新習慣？</span>
+    </div>
+    <p class="ch-intro">建立新習慣最常見的錯誤，是從目標出發而不是從系統出發——「我要每天運動」比「我每天早上刷完牙之後，換上運動服，走到公園」更難執行，因為前者沒有提示，沒有具體的第一個動作。</p>
+
+    <table class="simple-table">
       <thead>
         <tr>
-          <th>改變層次</th>
-          <th>關注焦點</th>
-          <th>例子</th>
+          <th>策略</th>
+          <th>怎麼做</th>
+          <th>為什麼有效</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>結果層次</td>
-          <td>你想要達到的目標（最外層）</td>
-          <td>「我想減重 10 公斤」</td>
+          <td>小到不可能失敗</td>
+          <td>把習慣縮到荒謬的小：「每天做一個深蹲」「每天讀一頁書」</td>
+          <td>降低啟動阻力，先建立「我是會做這件事的人」的身份認同，再慢慢增加</td>
         </tr>
         <tr>
-          <td>過程層次</td>
-          <td>你採取的系統與習慣</td>
-          <td>「我每天早晨運動 30 分鐘」</td>
+          <td>習慣堆疊</td>
+          <td>把新習慣接在已有的習慣後面：「每次喝完早上咖啡，我就寫三件感恩的事」</td>
+          <td>借用舊習慣的提示，不需要另外記憶或設提醒，直接嵌入既有的流程</td>
         </tr>
         <tr>
-          <td>身份認同層次</td>
-          <td>你對自己是誰的信念（最內層，最持久）</td>
-          <td>「我是一個重視健康的人」</td>
+          <td>具體化時間地點</td>
+          <td>「我要運動」→「每週一、三、五早上七點，在公園跑二十分鐘」</td>
+          <td>具體的時間和地點成為自動的提示，決策成本降到最低</td>
+        </tr>
+        <tr>
+          <td>設計環境</td>
+          <td>想讀書→把書放床頭。想練吉他→把吉他放在客廳。想少吃零食→不要買回家</td>
+          <td>讓好的行為更容易發生，壞的行為多一點摩擦——在無意識狀態下也能做出好的選擇</td>
+        </tr>
+        <tr>
+          <td>不追求完美，追求不中斷</td>
+          <td>「不要連續兩天沒做到」，允許偶爾一天沒做，但不讓它變成「算了」</td>
+          <td>一次失敗不是問題，失敗後放棄才是問題。評估週期是幾個月，不是幾天</td>
         </tr>
       </tbody>
     </table>
 
-    <p>James Clear 在《原子習慣》中強調，最持久的行為改變發生在<strong>身份認同層次</strong>：當你開始相信自己「是」某種人，而不只是「想要達到」某個目標，行為改變就有了更深的根基。每一次微小的習慣執行，都是對自己身份認同的一票投票。</p>
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">你想養成每天運動的習慣，試了很多次，最長堅持了兩週。每次放棄都覺得自己太懶，沒有毅力。</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">兩週是一個很典型的放棄節點——初始的動機消退了，但習慣迴路還沒有穩固到能自動運行。這個時候最需要的不是「更努力」，而是把啟動的門檻降到低到幾乎沒有，讓「開始」這件事不再需要動機。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>把「每天運動三十分鐘」改成「每天換上運動服」。</b>這是你唯一的承諾。換上之後要不要運動隨你——但通常你已經換了，就會出門了。降低的是啟動的門檻，不是目標。</li>
+          <li><b>找到一個固定的「之後」。</b>「每天吃完早餐之後換運動服」——讓早餐成為運動的提示，而不是讓「要運動的心情」成為提示，因為那個心情不可靠。</li>
+          <li><b>把「今天沒做到」和「放棄了」分開。</b>有一天沒做到，就明天繼續，不需要重新開始計算，也不需要更大的懺悔和決心。習慣是長期累積的，不是連勝紀錄。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  </section>
+  <!-- 05 你是在改變行為，還是在改變你是誰 -->
+  <div class="chapter">
+    <div class="ch-title-row">
+      <span class="ch-num">05</span>
+      <span class="ch-title">你是在改變行為，還是在改變你是誰？</span>
+    </div>
+    <p class="ch-intro">最持久的習慣改變，通常不是從「我想要做到某件事」出發，而是從「我是什麼樣的人」出發。這個差別聽起來很小，但效果很不一樣。</p>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th>出發點</th>
+          <th>想法方式</th>
+          <th>長期效果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>目標導向</td>
+          <td>「我要減重五公斤」「我要每天跑步」</td>
+          <td>達到目標後動機消失，或未達到時放棄。以終點為目標，沒有終點就沒有方向</td>
+        </tr>
+        <tr>
+          <td>身份認同導向</td>
+          <td>「我是一個重視健康的人」「我是一個每天運動的人」</td>
+          <td>每一次的行為都在強化這個身份認同，行為本身成為你是誰的證明，而不是你達成某件事的手段</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="scard">
+      <div class="scard-top">
+        <span class="scard-tag">情境</span>
+        <p class="scard-scene">有人問你要不要抽菸，你說「我在戒菸」。另一個方式是說「我不抽菸」。這兩句話有什麼不一樣？</p>
+      </div>
+      <div class="scard-body">
+        <p class="why">「我在戒菸」表示你是一個抽菸的人，正在勉強自己不要抽。「我不抽菸」表示抽菸不是你的身份的一部分。第二種說法讓你不需要每次都做一個「要不要的決定」——那個決定已經在身份認同層面做完了。</p>
+        <p class="act-label">你可以這樣做</p>
+        <ul class="acts">
+          <li><b>問自己：「什麼樣的人會做我想做的這些事？」</b>然後問：「我怎麼開始像那樣的人一樣行動？」不是「假裝」，而是用小的、真實的行動逐漸建立那個身份認同。</li>
+          <li><b>每一次微小的習慣執行，都是對那個身份的一票。</b>今天做了一個深蹲，你就投了一票給「我是一個會運動的人」。不需要完美，只需要累積。</li>
+          <li><b>改變你描述自己的語言。</b>不是「我試圖少用手機」，而是「我是一個管理自己注意力的人」。語言會塑造你對自己的預期，而預期會影響行為。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </main>
 
+<!-- SIDEBAR -->
 <aside>
-  <div class="sidebar-block">
-    <span class="section-label">Course Info</span>
-    <table class="meta-table">
+  <div class="sb-block">
+    <span class="slabel">Course Info</span>
+    <table class="mini-table">
       <tr><td>週次</td><td>第 7 週，共 16 週</td></tr>
-      <tr><td>單元</td><td>Unit 02 — 認知與行為心理學</td></tr>
-      <tr><td>程度</td><td>無需先備知識</td></tr>
-      <tr><td>閱讀時間</td><td>60 — 90 分鐘</td></tr>
+      <tr><td>單元</td><td>Unit 02 — 認知與行為</td></tr>
+      <tr><td>重點</td><td>生活應用</td></tr>
+      <tr><td>時間</td><td>40 — 55 分鐘</td></tr>
     </table>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Terms</span>
-    <ul class="terms-list">
-      <li>Classical Conditioning <span>古典制約</span></li>
-      <li>Unconditioned Stimulus <span>非制約刺激</span></li>
-      <li>Conditioned Stimulus <span>制約刺激</span></li>
-      <li>Extinction <span>消退</span></li>
-      <li>Spontaneous Recovery <span>自發恢復</span></li>
-      <li>Generalization <span>類化</span></li>
-      <li>Operant Conditioning <span>操作制約</span></li>
-      <li>Positive Reinforcement <span>正增強</span></li>
-      <li>Negative Reinforcement <span>負增強</span></li>
-      <li>Punishment <span>懲罰</span></li>
-      <li>Variable Ratio Schedule <span>變動比率時程</span></li>
-      <li>Habit Loop <span>習慣迴路</span></li>
-      <li>Social Learning Theory <span>社會學習理論</span></li>
-      <li>Self-efficacy <span>自我效能感</span></li>
-      <li>Mirror Neurons <span>鏡像神經元</span></li>
-      <li>Implementation Intention <span>執行意圖</span></li>
-      <li>Habit Stacking <span>習慣堆疊</span></li>
-    </ul>
+  <div class="sb-block">
+    <span class="slabel">建立新習慣速查</span>
+    <div class="qa-box">
+      <div class="qa-row">
+        <span class="qa-key">第一步</span>
+        <span class="qa-val">找到一個固定的「之後」作為提示</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">門檻</span>
+        <span class="qa-val">小到不可能失敗——只承諾第一個動作</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">環境</span>
+        <span class="qa-val">讓好的行為更容易，壞的行為多一點摩擦</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">失敗時</span>
+        <span class="qa-val">允許一天，但不允許連續兩天</span>
+      </div>
+      <div class="qa-row">
+        <span class="qa-key">長期</span>
+        <span class="qa-val">從「我要做到」變成「我是這樣的人」</span>
+      </div>
+    </div>
   </div>
 
-  <div class="sidebar-block">
-    <span class="section-label">Key Figures</span>
-    <table class="meta-table">
-      <tr><td>人物</td><td>Ivan Pavlov — 古典制約，條件反射</td></tr>
-      <tr><td>人物</td><td>John B. Watson — 行為主義宣言，Little Albert</td></tr>
-      <tr><td>人物</td><td>B.F. Skinner — 操作制約，增強時程表</td></tr>
-      <tr><td>人物</td><td>Albert Bandura — 社會學習理論，自我效能感</td></tr>
-      <tr><td>人物</td><td>Charles Duhigg — 習慣迴路模型</td></tr>
-      <tr><td>人物</td><td>Giacomo Rizzolatti — 鏡像神經元發現者</td></tr>
-    </table>
-  </div>
-
-  <div class="sidebar-block">
-    <span class="section-label">Further Reading</span>
-    <table class="meta-table">
-      <tr><td>書目</td><td>《原子習慣》James Clear</td></tr>
-      <tr><td>書目</td><td>《習慣的力量》Charles Duhigg</td></tr>
-      <tr><td>書目</td><td>《微習慣》BJ Fogg</td></tr>
-      <tr><td>書目</td><td>《行為設計學》BJ Fogg</td></tr>
-      <tr><td>論文</td><td>Bandura, A. (1961). Transmission of aggression through imitation.</td></tr>
+  <div class="sb-block">
+    <span class="slabel">延伸閱讀</span>
+    <table class="mini-table">
+      <tr><td>書</td><td>《原子習慣》James Clear</td></tr>
+      <tr><td>書</td><td>《習慣的力量》Charles Duhigg</td></tr>
+      <tr><td>書</td><td>《行為設計學》BJ Fogg</td></tr>
+      <tr><td>書</td><td>《深度工作力》Cal Newport</td></tr>
     </table>
   </div>
 </aside>
 </div>
 
-<div class="reflection">
-  <span class="section-label">Reflection Questions</span>
-  <div class="reflection-inner">
-    <div class="reflection-q">
-      <span class="q-num">Q1</span>
-      <span>選擇你生活中一個你想改變的習慣，用習慣迴路分析它：觸發這個習慣的「提示」是什麼？「慣例」的具體行為是什麼？它滿足了什麼「獎勵」或渴望？你認為可以用什麼新慣例取代它，同時保留原有的獎勵？</span>
+<!-- REFLECTION -->
+<div class="ref-wrap">
+  <span class="slabel">本週練習</span>
+  <div class="ref-box">
+    <div class="ref-q">
+      <span class="q-n">Q1</span>
+      <span>選一個你想改掉的壞習慣，用習慣迴路分析它：觸發提示是什麼？它在滿足什麼獎勵或需求？你能想到一個可以替換的慣例，保留同樣的獎勵嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q2</span>
-      <span>變動比率增強時程解釋了為什麼社群媒體如此令人難以放下。你在使用哪些平台或 App 時感受到這種「再刷一次，說不定有什麼新東西」的渴望？知道了這個機制後，你對自己的使用習慣有什麼新的想法？</span>
+    <div class="ref-q">
+      <span class="q-n">Q2</span>
+      <span>你有沒有察覺到自己生活裡有「變動比率獎勵」的機制在影響你？（手機、特定 App、購物等）知道了這個機制之後，你想做什麼改變嗎？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q3</span>
-      <span>Bandura 的研究顯示，我們透過觀察他人學習行為。回想你的成長過程，有哪些行為模式（正面或負面）是你透過觀察父母、同儕或媒體習得的，而不是被直接教導的？</span>
+    <div class="ref-q">
+      <span class="q-n">Q3</span>
+      <span>選一個你想建立的新習慣。用「習慣堆疊」的方法設計它：你要把它接在哪個已有的習慣後面？具體的第一個動作是什麼？</span>
     </div>
-    <div class="reflection-q">
-      <span class="q-num">Q4</span>
-      <span>「身份認同層次」的改變比目標層次更持久。試著將你目前正在嘗試培養的一個習慣，從「我想要做到 X」重新框架為「我是一個 Y 的人」。這樣的重新框架對你有什麼感覺？你認為它會改變你的行動嗎？</span>
+    <div class="ref-q">
+      <span class="q-n">Q4</span>
+      <span>你想成為什麼樣的人？這個身份認同對應的習慣是什麼？你今天可以做一個最小的行動，開始對那個身份投第一票嗎？</span>
     </div>
   </div>
 </div>
 
-<div class="complete-row">
-  <button class="btn-complete" id="completeBtn" onclick="markDone()">標記本週完成</button>
+<div class="done-row">
+  <button class="btn-done" id="doneBtn" onclick="markDone()">標記本週完成</button>
 </div>
 
-<div class="pagination">
-  <a href="day6.html" class="page-link">&#8592; Week 06</a>
-  <span class="page-dot">7 / 16</span>
-  <a href="day8.html" class="page-link">Week 08 &#8594;</a>
+<div class="pager">
+  <a href="day6.html">← Week 06</a>
+  <span class="pager-mid">07 / 16</span>
+  <a href="day8.html">Week 08 →</a>
 </div>
 
 <script>
-  const key = 'week-7';
-  const btn = document.getElementById('completeBtn');
-  if (localStorage.getItem(key) === 'done') {
+  const KEY = 'week-07';
+  const btn = document.getElementById('doneBtn');
+  if (localStorage.getItem(KEY) === 'done') {
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
   function markDone() {
-    localStorage.setItem(key, 'done');
+    localStorage.setItem(KEY, 'done');
     btn.classList.add('done');
     btn.textContent = '已完成本週';
   }
